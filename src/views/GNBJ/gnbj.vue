@@ -1,6 +1,6 @@
 <template>
   <div class="gnbj">
-    gnbj
+    gnbj123123123
   </div>
 </template>
 
