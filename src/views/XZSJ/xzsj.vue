@@ -1,12 +1,10 @@
 <template>
-  <div class="home">
-    <Header />
-    <router-view />
+  <div class="xzsj">
+    xzsj
   </div>
 </template>
 
 <script>
-import Header from "../components/header/header";
 export default {
   data() {
     return {};
@@ -23,7 +21,7 @@ export default {
   beforeDestroy() {},
   destroyed() {},
   activated() {},
-  components: { Header },
+  components: {},
 };
 </script>
 

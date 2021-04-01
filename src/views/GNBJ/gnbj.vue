@@ -1,12 +1,10 @@
 <template>
-  <div class="home">
-    <Header />
-    <router-view />
+  <div class="gnbj">
+    gnbj
   </div>
 </template>
 
 <script>
-import Header from "../components/header/header";
 export default {
   data() {
     return {};
@@ -14,16 +12,20 @@ export default {
   computed: {},
   watch: {},
   methods: {},
-  created() {},
+  created() {
+    __g.infoTree.show(["C954087449FA5304E76AE5A7EE1FD904"]);
+  },
   mounted() {},
   beforeCreate() {},
   beforeMount() {},
   beforeUpdate() {},
   updated() {},
-  beforeDestroy() {},
+  beforeDestroy() {
+    __g.infoTree.hide(["C954087449FA5304E76AE5A7EE1FD904"]);
+  },
   destroyed() {},
   activated() {},
-  components: { Header },
+  components: {},
 };
 </script>
 
