@@ -1,7 +1,5 @@
 <template>
-  <div class="zsyz">
-    zsyz
-  </div>
+  <div class="zsyz">zsysadasdasdsadz111</div>
 </template>
 
 <script>
