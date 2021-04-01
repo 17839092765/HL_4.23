@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="Logo">
-      <h1>红岭新兴金融产业带CIM平台</h1>
+      <h1 @click="shuaxin">红岭新兴金融产业带CIM平台</h1>
     </div>
     <div class="linkto">
       <router-link to="/Home/HLSJ" tag="div">
@@ -33,7 +33,11 @@ export default {
   },
   computed: {},
   watch: {},
-  methods: {},
+  methods: {
+    shuaxin() {
+      location.reload();
+    },
+  },
   created() {},
   mounted() {},
   beforeCreate() {},
