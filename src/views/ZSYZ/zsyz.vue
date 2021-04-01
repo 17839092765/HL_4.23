@@ -1,5 +1,5 @@
 <template>
-  <div class="zsyz">777zsysadasdasds asdasdsadasdasdsadasdaadz111</div>
+  <div class="zsyz">zsyz测试</div>
 </template>
 
 <script>
