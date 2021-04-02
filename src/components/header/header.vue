@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="Logo">
-      <h1 @click="shuaxin">红岭新兴金融产业带CIM平台</h1>
+      <h1 @click="shuaxin"><a href="#">红岭新兴金融产业带CIM平台</a></h1>
     </div>
     <div class="linkto">
       <router-link to="/Home/HLSJ" tag="div">
@@ -53,6 +53,7 @@ export default {
 
 <style lang="scss" scoped>
 .header {
+  font-weight: 600;
   width: 100%;
   height: 100px;
   background: rgba(0, 0, 0, 0.466);
@@ -83,6 +84,7 @@ export default {
       height: 50px;
       line-height: 50px;
       text-align: center;
+      cursor: pointer;
     }
     .router-link-active {
       color: #fee36d;
@@ -92,7 +94,6 @@ export default {
       position: absolute;
       bottom: 0;
       left: 0;
-      /* top: 0; */
       right: 0;
       margin: auto;
       width: 60%;

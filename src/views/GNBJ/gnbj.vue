@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { showtuceng, hidetuceng } from "../../util/showtuceng";
 export default {
   data() {
     return {};
@@ -13,7 +14,7 @@ export default {
   watch: {},
   methods: {},
   created() {
-    __g.infoTree.show(["C954087449FA5304E76AE5A7EE1FD904"]);
+    showtuceng(this.$treedata.gnbjdata);
   },
   mounted() {},
   beforeCreate() {},
@@ -21,7 +22,7 @@ export default {
   beforeUpdate() {},
   updated() {},
   beforeDestroy() {
-    __g.infoTree.hide(["C954087449FA5304E76AE5A7EE1FD904"]);
+    hidetuceng(this.$treedata.gnbjdata);
   },
   destroyed() {},
   activated() {},

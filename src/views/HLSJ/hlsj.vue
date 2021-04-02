@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import treedata from "../../util/treedata.json";
 import { showtuceng, hidetuceng } from "../../util/showtuceng";
 export default {
   data() {
@@ -15,7 +14,7 @@ export default {
   watch: {},
   methods: {},
   created() {
-    showtuceng(treedata.hlsjdata);
+    showtuceng(this.$treedata.hlsjdata);
   },
   mounted() {},
   beforeCreate() {},
@@ -23,7 +22,7 @@ export default {
   beforeUpdate() {},
   updated() {},
   beforeDestroy() {
-    hidetuceng(treedata.hlsjdata);
+    hidetuceng(this.$treedata.hlsjdata);
   },
   destroyed() {},
   activated() {},
