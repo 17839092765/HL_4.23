@@ -87,6 +87,7 @@ export default {
 
 <style lang="scss" scoped>
 .header {
+  position: absolute;
   font-weight: 600;
   width: 100%;
   height: 100px;

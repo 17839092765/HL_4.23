@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./assets/css/rest.css";
+import "./assets/css/global.css";
 import Element from "element-ui";
 import echarts from "echarts";
 import treedata from "./util/treedata.json";
