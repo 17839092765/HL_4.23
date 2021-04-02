@@ -1,7 +1,5 @@
 <template>
-  <div class="xzsj">
-    xzsj
-  </div>
+  <div class="xzsj">xzsj</div>
 </template>
 
 <script>
@@ -18,7 +16,9 @@ export default {
   beforeMount() {},
   beforeUpdate() {},
   updated() {},
-  beforeDestroy() {},
+  beforeDestroy() {
+    hidetuceng(this.$treedata.hlsjdata);
+  },
   destroyed() {},
   activated() {},
   components: {},

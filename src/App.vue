@@ -14,7 +14,7 @@ export default {
   methods: {
     //监听三维交互的返回事件
     onEvent(e) {
-      console.log(e);
+      console.log(e.MouseClickPoint);
     },
 
     initWebSocket() {
@@ -43,15 +43,15 @@ export default {
         __fn = fn;
 
         var ws = new WebSocket(url);
-        ws.onopen = function() {
+        ws.onopen = function () {
           this.send('{"command":6}');
         };
-        ws.onmessage = function(event) {
+        ws.onmessage = function (event) {
           var o = JSON.parse(event.data);
           __fn(o);
         };
-        ws.onclose = function() {};
-        ws.onerror = function(event) {};
+        ws.onclose = function () {};
+        ws.onerror = function (event) {};
       } else {
         this.log("Not Support WebSocket!");
       }
@@ -61,7 +61,7 @@ export default {
 
       if (location.search.indexOf("ms") != -1) {
         //页面地址加参数： http://192.168.1.222/int.html?ms
-        getMatchServerConfig(HostConfig.MatchServer, function(o) {
+        getMatchServerConfig(HostConfig.MatchServer, function (o) {
           if (o.result == 0) {
             if (withPlayer) {
               new AirCityPlayer(o.instanceId, "player", HostConfig.Token, true);
