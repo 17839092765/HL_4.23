@@ -1,10 +1,8 @@
 <template>
-  <div class="xzsj">xzsj</div>
+  <div class="fdtz"></div>
 </template>
 
 <script>
-import { showtuceng, hidetuceng } from "../../util/showtuceng";
-
 export default {
   data() {
     return {};
@@ -13,17 +11,13 @@ export default {
   watch: {},
   methods: {},
   created() {},
-  mounted() {
-    showtuceng(this.$treedata.xzsjdata);
-  },
+  mounted() {},
   beforeCreate() {},
   beforeMount() {},
   beforeUpdate() {},
   updated() {},
   beforeDestroy() {},
-  destroyed() {
-    hidetuceng(this.$treedata.xzsjdata);
-  },
+  destroyed() {},
   activated() {},
   components: {},
 };

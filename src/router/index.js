@@ -26,7 +26,26 @@ const router = new VueRouter({
         },
         {
           path: "XZSJ",
+          redirect: "/Home/XZSJ/fdtz",
           component: () => import("../views/XZSJ/xzsj"),
+          children: [
+            {
+              path: "fdtz",
+              component: () => import("../views/XZSJ/children/fdtz"),
+            },
+            {
+              path: "xzqs",
+              component: () => import("../views/XZSJ/children/fdtz"),
+            },
+            {
+              path: "tdly",
+              component: () => import("../views/XZSJ/children/fdtz"),
+            },
+            {
+              path: "csgx",
+              component: () => import("../views/XZSJ/children/fdtz"),
+            },
+          ],
         },
         {
           path: "ZSYZ",

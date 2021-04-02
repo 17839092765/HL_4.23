@@ -13,10 +13,10 @@ export default {
   computed: {},
   watch: {},
   methods: {},
-  created() {
+  created() {},
+  mounted() {
     showtuceng(this.$treedata.gnbjdata);
   },
-  mounted() {},
   beforeCreate() {},
   beforeMount() {},
   beforeUpdate() {},
