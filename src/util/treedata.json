@@ -3,6 +3,10 @@
         {
             "label":"基础底图",
             "layerid":["E42D9D0C486C4AFECF799A8C8939BE53"]
+        },
+        {
+            "label":"倾斜模型",
+            "layerid":["46D13CDC451240431008C084E693A832","85464FDA47941043BFCB55B0C6B104AF","3B15473042BCF8EC3529B786FA7F6A34"]
         }
     ],
     "gnbjdata":[
@@ -12,9 +16,6 @@
         }
     ],
     "xzsj":[
-        {
-            "label":"倾斜模型",
-            "layerid":["9CA1AB164A2434EBCE4CACBA58E68868"]
-        }
+        
     ]
 }

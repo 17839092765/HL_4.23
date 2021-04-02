@@ -1,7 +1,11 @@
 function showtuceng(data) {
-  __g.infoTree.show(data[0].layerid);
+  data.map((item) => {
+    __g.infoTree.show(item.layerid);
+  });
 }
 function hidetuceng(data) {
-  __g.infoTree.hide(data[0].layerid);
+  data.map((item) => {
+    __g.infoTree.hide(item.layerid);
+  });
 }
 export { showtuceng, hidetuceng };
