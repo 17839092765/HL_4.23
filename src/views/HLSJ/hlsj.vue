@@ -13,10 +13,10 @@ export default {
   computed: {},
   watch: {},
   methods: {},
-  created() {
+  created() {},
+  mounted() {
     showtuceng(this.$treedata.hlsjdata);
   },
-  mounted() {},
   beforeCreate() {},
   beforeMount() {},
   beforeUpdate() {},

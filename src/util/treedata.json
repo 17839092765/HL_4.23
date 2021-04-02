@@ -15,7 +15,10 @@
             "layerid":["9CA1AB164A2434EBCE4CACBA58E68868"]
         }
     ],
-    "xzsj":[
-        
+    "xzsjdata":[
+        {
+            "label":"基础底图",
+            "layerid":["E42D9D0C486C4AFECF799A8C8939BE53"]
+        }
     ]
 }

@@ -6,6 +6,7 @@ import "./assets/css/rest.css";
 import Element from "element-ui";
 import echarts from "echarts";
 import treedata from "./util/treedata.json";
+import "element-ui/lib/theme-chalk/index.css";
 Vue.prototype.$treedata = treedata;
 
 Vue.prototype.$echarts = echarts;

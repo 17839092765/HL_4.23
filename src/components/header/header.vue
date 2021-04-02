@@ -4,36 +4,70 @@
       <h1 @click="shuaxin"><a href="#">红岭新兴金融产业带CIM平台</a></h1>
     </div>
     <div class="linkto">
-      <router-link to="/Home/HLSJ" tag="div">
-        <span>红岭实景</span>
-      </router-link>
-      <router-link to="/Home/GNBJ" tag="div">
-        <span>功能布局</span>
-      </router-link>
-      <router-link to="/Home/XZSJ" tag="div">
-        <span>现状数据</span>
-      </router-link>
-      <router-link to="/Home/ZSYZ" tag="div">
-        <span>招商引资</span>
-      </router-link>
-      <router-link to="/Home/WLYJ" tag="div">
-        <span>未来愿景</span>
-      </router-link>
+      <div @click="showmenus(1)">
+        <router-link to="/Home/HLSJ" tag="div">
+          <span>红岭实景</span>
+        </router-link>
+      </div>
+      <div @click="showmenus(2)">
+        <router-link to="/Home/GNBJ" tag="div">
+          <span>功能布局</span>
+        </router-link>
+      </div>
+      <div @click="showmenus(3)">
+        <router-link to="/Home/XZSJ" tag="div">
+          <span>现状数据</span>
+          <div v-show="showxzsh4link" class="threelink">
+            <router-link to="/Home/XZSJ/fdtz" tag="li">
+              <span>法定图则</span>
+            </router-link>
+            <router-link to="/Home/XZSJ/xzqs" tag="li">
+              <span>现状权属</span>
+            </router-link>
+            <router-link to="/Home/XZSJ/tdly" tag="li">
+              <span>土地利用</span>
+            </router-link>
+            <router-link to="/Home/XZSJ/csgx" tag="li">
+              <span>城市更新单元</span>
+            </router-link>
+          </div>
+        </router-link>
+      </div>
+      <div @click="showmenus(4)">
+        <router-link to="/Home/ZSYZ" tag="div">
+          <span>招商引资</span>
+        </router-link>
+      </div>
+      <div @click="showmenus(5)">
+        <router-link to="/Home/WLYJ" tag="div">
+          <span>未来愿景</span>
+        </router-link>
+      </div>
     </div>
     <div class="tool">
-      gengneng
+      <HeaderTool />
     </div>
   </div>
 </template>
 
 <script>
+import HeaderTool from "../children/headertool";
 export default {
   data() {
-    return {};
+    return {
+      showxzsh4link: false,
+    };
   },
   computed: {},
   watch: {},
   methods: {
+    showmenus(val) {
+      if (val === 3) {
+        this.showxzsh4link = true;
+      } else {
+        this.showxzsh4link = false;
+      }
+    },
     shuaxin() {
       location.reload();
     },
@@ -47,7 +81,7 @@ export default {
   beforeDestroy() {},
   destroyed() {},
   activated() {},
-  components: {},
+  components: { HeaderTool },
 };
 </script>
 
@@ -56,14 +90,14 @@ export default {
   font-weight: 600;
   width: 100%;
   height: 100px;
-  background: rgba(0, 0, 0, 0.466);
+  background: rgba(0, 0, 0, 0.151);
   display: flex;
   justify-content: space-between;
   align-items: center;
   .Logo {
     width: 35%;
     height: 100%;
-    font-size: 48px;
+    font-size: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,6 +119,24 @@ export default {
       line-height: 50px;
       text-align: center;
       cursor: pointer;
+      .threelink {
+        position: absolute;
+        width: 500px;
+        top: 110%;
+        left: -200%;
+
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        > li {
+          position: relative;
+          color: #ffffff;
+          list-style: none;
+          &.router-link-active {
+            color: #fee36d;
+          }
+        }
+      }
     }
     .router-link-active {
       color: #fee36d;
@@ -92,7 +144,7 @@ export default {
     .router-link-active::after {
       content: "";
       position: absolute;
-      bottom: 0;
+      bottom: 10px;
       left: 0;
       right: 0;
       margin: auto;
