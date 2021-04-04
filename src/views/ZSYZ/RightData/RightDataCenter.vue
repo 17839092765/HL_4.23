@@ -6,17 +6,8 @@
 
     <div class="content">{{ msg }}</div>
     <div class="zsls_table">
-      <el-table
-        size="mini"
-        :data="tableData"
-        :show-header="false"
-        stripe
-        style="width: 100%"
-        class="table"
-        height="180px"
-        cell-class-name="row"
-        highlight-current-row
-      >
+      <el-table size="mini" :data="tableData" :show-header="false" stripe style="width: 100%" class="table"
+        height="180px" cell-class-name="row" highlight-current-row>
         <el-table-column prop="date" width="100px"> </el-table-column>
         <el-table-column prop="con" width="20px"> </el-table-column>
         <el-table-column prop="num" width="220px"> </el-table-column>
@@ -28,7 +19,7 @@
 <script>
 import Title1 from "../RightData/Title1";
 export default {
-  data() {
+  data () {
     return {
       msg:
         "超级总部基于“总部＋生态+文化”三大主题,营造世界级创新文化实验区。超级总部基于“总部+生态+文化”三大主题，营造世界级创新文化实验区。",
@@ -74,15 +65,15 @@ export default {
   computed: {},
   watch: {},
   methods: {},
-  created() {},
-  mounted() {},
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
+  created () { },
+  mounted () { },
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () { },
+  destroyed () { },
+  activated () { },
   components: {
     Title1,
   },

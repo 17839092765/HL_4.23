@@ -15,7 +15,7 @@
 <script>
 import dayjs from "dayjs";
 export default {
-  data() {
+  data () {
     return {
       time: "",
     };
@@ -23,25 +23,25 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    gettime() {
+    gettime () {
       this.timer = setInterval(() => {
-        this.time = dayjs().format("YYYY-MM-DD HH:mm:ss");
+        this.time = dayjs().format("YYYY/MM/DD HH:mm:ss");
       }, 1000);
     },
   },
-  created() {
+  created () {
     this.gettime();
   },
-  mounted() {},
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {
+  mounted () { },
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () {
     clearInterval(this.timer);
   },
-  destroyed() {},
-  activated() {},
+  destroyed () { },
+  activated () { },
   components: {},
 };
 </script>
@@ -51,16 +51,19 @@ export default {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
   > div {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 20%;
+    width: 15%;
     height: 100%;
     font-size: 20px;
-    /* background: #000; */
+  }
+  > div:nth-of-type(4) {
+    text-align: center;
+    width: 30%;
   }
 }
 </style>

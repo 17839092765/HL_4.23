@@ -17,20 +17,7 @@
       <div @click="showmenus(3)">
         <router-link to="/Home/XZSJ" tag="div">
           <span>现状数据</span>
-          <div v-show="showxzsh4link" class="threelink">
-            <router-link to="/Home/XZSJ/fdtz" tag="li">
-              <span>法定图则</span>
-            </router-link>
-            <router-link to="/Home/XZSJ/xzqs" tag="li">
-              <span>现状权属</span>
-            </router-link>
-            <router-link to="/Home/XZSJ/tdly" tag="li">
-              <span>土地利用</span>
-            </router-link>
-            <router-link to="/Home/XZSJ/csgx" tag="li">
-              <span>城市更新单元</span>
-            </router-link>
-          </div>
+
         </router-link>
       </div>
       <div @click="showmenus(4)">
@@ -53,7 +40,7 @@
 <script>
 import HeaderTool from "../children/headertool";
 export default {
-  data() {
+  data () {
     return {
       showxzsh4link: false,
     };
@@ -61,33 +48,33 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    showmenus(val) {
+    showmenus (val) {
       if (val === 3) {
         this.showxzsh4link = true;
       } else {
         this.showxzsh4link = false;
       }
     },
-    shuaxin() {
+    shuaxin () {
       location.reload();
     },
   },
-  created() {},
-  mounted() {},
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
+  created () { },
+  mounted () { },
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () { },
+  destroyed () { },
+  activated () { },
   components: { HeaderTool },
 };
 </script>
 
 <style lang="scss" scoped>
 .header {
-  position: absolute;
+  // position: relative;
   font-weight: 600;
   width: 100%;
   height: 100px;
@@ -120,24 +107,6 @@ export default {
       line-height: 50px;
       text-align: center;
       cursor: pointer;
-      .threelink {
-        position: absolute;
-        width: 500px;
-        top: 110%;
-        left: -200%;
-
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        > li {
-          position: relative;
-          color: #ffffff;
-          list-style: none;
-          &.router-link-active {
-            color: #fee36d;
-          }
-        }
-      }
     }
     .router-link-active {
       color: #fee36d;

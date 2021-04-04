@@ -1,11 +1,11 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from "vue"
+import VueRouter from "vue-router"
+import Home from "../views/Home.vue"
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes: [
     {
@@ -31,25 +31,38 @@ const router = new VueRouter({
           children: [
             {
               path: "fdtz",
-              component: () => import("../views/XZSJ/children/fdtz"),
+              name: "fdtz",
+              component: () => import("../views/XZSJ/children/fdtz.vue"),
             },
             {
               path: "xzqs",
-              component: () => import("../views/XZSJ/children/fdtz"),
+              component: () => import("../views/XZSJ/children/xzqs.vue"),
             },
             {
               path: "tdly",
-              component: () => import("../views/XZSJ/children/fdtz"),
+              component: () => import("../views/XZSJ/children/tdly"),
             },
             {
               path: "csgx",
-              component: () => import("../views/XZSJ/children/fdtz"),
+              component: () => import("../views/XZSJ/children/csgx"),
             },
           ],
         },
         {
           path: "ZSYZ",
+          redirect: "/Home/ZSYZ/zsly",
           component: () => import("../views/ZSYZ/zsyz"),
+          name: "zsyz",
+          children: [
+            {
+              path: "zsly",
+              component: () => import("../views/ZSYZ/children/zsly.vue"),
+            },
+            {
+              path: "zslc",
+              component: () => import("../views/ZSYZ/children/zslc.vue"),
+            },
+          ],
         },
         {
           path: "WLYJ",
@@ -58,6 +71,6 @@ const router = new VueRouter({
       ],
     },
   ],
-});
+})
 
-export default router;
+export default router
