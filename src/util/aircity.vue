@@ -32,6 +32,9 @@ export default {
       let that = this
       console.log(data);
       if (data && data.Id && data.Type == "Polygon") {
+        __g.polygon.get(data.Id, (res) => {
+          console.log(res);
+        });
         addhighlight(this.allpolygon, data)
         __g.camera.lookAt(data.MouseClickPoint[0], data.MouseClickPoint[1] - 300, 2000, -33.209282, -90, -90, () => {
           // this.isshowBack = false

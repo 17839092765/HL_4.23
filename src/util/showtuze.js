@@ -11,12 +11,13 @@ async function showVectorlayers(data) {
 
   if (database == "城市更新单元") {
     // res = await geoserverruest.cityupdataquery()
-    // res1 = await geoserverruest.ftfdtzquery()
+    res1 = await geoserverruest.ftfdtzquery()
     // res2 = await geoserverruest.lhfdtzquery()
 
+    console.log(res1)
     res = await geoserverruest.shownewcsgxdata()
     var cityupdata = res.data.features
-    console.log(cityupdata)
+    // console.log(cityupdata)
     // var ftfdtzdata = res1.data.features
     // var lhfdtzdata = res2.data.features
     // let color = [200 / 255, 200 / 255, 200 / 255, 0.2]
@@ -90,7 +91,7 @@ async function showVectorlayers(data) {
       // var color1 = [1, 20 / 255, 1, 1]
       var color1 = ele.properties.grb.split(",")
       for (let c = 0; c < color1.length; c++) {
-        color1[c] = Number(color1[c]) / 255
+        color1[c] = Number((color1[c] / 255).toFixed(5))
         // console.log(typeof Number(color1[c]))
       }
       let frameColor = color
@@ -159,7 +160,7 @@ async function showVectorlayers(data) {
         color1 = ele.properties.rgb.split(",")
 
         for (let c = 0; c < color1.length; c++) {
-          color1[c] = Number(color1[c]) / 255
+          color1[c] = Number((color1[c] / 255).toFixed(5))
         }
       } else if (idd == "fdtzxx") {
         id = idd + index + "-" + ele.properties.tname
@@ -167,13 +168,13 @@ async function showVectorlayers(data) {
         color1 = ele.properties.grb.split(",")
 
         for (let c = 0; c < color1.length; c++) {
-          color1[c] = Number(color1[c]) / 255
+          color1[c] = Number((color1[c] / 255).toFixed(5))
         }
       } else if (idd == "xzqsxx") {
         color1 = ele.properties.rgb.split(",")
 
         for (let c = 0; c < color1.length; c++) {
-          color1[c] = Number(color1[c]) / 255
+          color1[c] = Number((color1[c] / 255).toFixed(5))
         }
       }
 
@@ -212,7 +213,7 @@ async function showVectorlayers(data) {
   // console.log(date2-date1);
   // console.log(os, 999222)
 
-  // store.commit("addos", os)
+  store.commit("oscase", os)
   __g.polygon.add(os)
 }
 // 隐藏矢量数据

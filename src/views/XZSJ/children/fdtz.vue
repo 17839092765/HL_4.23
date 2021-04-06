@@ -25,6 +25,7 @@
 import * as echarts from 'echarts';
 import { mapState } from "vuex"
 import { showdata } from "../showdata"
+import __g from "../../../main"
 export default {
   data () {
     return {};
@@ -36,16 +37,80 @@ export default {
       // 。原始数据
       clickData: state => state.clickData,
       // 图则内容的显示隐藏
-      dataCaseisShow: state => state.dataCaseisShow
+      dataCaseisShow: state => state.dataCaseisShow,
+      os: state => state.os
     })
   },
   watch: {},
-  methods: {},
-  created () { },
+  methods: {
+
+    ChuLiOs (data) {
+      let echartsColorClass = []
+      console.log(this.os);
+      this.os.map(item => {
+        if (!echartsColorClass[item.color]) {
+          echartsColorClass[item.color] = []
+          echartsColorClass[item.color].push(item)
+
+        } else {
+          echartsColorClass[item.color].push(item)
+        }
+      })
+      console.log(echartsColorClass);
+      let odata = data.join()
+      let newos = this.os.map(item => {
+        if (item.color.join() === odata) {
+          return item.id
+        } else {
+          return 666
+        }
+      }).filter(item => {
+        if (item == 666) {
+          return false
+        } else {
+          return item
+        }
+      })
+      console.log(newos);
+      return newos
+    },
+    Glow (newos) {
+
+      __g.polygon.glow([...newos], 5, (res) => {
+        console.log(res)
+      })
+    }
+
+
+  },
+  created () {
+  },
   mounted () {
     var chartDom = document.getElementById('echarts1');
     var myChart = echarts.init(chartDom);
     var option;
+    myChart.on('click', (params) => {
+      console.log(params);
+      if (params.name == "商业服务业用地") {
+        this.Glow(this.ChuLiOs([0.99608, 0, 0, 0.6]))
+      } else if (params.name == "居住用地") {
+        this.Glow(this.ChuLiOs([1, 1, 0, 0.6]))
+      } else if (params.name == "公共管理与服务设施用地") {
+        this.Glow(this.ChuLiOs([1, 0, 1, 0.6]))
+      } else if (params.name == "物流仓储用地") {
+        this.Glow(this.ChuLiOs([0.4549, 0.43137, 0.86667, 0.6]))
+      } else if (params.name == "公用设施用地") {
+        this.Glow(this.ChuLiOs([0, 0.72157, 0.72157, 0.6]))
+      } else if (params.name == "交通设施用地") {
+        this.Glow(this.ChuLiOs([0, 0.43137, 0.86667, 0.6]))
+      } else if (params.name == "绿地与广场用地") {
+        this.Glow(this.ChuLiOs([0.25098, 1, 0.00392, 0.6]))
+      } else if (params.name == "工业用地") {
+        this.Glow(this.ChuLiOs([0.72157, 0.36078, 0.36471, 0.6]))
+      } else if (params.name == "其他用地") {
+        this.Glow(this.ChuLiOs([0.29412, 0.58431, 0, 0.6]))
+      }
+    })
     option = {
       color: ['#FA013B', '#ED28EE', '#7D684B', '#FFFF00', '#A66EDD', '#2D86E0', '#00B8B8', '#40FF01', '#608545'],
       backgroundColor: '#00032C',
