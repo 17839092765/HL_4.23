@@ -36,6 +36,7 @@
 import { mapState } from "vuex"
 import { showtuceng, hidetuceng } from "../../../util/showtuceng.js"
 import { showdata } from "../../XZSJ/showdata"
+import __g from "../../../main"
 export default {
   data () {
     return {
@@ -57,6 +58,7 @@ export default {
   },
   mounted () {
     showtuceng(this.$treedata.zsyzdata);
+    __g.camera.lookAt(510264.093750, 2493521.000000, 650.484497, -26.054821, -63.835243, -30)
   },
   beforeCreate () { },
   beforeMount () { },
@@ -64,6 +66,8 @@ export default {
   updated () { },
   beforeDestroy () {
     hidetuceng([this.$treedata.zsyzdata[2]])
+    this.$store.commit("clickData", {})
+    __g.tileLayer.stopHighlightActor();
 
   },
   destroyed () { },
@@ -75,9 +79,11 @@ export default {
 <style lang='scss' scoped>
 .zslycase {
   width: 20%;
-  height: calc(100% - 100px);
+  height: calc(100% - 80px);
+  color: #fff;
   position: absolute;
   right: 0;
-  background: rgba(0, 0, 0, 0.295);
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.171);
 }
 </style>

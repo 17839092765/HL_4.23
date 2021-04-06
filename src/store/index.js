@@ -8,6 +8,8 @@ export default new Vuex.Store({
     allpolygon: [],
     clickData: {},
     dataCaseisShow: false,
+    // 点击的楼宇高亮信息 用来关闭高亮
+    hightbuilding: {},
   },
   mutations: {
     //当前所有的矢量要素
@@ -21,6 +23,10 @@ export default new Vuex.Store({
     //tuze内容
     dataCaseisShow(state, boolen) {
       state.dataCaseisShow = boolen
+    },
+    // 高亮的楼宇楼层id信息
+    hightbuilding(state, Object) {
+      state.hightbuilding = Object
     },
   },
   actions: {},

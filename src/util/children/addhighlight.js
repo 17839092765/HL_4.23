@@ -1,4 +1,6 @@
 import store from "../../store"
+import __g from "../../main"
+import acapi from "../../static/ac.min"
 function addhighlight(alldata, clcdata) {
   // console.log(alldata, clcdata, 888888888888)
   console.log(clcdata, 888777)
@@ -19,7 +21,7 @@ function addhighlight(alldata, clcdata) {
         let thickness = 10
         let brightness = 0.8
         let flowRate = 0.5
-        let o = new PolylineData(
+        let o = new acapi.PolylineData(
           index + "p1",
           color,
           coords,

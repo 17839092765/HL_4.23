@@ -70,7 +70,7 @@ export default {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 100px;
+  top: 70px;
   left: 0;
   right: 0;
   margin: auto;

@@ -8,7 +8,9 @@
     <div class="four">
       {{ time }}
     </div>
-    <div class="five">1</div>
+    <div class="five">
+      <div id="he-plugin-simple"></div>
+    </div>
   </div>
 </template>
 
@@ -28,11 +30,55 @@ export default {
         this.time = dayjs().format("YYYY/MM/DD HH:mm:ss");
       }, 1000);
     },
+
   },
   created () {
     this.gettime();
   },
-  mounted () { },
+  mounted () {
+    // var bbb = document.createElement("script")
+    // bbb.innerHTML = {
+    // "CONFIG": {
+    //   "layout": "1",
+    //   "width": "300",
+    //   "height": "130",
+    //   "background": "1",
+    //   "dataColor": "FFFFFF",
+    //   "borderRadius": "10",
+    //   "modules": "10",
+    //   "key": "9c30dd27fee24912abc7708614f3c121"
+    // }
+    // }
+    // var aaa = document.createElement("script")
+    // aaa.src = "https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0"
+
+    window.WIDGET = {
+      "CONFIG": {
+        "modules": "0124",
+        "background": "1",
+        "tmpColor": "FFFFFF",
+        "tmpSize": "16",
+        "cityColor": "FFFFFF",
+        "citySize": "16",
+        "aqiColor": "FFFFFF",
+        "aqiSize": "16",
+        "weatherIconSize": "24",
+        "alertIconSize": "18",
+        "padding": "10px 10px 10px 10px",
+        "shadow": "1",
+        "language": "auto",
+        "borderRadius": "10",
+        "fixed": "false",
+        "vertical": "top",
+        "horizontal": "left",
+        "key": "8f0727ee21004600b2a5826ffc63a5f9"
+      }
+    }
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0';
+    document.getElementsByTagName('head')[0].appendChild(script);
+  },
   beforeCreate () { },
   beforeMount () { },
   beforeUpdate () { },
@@ -53,17 +99,29 @@ export default {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  z-index: 1000;
+
   > div {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 15%;
+    width: 10%;
     height: 100%;
     font-size: 20px;
   }
   > div:nth-of-type(4) {
     text-align: center;
+    width: 27%;
+  }
+  > div:nth-of-type(5) {
+    text-align: center;
     width: 30%;
   }
+  // #he-plugin-standard {
+  //   width: 300px;
+  //   height: 100px;
+  //   z-index: 10000;
+  //   margin-right: 20px;
+  // }
 }
 </style>

@@ -77,12 +77,14 @@ export default {
   // position: relative;
   font-weight: 600;
   width: 100%;
-  height: 100px;
+  height: 80px;
   background: rgba(0, 0, 0, 0.151);
   display: flex;
   justify-content: space-between;
   align-items: center;
   .Logo {
+    z-index: 1000;
+
     width: 35%;
     height: 100%;
     font-size: 40px;
@@ -124,6 +126,8 @@ export default {
     }
   }
   .tool {
+    z-index: 1000;
+
     width: 30%;
     height: 100%;
   }

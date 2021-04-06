@@ -7,6 +7,7 @@ import { mapState } from 'vuex'
 import { addhighlight } from "./children/addhighlight.js"
 import { click_EVT_building, click_EVT_jj100 } from "./clickEvt"
 import connector from "../api/common.js"
+import __g from "../main"
 export default {
   data () {
     return {
@@ -17,6 +18,7 @@ export default {
     ...mapState({
       allpolygon: state => state.allpolygon,
       clickData: state => state.clickData,
+      hightbuilding: state => state.hightbuilding
     }),
   },
   watch: {},
@@ -96,18 +98,18 @@ export default {
               click_EVT_jj100(data, data.Type, this.lastID)
             } else if (data.ObjectID.slice(0, 6) == '440303') {
               // 点击已高亮图层取消高亮和属性框 , id都一样，ObjectID不一样，根据ObjectID判断
-              // if (data.ObjectID && this.buildLastLight && data.ObjectID == this.buildLastLight.ObjectID) {
-              //   console.log(data.Id == this.buildLastLight.Id);
-              //   __g.tileLayer.stopHighlightActor();
-              //   //  __g.infoTree.hide(['BF15EEEC49051728DF0DD585E91B4C0E']);
-              //   var obj = {}
-              //   that.$store.commit('buildLastLight', obj)
-              //   return
-              // }
+              if (data.ObjectID && this.hightbuilding && data.ObjectID == this.hightbuilding.ObjectID) {
+                console.log(data.Id == this.hightbuilding.Id);
+                __g.tileLayer.stopHighlightActor();
+                //  __g.infoTree.hide(['BF15EEEC49051728DF0DD585E91B4C0E']);
+                var obj = {}
+                that.$store.commit('hightbuilding', obj)
+                return
+              }
               click_EVT_building(data, data.Type, this.lastID)
               //招商楼宇信息
               this.requestdata('建筑信息', data.ObjectID.slice(0, 19))
-              // that.$store.commit('buildLastLight', data)
+              that.$store.commit('hightbuilding', data)
               // __g.tileLayer.highlightActors("BF15EEEC49051728DF0DD585E91B4C0E")
 
 

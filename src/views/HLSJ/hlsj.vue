@@ -4,6 +4,7 @@
 
 <script>
 import { showtuceng, hidetuceng } from "../../util/showtuceng";
+import __g from "../../main"
 export default {
   data () {
     return {};
@@ -15,14 +16,8 @@ export default {
       __g.polyline.delete("p773");
     },
     polyline_add () {
-      __g.camera.lookAt(
-        509089.90625,
-        2493550.5,
-        702.473755,
-        -21.78359,
-        -30.963524,
-        0.0
-      );
+      __g.camera.lookAt(510264.093750, 2493521.000000, 650.484497, -26.054821, -63.835243, -30)
+
 
 
       let coords = [
@@ -83,7 +78,7 @@ export default {
       let thickness = 10
       let brightness = 0.8
       let flowRate = 0.5
-      let o1 = new PolylineData(
+      let o1 = new this.acapi.PolylineData(
         "p773",
         color,
         coords,
@@ -98,10 +93,11 @@ export default {
     }
   },
   created () {
-    this.polyline_add();
+
   },
   mounted () {
     showtuceng(this.$treedata.hlsjdata);
+    this.polyline_add();
   },
   beforeCreate () { },
   beforeMount () { },

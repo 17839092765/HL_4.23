@@ -24,7 +24,7 @@
 <script>
 import { showtuceng, hidetuceng } from "../../util/showtuceng";
 import { showVectorlayers, hideVectorlayers } from "../../util/showtuze"
-
+import __g from "../../main"
 import store from "../../store"
 export default {
   data () {
@@ -86,11 +86,13 @@ export default {
   beforeMount () { },
   beforeUpdate () { },
   updated () { },
-  beforeDestroy () { },
-  destroyed () {
+  beforeDestroy () {
     hidetuceng(this.$treedata.xzsjdata);
     hideVectorlayers()
     __g.polyline.clear()
+  },
+  destroyed () {
+
 
   },
   activated () { },
@@ -103,11 +105,13 @@ export default {
   position: absolute;
   width: 500px;
   height: 50px;
-  top: 100px;
+  top: 80px;
   left: 0;
   right: 0;
   margin: auto;
   background: rgba(0, 0, 0, 0.356);
+  border-radius: 20px;
+  font-size: 16px;
   display: flex;
   justify-content: space-around;
   align-items: center;

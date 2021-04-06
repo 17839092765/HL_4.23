@@ -135,12 +135,13 @@ export default {
   // padding: 10px;
 }
 .datacase {
-  padding: 0 10px;
+  padding: 20px 10px;
   box-sizing: border-box;
   width: 20%;
-  height: calc(100% - 100px);
+  height: calc(100% - 80px);
   background: rgba(0, 0, 0, 0.308);
   position: absolute;
+  border-radius: 20px 20px 0 0;
   // top: 0;
   right: 0;
   .clickdata {

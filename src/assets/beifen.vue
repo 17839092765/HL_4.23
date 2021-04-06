@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import acapi from "./static/ac.min.js"
 export default {
   data () {
     return {
@@ -21,15 +20,15 @@ export default {
     onLoad () {
       console.log(1);
       // onResize();
-      this.init(true, true);
+      init(true, true);
     },
     onResize () {
-      // let leftPanel = document.getElementById('leftPanel');
-      // let infoPanel = document.getElementById('infoPanel');
-      // let player = document.getElementById('player');
+      let leftPanel = document.getElementById('leftPanel');
+      let infoPanel = document.getElementById('infoPanel');
+      let player = document.getElementById('player');
 
-      // player.style.width = `${window.innerWidth - leftPanel.clientWidth - 30}px`;
-      // player.style.height = `${window.innerHeight - infoPanel.clientHeight - 50}px`;
+      player.style.width = `${window.innerWidth - leftPanel.clientWidth - 30}px`;
+      player.style.height = `${window.innerHeight - infoPanel.clientHeight - 50}px`;
     },
     onEvent (e) {
       console.log(e);
@@ -43,7 +42,7 @@ export default {
     initWebSocket () {
       //初始化weosocket
       const wsuri = "127.0.0.1:4322";
-      this.websock = new acapi.AirCityAPI(wsuri, this.onReady, this.log);
+      this.websock = new AirCityCloud(wsuri, this.onReady, this.log);
       // this.websock.setEventCallback(this.onEvent);
     },
     getMatchServerConfig (host, fn, callbackIndex) {
@@ -76,28 +75,27 @@ export default {
     init (withPlayer, withInterface) {
       let _this = this
 
-      this.getMatchServerConfig(HostConfig.MatchServer, function (o) {
-        console.log(o);
+      getMatchServerConfig(HostConfig.MatchServer, function (o) {
         if (o.result == 0) {
           if (withPlayer) {
-            new acapi.AirCityAPI(o.instanceId, 'player', HostConfig.Token, true);
+            new AirCityPlayer(o.instanceId, 'player', HostConfig.Token, true);
           }
           if (withInterface) {
-            var ace = new acapi.AirCityAPI(o.instanceId, _this.onReady, _this.log);
+            var ace = new AirCityCloud(o.instanceId, _this.onReady, _this.log);
             ace.setEventCallback(_this.onEvent);
           }
         }
         else {
           if (withPlayer) {
             let host = HostConfig.instanceId ? HostConfig.instanceId : HostConfig.AirCityPlayer;
-            let acp = new acapi.AirCityPlayer(host, 'player', HostConfig.Token, true, true);
+            let acp = new AirCityPlayer(host, 'player', HostConfig.Token, true, true);
             //AirCityPlayer对象增加方法enableAutoAdjustResolution，可以设置启用或关闭视频窗口缩放时
             //自动调整分辨率的功能。这个功能默认是启用的，如果想关闭此功能，可以在初始化的时候调用enableAutoAdjustResolution(false)
             //acp.enableAutoAdjustResolution(false);
           }
           if (withInterface) {
             let host = HostConfig.instanceId ? HostConfig.instanceId : HostConfig.AirCityAPI;
-            var ace = new acapi.AirCityAPI(host, _this.onReady, _this.log);
+            var ace = new AirCityCloud(host, _this.onReady, _this.log);
             ace.useColorLog = true;
             ace.setEventCallback(_this.onEvent);
 
