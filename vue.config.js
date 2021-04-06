@@ -1,4 +1,4 @@
-const webpack = require("webpack")
+const webpack = require("webpack");
 
 module.exports = {
   devServer: {
@@ -8,7 +8,7 @@ module.exports = {
       "/api": {
         // target: 'http://192.168.31.149:8080/CIMforfinance/finance/',
         // target: 'http://47.102.133.17:8080/CIMforfinance/finance/',
-        target: "http://localhost:80/CIMforhistory/finance/",
+        target: "http://192.168.5.22:80/CIMforhistory/finance/",
         // target: 'http://192.168.31.153:8080/CIMforfinance/finance/',
         changeOrigin: true,
         pathRewrite: {
@@ -43,8 +43,8 @@ module.exports = {
       maxAssetSize: 30000000,
       //只给出 js 文件的性能提示
       assetFilter: function(assetFilename) {
-        return assetFilename.endsWith(".js")
+        return assetFilename.endsWith(".js");
       },
     },
   },
-}
+};
