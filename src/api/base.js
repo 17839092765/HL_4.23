@@ -1,8 +1,8 @@
 let url
 if (process.env.NODE_ENV === "'dev'") {
   url = "/api"
-} else {
   console.log("devdevdevdevdevdev")
+} else {
   url = "/api"
 
   // url = 'http://localhost:8080/CIMforhistory/finance/'

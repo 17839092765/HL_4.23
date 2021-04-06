@@ -8,11 +8,22 @@ module.exports = {
       "/api": {
         // target: 'http://192.168.31.149:8080/CIMforfinance/finance/',
         // target: 'http://47.102.133.17:8080/CIMforfinance/finance/',
-        target: "http://localhost:80/CIMforhistory/finance/",
+        // target: "http://localhost:80/CIMforhistory/finance/",
+        target: "http://192.168.5.49:6639/CIMforhistory/finance/",
         // target: 'http://192.168.31.153:8080/CIMforfinance/finance/',
         changeOrigin: true,
         pathRewrite: {
           "^/api": "",
+        },
+      },
+      "/2api": {
+        // target: 'http://192.168.31.149:8080/CIMforfinance/finance/',
+        // target: 'http://47.102.133.17:8080/CIMforfinance/finance/',
+        target: "http://192.168.5.49:6639/geoserver/",
+        // target: 'http://192.168.31.153:8080/CIMforfinance/finance/',
+        changeOrigin: true,
+        pathRewrite: {
+          "^/2api": "",
         },
       },
     },

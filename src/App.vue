@@ -80,7 +80,7 @@ export default {
         console.log(o);
         if (o.result == 0) {
           if (withPlayer) {
-            new acapi.AirCityAPI(o.instanceId, 'player', HostConfig.Token, true);
+            new acapi.AirCityPlayer(o.instanceId, 'player', HostConfig.Token, true);
           }
           if (withInterface) {
             var ace = new acapi.AirCityAPI(o.instanceId, _this.onReady, _this.log);
