@@ -60,6 +60,83 @@ export default {
     var chartDom = document.getElementById('echarts4');
     var myChart = echarts.init(chartDom);
     var option;
+    myChart.on('click', (params) => {
+
+
+      console.log(params);
+
+
+      // if (params.seriesName == "法定图则") {
+      //   if (params.name === "商业服务业用地") {
+      //     Glow(this.ChuLiOs("0.25098039215686274,1,0.00392156862745098,1"))
+
+      //   } else if (params.name === "公共管理与服务设施用地") {
+      //     Glow(this.ChuLiOs("0.24705882352941178,1,0,1"))
+
+      //   } else if (params.name === "工业用地") {
+      //     Glow(this.ChuLiOs("0,0.7490196078431373,1,1"))
+
+      //   } else if (params.name === "居住用地") {
+      //     Glow(this.ChuLiOs("1,1,0,1"))
+
+      //   } else if (params.name === "物流仓储用地") {
+      //     Glow(this.ChuLiOs("0.6431372549019608,0.8666666666666667,0,1"))
+
+      //   } else if (params.name === "公共设施用地") {
+      //     Glow(this.ChuLiOs("0.25098039215686274,1,0.00392156862745098,1"))
+
+      //   } else if (params.name === "交通设施用地") {
+      //     Glow(this.ChuLiOs("0.6431372549019608,0.8666666666666667,0,1"))
+
+      //   } else if (params.name === "绿地与广场用地") {
+      //     Glow(this.ChuLiOs("0.6431372549019608,0.8666666666666667,0,1"))
+
+      //   }
+      // }
+      // if (params.name === "注记") {
+
+      //   Glow(this.ChuLiOs("1,1,1,1"))
+      // } else if (params.name === "已发证") {
+      //   Glow(this.ChuLiOs("1,0.8745098039215686,0.5019607843137255,1"))
+
+      // } else if (params.name === "商业服务业用地") {
+      //   Glow(this.ChuLiOs("1,1,0,1"))
+
+      // } else if (params.name === "备案") {
+
+      //   Glow(this.ChuLiOs("0.9764705882352941,0.5058823529411764,0.47843137254901963,1"))
+      // } else if (params.name === "待处理") {
+
+      //   Glow(this.ChuLiOs("0.49411764705882355,0.6235294117647059,0.996078431372549,1"))
+      // } else if (params.name === "军产用地") {
+
+      //   Glow(this.ChuLiOs("0.6431372549019608,0.8666666666666667,0,1"))
+      // } else if (params.name === "其他用地") {
+      //   Glow(this.ChuLiOs("0.6431372549019608,0.8666666666666667,0,1"))
+
+      // } else if (params.name === "公共管理与服务设施用地") {
+      //   Glow(this.ChuLiOs("0.24705882352941178,1,0,1"))
+
+      // } else if (params.name === "工业用地") {
+      //   Glow(this.ChuLiOs("0,0.7490196078431373,1,1"))
+
+      // } else if (params.name === "居住用地") {
+      //   Glow(this.ChuLiOs("0.6431372549019608,0.8666666666666667,0,1"))
+
+      // } else if (params.name === "物流仓储用地") {
+      //   Glow(this.ChuLiOs("0.6431372549019608,0.8666666666666667,0,1"))
+
+      // } else if (params.name === "公共设施用地") {
+      //   Glow(this.ChuLiOs("0.6431372549019608,0.8666666666666667,0,1"))
+
+      // } else if (params.name === "交通设施用地") {
+      //   Glow(this.ChuLiOs("0.6431372549019608,0.8666666666666667,0,1"))
+
+      // } else if (params.name === "绿地与广场用地") {
+      //   Glow(this.ChuLiOs("0.6431372549019608,0.8666666666666667,0,1"))
+
+      // }
+    });
     option = {
       color: ['#9CE8AA', '#ED494A', '#8565EE', '#FCF46D', '#DF9BE8'],
       backgroundColor: '#00032C',
@@ -78,7 +155,7 @@ export default {
       },
       series: [
         {
-          name: '法定图则',
+          name: '城市更新',
           type: 'pie',
           radius: ['30%', '70%'],
           center: ['50%', '60%'],

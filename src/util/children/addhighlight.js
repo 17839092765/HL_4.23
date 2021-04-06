@@ -3,7 +3,7 @@ import __g from "../../main"
 import acapi from "../../static/ac.min"
 function addhighlight(alldata, clcdata) {
   // console.log(alldata, clcdata, 888888888888)
-  console.log(clcdata, 888777)
+  // console.log(clcdata, 888777)
   __g.polyline.clear(() => {
     alldata.forEach((item, index) => {
       // console.log(clcdata.id)

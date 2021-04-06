@@ -19,7 +19,6 @@ export default {
   methods: {
     //监听三维交互的返回事件
     onLoad () {
-      console.log(1);
       // onResize();
       this.init(true, true);
     },
@@ -32,7 +31,7 @@ export default {
       // player.style.height = `${window.innerHeight - infoPanel.clientHeight - 50}px`;
     },
     onEvent (e) {
-      console.log(e);
+      // console.log(e);
     },
     onReady () {
       //此时可以调用接口了
@@ -77,7 +76,7 @@ export default {
       let _this = this
 
       this.getMatchServerConfig(HostConfig.MatchServer, function (o) {
-        console.log(o);
+        console.log(o, 111111);
         if (o.result == 0) {
           if (withPlayer) {
             new acapi.AirCityPlayer(o.instanceId, 'player', HostConfig.Token, true);
@@ -97,9 +96,9 @@ export default {
           }
           if (withInterface) {
             let host = HostConfig.instanceId ? HostConfig.instanceId : HostConfig.AirCityAPI;
-            var ace = new acapi.AirCityAPI(host, _this.onReady, _this.log);
+            var ace = new acapi.AirCityAPI(host, this.onReady, this.log);
             ace.useColorLog = true;
-            ace.setEventCallback(_this.onEvent);
+            ace.setEventCallback(this.onEvent);
 
           }
         }
