@@ -1,8 +1,8 @@
-import Vue from "vue"
-import VueRouter from "vue-router"
-import Home from "../views/Home.vue"
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: "hash",
@@ -56,7 +56,7 @@ const router = new VueRouter({
           children: [
             {
               path: "zsly",
-              component: () => import("../views/ZSYZ/children/zsly.vue"),
+              component: () => import("../views/ZSYZ/children/zsly"),
             },
             {
               path: "zslc",
@@ -71,6 +71,6 @@ const router = new VueRouter({
       ],
     },
   ],
-})
+});
 
-export default router
+export default router;

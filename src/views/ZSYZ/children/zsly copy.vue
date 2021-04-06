@@ -1,36 +1,27 @@
 <template>
   <div class="zsly">
     <div class="zslycase">
-      <div class="top_data" v-if="clickData.length <= 0">请点击左边建筑物</div>
-      <div class="top" v-if="clickData[2]">
+      <div class="top">
         <div class="top_item1">
-          <div class="top_item1_btn">地标</div>
+          <div class="top_item1_btn">地标66</div>
           <div class="top_item1_title" v-if="clickData[2]">
-            {{ clickData[2].data }}
+            {{ clickData[2].data }}66
           </div>
         </div>
         <div class="top_item2">招商类型: 银行金融科技子公司</div>
         <div class="top_item3">
           <div class="top_item3_left">
-            <div class="left_item1">
-              <img src="../../../assets/img/mianji1.png" />
-            </div>
+            <div class="left_item1"></div>
             <div class="left_item2">
-              <span class="spac" v-if="clickData[2]">
-                {{ (clickData[12].data / 10000).toFixed(2) }}
-              </span>
+              <span class="spac">2.6</span>
               <span class="wan">万m2</span>
               <div>占地面积</div>
             </div>
           </div>
           <div class="top_item3_right">
-            <div class="right_item1">
-              <img src="../../../assets/img/shangye1.png" />
-            </div>
+            <div class="right_item1"></div>
             <div class="right_item2">
-              <span class="spac" v-if="clickData[2]">{{
-                clickData[11].data
-              }}</span>
+              <span class="spac">38</span>
               <span class="wan">个</span>
               <div>招商单元</div>
             </div>
@@ -43,25 +34,13 @@
           </div>
         </div>
       </div>
-      <div class="cen" v-if="clickData[2]">
+      <div class="cen">
         <div class="centitle">
-          <div class="data_icom"></div>
-
-          <span class="info_jz">建筑信息</span>
+          <i class="el-icon-office-building"></i>
+          <span>建筑信息</span>
         </div>
         <div class="cencen">
-          "超级总部基于“总部＋生态+文化”三大主题,营造世界级创新文化实验区。超级总部基于“总部+生态+文化”三大主题，营造世界级创新文化实验区
-        </div>
-        <div class="condata">
-          <div
-            class="condata_item"
-            v-for="(item, index) in clickData"
-            :key="index"
-          >
-            <span class="span_left"> {{ item.name }}</span>
-            <span class="span_cen"> |</span>
-            <span class="span_right"> {{ item.data }}</span>
-          </div>
+          内容
         </div>
       </div>
     </div>
@@ -76,10 +55,7 @@ import __g from "../../../main";
 export default {
   data() {
     return {
-      msg: "",
-
       louyuName: "1",
-      data_s: clickData[12].data,
       zhaoshangClass: "2",
     };
   },
@@ -95,7 +71,6 @@ export default {
     showtuceng(this.$treedata.zsyzdata);
     __g.camera.lookAt(
       510264.09375,
-
       2493521.0,
       650.484497,
       -26.054821,
@@ -127,85 +102,13 @@ export default {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.171);
-  padding-left: 1%;
-  padding-right: 1%;
-}
-.top_data {
-  margin-top: 5%;
-}
-.span_left {
-  margin-left: 5%;
-  width: 20%;
-}
-.span_cen {
-}
-.span_right {
-  margin-left: 2%;
-  word-break: break-all;
-}
-.condata_item {
-  font-size: 18px;
-  width: 100%;
-  height: 5.5%;
-  margin-top: 1%;
-}
-.condata {
-  padding-top: 4%;
-  margin-top: 1%;
-  width: 100%;
-  height: 68%;
-  background: rgba(32, 53, 40, 0.1);
-}
-.cencen {
-  width: 100%;
-  height: 25%;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  background: transparent;
-  font-size: 18px;
-  font-family: PingFangSC-Medium, PingFang SC;
-  font-weight: 500;
-  color: #ffffff;
-  line-height: 30px;
-}
-.centitle {
-  display: flex;
-  width: 100%;
-  height: 7%;
-}
-.data_icom {
-  background-image: url("../../../assets//img//jz.png");
-  background-repeat: no-repeat;
-  background-size: 70%;
-  height: 100%;
-  width: 10%;
-}
-.data_icom img {
-  /* width: 55%;
-  height: 55%; */
-}
-.info_jz {
-  margin-left: -2%;
-  width: 90%;
-  height: 100%;
-  font-size: 24px;
-  font-family: PingFangSC-Medium, PingFang SC;
-  font-weight: 500;
-}
-.top {
-  width: 100%;
-  height: 30%;
-}
-.cen {
-  width: 100%;
-  height: 55%;
 }
 .jdt {
   width: 100%;
   height: 10%;
 }
 .wan {
-  width: 47%;
+  width: 100%;
   padding-left: 3%;
 }
 .top_item1 {
@@ -236,7 +139,7 @@ export default {
   color: #ffffff;
   line-height: 56px;
   margin-left: 2%;
-  margin-top: -7%;
+  margin-top: -4%;
 }
 .top_item2 {
   display: flex;
@@ -288,26 +191,20 @@ export default {
   height: 52px;
   border-radius: 52px;
   background: transparent;
-  border: 2px solid #ffff;
-  text-align: center;
-  line-height: 52px;
-}
-.left_item1 img,
-.right_item1 img {
-  width: 50%;
-  margin-top: 24%;
+  border: 2px solid #ff979797;
 }
 .left_item2 {
-  width: 69%;
+  width: 55%;
+  margin-left: -16%;
 }
 .right_item2 {
   width: 55%;
   margin-left: -19%;
 }
 .spac {
-  width: 50%;
+  width: 45px;
   height: 32px;
-  font-size: 22px;
+  font-size: 32px;
   font-family: STHeitiSC-Medium, STHeitiSC;
   font-weight: 500;
   color: #00f5f7;

@@ -3,7 +3,9 @@ import axios from "./http";
 // import base from "./base"
 
 // const geoserverurl = 'http://192.168.31.153:8080/geoserver/'
-const geoserverurl = "http://192.168.5.22:80/geoserver/";
+// const geoserverurl = "http://localhost:80/geoserver/"
+// const geoserverurl = "http://192.168.5.49:6639/geoserver/"
+const geoserverurl = "/2api";
 
 // http://localhost:80/geoserver/db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3A1111&maxFeatures=20000&outputFormat=application%2Fjson`
 
@@ -58,26 +60,26 @@ const geoserverruest = {
   // 现状权属
   shownewxzqsdata() {
     return axios.get(
-      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs2&maxFeatures=2000&outputFormat=application%2Fjson`
+      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs0403&maxFeatures=20000&outputFormat=application%2Fjson`
     );
     // db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs0401&maxFeatures=2000&outputFormat=application%2Fjson
   },
   // 法定图则
   shownewfdtzdata() {
     return axios.get(
-      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Afdtz0401&maxFeatures=2000&outputFormat=application%2Fjson`
+      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Afdtz0403&maxFeatures=20000&outputFormat=application%2Fjson`
     );
   },
   // 土地利用
   shownewtdlydata() {
     return axios.get(
-      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Atdlyxz0401&maxFeatures=2000&outputFormat=application%2Fjson`
+      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Atdlyxz0403&maxFeatures=20000&outputFormat=application%2Fjson`
     );
   },
   // 城市更新
   shownewcsgxdata() {
     return axios.get(
-      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Acityupdate0401&maxFeatures=2000&outputFormat=application%2Fjson`
+      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Acityupdate0406&maxFeatures=20000&outputFormat=application%2Fjson`
     );
   },
 };
