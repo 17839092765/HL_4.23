@@ -1,14 +1,20 @@
 <template>
-  <div class='search'>
+  <div class="search">
     <div class="showtab">
       <div class="tit">全球 • 仅华尔街才有此金融地位</div>
       <div class="showtab_box">
         <div @click="show_search_home" class="showtab_box_one">
-          <img src="../../../assets/img/0407红岭切图/招商引资/icon_搜房.svg" alt="">
+          <img
+            src="../../../assets/img/0407红岭切图/招商引资/icon_搜房.svg"
+            alt=""
+          />
           <span>搜房</span>
         </div>
         <div @click="show_search_hig" class="showtab_box_two">
-          <img src="../../../assets/img/0407红岭切图/招商引资/icon_高级搜索.svg" alt="">
+          <img
+            src="../../../assets/img/0407红岭切图/招商引资/icon_高级搜索.svg"
+            alt=""
+          />
           <span>高级搜索</span>
         </div>
         <div v-if="isshowClose" class="close">
@@ -19,13 +25,12 @@
             <div class="tit">面积(m<sup>2</sup>)</div>
             <div class="slider1">
               <el-slider v-model="value" range @change="sliderChange" :max="10">
-
               </el-slider>
               <!-- <el-slider @change="sliderChange" v-model="value" :max="max" :step="100">
               </el-slider> -->
               <div class="num">
-                <span v-for="item,index in 10" :key="index">
-                  {{item*100}}
+                <span v-for="(item, index) in 10" :key="index">
+                  {{ item * 100 }}
                 </span>
               </div>
             </div>
@@ -33,21 +38,95 @@
           <div class="center">
             <div class="tit">租金(元)</div>
             <div class="slider2">
-              <el-slider v-model="value2" range @change="sliderChange1" :max="10">
+              <el-slider
+                v-model="value2"
+                range
+                @change="sliderChange1"
+                :max="10"
+              >
               </el-slider>
               <!-- <el-slider @change="sliderChange1" v-model="value2" :max="max" :step="100">
               </el-slider> -->
               <div class="num">
-                <span v-for="item,index in 10" :key="index">
-                  {{item*100}}
+                <span v-for="(item, index) in 10" :key="index">
+                  {{ item * 100 }}
                 </span>
               </div>
             </div>
           </div>
-          <div class="right"></div>
+          <div class="right">
+            <div class="tit">区域</div>
+            <div class="blockquyu">
+              <div @click="quyublock(1)" class="left">
+                <img
+                  v-if="iswhowbeiduan"
+                  src="../../../assets/img/0407红岭切图/招商引资/北段_选中.svg"
+                  alt=""
+                />
+                <img
+                  v-if="!iswhowbeiduan"
+                  src="../../../assets/img/0407红岭切图/招商引资/北段_未选.svg"
+                  alt=""
+                />
+              </div>
+              <div @click="quyublock(2)" class="center">
+                <img
+                  v-if="iswhowcenter"
+                  src="../../../assets/img/0407红岭切图/招商引资/中段_选中.svg"
+                  alt=""
+                />
+                <img
+                  v-if="!iswhowcenter"
+                  src="../../../assets/img/0407红岭切图/招商引资/中段_未选.svg"
+                  alt=""
+                />
+              </div>
+              <div @click="quyublock(3)" class="right">
+                <img
+                  v-if="iswhownanduan"
+                  src="../../../assets/img/0407红岭切图/招商引资/南段_选中.svg"
+                  alt=""
+                />
+                <img
+                  v-if="!iswhownanduan"
+                  src="../../../assets/img/0407红岭切图/招商引资/南段_未选.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
         </div>
         <div class="tabdata1">
-
+          <div class="searchblock">
+            <div class="left">
+              <p>
+                <span>关键字</span><input type="text" v-model="key" name="" />
+              </p>
+              <p>
+                <span>面积</span
+                ><input type="number" v-model="area_start" name="" />
+                <span>-</span>
+                <input type="number" name="" v-model="area_end" />
+                <span>m2</span>
+              </p>
+            </div>
+            <div class="center">
+              <p>
+                <span>租金</span
+                ><input type="number" v-model="money_start" name="" />
+                <span>-</span>
+                <input type="number" name="" v-model="money_end" />
+                <span>元</span>
+              </p>
+            </div>
+            <div class="right">
+              <button @click="sumit">确定</button>
+              <button @click="reset">清空</button>
+            </div>
+          </div>
+          <div class="showblock">
+            show
+          </div>
         </div>
       </div>
     </div>
@@ -55,131 +134,175 @@
 </template>
 
 <script>
-import connector from "../../../api/common.js"
+// import beiduan from "../../../assets/img/0407红岭切图/招商引资/中段_选中.svg";
+// import beiduan from "../../../assets/img/0407红岭切图/招商引资/北段_选中.svg";
+import connector from "../../../api/common.js";
 export default {
-  data () {
+  data() {
     return {
+      // 高级搜索
+      // 关键字
+      key: "",
+      area_start: 0,
+      area_end: 0,
+      money_start: 0,
+      money_end: 0,
+      // 展示北段选中的样式
+      iswhowbeiduan: false,
+      iswhowcenter: false,
+      iswhownanduan: false,
       max: 1000,
       value: [0, 100],
       value2: [0, 100],
-      isshowClose: false
-
-
+      isshowClose: false,
     };
   },
   computed: {},
   watch: {},
   methods: {
-    // 搜索房子
-    async sliderChange (e) {
-      const result = await connector.layer_building(4403030030040400000)
+    // 高级搜索提交确定
+    sumit() {
+      let dataarr = {
+        key: this.key,
+        area_start: this.area_start,
+        area_end: this.area_end,
+        money_start: this.money_start,
+        money_end: this.money_end,
+      };
+      console.log(dataarr);
+    },
+    reset() {
+      this.key = "";
+      this.area_start = 0;
+      this.area_end = 0;
+      this.money_start = 0;
+      this.money_end = 0;
+    },
+    // 搜房__选择区域
+    quyublock(val) {
+      console.log(val);
+      // let blockquyu = document.getElementsByClassName("blockquyu")[0]
+      //   .children[0];
+      // let blockquyu2 = document.getElementsByClassName("blockquyu")[0]
+      //   .children[1];
+      // let blockquyu3 = document.getElementsByClassName("blockquyu")[0]
+      //   .children[2];
+      if (val === 1) {
+        console.log(1);
+        this.iswhowbeiduan = !this.iswhowbeiduan;
+      } else if (val === 2) {
+        this.iswhowcenter = !this.iswhowcenter;
+      } else if (val === 3) {
+        this.iswhownanduan = !this.iswhownanduan;
+      }
+    },
+    // 搜房__搜索面积
+    async sliderChange(e) {
+      const result = await connector.layer_building(4403030030040400000);
       console.log(e);
       console.log(result);
     },
-    // 搜索面积
-    sliderChange1 (e) {
+    // 搜房__搜索租金
+    sliderChange1(e) {
       console.log(e);
     },
-    show_search_home () {
-      this.isshowClose = true
-      let showtab = document.getElementsByClassName("showtab")[0]
-      let one = document.getElementsByClassName("showtab_box_one")[0]
-      let two = document.getElementsByClassName("showtab_box_two")[0]
-      let tabdata = document.getElementsByClassName("tabdata")[0]
-      let tabdata1 = document.getElementsByClassName("tabdata1")[0]
-      tabdata.style.display = "block"
-      tabdata1.style.display = "none"
-      one.style.borderBottom = "none"
-      two.style.borderBottom = "none"
+    show_search_home() {
+      this.isshowClose = true;
+      let showtab = document.getElementsByClassName("showtab")[0];
+      let one = document.getElementsByClassName("showtab_box_one")[0];
+      let two = document.getElementsByClassName("showtab_box_two")[0];
+      let tabdata = document.getElementsByClassName("tabdata")[0];
+      let tabdata1 = document.getElementsByClassName("tabdata1")[0];
+      tabdata.style.display = "block";
+      tabdata1.style.display = "none";
+      one.style.border = "none";
+      two.style.border = "none";
 
-
-      showtab.style.top = "calc(100% - 260px)"
-      tabdata.style.top = "93px"
-      one.style.height = "50px"
-      one.style.fontSize = "16px"
-      one.style.borderBottom = "1px solid #fff"
-      two.style.height = "50px"
-      two.style.fontSize = "16px"
-      this.is_to_top = !this.is_to_top
+      showtab.style.top = "calc(100% - 260px)";
+      tabdata.style.top = "93px";
+      one.style.height = "50px";
+      one.style.fontSize = "16px";
+      one.style.border = "1px solid #fff";
+      one.style.borderBottom = "none";
+      two.style.borderBottom = "none";
+      two.style.height = "50px";
+      two.style.fontSize = "16px";
+      this.is_to_top = !this.is_to_top;
     },
-    show_search_hig () {
-      this.isshowClose = true
+    show_search_hig() {
+      this.isshowClose = true;
 
-      let showtab = document.getElementsByClassName("showtab")[0]
-      let one = document.getElementsByClassName("showtab_box_one")[0]
-      let two = document.getElementsByClassName("showtab_box_two")[0]
-      let tabdata = document.getElementsByClassName("tabdata")[0]
-      let tabdata1 = document.getElementsByClassName("tabdata1")[0]
-      tabdata.style.display = "none"
-      tabdata1.style.display = "block"
-      one.style.borderBottom = "none"
-      two.style.borderBottom = "none"
-      showtab.style.top = "calc(100% - 260px)"
-      tabdata1.style.top = "93px"
-      one.style.height = "50px"
-      one.style.fontSize = "16px"
-      two.style.borderBottom = "1px solid #fff"
-      two.style.height = "50px"
-      two.style.fontSize = "16px"
-      this.is_to_top2 = !this.is_to_top2
+      let showtab = document.getElementsByClassName("showtab")[0];
+      let one = document.getElementsByClassName("showtab_box_one")[0];
+      let two = document.getElementsByClassName("showtab_box_two")[0];
+      let tabdata = document.getElementsByClassName("tabdata")[0];
+      let tabdata1 = document.getElementsByClassName("tabdata1")[0];
+      tabdata.style.display = "none";
+      tabdata1.style.display = "block";
+      one.style.border = "none";
+      two.style.border = "none";
 
-
+      showtab.style.top = "calc(100% - 260px)";
+      tabdata1.style.top = "93px";
+      one.style.height = "50px";
+      one.style.fontSize = "16px";
+      two.style.border = "1px solid #fff";
+      one.style.borderBottom = "none";
+      two.style.borderBottom = "none";
+      two.style.height = "50px";
+      two.style.fontSize = "16px";
+      this.is_to_top2 = !this.is_to_top2;
     },
-    close () {
-      let showtab = document.getElementsByClassName("showtab")[0]
-      let one = document.getElementsByClassName("showtab_box_one")[0]
-      let two = document.getElementsByClassName("showtab_box_two")[0]
-      let tabdata = document.getElementsByClassName("tabdata")[0]
-      let tabdata1 = document.getElementsByClassName("tabdata1")[0]
-      showtab.style.top = "calc(100% - 150px)"
-      tabdata1.style.top = "260px"
-      tabdata.style.top = "260px"
-      one.style.borderBottom = "none"
-      two.style.borderBottom = "none"
-      one.style.height = "70px"
-      one.style.fontSize = "20px"
-      two.style.height = "70px"
-      two.style.fontSize = "20px"
-      this.isshowClose = false
-
-    }
-
+    close() {
+      let showtab = document.getElementsByClassName("showtab")[0];
+      let one = document.getElementsByClassName("showtab_box_one")[0];
+      let two = document.getElementsByClassName("showtab_box_two")[0];
+      let tabdata = document.getElementsByClassName("tabdata")[0];
+      let tabdata1 = document.getElementsByClassName("tabdata1")[0];
+      showtab.style.top = "calc(100% - 150px)";
+      tabdata1.style.top = "260px";
+      tabdata.style.top = "260px";
+      one.style.border = "none";
+      two.style.border = "none";
+      one.style.height = "70px";
+      one.style.fontSize = "20px";
+      two.style.height = "70px";
+      two.style.fontSize = "20px";
+      this.isshowClose = false;
+    },
   },
-  created () {
-
-  },
-  mounted () {
-
-  },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () { },
-  destroyed () { },
-  activated () { },
+  created() {},
+  mounted() {},
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {},
+  destroyed() {},
+  activated() {},
   components: {},
-}
+};
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .search {
   position: absolute;
-  width: 100%;
+  width: 55%;
   height: 260px;
   top: calc(100% - 260px);
-  overflow: hidden;
-
-  // background: rgba(0, 0, 0, 0.295);
+  /* overflow: hidden; */
+  left: 0;
+  box-sizing: border-box;
+  /* // background: rgba(0, 0, 0, 0.295); */
   z-index: 20;
   .showtab {
+    z-index: 10;
     transition: all 1s;
-
     position: absolute;
     top: calc(100% - 150px);
-    width: 500px;
+    width: 80%;
     height: 150px;
-    background: rgba(0, 0, 0, 0);
+    /* background: rgba(70, 64, 64, 0.205); */
     .tit {
       width: 100%;
       height: 30px;
@@ -238,12 +361,12 @@ export default {
         position: absolute;
         width: 70px;
         height: 30px;
-        top: 20px;
-        right: -250px;
+        top: 45px;
+        left: 550px;
         // background: #000;
       }
       .num {
-        width: 400px;
+        width: 350px;
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -254,7 +377,7 @@ export default {
       .tabdata {
         transition: all 0.5s;
         position: absolute;
-        width: 2000px;
+        width: 1500px;
         height: 150px;
         top: 150px;
         left: 10px;
@@ -265,15 +388,16 @@ export default {
             margin-top: 10px;
           }
           padding: 0 10px;
-          width: 450px;
+          width: 430px;
           height: 100%;
           float: left;
           // background: #000;
           position: relative;
-          margin-left: 30px;
+          margin-left: 0px;
           // border: 1px solid #a72828;
         }
-        > div:nth-of-type(1)::after {
+        > div:nth-of-type(1)::after,
+        > div:nth-of-type(2)::after {
           content: "";
           position: absolute;
           right: 0;
@@ -284,8 +408,40 @@ export default {
           height: 80%;
           background: rgb(214, 205, 205);
         }
+        > div:nth-of-type(3) {
+          width: 500px;
+          /* height: 100%; */
+          /* background: rgba(3, 3, 3, 0.356); */
+          > div {
+            height: 5%;
+          }
+          .blockquyu {
+            height: 95%;
+            /* background: #000; */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            > div {
+              width: 150px;
+              height: 80px;
+              /* background: #000; */
+            }
+            /* > div:nth-of-type(1) {
+              background: url("../../../assets/img/0407红岭切图/招商引资/北段_未选.svg")
+                no-repeat center;
+            }
+            > div:nth-of-type(2) {
+              background: url("../../../assets/img/0407红岭切图/招商引资/中段_未选.svg")
+                no-repeat center;
+            }
+            > div:nth-of-type(3) {
+              background: url("../../../assets/img/0407红岭切图/招商引资/南段_未选.svg")
+                no-repeat center;
+            } */
+          }
+        }
         .el-slider {
-          width: 380px;
+          width: 360px;
         }
 
         // .slider1 {
@@ -294,6 +450,13 @@ export default {
         //   height: 100%;
         //   // background: rgba(0, 0, 0, 0.486);
         // }
+
+        .slider2 {
+          margin-left: 0px;
+          float: left;
+          width: 320px;
+          height: 100%;
+        }
         /deep/ .el-slider__button {
           width: 30px;
           height: 30px;
@@ -313,21 +476,28 @@ export default {
 
           background: rgba(0, 0, 0, 0.226);
         }
-        .slider2 {
-          margin-left: 30px;
-          float: left;
-          width: 420px;
-          height: 100%;
-        }
       }
       .tabdata1 {
         transition: all 0.5s;
         position: absolute;
-        width: 1000px;
+        width: 1500px;
         height: 150px;
         top: 150px;
         left: 10px;
-        background: rgb(145, 53, 53);
+        background: rgba(8, 8, 8, 0.171);
+        .searchblock {
+          width: 48%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.288);
+          float: left;
+          margin-right: 10px;
+        }
+        .showblock {
+          width: 48%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.199);
+          float: left;
+        }
       }
     }
   }

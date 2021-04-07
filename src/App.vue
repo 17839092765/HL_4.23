@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       api: null,
       player: null,
@@ -17,38 +17,38 @@ export default {
   watch: {},
   methods: {
     //监听三维交互的返回事件
-    onLoad () {
+    onLoad() {
       // onResize();
       this.init(true, true);
     },
-    onResize () {
+    onResize() {
       // let leftPanel = document.getElementById('leftPanel');
       // let infoPanel = document.getElementById('infoPanel');
       // let player = document.getElementById('player');
       // player.style.width = `${window.innerWidth - leftPanel.clientWidth - 30}px`;
       // player.style.height = `${window.innerHeight - infoPanel.clientHeight - 50}px`;
     },
-    onEvent (e) {
+    onEvent(e) {
       // console.log(e);
     },
-    onReady () {
+    onReady() {
       //此时可以调用接口了
     },
-    log () { },
-    initWebSocket () {
+    log() {},
+    initWebSocket() {
       //初始化weosocket
       const wsuri = "127.0.0.1:4322";
       this.websock = new AirCityAPI(wsuri, this.onReady, this.log);
       this.websock.setEventCallback(this.onEvent);
     },
-    getMatchServerConfig (host, fn, callbackIndex) {
+    getMatchServerConfig(host, fn, callbackIndex) {
       console.log(1);
       if ("WebSocket" in window) {
         var url = `ws://${host}`;
         let __fn = fn;
 
         var ws = new WebSocket(url);
-        ws.onopen = function () {
+        ws.onopen = function() {
           this.send(
             JSON.stringify({
               command: 6,
@@ -56,36 +56,27 @@ export default {
             })
           );
         };
-        ws.onmessage = function (event) {
+        ws.onmessage = function(event) {
           var o = JSON.parse(event.data);
           __fn(o);
         };
-        ws.onclose = function () { };
-        ws.onerror = function (event) { };
+        ws.onclose = function() {};
+        ws.onerror = function(event) {};
       } else {
         this.log("Not Support WebSocket!");
       }
     },
-    init (withPlayer, withInterface) {
+    init(withPlayer, withInterface) {
       let _this = this;
 
-      this.getMatchServerConfig(HostConfig.MatchServer, function (o) {
+      this.getMatchServerConfig(HostConfig.MatchServer, function(o) {
         console.log(o, 111111);
         if (o.result == 0) {
           if (withPlayer) {
-            new AirCityPlayer(
-              o.instanceId,
-              "player",
-              HostConfig.Token,
-              true
-            );
+            new AirCityPlayer(o.instanceId, "player", HostConfig.Token, true);
           }
           if (withInterface) {
-            var ace = new AirCityAPI(
-              o.instanceId,
-              _this.onReady,
-              _this.log
-            );
+            var ace = new AirCityAPI(o.instanceId, _this.onReady, _this.log);
             ace.setEventCallback(_this.onEvent);
           }
         } else {
@@ -116,29 +107,28 @@ export default {
       });
     },
   },
-  created () {
+  created() {
     this.initWebSocket();
   },
-  mounted () {
+  mounted() {
     // window.addEventListener("load", this.onLoad, true);
     // window.addEventListener("resize", this.onResize, true);
     // this.api = new AirCityAPI(instanceId, function () {
     //   this.api.misc.setMainUIVisibility(true);
     // }.bind(this));
     // let instanceId = "3232270593-8889-8081-4323"
-
     // this.player = new AirCityPlayer(instanceId, "player")
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () { },
-  destroyed () {
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {},
+  destroyed() {
     // this.api.destroy();
     // this.player.destroy();
   },
-  activated () { },
+  activated() {},
   components: {},
 };
 </script>
@@ -149,5 +139,6 @@ export default {
   height: 100%;
   position: absolute;
   z-index: 0;
+  background: rgba(0, 0, 0, 0.226);
 }
 </style>

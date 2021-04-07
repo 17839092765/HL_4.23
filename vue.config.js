@@ -1,5 +1,5 @@
 const webpack = require("webpack");
-
+const path = require("path");
 module.exports = {
   devServer: {
     // 项目运行时候的端口号
@@ -28,6 +28,7 @@ module.exports = {
       },
     },
   },
+
   css: {
     sourceMap: true, // 开启 CSS source maps
   },
