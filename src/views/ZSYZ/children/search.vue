@@ -15,15 +15,36 @@
           <el-button @click="close" type="warning">关闭</el-button>
         </div>
         <div class="tabdata">
-          <div class="tit">面积(m<sup>2</sup>)</div>
-          <div class="slider1">
-            <el-slider v-model="value" :max="max" :step="100">
-            </el-slider>
+          <div class="left">
+            <div class="tit">面积(m<sup>2</sup>)</div>
+            <div class="slider1">
+              <el-slider v-model="value" range @change="sliderChange" :max="10">
+
+              </el-slider>
+              <!-- <el-slider @change="sliderChange" v-model="value" :max="max" :step="100">
+              </el-slider> -->
+              <div class="num">
+                <span v-for="item,index in 10" :key="index">
+                  {{item*100}}
+                </span>
+              </div>
+            </div>
           </div>
-          <div class="slider2">
-            <el-slider v-model="value2" :max="max" :step="100">
-            </el-slider>
+          <div class="center">
+            <div class="tit">租金(元)</div>
+            <div class="slider2">
+              <el-slider v-model="value2" range @change="sliderChange1" :max="10">
+              </el-slider>
+              <!-- <el-slider @change="sliderChange1" v-model="value2" :max="max" :step="100">
+              </el-slider> -->
+              <div class="num">
+                <span v-for="item,index in 10" :key="index">
+                  {{item*100}}
+                </span>
+              </div>
+            </div>
           </div>
+          <div class="right"></div>
         </div>
         <div class="tabdata1">
 
@@ -34,13 +55,13 @@
 </template>
 
 <script>
-
+import connector from "../../../api/common.js"
 export default {
   data () {
     return {
-      max: 2000,
-      value: 0,
-      value2: 0,
+      max: 1000,
+      value: [0, 100],
+      value2: [0, 100],
       isshowClose: false
 
 
@@ -49,8 +70,17 @@ export default {
   computed: {},
   watch: {},
   methods: {
+    // 搜索房子
+    async sliderChange (e) {
+      const result = await connector.layer_building(4403030030040400000)
+      console.log(e);
+      console.log(result);
+    },
+    // 搜索面积
+    sliderChange1 (e) {
+      console.log(e);
+    },
     show_search_home () {
-      // this.close()
       this.isshowClose = true
       let showtab = document.getElementsByClassName("showtab")[0]
       let one = document.getElementsByClassName("showtab_box_one")[0]
@@ -62,7 +92,6 @@ export default {
       one.style.borderBottom = "none"
       two.style.borderBottom = "none"
 
-      // if (this.is_to_top) {
 
       showtab.style.top = "calc(100% - 260px)"
       tabdata.style.top = "93px"
@@ -72,17 +101,8 @@ export default {
       two.style.height = "50px"
       two.style.fontSize = "16px"
       this.is_to_top = !this.is_to_top
-
-      // } else {
-      //   this.close(1)
-
-      // }
-      // console.log(a);
-      // showtab.style.height = "300px"
-
     },
     show_search_hig () {
-      // this.close()
       this.isshowClose = true
 
       let showtab = document.getElementsByClassName("showtab")[0]
@@ -94,7 +114,6 @@ export default {
       tabdata1.style.display = "block"
       one.style.borderBottom = "none"
       two.style.borderBottom = "none"
-      // if (this.is_to_top2) {
       showtab.style.top = "calc(100% - 260px)"
       tabdata1.style.top = "93px"
       one.style.height = "50px"
@@ -104,10 +123,7 @@ export default {
       two.style.fontSize = "16px"
       this.is_to_top2 = !this.is_to_top2
 
-      // } else {
 
-      //   this.close(2)
-      // }
     },
     close () {
       let showtab = document.getElementsByClassName("showtab")[0]
@@ -118,18 +134,14 @@ export default {
       showtab.style.top = "calc(100% - 150px)"
       tabdata1.style.top = "260px"
       tabdata.style.top = "260px"
-
       one.style.borderBottom = "none"
       two.style.borderBottom = "none"
-
       one.style.height = "70px"
       one.style.fontSize = "20px"
       two.style.height = "70px"
       two.style.fontSize = "20px"
-
       this.isshowClose = false
 
-      // this.is_to_top2 = !this.is_to_top2
     }
 
   },
@@ -153,7 +165,7 @@ export default {
 <style lang='scss' scoped>
 .search {
   position: absolute;
-  width: 50%;
+  width: 100%;
   height: 260px;
   top: calc(100% - 260px);
   overflow: hidden;
@@ -230,27 +242,58 @@ export default {
         right: -250px;
         // background: #000;
       }
+      .num {
+        width: 400px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-left: 33px;
+        color: #fff;
+        font-size: 18px;
+      }
       .tabdata {
         transition: all 0.5s;
         position: absolute;
-        width: 1000px;
+        width: 2000px;
         height: 150px;
         top: 150px;
         left: 10px;
         background: rgba(0, 0, 0, 0.205);
-        // .el-slider {
-        //   color: rgb(20, 18, 18);
-        //   width: 500px;
-        //   height: 30px;
-        //   background: rgba(14, 14, 14, 0.274);
-        // }
-
-        .slider1 {
-          float: left;
-          width: 420px;
+        > div {
+          .tit {
+            text-align: center;
+            margin-top: 10px;
+          }
+          padding: 0 10px;
+          width: 450px;
           height: 100%;
-          // background: rgba(0, 0, 0, 0.486);
+          float: left;
+          // background: #000;
+          position: relative;
+          margin-left: 30px;
+          // border: 1px solid #a72828;
         }
+        > div:nth-of-type(1)::after {
+          content: "";
+          position: absolute;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          width: 2px;
+          height: 80%;
+          background: rgb(214, 205, 205);
+        }
+        .el-slider {
+          width: 380px;
+        }
+
+        // .slider1 {
+        //   float: left;
+        //   width: 420px;
+        //   height: 100%;
+        //   // background: rgba(0, 0, 0, 0.486);
+        // }
         /deep/ .el-slider__button {
           width: 30px;
           height: 30px;
@@ -263,7 +306,7 @@ export default {
         }
         /deep/ .el-slider__bar {
           height: 30px;
-          background: rgba(0, 0, 0, 0.699);
+          background: url("../../../assets/img/0407红岭切图/招商引资/滑块背景.svg");
         }
         /deep/ .el-slider__runway {
           height: 30px;

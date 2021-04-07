@@ -1,6 +1,6 @@
 <template>
   <div class="zsly">
-    <div v-if="false" class="zslycase">
+    <div v-if="true" class="zslycase">
       <div class="top_data">点击左边建筑物查看信息</div>
       <div class="top" v-if="clickData[2]">
         <div class="top_item1">

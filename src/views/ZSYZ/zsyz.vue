@@ -11,16 +11,19 @@
     </div> -->
     <ZHLY />
     <Search />
+    <Tag />
+    <BENSEARCH />
     <router-view />
 
   </div>
 </template>
 
 <script>
-// import RightData from "../ZSYZ/RightData/RightData";
 import ZHLY from "./children/zsly"
 import Search from "./children/search"
 import { showtuceng, hidetuceng } from "../../util/showtuceng.js"
+import Tag from './children/tag.vue';
+import BENSEARCH from "./children/beifenSearch"
 export default {
   data () {
     return {};
@@ -29,6 +32,7 @@ export default {
   watch: {},
   methods: {},
   created () {
+    __g.infoTree.show("A3CC59C2442B8110161A4A913FCDE533")
   },
   mounted () {
 
@@ -39,6 +43,8 @@ export default {
   beforeUpdate () { },
   updated () { },
   beforeDestroy () {
+    __g.infoTree.hide("A3CC59C2442B8110161A4A913FCDE533")
+
     hidetuceng(this.$treedata.zsyzdata)
   },
   destroyed () { },
@@ -46,7 +52,9 @@ export default {
   components: {
     // RightData,
     ZHLY,
-    Search
+    Search,
+    Tag,
+    BENSEARCH
   },
 };
 </script>
