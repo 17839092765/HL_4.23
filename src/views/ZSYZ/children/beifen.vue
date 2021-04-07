@@ -33,9 +33,9 @@
 import { mapState } from "vuex";
 import { showtuceng, hidetuceng } from "../../../util/showtuceng.js";
 import { showdata } from "../../XZSJ/showdata";
-import __g from "../../../main";
+// import __g from "../../../main";
 export default {
-  data() {
+  data () {
     return {};
   },
   computed: {
@@ -45,8 +45,8 @@ export default {
   },
   watch: {},
   methods: {},
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     showtuceng(this.$treedata.zsyzdata);
     __g.camera.lookAt(
       510264.09375,
@@ -57,17 +57,17 @@ export default {
       -30
     );
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () {
     hidetuceng([this.$treedata.zsyzdata[2]]);
     this.$store.commit("clickData", {});
     __g.tileLayer.stopHighlightActor();
   },
-  destroyed() {},
-  activated() {},
+  destroyed () { },
+  activated () { },
   components: {},
 };
 </script>

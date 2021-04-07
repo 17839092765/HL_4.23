@@ -24,7 +24,7 @@
 <script>
 import { showtuceng, hidetuceng } from "../../util/showtuceng";
 import { showVectorlayers, hideVectorlayers } from "../../util/showtuze"
-import __g from "../../main"
+// import __g from "../../main"
 import store from "../../store"
 export default {
   data () {

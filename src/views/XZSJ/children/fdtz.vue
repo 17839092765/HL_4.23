@@ -73,6 +73,15 @@
           </div>
         </div>
       </div>
+
+      <div v-for="(item, index) in clickData1" :key="index" class="case">
+        <span>
+          {{ item.name }}
+        </span>
+        <span>
+          {{ item.data }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -81,7 +90,7 @@
 import * as echarts from "echarts";
 import { mapState } from "vuex";
 import { showdata } from "../showdata";
-import __g from "../../../main";
+// import __g from "../../../main";
 export default {
   data() {
     return {};
@@ -158,7 +167,7 @@ export default {
           let thickness = 7;
           let brightness = 0.8;
           let flowRate = 0.5;
-          let o = new this.acapi.PolylineData(
+          let o = new PolylineData(
             index + "p11",
             color,
             coords,
@@ -504,13 +513,6 @@ export default {
   color: #ffffff;
   // line-height: 20%;
   text-align: center;
-}
-
-.title1 {
-  width: 58%;
-  height: 6%;
-  background: rgba(230, 206, 206, 0.2);
-  filter: blur(1px);
 }
 
 .title {

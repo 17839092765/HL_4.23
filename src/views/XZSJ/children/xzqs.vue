@@ -73,7 +73,7 @@ import * as echarts from "echarts";
 import { mapState } from "vuex";
 import { showdata } from "../showdata";
 import connector from "../../../api/common";
-import __g from "../../../main";
+// import __g from "../../../main";
 export default {
   data() {
     return {
@@ -152,7 +152,7 @@ export default {
           let thickness = 7;
           let brightness = 0.8;
           let flowRate = 0.5;
-          let o = new this.acapi.PolylineData(
+          let o = new PolylineData(
             index + "p11",
             color,
             coords,

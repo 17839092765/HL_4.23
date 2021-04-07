@@ -4,7 +4,7 @@
 
 <script>
 import { showtuceng, hidetuceng } from "../../util/showtuceng";
-import __g from "../../main"
+// import __g from "../../main"
 export default {
   data () {
     return {};
@@ -78,7 +78,7 @@ export default {
       let thickness = 10
       let brightness = 0.8
       let flowRate = 0.5
-      let o1 = new this.acapi.PolylineData(
+      let o1 = new PolylineData(
         "p773",
         color,
         coords,

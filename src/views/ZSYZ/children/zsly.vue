@@ -68,7 +68,7 @@
 import { mapState } from "vuex";
 import { showtuceng, hidetuceng } from "../../../util/showtuceng.js";
 import { showdata } from "../../XZSJ/showdata";
-import __g from "../../../main";
+// import __g from "../../../main";
 export default {
   data () {
 
