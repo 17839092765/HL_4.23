@@ -12,9 +12,41 @@
     <div class="datacase">
       <div v-show="dataCaseisShow" class="clickdata">
         <div class="title">
-          {{ clickData.title ? clickData.title : "Loding..." }}
-          <!-- {{clickData1}} -->
+          <div class="letf_title">
+            <div class="title_icon">
+              <img src="../../../assets//img/jz.png" />
+            </div>
+            <div class="title_con">
+              {{ clickData.title ? clickData.title : "Loding..." }}
+              <!-- {{clickData1}} -->
+            </div>
+          </div>
+          <div class="right_title"></div>
         </div>
+        <div class="top_item1">
+          <div class="top_item1_btn">地块编号</div>
+          <div class="top_item1_title" v-if="clickData1[2]">
+            {{ clickData1[0].data }}
+          </div>
+        </div>
+        <div class="top_item2">招商类型: 银行金融科技子公司</div>
+        <div class="top_item3">
+         <div class="right_item11">
+            <div class="right_item1">
+              <img src="../../../assets//img/mianji1.png" />
+            </div>
+         </div>
+           
+            <div class="right_item2">
+             <span class="spac" v-if="clickData1[2]">  {{ clickData1[3].data }}</span>
+              <span class="wan">m<sup>2</sup></span>
+              <div>用地面积</div>
+         
+          </div>
+         
+          </div>  
+        </div>
+
         <div v-for="(item, index) in clickData1" :key="index" class="case">
           <span>
             {{ item.name }}
@@ -200,6 +232,163 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.right_item11 {
+  width: 20%;
+  height: 100%;
+  margin-left: 5%;
+}
+.right_item2 {
+   width: 60%;
+  height: 100%;
+}
+.right_item1 img {
+  width: 50%;
+  margin-top: 24%;
+}
+.wan {
+  width: 47%;
+  padding-left: 3%;
+}
+.spac {
+  width: 50%;
+  height: 32px;
+  font-size: 22px;
+  font-family: STHeitiSC-Medium, STHeitiSC;
+  font-weight: 500;
+  color: #00f5f7;
+  line-height: 33px;
+}
+.left_item2 {
+  width: 69%;
+}
+.right_item1 {
+  width: 52px;
+  height: 52px;
+  border-radius: 52px;
+  background: transparent;
+  border: 2px solid #ffff;
+  text-align: center;
+  line-height: 52px;
+}
+.top_item3 {
+  width: 100%;
+  height: 15%;
+  background: green;
+  display: flex;
+ align-items: center;
+}
+.item_left {
+width: 50%;
+height: 100%;
+}
+.con {
+  width: 75px;
+  height: 75px;
+ border-radius: 50%;
+}
+.item_right {
+width: 50%;
+height: 100%;
+}
+.fdtz {
+  width: 100%;
+  height: 100%;
+}
+.datacase {
+  width: 20%;
+  height: 100%;
+  padding: 20px 10px;
+  box-sizing: border-box;
+
+  height: calc(100% - 80px);
+  background: rgba(0, 0, 0, 0.171);
+  position: absolute;
+  border-radius: 20px 20px 0 0;
+  // top: 0;
+  right: 0;
+}
+.clickdata {
+  width: 100%;
+  height: 100%;
+}
+.top_item1 {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top_item1_btn {
+  margin-top: 1%;
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #fbf6e6;
+  background: #f7b700;
+  width: 30%;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+}
+.top_item1_title {
+  width: 70%;
+  height: 35px;
+  font-size: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 56px;
+  margin-left: 2%;
+  margin-top: -7%;
+}
+.top_item2 {
+  display: flex;
+  align-items: center;
+  background: #007ad9;
+  padding-left: 4%;
+  width: 80%;
+  height: 7%;
+  font-size: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #ffffff;
+  // line-height: 20%;
+  text-align: center;
+}
+
+
+
+.title {
+  width: 100%;
+  height: 6%;
+}
+.letf_title {
+  width: 60%;
+  height: 100%;
+  font-size: 18px;
+  color: white;
+  background: rgba(109, 136, 123, 0.1);
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+.title_icon {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.title_icon img {
+  width: 30px;
+}
+.right_title {
+  width: 40%;
+  height: 100%;
+}
 #echarts1 {
   width: 100%;
   height: 370px;
@@ -214,6 +403,7 @@ export default {
   top: 100px;
   left: 20px;
   z-index: 100;
+  color: white;
 
   .top {
     height: 40px;
@@ -227,39 +417,6 @@ export default {
     width: 100%;
     height: calc(100% - 40px);
     background: rgba(0, 0, 0, 0.39);
-  }
-}
-.datacase {
-  padding: 20px 10px;
-  box-sizing: border-box;
-  width: 20%;
-  height: calc(100% - 80px);
-  background: rgba(0, 0, 0, 0.308);
-  position: absolute;
-  border-radius: 20px 20px 0 0;
-  // top: 0;
-  right: 0;
-  .clickdata {
-    overflow-y: scroll;
-    width: 100%;
-    height: 300px;
-    background: rgb(121, 117, 117);
-    .title {
-      height: 30px;
-      font-size: 18px;
-      line-height: 30px;
-      text-align: center;
-      font-weight: 600;
-    }
-  }
-  .cityshow {
-    .img {
-      width: 100%;
-      height: 100px;
-      img {
-        width: 50%;
-      }
-    }
   }
 }
 </style>

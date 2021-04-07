@@ -79,7 +79,6 @@ export default {
       msg: "",
 
       louyuName: "1",
-      data_s: clickData[12].data,
       zhaoshangClass: "2",
     };
   },

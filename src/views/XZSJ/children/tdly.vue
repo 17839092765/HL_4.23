@@ -162,6 +162,8 @@ export default {
   top: 100px;
   left: 20px;
   z-index: 100;
+  color: white;
+
   .top {
     height: 40px;
     width: 100px;
