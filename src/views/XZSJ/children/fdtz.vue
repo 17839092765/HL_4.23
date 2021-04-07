@@ -1,16 +1,31 @@
 <template>
   <div class="fdtz">
     <div class="echwarp">
-      <div class="top">
-        <i>icon</i>
-        <span>法定图则</span>
-      </div>
+      <div class="echbox1"></div>
       <div class="echbox">
-        <div id="echarts1"></div>
+        <div class="main_box">
+          <div class="cvn"></div>
+          <div class="cvy">
+            <div class="top1"></div>
+            <div class="top">
+              <div class="cyu">
+                <img src="../../../assets/img/mianji1.png" />
+              </div>
+              <span>法定图则</span>
+            </div>
+          </div>
+          <div class="cvh"></div>
+        </div>
+
+        <div id="echarts11"></div>
       </div>
     </div>
     <div class="datacase">
+      <div class="top_data" v-if="clickData1.length === 0">
+        点击左边建筑物查看信息
+      </div>
       <div v-show="dataCaseisShow" class="clickdata">
+        <div class="title1"></div>
         <div class="title">
           <div class="letf_title">
             <div class="title_icon">
@@ -31,29 +46,31 @@
         </div>
         <div class="top_item2">招商类型: 银行金融科技子公司</div>
         <div class="top_item3">
-         <div class="right_item11">
+          <div class="right_item11">
             <div class="right_item1">
               <img src="../../../assets//img/mianji1.png" />
             </div>
-         </div>
-           
-            <div class="right_item2">
-             <span class="spac" v-if="clickData1[2]">  {{ clickData1[3].data }}</span>
-              <span class="wan">m<sup>2</sup></span>
-              <div>用地面积</div>
-         
           </div>
-         
-          </div>  
-        </div>
 
-        <div v-for="(item, index) in clickData1" :key="index" class="case">
-          <span>
-            {{ item.name }}
-          </span>
-          <span>
-            {{ item.data }}
-          </span>
+          <div class="right_item2">
+            <span class="spac" v-if="clickData1[2]">
+              {{ clickData1[3].data }}</span
+            >
+            <span class="wan">m<sup>2</sup></span>
+            <div>用地面积</div>
+          </div>
+        </div>
+        <div class="condata1"></div>
+        <div class="condata">
+          <div
+            class="condata_item"
+            v-for="(item, index) in clickData1"
+            :key="index"
+          >
+            <div class="span_left">{{ item.name }}</div>
+            <span class="span_cen"> |</span>
+            <span class="span_right"> {{ item.data }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -66,7 +83,7 @@ import { mapState } from "vuex";
 import { showdata } from "../showdata";
 import __g from "../../../main";
 export default {
-  data () {
+  data() {
     return {};
   },
   computed: {
@@ -82,7 +99,7 @@ export default {
   },
   watch: {},
   methods: {
-    ChuLiOs (data) {
+    ChuLiOs(data) {
       // let echartsColorClass = []
       // console.log(this.os);
       // this.os.map(item => {
@@ -95,35 +112,38 @@ export default {
       //   }
       // })
       // console.log(echartsColorClass);
-      let odata = data.join()
-      let newos = this.os.map(item => {
-        if (item.color.join() === odata) {
-          return [item.id, item.coordinates[0][0]]
-        } else {
-          return 666
-        }
-      }).filter(item => {
-        if (item == 666) {
-          return false
-        } else {
-          return item
-        }
-      })
+      let odata = data.join();
+      let newos = this.os
+        .map((item) => {
+          if (item.color.join() === odata) {
+            return [item.id, item.coordinates[0][0]];
+          } else {
+            return 666;
+          }
+        })
+        .filter((item) => {
+          if (item == 666) {
+            return false;
+          } else {
+            return item;
+          }
+        });
       console.log(newos);
-      return newos
+      return newos;
     },
-    Glow (newos) {
-      console.log(newos)
+    Glow(newos) {
+      console.log(newos);
 
-      __g.polygon.glow(newos.map(item => {
-        return item[0]
-      }), 5, (res) => {
-      })
-
-
+      __g.polygon.glow(
+        newos.map((item) => {
+          return item[0];
+        }),
+        5,
+        (res) => {}
+      );
 
       __g.polyline.clear(() => {
-        let oo1 = []
+        let oo1 = [];
         newos.forEach((item, index) => {
           // console.log(clcdata.id)
           // item.coordinates[0][0].forEach((item) => {
@@ -132,12 +152,12 @@ export default {
           // })
           // console.log("对", item.coordinates[0][0])
 
-          let coords = item[1]
-          let color = [0, 1, 1, 1]
-          let style = 4
-          let thickness = 7
-          let brightness = 0.8
-          let flowRate = 0.5
+          let coords = item[1];
+          let color = [0, 1, 1, 1];
+          let style = 4;
+          let thickness = 7;
+          let brightness = 0.8;
+          let flowRate = 0.5;
           let o = new this.acapi.PolylineData(
             index + "p11",
             color,
@@ -146,19 +166,19 @@ export default {
             thickness,
             brightness,
             flowRate
-          )
-          o.depthTest = true
-          oo1.push(o)
-        })
+          );
+          o.depthTest = true;
+          oo1.push(o);
+        });
         __g.polyline.add(oo1, () => {
           // 点击现状数据图层右边的数据展示
-        })
-      })
+        });
+      });
     },
   },
-  created () { },
-  mounted () {
-    var chartDom = document.getElementById("echarts1");
+  created() {},
+  mounted() {
+    var chartDom = document.getElementById("echarts11");
     var myChart = echarts.init(chartDom);
     var option;
     myChart.on("click", (params) => {
@@ -201,7 +221,7 @@ export default {
         formatter: "{a} <br/>{b} : {d}%",
       },
       legend: {
-        backgroundColor: "#0000004d",
+        // backgroundColor: "#0000004d",
 
         orient: "horizontal",
         bottom: "5%",
@@ -257,26 +277,119 @@ export default {
     };
     option && myChart.setOption(option);
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () { },
-  destroyed () { },
-  activated () { },
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {},
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>
 
 <style lang="scss" scoped>
+.main_box {
+  display: flex;
+  width: 100%;
+  height: 10%;
+  margin-top: 2%;
+}
+.cvn {
+  width: 15%;
+  height: 100%;
+  border-bottom: 1px solid white;
+}
+
+.cvh {
+  width: 45%;
+  height: 100%;
+  border-bottom: 1px solid white;
+}
+.cyu {
+  width: 100%;
+  height: 100%;
+}
+.cyu img {
+  padding-top: 5%;
+  width: 25px;
+  height: 25px;
+}
+.cvy {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  width: 35%;
+  height: 100%;
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  background: green;
+}
+.span_right {
+  margin-left: 1%;
+  /* word-break: break-all; */
+  overflow: hidden; //超出的文本隐藏
+  text-overflow: ellipsis; //溢出用省略号显示
+  white-space: nowrap; //溢出不换行
+  min-height: 100%;
+  width: 50%;
+
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+}
+.span_cen {
+  width: 2%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.span_left {
+  margin-left: 5%;
+  width: 50%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+.condata_item {
+  font-size: 16px;
+  width: 100%;
+  height: 10%;
+  min-height: 9.5%;
+  margin-top: 1%;
+  display: flex;
+  align-items: center;
+}
+.condata {
+  font-size: 16px;
+  width: 100%;
+  height: 38%;
+  position: absolute;
+  right: -4%;
+  top: 40%;
+}
+.condata1 {
+  font-size: 16px;
+  padding-top: 4%;
+  margin-top: 1%;
+  width: 100%;
+  height: 38%;
+  background: rgba(53, 46, 44, 0.45);
+  filter: blur(2px);
+}
+
 .right_item11 {
   width: 20%;
   height: 100%;
   margin-left: 5%;
+  padding-top: 20%;
 }
 .right_item2 {
-   width: 60%;
+  width: 60%;
   height: 100%;
+  padding-top: 20%;
 }
 .right_item1 img {
   width: 50%;
@@ -310,22 +423,22 @@ export default {
 .top_item3 {
   width: 100%;
   height: 15%;
-  background: green;
+  background: transparent;
   display: flex;
- align-items: center;
+  align-items: center;
 }
 .item_left {
-width: 50%;
-height: 100%;
+  width: 50%;
+  height: 100%;
 }
 .con {
   width: 75px;
   height: 75px;
- border-radius: 50%;
+  border-radius: 50%;
 }
 .item_right {
-width: 50%;
-height: 100%;
+  width: 50%;
+  height: 100%;
 }
 .fdtz {
   width: 100%;
@@ -336,7 +449,7 @@ height: 100%;
   height: 100%;
   padding: 20px 10px;
   box-sizing: border-box;
-
+  color: white;
   height: calc(100% - 80px);
   background: rgba(0, 0, 0, 0.171);
   position: absolute;
@@ -393,14 +506,23 @@ height: 100%;
   text-align: center;
 }
 
-
+.title1 {
+  width: 58%;
+  height: 6%;
+  background: rgba(230, 206, 206, 0.2);
+  filter: blur(1px);
+}
 
 .title {
   width: 100%;
   height: 6%;
+  display: flex;
+  position: absolute;
+  top: 2.4%;
+  left: 2.3%;
 }
 .letf_title {
-  width: 60%;
+  width: 55%;
   height: 100%;
   font-size: 18px;
   color: white;
@@ -425,16 +547,27 @@ height: 100%;
 .right_title {
   width: 40%;
   height: 100%;
+  border-bottom: 1px solid white;
 }
-#echarts1 {
+#echarts11 {
   width: 100%;
   height: 370px;
   margin: 0 auto;
   // padding: 10px;
 }
+.top1 {
+  height: 40px;
+  width: 100px;
+  line-height: 40px;
+  background: rgba(230, 206, 206, 0.2);
+  filter: blur(1px);
+  position: absolute;
+  top: 2%;
+  left: 0;
+}
 .echwarp {
   width: 350px;
-  height: 400px;
+  height: 450px;
   /* background: #0000004d; */
   position: absolute;
   top: 100px;
@@ -445,15 +578,30 @@ height: 100%;
   .top {
     height: 40px;
     width: 100px;
-    border: 1px solid rgb(255, 255, 255);
     line-height: 40px;
-    background: rgba(0, 0, 0, 0.452);
+    display: flex;
   }
   .echbox {
-    border: 1px solid #fff;
+    width: 100%;
+    height: calc(100% - 120px);
+    position: absolute;
+    top: 1.5%;
+    left: 0;
+    /* background: rgba(40, 68, 67, 0.3); */
+    /* filter: blur(0.5px); */
+  }
+  .echbox1 {
+    margin-top: 1.5%;
+
     width: 100%;
     height: calc(100% - 40px);
-    background: rgba(0, 0, 0, 0.39);
+    background: red;
+    background: rgba(41, 62, 65, 0.65);
+    filter: blur(8px);
   }
+}
+.top_data {
+  margin-top: 5%;
+  color: red;
 }
 </style>
