@@ -3,20 +3,16 @@
     <div class="echwarp">
       <div class="echbox1"></div>
       <div class="echbox">
-        <div class="main_box">
-          <div class="cvn"></div>
-          <div class="cvy">
-            <div class="top1"></div>
-            <div class="top">
-              <div class="cyu">
-                <img src="../../../assets/img/mianji1.png" />
-              </div>
-              <span>法定图则</span>
+        <div class="top">
+          <div class="top2">
+            <div class="igm_top">
+              <img
+                src="../../../assets/img/0407红岭切图/xianzhuang/fadingtu.svg"
+              />
             </div>
+            <span class="fading">法定图则</span>
           </div>
-          <div class="cvh"></div>
         </div>
-
         <div id="echarts11"></div>
       </div>
     </div>
@@ -27,16 +23,12 @@
       <div v-show="dataCaseisShow" class="clickdata">
         <div class="title1"></div>
         <div class="title">
-          <div class="letf_title">
-            <div class="title_icon">
-              <img src="../../../assets//img/jz.png" />
-            </div>
-            <div class="title_con">
-              {{ clickData.title ? clickData.title : "Loding..." }}
-              <!-- {{clickData1}} -->
-            </div>
+          <div class="title_img">
+            <img src="../../../assets/img/0407红岭切图/xianzhuang/dikuai.svg" />
           </div>
-          <div class="right_title"></div>
+          <div class="title_con">
+            {{ clickData.title ? clickData.title : "Loding..." }}
+          </div>
         </div>
         <div class="top_item1">
           <div class="top_item1_btn">地块编号</div>
@@ -47,9 +39,7 @@
         <div class="top_item2">招商类型: 银行金融科技子公司</div>
         <div class="top_item3">
           <div class="right_item11">
-            <div class="right_item1">
-              <img src="../../../assets//img/mianji1.png" />
-            </div>
+            <div class="right_item1"></div>
           </div>
 
           <div class="right_item2">
@@ -72,15 +62,6 @@
             <span class="span_right"> {{ item.data }}</span>
           </div>
         </div>
-      </div>
-
-      <div v-for="(item, index) in clickData1" :key="index" class="case">
-        <span>
-          {{ item.name }}
-        </span>
-        <span>
-          {{ item.data }}
-        </span>
       </div>
     </div>
   </div>
@@ -231,7 +212,7 @@ export default {
       },
       legend: {
         // backgroundColor: "#0000004d",
-
+        backgroundColor: "#00032C",
         orient: "horizontal",
         bottom: "5%",
         show: true,
@@ -255,7 +236,7 @@ export default {
         {
           name: "法定图则",
           type: "pie",
-          radius: ["20%", "55%"],
+          radius: ["35%", "55%"],
           center: ["50%", "35%"],
           avoidLabelOverlap: true, //开启后饼图上的文字不会重叠，并且鼠标移入后文字不会消失
           selectedMode: "single",
@@ -298,6 +279,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title_img {
+  width: 20%;
+  height: 100%;
+}
+.title_img img {
+  width: 35px;
+  height: 35px;
+  margin-left: 50%;
+  margin-top: 10%;
+}
+.title_con {
+  width: 50%;
+  height: 100%;
+  margin-left: 3%;
+  margin-top: 4%;
+  font-size: 16px;
+}
+.igm_top {
+  margin-left: 8%;
+  display: flex;
+  align-items: center;
+}
+.fading {
+  margin-left: 1.5%;
+  display: flex;
+  align-items: center;
+}
+.igm_top img {
+  width: 30px;
+  height: 30px;
+}
 .main_box {
   display: flex;
   width: 100%;
@@ -329,24 +341,18 @@ export default {
   display: flex;
   align-items: center;
   width: 35%;
-  height: 100%;
-  border-top: 1px solid white;
-  border-left: 1px solid white;
-  border-right: 1px solid white;
-  background: green;
+  height: 10%;
 }
 .span_right {
-  margin-left: 1%;
+  width: 170px;
+
   /* word-break: break-all; */
   overflow: hidden; //超出的文本隐藏
   text-overflow: ellipsis; //溢出用省略号显示
   white-space: nowrap; //溢出不换行
   min-height: 100%;
-  width: 50%;
-
-  display: flex;
-  align-items: center;
-  padding-left: 5%;
+  margin-top: 5%;
+  margin-left: 3%;
 }
 .span_cen {
   width: 2%;
@@ -356,7 +362,7 @@ export default {
 }
 .span_left {
   margin-left: 5%;
-  width: 50%;
+  width: 37%;
   height: 100%;
 
   display: flex;
@@ -367,7 +373,7 @@ export default {
   width: 100%;
   height: 10%;
   min-height: 9.5%;
-  margin-top: 1%;
+
   display: flex;
   align-items: center;
 }
@@ -421,13 +427,11 @@ export default {
   width: 69%;
 }
 .right_item1 {
-  width: 52px;
-  height: 52px;
-  border-radius: 52px;
-  background: transparent;
-  border: 2px solid #ffff;
-  text-align: center;
-  line-height: 52px;
+  width: 100%;
+  height: 70px;
+  background-image: url("../../../assets/img/0407红岭切图/xianzhuang/mianji.svg");
+  background-size: 80%;
+  background-repeat: no-repeat;
 }
 .top_item3 {
   width: 100%;
@@ -516,12 +520,13 @@ export default {
 }
 
 .title {
+  display: flex;
+
   width: 100%;
   height: 6%;
-  display: flex;
-  position: absolute;
-  top: 2.4%;
-  left: 2.3%;
+  background-image: url("../../../assets/img/0407红岭切图/xianzhuang/titbg_text6.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 .letf_title {
   width: 55%;
@@ -578,10 +583,10 @@ export default {
   color: white;
 
   .top {
-    height: 40px;
-    width: 100px;
-    line-height: 40px;
-    display: flex;
+    margin-top: 3%;
+    background-image: url("../../../assets/img/0407红岭切图/xianzhuang/titbg_text4.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
   }
   .echbox {
     width: 100%;
