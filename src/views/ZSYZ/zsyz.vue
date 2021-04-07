@@ -1,6 +1,6 @@
 <template>
   <div class="zsyz">
-    <div class="twoLink">
+    <!-- <div class="twoLink">
       <router-link to="/Home/ZSYZ/zsly" tag="li">
         <span>招商楼宇</span>
       </router-link>
@@ -8,16 +8,18 @@
         <span>招商楼层</span>
       </router-link>
 
-    </div>
-    <router-view />
-    <!-- <div class="zsyz_right">
-      <RightData> </RightData>
     </div> -->
+    <ZHLY />
+    <Search />
+    <router-view />
+
   </div>
 </template>
 
 <script>
 // import RightData from "../ZSYZ/RightData/RightData";
+import ZHLY from "./children/zsly"
+import Search from "./children/search"
 import { showtuceng, hidetuceng } from "../../util/showtuceng.js"
 export default {
   data () {
@@ -43,6 +45,8 @@ export default {
   activated () { },
   components: {
     // RightData,
+    ZHLY,
+    Search
   },
 };
 </script>
