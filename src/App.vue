@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import acapi from "./static/ac.min.js";
 export default {
   data () {
     return {
@@ -39,8 +38,8 @@ export default {
     initWebSocket () {
       //初始化weosocket
       const wsuri = "127.0.0.1:4322";
-      this.websock = new acapi.AirCityAPI(wsuri, this.onReady, this.log);
-      // this.websock.setEventCallback(this.onEvent);
+      this.websock = new AirCityAPI(wsuri, this.onReady, this.log);
+      this.websock.setEventCallback(this.onEvent);
     },
     getMatchServerConfig (host, fn, callbackIndex) {
       console.log(1);
@@ -74,7 +73,7 @@ export default {
         console.log(o, 111111);
         if (o.result == 0) {
           if (withPlayer) {
-            new acapi.AirCityPlayer(
+            new AirCityPlayer(
               o.instanceId,
               "player",
               HostConfig.Token,
@@ -82,7 +81,7 @@ export default {
             );
           }
           if (withInterface) {
-            var ace = new acapi.AirCityAPI(
+            var ace = new AirCityAPI(
               o.instanceId,
               _this.onReady,
               _this.log
@@ -94,7 +93,7 @@ export default {
             let host = HostConfig.instanceId
               ? HostConfig.instanceId
               : HostConfig.AirCityPlayer;
-            let acp = new acapi.AirCityPlayer(
+            let acp = new AirCityPlayer(
               host,
               "player",
               HostConfig.Token,
@@ -109,26 +108,26 @@ export default {
             let host = HostConfig.instanceId
               ? HostConfig.instanceId
               : HostConfig.AirCityAPI;
-            var ace = new acapi.AirCityAPI(host, _this.onReady, _this.log);
+            var ace = new AirCityAPI(host, _this.onReady, _this.log);
             ace.useColorLog = true;
-            ace.setEventCallback(_this.onEvent);
+            __g.setEventCallback(_this.onEvent);
           }
         }
       });
     },
   },
   created () {
-    // this.initWebSocket();
+    this.initWebSocket();
   },
   mounted () {
-    window.addEventListener("load", this.onLoad, true);
-    window.addEventListener("resize", this.onResize, true);
-    // this.api = new acapi.AirCityAPI(instanceId, function () {
+    // window.addEventListener("load", this.onLoad, true);
+    // window.addEventListener("resize", this.onResize, true);
+    // this.api = new AirCityAPI(instanceId, function () {
     //   this.api.misc.setMainUIVisibility(true);
     // }.bind(this));
     // let instanceId = "3232270593-8889-8081-4323"
 
-    // this.player = new acapi.AirCityPlayer(instanceId, "player")
+    // this.player = new AirCityPlayer(instanceId, "player")
   },
   beforeCreate () { },
   beforeMount () { },

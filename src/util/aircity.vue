@@ -7,9 +7,9 @@ import { mapState } from "vuex";
 import { addhighlight } from "./children/addhighlight.js";
 import { click_EVT_building, click_EVT_jj100 } from "./clickEvt";
 import connector from "../api/common.js";
-import __g from "../main";
+// import __g from "../main";
 export default {
-  data() {
+  data () {
     return {};
   },
   computed: {
@@ -21,11 +21,12 @@ export default {
   },
   watch: {},
   methods: {
-    clickevt() {
+    clickevt () {
+      // console.log(window);
       __g.setEventCallback(this.callevt);
     },
     //点击事件的回调函数 ，data：点击要素的信息
-    callevt(data) {
+    callevt (data) {
       let that = this;
       console.log(data);
       if (data && data.Id && data.Type == "Polygon") {
@@ -127,7 +128,7 @@ export default {
       }
     },
     //根据要素id请求数据
-    async requestdata(title, data) {
+    async requestdata (title, data) {
       let that = this;
       let bool = true;
       var arrdata = [];
@@ -157,17 +158,19 @@ export default {
       console.log(that.$store.state.clickData);
     },
   },
-  created() {
-    this.clickevt();
+  created () {
   },
-  mounted() {},
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
+  mounted () {
+    this.clickevt();
+
+  },
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () { },
+  destroyed () { },
+  activated () { },
   components: {},
 };
 </script>

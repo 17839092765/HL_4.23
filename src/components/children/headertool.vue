@@ -66,10 +66,11 @@ export default {
         "alertIconSize": "18",
         "padding": "10px 10px 10px 10px",
         "shadow": "1",
-        "language": "auto",
+        "language": "zh",
         "borderRadius": "10",
         "fixed": "false",
         "vertical": "top",
+
         "horizontal": "left",
         "key": "8f0727ee21004600b2a5826ffc63a5f9"
       }

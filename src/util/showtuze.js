@@ -1,7 +1,7 @@
 import geoserverruest from "../api/geoserverq"
 import store from "../store"
-import __g from "../main"
-import acapi from "../static/ac.min"
+// import __g from "../main"
+// import from "../static/ac.min"
 var dataId = []
 //加载矢量数据
 async function showVectorlayers(data) {
@@ -35,13 +35,7 @@ async function showVectorlayers(data) {
       }
       let frameColor = color
       let frameThickness = 1
-      let o = new acapi.PolygonData(
-        id,
-        color,
-        coords,
-        frameColor,
-        frameThickness
-      )
+      let o = new PolygonData(id, color, coords, frameColor, frameThickness)
       o.depthTest = false
       os.push(o)
       dataId.push(id)
@@ -62,7 +56,7 @@ async function showVectorlayers(data) {
     //   }
     //   let frameColor = color
     //   let frameThickness = 1
-    //   let o = new acapi.PolygonData(
+    //   let o = new PolygonData(
     //     id,
     //     [...color, 0.6],
     //     coords,
@@ -99,7 +93,7 @@ async function showVectorlayers(data) {
       }
       let frameColor = color
       let frameThickness = 1
-      let o = new acapi.PolygonData(
+      let o = new PolygonData(
         id,
         [...color1, 0.6],
         coords,
@@ -151,7 +145,7 @@ async function showVectorlayers(data) {
       }
       let frameColor = color
       let frameThickness = 1
-      let o = new acapi.PolygonData(
+      let o = new PolygonData(
         id,
         [...color1, 0.4],
         coords,
@@ -190,7 +184,7 @@ async function showVectorlayers(data) {
       }
       let frameColor = color
       let frameThickness = 1
-      let o = new acapi.PolygonData(
+      let o = new PolygonData(
         id,
         [...color1, 1],
         coords,
@@ -230,7 +224,7 @@ async function showVectorlayers(data) {
       }
       let frameColor = color
       let frameThickness = 1
-      let o = new acapi.PolygonData(
+      let o = new PolygonData(
         id,
         [...color1, 0.4],
         coords,
@@ -308,7 +302,7 @@ async function showVectorlayers(data) {
       color = color1
       let frameColor = color
       let frameThickness = 1
-      let o = new acapi.PolygonData(
+      let o = new PolygonData(
         id,
         [...color, 0.6],
         coords,

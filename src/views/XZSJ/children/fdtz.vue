@@ -31,40 +31,40 @@
         </div>
         <div class="top_item2">招商类型: 银行金融科技子公司</div>
         <div class="top_item3">
-         <div class="right_item11">
+          <div class="right_item11">
             <div class="right_item1">
               <img src="../../../assets//img/mianji1.png" />
             </div>
-         </div>
-           
-            <div class="right_item2">
-             <span class="spac" v-if="clickData1[2]">  {{ clickData1[3].data }}</span>
-              <span class="wan">m<sup>2</sup></span>
-              <div>用地面积</div>
-         
           </div>
-         
-          </div>  
-        </div>
 
-        <div v-for="(item, index) in clickData1" :key="index" class="case">
-          <span>
-            {{ item.name }}
-          </span>
-          <span>
-            {{ item.data }}
-          </span>
+          <div class="right_item2">
+            <span class="spac" v-if="clickData1[2]"> {{ clickData1[3].data }}</span>
+            <span class="wan">m<sup>2</sup></span>
+            <div>用地面积</div>
+
+          </div>
+
         </div>
+      </div>
+
+      <div v-for="(item, index) in clickData1" :key="index" class="case">
+        <span>
+          {{ item.name }}
+        </span>
+        <span>
+          {{ item.data }}
+        </span>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
 import * as echarts from "echarts";
 import { mapState } from "vuex";
 import { showdata } from "../showdata";
-import __g from "../../../main";
+// import __g from "../../../main";
 export default {
   data () {
     return {};
@@ -138,7 +138,7 @@ export default {
           let thickness = 7
           let brightness = 0.8
           let flowRate = 0.5
-          let o = new this.acapi.PolylineData(
+          let o = new PolylineData(
             index + "p11",
             color,
             coords,
@@ -201,7 +201,7 @@ export default {
         formatter: "{a} <br/>{b} : {d}%",
       },
       legend: {
-        backgroundColor: "#0000004d",
+        // backgroundColor: "#0000004d",
 
         orient: "horizontal",
         bottom: "5%",
@@ -275,7 +275,7 @@ export default {
   margin-left: 5%;
 }
 .right_item2 {
-   width: 60%;
+  width: 60%;
   height: 100%;
 }
 .right_item1 img {
@@ -312,20 +312,20 @@ export default {
   height: 15%;
   background: green;
   display: flex;
- align-items: center;
+  align-items: center;
 }
 .item_left {
-width: 50%;
-height: 100%;
+  width: 50%;
+  height: 100%;
 }
 .con {
   width: 75px;
   height: 75px;
- border-radius: 50%;
+  border-radius: 50%;
 }
 .item_right {
-width: 50%;
-height: 100%;
+  width: 50%;
+  height: 100%;
 }
 .fdtz {
   width: 100%;
@@ -392,8 +392,6 @@ height: 100%;
   // line-height: 20%;
   text-align: center;
 }
-
-
 
 .title {
   width: 100%;

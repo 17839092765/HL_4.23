@@ -6,7 +6,7 @@
 import layers_jjone from "../../../assets/js/jjone.js"
 import { showtuceng, hidetuceng } from "../../../util/showtuceng"
 import { clear_jj100 } from "../../../util/clickEvt"
-import __g from "../../../main"
+// import __g from "../../../main"
 export default {
   data () {
     return {

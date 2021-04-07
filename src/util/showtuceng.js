@@ -1,4 +1,4 @@
-import __g from "../main.js"
+// import __g from "../main.js"
 function showtuceng(data) {
   data.map((item) => {
     __g.infoTree.show(item.layerid)

@@ -33,9 +33,9 @@ import * as echarts from "echarts";
 import { mapState } from "vuex";
 import { showdata } from "../showdata";
 import connector from "../../../api/common";
-import __g from "../../../main";
+// import __g from "../../../main";
 export default {
-  data() {
+  data () {
     return {
       option: [],
     };
@@ -53,7 +53,7 @@ export default {
   },
   watch: {},
   methods: {
-    ChuLiOs(data) {
+    ChuLiOs (data) {
       // let echartsColorClass = []
       // console.log(this.os);
       // this.os.map(item => {
@@ -85,7 +85,7 @@ export default {
       console.log(newos);
       return newos;
     },
-    Glow(newos) {
+    Glow (newos) {
       console.log(newos);
 
       __g.polygon.glow(
@@ -93,7 +93,7 @@ export default {
           return item[0];
         }),
         5,
-        (res) => {}
+        (res) => { }
       );
 
       __g.polyline.clear(() => {
@@ -112,7 +112,7 @@ export default {
           let thickness = 7;
           let brightness = 0.8;
           let flowRate = 0.5;
-          let o = new this.acapi.PolylineData(
+          let o = new PolylineData(
             index + "p11",
             color,
             coords,
@@ -129,7 +129,7 @@ export default {
         });
       });
     },
-    async getechartsdata() {
+    async getechartsdata () {
       const result = await connector.xzqs_echart();
       if (result.status === 200) {
         console.log(result.data);
@@ -138,7 +138,7 @@ export default {
         this.showEcharts();
       }
     },
-    showEcharts() {
+    showEcharts () {
       var chartDom = document.getElementById("echarts3");
       var myChart = echarts.init(chartDom);
       var option;
@@ -204,17 +204,17 @@ export default {
       option && myChart.setOption(option);
     },
   },
-  created() {
+  created () {
     this.getechartsdata();
   },
-  mounted() {},
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
+  mounted () { },
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () { },
+  destroyed () { },
+  activated () { },
   components: {},
 };
 </script>
