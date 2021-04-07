@@ -11,41 +11,44 @@ async function showVectorlayers(data) {
 
   if (database == "城市更新单元") {
     // res = await geoserverruest.cityupdataquery()
-    res1 = await geoserverruest.ftfdtzquery()
+    res1 = await geoserverruest.shownewcsgxdatawarp()
     // res2 = await geoserverruest.lhfdtzquery()
 
-    console.log(res1)
     res = await geoserverruest.shownewcsgxdata()
     var cityupdata = res.data.features
     // console.log(cityupdata)
-    // var ftfdtzdata = res1.data.features
+    var ftfdtzdata = res1.data.features
+    console.log(ftfdtzdata)
     // var lhfdtzdata = res2.data.features
-    // let color = [200 / 255, 200 / 255, 200 / 255, 0.2]
+    let color = [200 / 255, 200 / 255, 200 / 255, 0.2]
     var id, coords
-    // ftfdtzdata.forEach((ele, index) => {
-    //   id = "fdtzft" + index + "-" + ele.properties.tname
-    //   coords = ele.geometry.coordinates
-    //   for (let i = 0; i < coords.length; i++) {
-    //     for (let j = 0; j < coords[i].length; j++) {
-    //       let element = coords[i][j]
-    //       for (let q = 0; q < element.length; q++) {
-    //         let element1 = element[q]
-    //       }
-    //     }
-    //   }
-    //   let frameColor = color
-    //   let frameThickness = 1
-    //   let o = new acapi.PolygonData(
-    //     id,
-    //     color,
-    //     coords,
-    //     frameColor,
-    //     frameThickness
-    //   )
-    //   o.depthTest = false
-    //   os.push(o)
-    //   dataId.push(id)
-    // })
+    ftfdtzdata.forEach((ele, index) => {
+      id = "fdtzft" + index + "-" + ele.properties.tname
+      coords = ele.geometry.coordinates
+      for (let i = 0; i < coords.length; i++) {
+        for (let j = 0; j < coords[i].length; j++) {
+          let element = coords[i][j]
+          for (let q = 0; q < element.length; q++) {
+            let element1 = element[q]
+          }
+        }
+      }
+      let frameColor = color
+      let frameThickness = 1
+      let o = new acapi.PolygonData(
+        id,
+        color,
+        coords,
+        frameColor,
+        frameThickness
+      )
+      o.depthTest = false
+      os.push(o)
+      dataId.push(id)
+
+      // 点击地块高亮且视角锁定
+      store.state.allpolygon.push(o)
+    })
     // lhfdtzdata.forEach((ele, index) => {
     //   id = "fdtzlh" + index + "-" + ele.properties.tname
     //   coords = ele.geometry.coordinates
@@ -111,10 +114,134 @@ async function showVectorlayers(data) {
   }
 
   if (database == "法定图则") {
-    // res = await geoserverruest.xzqsquery()
-    res = await geoserverruest.shownewfdtzdata()
-    data1 = res.data.features
-    idd = "fdtzxx"
+    res = await geoserverruest.shownewfdtzdata_left()
+    res1 = await geoserverruest.shownewfdtzdata_center()
+    res2 = await geoserverruest.shownewfdtzdata_rigtht()
+    // data1 = res.data.features
+    var fdtz_left = res.data.features
+    var fdtz_center = res1.data.features
+    var fdtz_right = res2.data.features
+    // idd = "fdtzxx"
+    let num = 0
+    fdtz_left.forEach((ele, index) => {
+      id = "fdtzxx" + num + "-" + ele.properties.tname
+      num++
+
+      coords = ele.geometry.coordinates
+      for (let i = 0; i < coords.length; i++) {
+        for (let j = 0; j < coords[i].length; j++) {
+          let element = coords[i][j]
+          for (let q = 0; q < element.length; q++) {
+            let element1 = element[q]
+            if (element1.length == 2) {
+              element1.push(40)
+            } else if (element1.length == 3) {
+              element1.pop()
+              element1.push(40)
+            }
+          }
+        }
+      }
+      var color = [1, 20 / 255, 1, 1]
+      // var color1 = [1, 20 / 255, 1, 1]
+      var color1 = ele.properties.grb.split(",")
+      for (let c = 0; c < color1.length; c++) {
+        color1[c] = Number((color1[c] / 255).toFixed(5))
+        // console.log(typeof Number(color1[c]))
+      }
+      let frameColor = color
+      let frameThickness = 1
+      let o = new acapi.PolygonData(
+        id,
+        [...color1, 0.4],
+        coords,
+        frameColor,
+        frameThickness
+      )
+      o.depthTest = false
+      os.push(o)
+      store.state.allpolygon.push(o)
+      dataId.push(id)
+    })
+    fdtz_center.forEach((ele, index) => {
+      id = "fdtzxx" + num + "-" + ele.properties.tname
+      num++
+      coords = ele.geometry.coordinates
+      for (let i = 0; i < coords.length; i++) {
+        for (let j = 0; j < coords[i].length; j++) {
+          let element = coords[i][j]
+          for (let q = 0; q < element.length; q++) {
+            let element1 = element[q]
+            if (element1.length == 2) {
+              element1.push(40)
+            } else if (element1.length == 3) {
+              element1.pop()
+              element1.push(40)
+            }
+          }
+        }
+      }
+      var color = [1, 20 / 255, 1, 1]
+      // var color1 = [1, 20 / 255, 1, 1]
+      var color1 = ele.properties.grb.split(",")
+      for (let c = 0; c < color1.length; c++) {
+        color1[c] = Number((color1[c] / 255).toFixed(5))
+        // console.log(typeof Number(color1[c]))
+      }
+      let frameColor = color
+      let frameThickness = 1
+      let o = new acapi.PolygonData(
+        id,
+        [...color1, 1],
+        coords,
+        frameColor,
+        frameThickness
+      )
+      o.depthTest = false
+      os.push(o)
+      store.state.allpolygon.push(o)
+      dataId.push(id)
+    })
+    fdtz_right.forEach((ele, index) => {
+      id = "fdtzxx" + num + "-" + ele.properties.tname
+      num++
+
+      coords = ele.geometry.coordinates
+      for (let i = 0; i < coords.length; i++) {
+        for (let j = 0; j < coords[i].length; j++) {
+          let element = coords[i][j]
+          for (let q = 0; q < element.length; q++) {
+            let element1 = element[q]
+            if (element1.length == 2) {
+              element1.push(40)
+            } else if (element1.length == 3) {
+              element1.pop()
+              element1.push(40)
+            }
+          }
+        }
+      }
+      var color = [1, 20 / 255, 1, 1]
+      // var color1 = [1, 20 / 255, 1, 1]
+      var color1 = ele.properties.grb.split(",")
+      for (let c = 0; c < color1.length; c++) {
+        color1[c] = Number((color1[c] / 255).toFixed(5))
+        // console.log(typeof Number(color1[c]))
+      }
+      let frameColor = color
+      let frameThickness = 1
+      let o = new acapi.PolygonData(
+        id,
+        [...color1, 0.4],
+        coords,
+        frameColor,
+        frameThickness
+      )
+      o.depthTest = false
+      os.push(o)
+      store.state.allpolygon.push(o)
+      dataId.push(id)
+    })
     // debugger
   } else if (database == "现状权属") {
     // res = await geoserverruest.xzqsquery()
