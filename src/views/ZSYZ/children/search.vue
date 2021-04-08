@@ -188,6 +188,7 @@ export default {
       two.style.height = "70px";
       two.style.fontSize = "20px";
       this.isshowClose = false;
+      this.showjjone = false
       this.$router.push("/Home/ZSYZ/zsly")
 
     },
