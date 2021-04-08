@@ -1,14 +1,14 @@
 <template>
   <div class="home">
     <Header />
-    <AirCity />
+    <!-- <AirCity /> -->
     <router-view />
   </div>
 </template>
 
 <script>
 import Header from "../components/header/header";
-import AirCity from "../util/aircity"
+// import AirCity from "../util/aircity"
 export default {
   data () {
     return {};
@@ -25,7 +25,7 @@ export default {
   beforeDestroy () { },
   destroyed () { },
   activated () { },
-  components: { Header, AirCity },
+  components: { Header },
 };
 </script>
 
