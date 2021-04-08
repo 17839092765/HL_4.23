@@ -51,17 +51,18 @@ const router = new VueRouter({
         {
           path: "ZSYZ",
           component: () => import("../views/ZSYZ/zsyz"),
+          redirect: "/Home/ZSYZ/zsly",
           name: "zsyz",
-          // children: [
-          //   {
-          //     path: "zsly",
-          //     component: () => import("../views/ZSYZ/children/zsly"),
-          //   },
-          //   {
-          //     path: "zslc",
-          //     component: () => import("../views/ZSYZ/children/zslc.vue"),
-          //   },
-          // ],
+          children: [
+            {
+              path: "zsly",
+              component: () => import("../views/ZSYZ/children/zsly"),
+            },
+            {
+              path: "zslc",
+              component: () => import("../views/ZSYZ/children/zslc.vue"),
+            },
+          ],
         },
         {
           path: "WLYJ",

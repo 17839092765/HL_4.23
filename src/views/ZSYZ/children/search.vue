@@ -77,7 +77,8 @@ import SearchGaoji from "./search_gaoji"
 export default {
   data () {
     return {
-
+      // 展示jjone
+      showjjone: false,
       // 展示北段选中的样式
       iswhowbeiduan: false,
       iswhowcenter: false,
@@ -121,6 +122,7 @@ export default {
       console.log(e);
     },
     show_search_home () {
+      this.showjjone = true
       this.isshowClose = true;
       let showtab = document.getElementsByClassName("showtab")[0];
       let one = document.getElementsByClassName("showtab_box_one")[0];
@@ -142,6 +144,8 @@ export default {
       two.style.height = "50px";
       two.style.fontSize = "16px";
       this.is_to_top = !this.is_to_top;
+      this.$router.push("/Home/ZSYZ/zslc")
+
     },
     show_search_hig () {
       this.isshowClose = true;
@@ -168,6 +172,7 @@ export default {
       this.is_to_top2 = !this.is_to_top2;
     },
     close () {
+
       let showtab = document.getElementsByClassName("showtab")[0];
       let one = document.getElementsByClassName("showtab_box_one")[0];
       let two = document.getElementsByClassName("showtab_box_two")[0];
@@ -183,6 +188,8 @@ export default {
       two.style.height = "70px";
       two.style.fontSize = "20px";
       this.isshowClose = false;
+      this.$router.push("/Home/ZSYZ/zsly")
+
     },
   },
   created () { },

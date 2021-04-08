@@ -499,7 +499,7 @@ export default {
 .top_item1_btn {
   margin-top: 1%;
   font-size: 16px;
-  font-family: PingFangSC-Medium, PingFang SC;
+  // font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #fbf6e6;
   background: #f7b700;
@@ -512,7 +512,7 @@ export default {
   width: 70%;
   height: 35px;
   font-size: 20px;
-  font-family: PingFangSC-Medium, PingFang SC;
+  // font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #ffffff;
   line-height: 56px;
@@ -527,7 +527,7 @@ export default {
   width: 80%;
   height: 7%;
   font-size: 20px;
-  font-family: PingFangSC-Medium, PingFang SC;
+  // font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #ffffff;
   // line-height: 20%;

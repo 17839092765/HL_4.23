@@ -53,11 +53,7 @@
           "超级总部基于“总部＋生态+文化”三大主题,营造世界级创新文化实验区。超级总部基于“总部+生态+文化”三大主题，营造世界级创新文化实验区
         </div>
         <div class="condata">
-          <div
-            class="condata_item"
-            v-for="(item, index) in clickData"
-            :key="index"
-          >
+          <div class="condata_item" v-for="(item, index) in clickData" :key="index">
             <span class="span_left"> {{ item.name }}</span>
             <span class="span_cen"> |</span>
             <span class="span_right"> {{ item.data }}</span>
@@ -74,7 +70,7 @@ import { showtuceng, hidetuceng } from "../../../util/showtuceng.js";
 import { showdata } from "../../XZSJ/showdata";
 // import __g from "../../../main";
 export default {
-  data() {
+  data () {
     return {
       msg: "",
 
@@ -89,8 +85,11 @@ export default {
   },
   watch: {},
   methods: {},
-  created() {},
-  mounted() {
+  created () {
+    __g.infoTree.show("BF15EEEC49051728DF0DD585E91B4C0E")
+
+  },
+  mounted () {
     showtuceng(this.$treedata.zsyzdata);
     __g.camera.lookAt(
       510264.09375,
@@ -102,17 +101,20 @@ export default {
       -30
     );
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {
-    hidetuceng([this.$treedata.zsyzdata[2]]);
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () {
+    // hidetuceng([this.$treedata.zsyzdata[2]]);
+    __g.infoTree.hide("BF15EEEC49051728DF0DD585E91B4C0E")
+
+    // BF15EEEC49051728DF0DD585E91B4C0E
     this.$store.commit("clickData", {});
     __g.tileLayer.stopHighlightActor();
   },
-  destroyed() {},
-  activated() {},
+  destroyed () { },
+  activated () { },
   components: {},
 };
 </script>

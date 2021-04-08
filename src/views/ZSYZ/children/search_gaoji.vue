@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <div class="showblock">
+    <div v-show="tableData.length>0" class="showblock">
       <!-- <el-table :data="tableData" height="150" border style="width: 100%">
         <el-table-column label="楼宇名称" width="280">
           <template slot-scope="scope">{{ scope.row.date+"111" }}</template>
@@ -71,6 +71,7 @@
 </template>
 
 <script>
+import api from "../../../api/common"
 export default {
   data () {
     return {
@@ -86,19 +87,21 @@ export default {
       // 搜索的数据的条数
       searchAfterNum: 0,
       // 
-      tableData: [{
-        name: 'aaa',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        name: 'ccc',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        name: 'vvv',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        name: 'bbb',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+      tableData: [
+        //   {
+        //   name: 'aaa',
+        //   address: '上海市普陀区金沙江路 1518 弄'
+        // }, {
+        //   name: 'ccc',
+        //   address: '上海市普陀区金沙江路 1517 弄'
+        // }, {
+        //   name: 'vvv',
+        //   address: '上海市普陀区金沙江路 1519 弄'
+        // }, {
+        //   name: 'bbb',
+        //   address: '上海市普陀区金沙江路 1516 弄'
+        // }
+      ]
     };
   },
   computed: {},
@@ -109,7 +112,7 @@ export default {
       console.log(item);
     },
     // 高级搜索提交确定
-    sumit () {
+    async sumit () {
       let dataarr = {
         key: this.key,
         area_start: this.area_start,
@@ -120,6 +123,17 @@ export default {
         zhongbuild: this.zhongbuild
       };
       console.log(dataarr);
+      var request = {
+        minArea: this.area_start,
+        maxArea: this.area_end,
+        minRent: this.money_start,
+        maxRent: this.money_end,
+        isFree: true
+      }
+      // 4403030030090300003
+
+      const result = await api.layer_jj100_one("4403030030090300003")
+      console.log(result);
     },
     reset () {
       this.key = "";
@@ -127,6 +141,8 @@ export default {
       this.area_end = '';
       this.money_start = '';
       this.money_end = '';
+      this.quyu = ""
+      this.zhongbuild = ""
     },
   },
   created () {

@@ -1,18 +1,18 @@
 <template>
   <div class="zsyz">
-    <!-- <div class="twoLink">
-      <router-link to="/Home/ZSYZ/zsly" tag="li">
+    <div class="twoLink">
+      <!-- <router-link to="/Home/ZSYZ/zsly" tag="li">
         <span>招商楼宇</span>
-      </router-link>
-      <router-link to="/Home/ZSYZ/zslc" tag="li">
+      </router-link> -->
+      <!-- <router-link to="/Home/ZSYZ/zslc" tag="li">
         <span>招商楼层</span>
-      </router-link>
+      </router-link> -->
 
-    </div> -->
-    <ZHLY />
+    </div>
+    <!-- <ZHLY /> -->
     <Search />
     <Tag />
-    <BENSEARCH />
+    <!-- <BENSEARCH /> -->
     <router-view />
 
   </div>
