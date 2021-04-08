@@ -4,12 +4,10 @@
       <div class="echbox1"></div>
       <div class="echbox">
         <div class="top">
-          <div class="top2">
-            <div class="igm_top">
-              <img
-                src="../../../assets/img/0407红岭切图/xianzhuang/fadingtu.svg"
-              />
-            </div>
+          <div class="igm_top">
+            <img
+              src="../../../assets/img/0407红岭切图/xianzhuang/fadingtu.svg"
+            />
             <span class="fading">法定图则</span>
           </div>
         </div>
@@ -17,9 +15,7 @@
       </div>
     </div>
     <div class="datacase">
-      <div class="top_data" v-if="clickData1.length === 0">
-        点击左边建筑物查看信息
-      </div>
+      <div class="top_data" v-if="!clickData1[2]">点击左边建筑物查看信息</div>
       <div v-show="dataCaseisShow" class="clickdata">
         <div class="title1"></div>
         <div class="title">
@@ -302,7 +298,9 @@ export default {
   align-items: center;
 }
 .fading {
-  margin-left: 1.5%;
+  width: 105px;
+  font-size: 18px;
+  margin-left: 2.5%;
   display: flex;
   align-items: center;
 }
@@ -384,7 +382,29 @@ export default {
   position: absolute;
   right: -4%;
   top: 40%;
+  overflow: scroll;
 }
+/* 滚动条宽度 */
+::-webkit-scrollbar {
+  width: 1px;
+}
+/* 滚动条轨道颜色 */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+/* 滚动条颜色 */
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+/* 鼠标移动到滚动条上后显示的颜色 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: transparent;
+}
+/* 点击时滚动条的颜色 */
+::-webkit-scrollbar-thumb:active {
+  background-color: transparent;
+}
+
 .condata1 {
   font-size: 16px;
   padding-top: 4%;
@@ -583,6 +603,10 @@ export default {
   color: white;
 
   .top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 15%;
     margin-top: 3%;
     background-image: url("../../../assets/img/0407红岭切图/xianzhuang/titbg_text4.svg");
     background-size: 100%;
@@ -590,7 +614,7 @@ export default {
   }
   .echbox {
     width: 100%;
-    height: calc(100% - 120px);
+    height: calc(100% - 140px);
     position: absolute;
     top: 1.5%;
     left: 0;
@@ -601,7 +625,7 @@ export default {
     margin-top: 1.5%;
 
     width: 100%;
-    height: calc(100% - 40px);
+    height: calc(100% - 20px);
     background: red;
     background: rgba(41, 62, 65, 0.65);
     filter: blur(8px);

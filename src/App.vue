@@ -48,7 +48,7 @@ export default {
         let __fn = fn;
 
         var ws = new WebSocket(url);
-        ws.onopen = function() {
+        ws.onopen = function () {
           this.send(
             JSON.stringify({
               command: 6,
@@ -56,12 +56,12 @@ export default {
             })
           );
         };
-        ws.onmessage = function(event) {
+        ws.onmessage = function (event) {
           var o = JSON.parse(event.data);
           __fn(o);
         };
-        ws.onclose = function() {};
-        ws.onerror = function(event) {};
+        ws.onclose = function () {};
+        ws.onerror = function (event) {};
       } else {
         this.log("Not Support WebSocket!");
       }
@@ -69,7 +69,7 @@ export default {
     init(withPlayer, withInterface) {
       let _this = this;
 
-      this.getMatchServerConfig(HostConfig.MatchServer, function(o) {
+      this.getMatchServerConfig(HostConfig.MatchServer, function (o) {
         console.log(o, 111111);
         if (o.result == 0) {
           if (withPlayer) {
@@ -139,6 +139,6 @@ export default {
   height: 100%;
   position: absolute;
   z-index: 0;
-  background: rgba(0, 0, 0, 0.226);
+  // background: rgba(0, 0, 0, 0.226);
 }
 </style>
