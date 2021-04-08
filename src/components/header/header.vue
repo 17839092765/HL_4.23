@@ -1,7 +1,9 @@
 <template>
   <div class="header">
     <div class="Logo">
-      <h1 @click="shuaxin"><a href="#">红岭新兴金融产业带CIM平台</a></h1>
+      <!-- <img src="../../assets/img/public/LOGO.svg" alt=""> -->
+      <!-- <h1 @click="shuaxin"> -->
+      <!-- </h1> -->
     </div>
     <div class="linkto">
       <div @click="showmenus(1)">
@@ -84,15 +86,19 @@ export default {
   align-items: center;
   .Logo {
     z-index: 1000;
-
+    background: url("../../assets/img/public/logo.png") no-repeat center;
     width: 35%;
     height: 100%;
-    font-size: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: YouSheBiaoTiHei;
-    color: #ffffff;
+    // font-size: 40px;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // font-family: YouSheBiaoTiHei;
+    // color: #ffffff;
+    img {
+      width: 100%;
+      // height: 100%;
+    }
   }
   .linkto {
     width: 35%;

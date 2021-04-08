@@ -4,11 +4,11 @@
       <div class="tit">全球 • 仅华尔街才有此金融地位</div>
       <div class="showtab_box">
         <div @click="show_search_home" class="showtab_box_one">
-          <img src="../../../assets/img/0407红岭切图/招商引资/icon_搜房.svg" alt="" />
+          <img src="../../../assets/img/4招商引资/icon_搜房.svg" alt="" />
           <span>搜房</span>
         </div>
         <div @click="show_search_hig" class="showtab_box_two">
-          <img src="../../../assets/img/0407红岭切图/招商引资/icon_高级搜索.svg" alt="" />
+          <img src="../../../assets/img/4招商引资/icon_高级搜索.svg" alt="" />
           <span>高级搜索</span>
         </div>
         <div v-if="isshowClose" class="close">
@@ -47,22 +47,22 @@
             <div class="tit">区域</div>
             <div class="blockquyu">
               <div @click="quyublock(1)" class="left">
-                <img v-if="iswhowbeiduan" src="../../../assets/img/0407红岭切图/招商引资/北段_选中.svg" alt="" />
-                <img v-if="!iswhowbeiduan" src="../../../assets/img/0407红岭切图/招商引资/北段_未选.svg" alt="" />
+                <img v-if="iswhowbeiduan" src="../../../assets/img/4招商引资/北段_选中.svg" alt="" />
+                <img v-if="!iswhowbeiduan" src="../../../assets/img/4招商引资/北段_未选.svg" alt="" />
               </div>
               <div @click="quyublock(2)" class="center">
-                <img v-if="iswhowcenter" src="../../../assets/img/0407红岭切图/招商引资/中段_选中.svg" alt="" />
-                <img v-if="!iswhowcenter" src="../../../assets/img/0407红岭切图/招商引资/中段_未选.svg" alt="" />
+                <img v-if="iswhowcenter" src="../../../assets/img/4招商引资/中段_选中.svg" alt="" />
+                <img v-if="!iswhowcenter" src="../../../assets/img/4招商引资/中段_未选.svg" alt="" />
               </div>
               <div @click="quyublock(3)" class="right">
-                <img v-if="iswhownanduan" src="../../../assets/img/0407红岭切图/招商引资/南段_选中.svg" alt="" />
-                <img v-if="!iswhownanduan" src="../../../assets/img/0407红岭切图/招商引资/南段_未选.svg" alt="" />
+                <img v-if="iswhownanduan" src="../../../assets/img/4招商引资/南段_选中.svg" alt="" />
+                <img v-if="!iswhownanduan" src="../../../assets/img/4招商引资/南段_未选.svg" alt="" />
               </div>
             </div>
           </div>
         </div>
         <div class="tabdata1">
-<SearchGaoji/>
+          <SearchGaoji />
         </div>
       </div>
     </div>
@@ -70,20 +70,14 @@
 </template>
 
 <script>
-// import beiduan from "../../../assets/img/0407红岭切图/招商引资/中段_选中.svg";
-// import beiduan from "../../../assets/img/0407红岭切图/招商引资/北段_选中.svg";
+// import beiduan from "../../../assets/img/4招商引资/中段_选中.svg";
+// import beiduan from "../../../assets/img/4招商引资/北段_选中.svg";
 import connector from "../../../api/common.js";
 import SearchGaoji from "./search_gaoji"
 export default {
   data () {
     return {
-      // 高级搜索
-      // 关键字
-      key: "",
-      area_start: 0,
-      area_end: 0,
-      money_start: 0,
-      money_end: 0,
+
       // 展示北段选中的样式
       iswhowbeiduan: false,
       iswhowcenter: false,
@@ -97,24 +91,7 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    // 高级搜索提交确定
-    sumit () {
-      let dataarr = {
-        key: this.key,
-        area_start: this.area_start,
-        area_end: this.area_end,
-        money_start: this.money_start,
-        money_end: this.money_end,
-      };
-      console.log(dataarr);
-    },
-    reset () {
-      this.key = "";
-      this.area_start = 0;
-      this.area_end = 0;
-      this.money_start = 0;
-      this.money_end = 0;
-    },
+
     // 搜房__选择区域
     quyublock (val) {
       console.log(val);
@@ -217,7 +194,7 @@ export default {
   beforeDestroy () { },
   destroyed () { },
   activated () { },
-  components: {SearchGaoji},
+  components: { SearchGaoji },
 };
 </script>
 
@@ -318,7 +295,7 @@ export default {
         height: 150px;
         top: 150px;
         left: 10px;
-        background: rgba(0, 0, 0, 0.205);
+        background: rgba(0, 0, 0, 0.349);
         > div {
           .tit {
             text-align: center;
@@ -364,15 +341,15 @@ export default {
               /* background: #000; */
             }
             /* > div:nth-of-type(1) {
-              background: url("../../../assets/img/0407红岭切图/招商引资/北段_未选.svg")
+              background: url("../../../assets/img/4招商引资/北段_未选.svg")
                 no-repeat center;
             }
             > div:nth-of-type(2) {
-              background: url("../../../assets/img/0407红岭切图/招商引资/中段_未选.svg")
+              background: url("../../../assets/img/4招商引资/中段_未选.svg")
                 no-repeat center;
             }
             > div:nth-of-type(3) {
-              background: url("../../../assets/img/0407红岭切图/招商引资/南段_未选.svg")
+              background: url("../../../assets/img/4招商引资/南段_未选.svg")
                 no-repeat center;
             } */
           }
@@ -401,12 +378,12 @@ export default {
           margin-top: 15px;
           margin-left: 20px;
           border: none;
-          background: url("../../../assets/img/0407红岭切图/招商引资/滑块.svg")
-            no-repeat center/cover;
+          background: url("../../../assets/img/4招商引资/滑块.svg") no-repeat
+            center/cover;
         }
         /deep/ .el-slider__bar {
           height: 30px;
-          background: url("../../../assets/img/0407红岭切图/招商引资/滑块背景.svg");
+          background: url("../../../assets/img/4招商引资/滑块背景.svg");
         }
         /deep/ .el-slider__runway {
           height: 30px;
@@ -421,7 +398,7 @@ export default {
         height: 150px;
         top: 150px;
         left: 10px;
-        background: rgba(8, 8, 8, 0.171);
+        background: rgba(8, 8, 8, 0.363);
       }
     }
   }

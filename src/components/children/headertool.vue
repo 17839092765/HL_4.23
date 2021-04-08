@@ -112,7 +112,7 @@ export default {
   }
   > div:nth-of-type(4) {
     text-align: center;
-    width: 27%;
+    width: 25%;
   }
   > div:nth-of-type(5) {
     text-align: center;
