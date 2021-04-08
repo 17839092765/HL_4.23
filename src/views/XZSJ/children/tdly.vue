@@ -1,13 +1,16 @@
 <template>
   <div class="fdtz">
     <div class="echwarp">
-      <div class="top1"></div>
-      <div class="top">
-        <i>icon</i>
-        <span>法定图则</span>
-      </div>
       <div class="echbox1"></div>
       <div class="echbox">
+        <div class="top">
+          <div class="igm_top">
+            <img
+              src="../../../assets/img/0407红岭切图/xianzhuang/fadingtu.svg"
+            />
+            <span class="fading">土地利用</span>
+          </div>
+        </div>
         <div id="echarts13"></div>
       </div>
     </div>
@@ -18,16 +21,12 @@
       <div v-show="dataCaseisShow" class="clickdata">
         <div class="title1"></div>
         <div class="title">
-          <div class="letf_title">
-            <div class="title_icon">
-              <img src="../../../assets//img/jz.png" />
-            </div>
-            <div class="title_con">
-              {{ clickData.title ? clickData.title : "Loding..." }}
-              <!-- {{clickData1}} -->
-            </div>
+          <div class="title_img">
+            <img src="../../../assets/img/0407红岭切图/xianzhuang/dikuai.svg" />
           </div>
-          <div class="right_title"></div>
+          <div class="title_con">
+            {{ clickData.title ? clickData.title : "Loding..." }}
+          </div>
         </div>
         <div class="top_item1">
           <div class="top_item1_btn">地块编号</div>
@@ -38,9 +37,7 @@
         <div class="top_item2">招商类型: 银行金融科技子公司</div>
         <div class="top_item3">
           <div class="right_item11">
-            <div class="right_item1">
-              <img src="../../../assets//img/mianji1.png" />
-            </div>
+            <div class="right_item1"></div>
           </div>
 
           <div class="right_item2">
@@ -88,7 +85,9 @@ export default {
   },
   watch: {},
   methods: {},
-  created() {},
+  created() {
+    clickData1 = [];
+  },
   mounted() {
     var chartDom = document.getElementById("echarts13");
     var myChart = echarts.init(chartDom);
@@ -188,18 +187,82 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title_img {
+  width: 20%;
+  height: 100%;
+}
+.title_img img {
+  width: 35px;
+  height: 35px;
+  margin-left: 50%;
+  margin-top: 10%;
+}
+.title_con {
+  width: 50%;
+  height: 100%;
+  margin-left: 3%;
+  margin-top: 4%;
+  font-size: 16px;
+}
+.igm_top {
+  margin-left: 8%;
+  display: flex;
+  align-items: center;
+}
+.fading {
+  width: 105px;
+  font-size: 18px;
+  margin-left: 2.5%;
+  display: flex;
+  align-items: center;
+}
+.igm_top img {
+  width: 30px;
+  height: 30px;
+}
+.main_box {
+  display: flex;
+  width: 100%;
+  height: 10%;
+  margin-top: 2%;
+}
+.cvn {
+  width: 15%;
+  height: 100%;
+  border-bottom: 1px solid white;
+}
+
+.cvh {
+  width: 45%;
+  height: 100%;
+  border-bottom: 1px solid white;
+}
+.cyu {
+  width: 100%;
+  height: 100%;
+}
+.cyu img {
+  padding-top: 5%;
+  width: 25px;
+  height: 25px;
+}
+.cvy {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  width: 35%;
+  height: 10%;
+}
 .span_right {
-  margin-left: 1%;
+  width: 170px;
+
   /* word-break: break-all; */
   overflow: hidden; //超出的文本隐藏
   text-overflow: ellipsis; //溢出用省略号显示
   white-space: nowrap; //溢出不换行
   min-height: 100%;
-  width: 50%;
-
-  display: flex;
-  align-items: center;
-  padding-left: 5%;
+  margin-top: 5%;
+  margin-left: 3%;
 }
 .span_cen {
   width: 2%;
@@ -209,7 +272,7 @@ export default {
 }
 .span_left {
   margin-left: 5%;
-  width: 50%;
+  width: 37%;
   height: 100%;
 
   display: flex;
@@ -220,7 +283,7 @@ export default {
   width: 100%;
   height: 10%;
   min-height: 9.5%;
-  margin-top: 1%;
+
   display: flex;
   align-items: center;
 }
@@ -231,7 +294,29 @@ export default {
   position: absolute;
   right: -4%;
   top: 40%;
+  overflow: scroll;
 }
+/* 滚动条宽度 */
+::-webkit-scrollbar {
+  width: 1px;
+}
+/* 滚动条轨道颜色 */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+/* 滚动条颜色 */
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+/* 鼠标移动到滚动条上后显示的颜色 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: transparent;
+}
+/* 点击时滚动条的颜色 */
+::-webkit-scrollbar-thumb:active {
+  background-color: transparent;
+}
+
 .condata1 {
   font-size: 16px;
   padding-top: 4%;
@@ -274,13 +359,11 @@ export default {
   width: 69%;
 }
 .right_item1 {
-  width: 52px;
-  height: 52px;
-  border-radius: 52px;
-  background: transparent;
-  border: 2px solid #ffff;
-  text-align: center;
-  line-height: 52px;
+  width: 100%;
+  height: 70px;
+  background-image: url("../../../assets/img/0407红岭切图/xianzhuang/mianji.svg");
+  background-size: 80%;
+  background-repeat: no-repeat;
 }
 .top_item3 {
   width: 100%;
@@ -368,20 +451,14 @@ export default {
   text-align: center;
 }
 
-.title1 {
-  width: 58%;
-  height: 6%;
-  background: rgba(230, 206, 206, 0.2);
-  filter: blur(1px);
-}
-
 .title {
+  display: flex;
+
   width: 100%;
   height: 6%;
-  display: flex;
-  position: absolute;
-  top: 2.4%;
-  left: 2.3%;
+  background-image: url("../../../assets/img/0407红岭切图/xianzhuang/titbg_text6.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 .letf_title {
   width: 55%;
@@ -423,10 +500,13 @@ export default {
   line-height: 40px;
   background: rgba(230, 206, 206, 0.2);
   filter: blur(1px);
+  position: absolute;
+  top: 2%;
+  left: 0;
 }
 .echwarp {
   width: 350px;
-  height: 400px;
+  height: 450px;
   /* background: #0000004d; */
   position: absolute;
   top: 100px;
@@ -435,29 +515,29 @@ export default {
   color: white;
 
   .top {
-    height: 40px;
-    width: 100px;
-    line-height: 40px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 1px solid #c4e0e3;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+    margin-top: 3%;
+    background-image: url("../../../assets/img/0407红岭切图/xianzhuang/titbg_text4.svg");
+    background-size: 100%;
+    background-repeat: no-repeat;
   }
   .echbox {
-    border: 1px solid #c4e0e3;
     width: 100%;
-    height: calc(100% - 40px);
+    height: calc(100% - 140px);
     position: absolute;
-    top: 10.5%;
+    top: 1.5%;
     left: 0;
     /* background: rgba(40, 68, 67, 0.3); */
     /* filter: blur(0.5px); */
   }
   .echbox1 {
     margin-top: 1.5%;
-    border: 1px solid #fff;
+
     width: 100%;
-    height: calc(100% - 40px);
+    height: calc(100% - 20px);
     background: red;
     background: rgba(41, 62, 65, 0.65);
     filter: blur(8px);
