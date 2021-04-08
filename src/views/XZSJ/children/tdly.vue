@@ -5,9 +5,7 @@
       <div class="echbox">
         <div class="top">
           <div class="igm_top">
-            <img
-              src="../../../assets/img/0407红岭切图/xianzhuang/fadingtu.svg"
-            />
+            <img src="../../../assets/img/3现状数据/icon_法定图则.svg" />
             <span class="fading">土地利用</span>
           </div>
         </div>
@@ -22,7 +20,7 @@
         <div class="title1"></div>
         <div class="title">
           <div class="title_img">
-            <img src="../../../assets/img/0407红岭切图/xianzhuang/dikuai.svg" />
+            <img src="../../../assets/img/3现状数据/icon_地块信息.svg" />
           </div>
           <div class="title_con">
             {{ clickData.title ? clickData.title : "Loding..." }}
@@ -42,19 +40,14 @@
 
           <div class="right_item2">
             <span class="spac" v-if="clickData1[2]">
-              {{ clickData1[3].data }}</span
-            >
+              {{ clickData1[3].data }}</span>
             <span class="wan">m<sup>2</sup></span>
             <div>用地面积</div>
           </div>
         </div>
         <div class="condata1"></div>
         <div class="condata">
-          <div
-            class="condata_item"
-            v-for="(item, index) in clickData1"
-            :key="index"
-          >
+          <div class="condata_item" v-for="(item, index) in clickData1" :key="index">
             <div class="span_left">{{ item.name }}</div>
             <span class="span_cen"> |</span>
             <span class="span_right"> {{ item.data }}</span>
@@ -70,7 +63,7 @@ import * as echarts from "echarts";
 import { mapState } from "vuex";
 import { showdata } from "../showdata";
 export default {
-  data() {
+  data () {
     return {};
   },
   computed: {
@@ -85,10 +78,10 @@ export default {
   },
   watch: {},
   methods: {},
-  created() {
+  created () {
     clickData1 = [];
   },
-  mounted() {
+  mounted () {
     var chartDom = document.getElementById("echarts13");
     var myChart = echarts.init(chartDom);
     var option;
@@ -175,13 +168,13 @@ export default {
     };
     option && myChart.setOption(option);
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () { },
+  destroyed () { },
+  activated () { },
   components: {},
 };
 </script>
@@ -361,7 +354,7 @@ export default {
 .right_item1 {
   width: 100%;
   height: 70px;
-  background-image: url("../../../assets/img/0407红岭切图/xianzhuang/mianji.svg");
+  background-image: url("../../../assets/img/3现状数据/icon_面积.svg");
   background-size: 80%;
   background-repeat: no-repeat;
 }
@@ -456,7 +449,7 @@ export default {
 
   width: 100%;
   height: 6%;
-  background-image: url("../../../assets/img/0407红岭切图/xianzhuang/titbg_text6.svg");
+  background-image: url("../../../assets/img/3现状数据/titbg_text6.svg");
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -520,7 +513,7 @@ export default {
     width: 100%;
     height: 15%;
     margin-top: 3%;
-    background-image: url("../../../assets/img/0407红岭切图/xianzhuang/titbg_text4.svg");
+    background-image: url("../../../assets/img/3现状数据/titbg_text4.svg");
     background-size: 100%;
     background-repeat: no-repeat;
   }

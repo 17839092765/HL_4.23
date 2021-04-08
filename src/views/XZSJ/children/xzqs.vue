@@ -5,9 +5,7 @@
       <div class="echbox">
         <div class="top">
           <div class="igm_top">
-            <img
-              src="../../../assets/img/0407红岭切图/xianzhuang/fadingtu.svg"
-            />
+            <img src="../../../assets/img/3现状数据/icon_法定图则.svg" />
             <span class="fading">现状权属</span>
           </div>
         </div>
@@ -22,7 +20,7 @@
         <div class="title1"></div>
         <div class="title">
           <div class="title_img">
-            <img src="../../../assets/img/0407红岭切图/xianzhuang/dikuai.svg" />
+            <img src="../../../assets/img/3现状数据/icon_地块信息.svg" />
           </div>
           <div class="title_con">
             {{ clickData.title ? clickData.title : "Loding..." }}
@@ -42,19 +40,14 @@
 
           <div class="right_item2">
             <span class="spac" v-if="clickData1[2]">
-              {{ clickData1[3].data }}</span
-            >
+              {{ clickData1[3].data }}</span>
             <span class="wan">m<sup>2</sup></span>
             <div>用地面积</div>
           </div>
         </div>
         <div class="condata1"></div>
         <div class="condata">
-          <div
-            class="condata_item"
-            v-for="(item, index) in clickData1"
-            :key="index"
-          >
+          <div class="condata_item" v-for="(item, index) in clickData1" :key="index">
             <div class="span_left">{{ item.name }}</div>
             <span class="span_cen"> |</span>
             <span class="span_right"> {{ item.data }}</span>
@@ -72,7 +65,7 @@ import { showdata } from "../showdata";
 import connector from "../../../api/common";
 // import __g from "../../../main";
 export default {
-  data() {
+  data () {
     return {
       option: [],
     };
@@ -90,7 +83,7 @@ export default {
   },
   watch: {},
   methods: {
-    ChuLiOs(data) {
+    ChuLiOs (data) {
       // let echartsColorClass = []
       // console.log(this.os);
       // this.os.map(item => {
@@ -122,7 +115,7 @@ export default {
       console.log(newos);
       return newos;
     },
-    Glow(newos) {
+    Glow (newos) {
       console.log(newos);
 
       __g.polygon.glow(
@@ -130,7 +123,7 @@ export default {
           return item[0];
         }),
         5,
-        (res) => {}
+        (res) => { }
       );
 
       __g.polyline.clear(() => {
@@ -166,7 +159,7 @@ export default {
         });
       });
     },
-    async getechartsdata() {
+    async getechartsdata () {
       const result = await connector.xzqs_echart();
       if (result.status === 200) {
         console.log(result.data);
@@ -175,7 +168,7 @@ export default {
         this.showEcharts();
       }
     },
-    showEcharts() {
+    showEcharts () {
       var chartDom = document.getElementById("echarts12");
       var myChart = echarts.init(chartDom);
       var option;
@@ -238,18 +231,18 @@ export default {
       option && myChart.setOption(option);
     },
   },
-  created() {
+  created () {
     this.getechartsdata();
     clickData1 = [];
   },
-  mounted() {},
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
+  mounted () { },
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () { },
+  destroyed () { },
+  activated () { },
   components: {},
 };
 </script>
@@ -429,7 +422,7 @@ export default {
 .right_item1 {
   width: 100%;
   height: 70px;
-  background-image: url("../../../assets/img/0407红岭切图/xianzhuang/mianji.svg");
+  background-image: url("../../../assets/img/3现状数据/icon_面积.svg");
   background-size: 80%;
   background-repeat: no-repeat;
 }
@@ -524,7 +517,7 @@ export default {
 
   width: 100%;
   height: 6%;
-  background-image: url("../../../assets/img/0407红岭切图/xianzhuang/titbg_text6.svg");
+  background-image: url("../../../assets/img/3现状数据/titbg_text6.svg");
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -588,7 +581,7 @@ export default {
     width: 100%;
     height: 15%;
     margin-top: 3%;
-    background-image: url("../../../assets/img/0407红岭切图/xianzhuang/titbg_text4.svg");
+    background-image: url("../../../assets/img/3现状数据/titbg_text4.svg");
     background-size: 100%;
     background-repeat: no-repeat;
   }
