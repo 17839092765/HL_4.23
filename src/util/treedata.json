@@ -53,5 +53,11 @@
         "5ACB1BA1426582D4B195E8B1AE360E97"
       ]
     }
+  ],
+  "wlyjdata": [
+    {
+      "label": "基础底图",
+      "layerid": ["E42D9D0C486C4AFECF799A8C8939BE53"]
+    }
   ]
 }

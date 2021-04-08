@@ -1,24 +1,31 @@
 <template>
-  <div class="hlsj"></div>
+  <div class="hlsj">
+    <button class="btn" @click="playCameraTour">CameraTour</button>
+  </div>
 </template>
 
 <script>
 import { showtuceng, hidetuceng } from "../../util/showtuceng";
 // import __g from "../../main"
 export default {
-  data () {
+  data() {
     return {};
   },
   computed: {},
   watch: {},
   methods: {
-    polyline_del () {
+    polyline_del() {
       __g.polyline.delete("p773");
     },
-    polyline_add () {
-      __g.camera.lookAt(510264.093750, 2493521.000000, 650.484497, -26.054821, -63.835243, -30)
-
-
+    polyline_add() {
+      __g.camera.lookAt(
+        510264.09375,
+        2493521.0,
+        650.484497,
+        -26.054821,
+        -63.835243,
+        -30
+      );
 
       let coords = [
         [510248.03125, 2492991.25, 0.1599999964237213],
@@ -43,9 +50,9 @@ export default {
         [510574.71875, 2493035.5, 0.1603125035762787],
         [510247.09375, 2492969.5, 0.1599999964237213],
       ]; //光流的polyline的坐标数组
-      coords.forEach(item => {
-        item[2] = item[2] + 10
-      })
+      coords.forEach((item) => {
+        item[2] = item[2] + 10;
+      });
       //   let duration = 3; //光流粒子的生命周期
       //   let thickness = 0.4; //光流线的宽度
       //   let interval = 0.5; //光流粒子发射间隔
@@ -62,22 +69,14 @@ export default {
       //   );
       // }
 
-
-
       // __g.beam.add(o1);
 
-
-
-
-
-
-
       //  let coords = item.coordinates[0][0]
-      let color = [1, 1, 1, 1]
-      let style = 4
-      let thickness = 10
-      let brightness = 0.8
-      let flowRate = 0.5
+      let color = [1, 1, 1, 1];
+      let style = 4;
+      let thickness = 10;
+      let brightness = 0.8;
+      let flowRate = 0.5;
       let o1 = new PolylineData(
         "p773",
         color,
@@ -86,31 +85,63 @@ export default {
         thickness,
         brightness,
         flowRate
-      )
-      o1.depthTest = true
+      );
+      o1.depthTest = true;
 
-      __g.polyline.add(o1)
-    }
+      __g.polyline.add(o1);
+    },
+    addCameraTour() {
+      console.log(111);
+      let frames = [];
+      frames.push(
+        new CameraTourKeyFrame(
+          0,
+          2.0,
+          [509845.78125, 2494115.5, 572.988708],
+          [-32.791355, -5.582986, 0]
+        )
+      );
+      frames.push(
+        new CameraTourKeyFrame(
+          4.0,
+          [510170.28125, 2492695.5, 371.758575],
+          [-18.926664, -71.260094, 0]
+        )
+      );
+      let o = new CameraTourData("1", "test", 20, frames);
+      __g.cameraTour.add(o);
+    },
+    playCameraTour() {
+      __g.cameraTour.play("1", () => {
+        console.log(2222);
+      });
+    },
   },
-  created () {
-
-  },
-  mounted () {
+  created() {},
+  mounted() {
     showtuceng(this.$treedata.hlsjdata);
     this.polyline_add();
+    this.addCameraTour();
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () {
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {
     hidetuceng(this.$treedata.hlsjdata);
     this.polyline_del();
+    __g.cameraTour.delete("1");
   },
-  destroyed () { },
-  activated () { },
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.btn {
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+}
+</style>
