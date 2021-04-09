@@ -1,9 +1,35 @@
 <template>
   <div class="headertool">
-    <div class="one">1</div>
-    <div class="two">1</div>
-    <div class="three">
-      <i class="el-icon-setting"></i>
+    <div class="one" @click="resetCamera">
+      <img src="../../assets/img/icon-初始视角.svg" alt="" />
+    </div>
+    <div class="two">
+      <img src="../../assets/img/icon-取消高亮.svg" alt="" />
+    </div>
+    <div class="three" @click="setUp">
+      <el-popover
+        popper-class="popper"
+        placement="bottom"
+        title=""
+        width="100"
+        trigger="click"
+      >
+        <div class="">
+          <div>
+            <span>展示UI菜单 </span>
+            <el-switch
+              v-model="isShowUI"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+              @change="showUI"
+            >
+            </el-switch>
+          </div>
+        </div>
+        <div slot="reference">
+          <img src="../../assets/img/icon-设置.svg" alt="" />
+        </div>
+      </el-popover>
     </div>
     <div class="four">
       {{ time }}
@@ -17,25 +43,30 @@
 <script>
 import dayjs from "dayjs";
 export default {
-  data () {
+  data() {
     return {
-      time: "",
+      isShowUI: true,
+      time: "00:00",
     };
   },
   computed: {},
   watch: {},
   methods: {
-    gettime () {
+    gettime() {
       this.timer = setInterval(() => {
         this.time = dayjs().format("YYYY/MM/DD HH:mm:ss");
       }, 1000);
     },
-
+    resetCamera() {},
+    setUp() {},
+    showUI() {
+      __g.misc.setMainUIVisibility(this.isShowUI);
+    },
   },
-  created () {
+  created() {
     this.gettime();
   },
-  mounted () {
+  mounted() {
     // var bbb = document.createElement("script")
     // bbb.innerHTML = {
     // "CONFIG": {
@@ -53,47 +84,55 @@ export default {
     // aaa.src = "https://widget.qweather.net/standard/static/js/he-standard-common.js?v=2.0"
 
     window.WIDGET = {
-      "CONFIG": {
-        "modules": "0124",
-        "background": "1",
-        "tmpColor": "FFFFFF",
-        "tmpSize": "16",
-        "cityColor": "FFFFFF",
-        "citySize": "16",
-        "aqiColor": "FFFFFF",
-        "aqiSize": "16",
-        "weatherIconSize": "24",
-        "alertIconSize": "18",
-        "padding": "10px 10px 10px 10px",
-        "shadow": "1",
-        "language": "zh",
-        "borderRadius": "10",
-        "fixed": "false",
-        "vertical": "top",
+      CONFIG: {
+        modules: "0124",
+        background: "1",
+        tmpColor: "FFFFFF",
+        tmpSize: "16",
+        cityColor: "FFFFFF",
+        citySize: "16",
+        aqiColor: "FFFFFF",
+        aqiSize: "16",
+        weatherIconSize: "24",
+        alertIconSize: "18",
+        padding: "10px 10px 10px 10px",
+        shadow: "1",
+        language: "zh",
+        borderRadius: "10",
+        fixed: "false",
+        vertical: "top",
 
-        "horizontal": "left",
-        "key": "8f0727ee21004600b2a5826ffc63a5f9"
-      }
-    }
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0';
-    document.getElementsByTagName('head')[0].appendChild(script);
+        horizontal: "left",
+        key: "8f0727ee21004600b2a5826ffc63a5f9",
+      },
+    };
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src =
+      "https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0";
+    document.getElementsByTagName("head")[0].appendChild(script);
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () {
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {
     clearInterval(this.timer);
   },
-  destroyed () { },
-  activated () { },
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>
 
 <style lang="scss" scoped>
+.popper {
+  background: transparent !important;
+}
+/deep/ .el-popover {
+  background-color: transparent !important;
+  color: #fff;
+}
 .headertool {
   width: 100%;
   height: 100%;
@@ -109,6 +148,8 @@ export default {
     width: 10%;
     height: 100%;
     font-size: 20px;
+    cursor: pointer;
+    position: relative;
   }
   > div:nth-of-type(4) {
     text-align: center;
