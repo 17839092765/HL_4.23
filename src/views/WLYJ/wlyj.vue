@@ -1,7 +1,7 @@
 <template>
   <div class="wlyj">
     <div ref="slider" class="slider">
-      <img src="../../assets/img/0408红岭切图/5未来愿景/调节条背景.svg" alt="" />
+      <img src="../../assets/img/5未来愿景/调节条背景.svg" alt="" />
       <div class="point" @mousedown="updateTime" ref="point">
         <!-- <img
           src="../../assets/img/0408红岭切图/5未来愿景/当前选中.png"
@@ -124,7 +124,7 @@ export default {
   left: -65px;
   cursor: pointer;
   user-select: none;
-  background: url("../../assets/img/0408红岭切图/5未来愿景/当前选中.png");
+  background: url("../../assets/img/5未来愿景/当前选中.png");
   > div {
     position: absolute;
     color: #fff;

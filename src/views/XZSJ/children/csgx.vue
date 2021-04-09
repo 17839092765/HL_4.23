@@ -26,14 +26,13 @@
             {{ clickData.title ? clickData.title : "Loding..." }}
           </div>
         </div>
-        <div class="top_item1">
-          <div class="top_item1_btn">地块编号</div>
+        <div class="top_item2">{{clickData1[1][0].data}}</div>
+        <!-- <div class="top_item1">
           <div class="top_item1_title" v-if="clickData1[2]">
             {{ clickData1[0].data }}
           </div>
-        </div>
-        <div class="top_item2">招商类型: 银行金融科技子公司</div>
-        <div class="top_item3">
+        </div> -->
+        <!-- <div class="top_item3">
           <div class="right_item11">
             <div class="right_item1"></div>
           </div>
@@ -44,13 +43,13 @@
             <span class="wan">m<sup>2</sup></span>
             <div>用地面积</div>
           </div>
-        </div>
-        <div class="condata1"></div>
-        <div class="condata">
-          <div class="condata_item" v-for="(item, index) in clickData1[1]" :key="index">
-            <div class="span_left">{{ item.name }}</div>
-            <span class="span_cen"> |</span>
-            <span class="span_right"> {{ item.data }}</span>
+        </div> -->
+        <!-- <div class="condata1"></div> -->
+        <div class="condata111">
+          <div class="condata_item1" v-for="(item, index) in clickData1[1]" :key="index">
+            <div class="span_left1">{{ item.name+":" }}</div>
+            <!-- <span class="span_cen"> </span> -->
+            <div class="span_right1"> {{ item.data }}</div>
           </div>
         </div>
         <!-- 更新单元图纸 -->
@@ -62,12 +61,23 @@
             <div>更新单元图纸</div>
           </div>
           <div class="drawing_img">
-            <img v-if="clickData1[0] === 3" src="../../../assets/img/updata/3.jpg" alt="" />
+            <!-- <img v-if="clickData1[0] === 3" src="../../../assets/img/updata/3.jpg" alt="" />
             <img v-else-if="clickData1[0] === 5" src="../../../assets/img/updata/5.jpg" alt="" />
             <img v-else-if="clickData1[0] === 7" src="../../../assets/img/updata/7.jpg" alt="" />
             <img v-else-if="clickData1[0] === 9" src="../../../assets/img/updata/9.jpg" alt="" />
             <img v-else-if="clickData1[0] === 11" src="../../../assets/img/updata/11.jpg" alt="" />
-            <img v-else src="../../../assets/img/updata/1.png" alt="" />
+            <img v-else src="../../../assets/img/updata/1.png" alt="" /> -->
+            <img v-if="clickData1[0]==13" src="../../../assets/img/updata/1.png" alt="" />
+            <img v-else-if="clickData1[0]==6" src="../../../assets/img/updata/3.jpg" alt="" />
+            <img v-else-if="clickData1[0]==8" src="../../../assets/img/updata/5.jpg" alt="" />
+            <img v-else-if="clickData1[0]==9" src="../../../assets/img/updata/6.jpg" alt="" />
+            <img v-else-if="clickData1[0]==10" src="../../../assets/img/updata/6.jpg" alt="" />
+            <img v-else-if="clickData1[0]==11" src="../../../assets/img/updata/7.jpg" alt="" />
+            <img v-else-if="clickData1[0]==13" src="../../../assets/img/updata/9.jpg" alt="" />
+            <img v-else-if="clickData1[0]==22" src="../../../assets/img/updata/9.jpg" alt="" />
+            <img v-else-if="clickData1[0]==21" src="../../../assets/img/updata/9.jpg" alt="" />
+            <img v-else-if="clickData1[0]==12" src="../../../assets/img/updata/11.jpg" alt="" />
+            <!-- <img v-else src="../../../assets/img/updata/1.png" alt="" /> -->
           </div>
         </div>
       </div>
@@ -264,6 +274,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.condata111 {
+  width: 100%;
+  height: 300px;
+  overflow-y: scroll;
+  > div {
+    width: 100%;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.356);
+    margin: 3px 0;
+    display: flex;
+    align-items: center;
+    > div {
+      // width: 40%;
+      width: 50%;
+      height: 100%;
+    }
+    > div:nth-of-type(1) {
+      display: flex;
+      line-height: 60px;
+      justify-content: flex-start;
+      white-space: nowrap;
+      // width: 60%;
+      // text-align: right;
+      font-size: 14px;
+      text-indent: 10px;
+    }
+    > div:nth-of-type(2) {
+      // line-height: 60px;
+      white-space: wrap;
+      display: flex;
+      align-items: center;
+      // width: 60%;
+      // text-align: right;
+      font-size: 14px;
+    }
+  }
+}
 .drawing {
   width: 100%;
   margin-top: 10px;
@@ -379,22 +426,40 @@ export default {
   align-items: center;
 }
 .condata_item {
-  font-size: 16px;
+  font-size: 14px;
   width: 100%;
-  height: 10%;
-  min-height: 9.5%;
-
+  // height: 10%;
+  // min-height: 9.5%;
+  height: 50px;
   display: flex;
+  justify-content: center;
   align-items: center;
+  overflow-x: hidden;
+  > div {
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    background: #000;
+    // float: left;
+  }
+  // > .span_right {
+  //   height: 100%;
+  //   width: 60%;
+
+  //   text-align: center;
+  //   background: #000;
+  //   float: left;
+  // }
 }
 .condata {
   font-size: 16px;
   width: 100%;
-  height: 22%;
-  position: absolute;
-  right: -4%;
-  top: 40%;
-  overflow: scroll;
+  height: 350px;
+  // position: absolute;
+  // right: -4%;
+  // top: 40%;
+  overflow-y: scroll;
+  background: rgba(0, 0, 0, 0.212);
 }
 /* 滚动条宽度 */
 ::-webkit-scrollbar {
@@ -544,6 +609,7 @@ export default {
   width: 80%;
   height: 7%;
   font-size: 20px;
+  margin: 20px 0;
   // font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #ffffff;

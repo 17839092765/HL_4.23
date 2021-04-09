@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="Logo">
-      <!-- <img src="../../assets/img/public/LOGO.svg" alt=""> -->
+      <img src="../../assets/img/public/logo.png" alt="">
       <!-- <h1 @click="shuaxin"> -->
       <!-- </h1> -->
     </div>
@@ -80,13 +80,14 @@ export default {
   font-weight: 600;
   width: 100%;
   height: 80px;
-  background: rgba(0, 0, 0, 0.151);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: rgba(0, 0, 0, 0.76);
+
   .Logo {
     z-index: 1000;
-    background: url("../../assets/img/public/logo.png") no-repeat center;
+    // background: url("../../assets/img/public/logo.png") no-repeat center;
     width: 35%;
     height: 100%;
     // font-size: 40px;

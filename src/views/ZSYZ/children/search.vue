@@ -47,16 +47,16 @@
             <div class="tit">区域</div>
             <div class="blockquyu">
               <div @click="quyublock(1)" class="left">
-                <img v-if="iswhowbeiduan" src="../../../assets/img/4招商引资/北段_选中.svg" alt="" />
-                <img v-if="!iswhowbeiduan" src="../../../assets/img/4招商引资/北段_未选.svg" alt="" />
+                <img v-if="iswhowbeiduan" src="../../../assets/img/4招商引资/北段_选中.png" alt="" />
+                <img v-if="!iswhowbeiduan" src="../../../assets/img/4招商引资/北段_未选.png" alt="" />
               </div>
               <div @click="quyublock(2)" class="center">
-                <img v-if="iswhowcenter" src="../../../assets/img/4招商引资/中段_选中.svg" alt="" />
-                <img v-if="!iswhowcenter" src="../../../assets/img/4招商引资/中段_未选.svg" alt="" />
+                <img v-if="iswhowcenter" src="../../../assets/img/4招商引资/中段_选中.png" alt="" />
+                <img v-if="!iswhowcenter" src="../../../assets/img/4招商引资/中段_未选.png" alt="" />
               </div>
               <div @click="quyublock(3)" class="right">
-                <img v-if="iswhownanduan" src="../../../assets/img/4招商引资/南段_选中.svg" alt="" />
-                <img v-if="!iswhownanduan" src="../../../assets/img/4招商引资/南段_未选.svg" alt="" />
+                <img v-if="iswhownanduan" src="../../../assets/img/4招商引资/南段_选中.png" alt="" />
+                <img v-if="!iswhownanduan" src="../../../assets/img/4招商引资/南段_未选.png" alt="" />
               </div>
             </div>
           </div>
@@ -85,8 +85,8 @@ export default {
       iswhowcenter: false,
       iswhownanduan: false,
       max: 1000,
-      value: [0, 100],
-      value2: [0, 100],
+      value: [0, 2000],
+      value2: [0, 2000],
       isshowClose: false,
     };
   },
@@ -370,7 +370,7 @@ export default {
           background: rgb(214, 205, 205);
         }
         > div:nth-of-type(3) {
-          width: 500px;
+          width: 450px;
           /* height: 100%; */
           /* background: rgba(3, 3, 3, 0.356); */
           > div {
@@ -383,8 +383,11 @@ export default {
             justify-content: space-around;
             align-items: center;
             > div {
-              width: 150px;
+              width: 33%;
               height: 80px;
+              display: flex;
+              justify-content: center;
+              align-items: flex-end;
               /* background: #000; */
             }
             /* > div:nth-of-type(1) {
