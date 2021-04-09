@@ -10,15 +10,8 @@
           src="../../assets/img/0408红岭切图/5未来愿景/当前选中.png"
           alt=""
         /> -->
+        <div>{{ currentTime }}</div>
       </div>
-      <!-- <el-slider
-        vertical
-        height="481px"
-        v-model="value"
-        :step="12.5"
-        show-stops
-      >
-      </el-slider> -->
     </div>
   </div>
 </template>
@@ -30,6 +23,7 @@ export default {
   data() {
     return {
       value: 0,
+      currentTime: "08:00",
     };
   },
   computed: {},
@@ -45,30 +39,48 @@ export default {
           mousEvent.clientY - e.offsetY - this.$refs.slider.offsetTop;
         if (mousePositon <= 16) {
           mousePositon = -14;
+          this.currentTime = "16:00";
+          __g.weather.setDateTime(2021, 4, 9, 16, 0);
         }
         if (mousePositon > 16 && mousePositon <= 76) {
           mousePositon = 46;
+          this.currentTime = "14:00";
+          __g.weather.setDateTime(2021, 4, 9, 14, 0);
         }
         if (mousePositon > 76 && mousePositon <= 136) {
           mousePositon = 106;
+          this.currentTime = "12:00";
+          __g.weather.setDateTime(2021, 4, 9, 12, 0);
         }
         if (mousePositon > 136 && mousePositon <= 196) {
           mousePositon = 166;
+          this.currentTime = "10:00";
+          __g.weather.setDateTime(2021, 4, 9, 10, 0);
         }
         if (mousePositon > 196 && mousePositon <= 256) {
           mousePositon = 226;
+          this.currentTime = "08:00";
+          __g.weather.setDateTime(2021, 4, 9, 8, 0, false);
         }
         if (mousePositon > 256 && mousePositon <= 316) {
           mousePositon = 286;
+          this.currentTime = "06:00";
+          __g.weather.setDateTime(2021, 4, 9, 6, 0);
         }
         if (mousePositon > 316 && mousePositon <= 376) {
           mousePositon = 346;
+          this.currentTime = "04:00";
+          __g.weather.setDateTime(2021, 4, 9, 4, 0);
         }
         if (mousePositon > 376 && mousePositon <= 436) {
           mousePositon = 406;
+          this.currentTime = "02:00";
+          __g.weather.setDateTime(2021, 4, 9, 2, 0);
         }
         if (mousePositon > 436) {
           mousePositon = 466;
+          this.currentTime = "00:00";
+          __g.weather.setDateTime(2021, 4, 9, 0, 0, false);
         }
         this.$refs.point.style.top = mousePositon + "px";
         document.documentElement.onmouseup = () => {
@@ -88,6 +100,7 @@ export default {
   updated() {},
   beforeDestroy() {
     hidetuceng(this.$treedata.hlsjdata);
+    __g.weather.setDateTime(2021, 4, 9, 8, 0, false);
   },
   destroyed() {},
   activated() {},
@@ -100,39 +113,21 @@ export default {
   position: absolute;
   left: 47px;
   top: 293px;
-  /* width: 75px;
-  height: 499px; */
-  /* background: rgba(217, 229, 233, 0.3); */
-  /* flex-direction: column;
-  display: flex;
-  align-items: center;
-  justify-content: center; */
 }
 .point {
   position: absolute;
   width: 229px;
   height: 213px;
-  top: 46px;
+  top: 226px;
   left: -65px;
   cursor: pointer;
   user-select: none;
   background: url("../../assets/img/0408红岭切图/5未来愿景/当前选中.png");
+  > div {
+    position: absolute;
+    color: #fff;
+    top: 100px;
+    left: 135px;
+  }
 }
-/* /deep/ .el-slider.is-vertical .el-slider__runway {
-  width: 4px;
-}
-/deep/ .el-slider__runway {
-  background-color: rgba(237, 249, 254, 0.61);
-}
-/deep/ .el-slider__bar {
-  background-color: rgba(237, 249, 254, 0.61);
-}
-/deep/ .el-slider__button {
-  width: 34px;
-  height: 34px;
-  background: #fee36d;
-  box-shadow: 0px 2px 4px 0px rgba(154, 153, 141, 0.5);
-  border-radius: 50%;
-  border: 3px solid #fffbe9;
-} */
 </style>

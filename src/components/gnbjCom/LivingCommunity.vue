@@ -1,8 +1,11 @@
 <template>
-  <div class="livingcommunity"></div>
+  <div class="livingcommunity">
+    <Back />
+  </div>
 </template>
 
 <script>
+import Back from "./Back";
 export default {
   name: "LivingCommunity",
   data() {
@@ -101,7 +104,9 @@ export default {
   },
   destroyed() {},
   activated() {},
-  components: {},
+  components: {
+    Back,
+  },
 };
 </script>
 

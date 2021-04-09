@@ -6,14 +6,16 @@
         <div class="top">
           <div class="igm_top">
             <img src="../../../assets/img/3现状数据/icon_城市更新单元.svg" />
-            <span class="fading">法定图则</span>
+            <span class="fading">城市更新单元</span>
           </div>
         </div>
         <div id="echarts14"></div>
       </div>
     </div>
     <div class="datacase">
-      <div class="top_data" v-if="!clickData1[2]">点击左边建筑物查看信息</div>
+      <div class="top_data" v-if="!clickData1.length">
+        点击左边建筑物查看信息
+      </div>
       <div v-show="dataCaseisShow" class="clickdata">
         <div class="title1"></div>
         <div class="title">
@@ -38,20 +40,63 @@
 
           <div class="right_item2">
             <span class="spac" v-if="clickData1[2]">
-              {{ clickData1[3].data }}</span>
+              {{ clickData1[3].data }}</span
+            >
             <span class="wan">m<sup>2</sup></span>
             <div>用地面积</div>
           </div>
         </div>
         <div class="condata1"></div>
         <div class="condata">
-          <div class="condata_item" v-for="(item, index) in clickData1" :key="index">
+          <div
+            class="condata_item"
+            v-for="(item, index) in clickData1[1]"
+            :key="index"
+          >
             <div class="span_left">{{ item.name }}</div>
             <span class="span_cen"> |</span>
             <span class="span_right"> {{ item.data }}</span>
-            {{
-              clickData1
-            }}
+            <!-- {{ clickData1 }} -->
+          </div>
+        </div>
+        <!-- 更新单元图纸 -->
+        <div class="drawing">
+          <div class="drawing_title">
+            <div>
+              <img
+                src="../../../assets/img/3现状数据/icon_建筑信息.png"
+                alt=""
+              />
+            </div>
+            <div>更新单元图纸</div>
+          </div>
+          <div class="drawing_img">
+            <img
+              v-if="clickData1[0] === 3"
+              src="../../../assets/img/updata/3.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] === 5"
+              src="../../../assets/img/updata/5.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] === 7"
+              src="../../../assets/img/updata/7.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] === 9"
+              src="../../../assets/img/updata/9.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] === 11"
+              src="../../../assets/img/updata/11.jpg"
+              alt=""
+            />
+            <img v-else src="../../../assets/img/updata/1.png" alt="" />
           </div>
         </div>
       </div>
@@ -64,8 +109,10 @@ import * as echarts from "echarts";
 import { mapState } from "vuex";
 import { showdata } from "../showdata";
 export default {
-  data () {
-    return {};
+  data() {
+    return {
+      img: "",
+    };
   },
   computed: {
     ...mapState({
@@ -77,12 +124,21 @@ export default {
       dataCaseisShow: (state) => state.dataCaseisShow,
     }),
   },
-  watch: {},
+  watch: {
+    // "this.clickData1": {
+    //   handler() {
+    //     if (clickData1[0]) {
+    //       img = require(`../../../assets/img/updata/${clickData1[0]}`);
+    //     }
+    //   },
+    //   immediate: true,
+    // },
+  },
   methods: {},
-  created () {
+  created() {
     // clickData1 = [this.clickData1];
   },
-  mounted () {
+  mounted() {
     var chartDom = document.getElementById("echarts14");
     var myChart = echarts.init(chartDom);
     var option;
@@ -222,19 +278,44 @@ export default {
       ],
     };
     option && myChart.setOption(option);
+
+    // console.log(this.clickData1);
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () { },
-  destroyed () { },
-  activated () { },
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {},
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>
 
 <style lang="scss" scoped>
+.drawing {
+  width: 100%;
+  margin-top: 10px;
+  > .drawing_title {
+    height: 50px;
+    background: url("../../../assets/img/3现状数据/titbg_text4.svg") no-repeat;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding-left: 25px;
+  }
+  .drawing_img {
+    margin: 0 auto;
+    width: 343px;
+    height: 268px;
+    /* background: #000; */
+    > img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
 .title_img {
   width: 20%;
   height: 100%;
@@ -258,7 +339,7 @@ export default {
   align-items: center;
 }
 .fading {
-  width: 105px;
+  width: 125px;
   font-size: 18px;
   margin-left: 2.5%;
   display: flex;
@@ -305,7 +386,7 @@ export default {
   width: 170px;
 
   /* word-break: break-all; */
-  overflow: hidden; //超出的文本隐藏
+  /* overflow: hidden; //超出的文本隐藏 */
   text-overflow: ellipsis; //溢出用省略号显示
   white-space: nowrap; //溢出不换行
   min-height: 100%;
@@ -338,7 +419,7 @@ export default {
 .condata {
   font-size: 16px;
   width: 100%;
-  height: 38%;
+  height: 22%;
   position: absolute;
   right: -4%;
   top: 40%;
@@ -370,7 +451,7 @@ export default {
   padding-top: 4%;
   margin-top: 1%;
   width: 100%;
-  height: 38%;
+  height: 22%;
   background: rgba(53, 46, 44, 0.45);
   filter: blur(2px);
 }

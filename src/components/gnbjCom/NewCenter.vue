@@ -1,8 +1,12 @@
 <template>
-  <div class="newcenter"></div>
+  <div class="newcenter">
+    <Back />
+  </div>
 </template>
 
 <script>
+import Back from "./Back";
+
 export default {
   name: "NewCenter",
   data() {
@@ -123,7 +127,9 @@ export default {
   },
   destroyed() {},
   activated() {},
-  components: {},
+  components: {
+    Back,
+  },
 };
 </script>
 

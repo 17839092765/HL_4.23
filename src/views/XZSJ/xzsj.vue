@@ -23,79 +23,82 @@
 
 <script>
 import { showtuceng, hidetuceng } from "../../util/showtuceng";
-import { showVectorlayers, hideVectorlayers } from "../../util/showtuze"
+import { showVectorlayers, hideVectorlayers } from "../../util/showtuze";
 // import __g from "../../main"
-import store from "../../store"
+import store from "../../store";
 export default {
-  data () {
+  data() {
     return {
       onclickdata: 0,
     };
   },
-  computed: {
-
-  },
+  computed: {},
   watch: {
     $route: {
-      handler (to, from) {
+      handler(to, from) {
         // 删除点击出来的段变形
-        __g.polyline.clear()
-        store.commit("dataCaseisShow", false)
-        __g.camera.lookAt(510190.2778, 2494828.118, 5500.464294, -33.209282, -90, -90, () => {
-          // this.isshowBack = false
-        })
+        __g.polyline.clear();
+        store.commit("dataCaseisShow", false);
+        __g.camera.lookAt(
+          510190.2778,
+          2494828.118,
+          5500.464294,
+          -33.209282,
+          -90,
+          -90,
+          () => {
+            // this.isshowBack = false
+          }
+        );
         if (to && to.path === "/Home/XZSJ/fdtz") {
           console.log(to);
 
-          hideVectorlayers()
-          showVectorlayers("法定图则")
-
-
-
+          hideVectorlayers();
+          showVectorlayers("法定图则");
         } else if (to && to.path === "/Home/XZSJ/xzqs") {
           console.log(to);
-          hideVectorlayers()
-          showVectorlayers("现状权属")
-
+          hideVectorlayers();
+          showVectorlayers("现状权属");
         } else if (to && to.path === "/Home/XZSJ/tdly") {
           console.log(to);
-          hideVectorlayers()
-          showVectorlayers("土地利用现状")
-
+          hideVectorlayers();
+          showVectorlayers("土地利用现状");
         } else if (to && to.path === "/Home/XZSJ/csgx") {
           console.log(to);
-          hideVectorlayers()
-          showVectorlayers("城市更新单元")
-
+          hideVectorlayers();
+          showVectorlayers("城市更新单元");
         }
       },
     },
-
   },
   methods: {},
-  created () {
+  created() {},
+  mounted() {
+    this.$treedata && showtuceng(this.$treedata.xzsjdata);
+    showVectorlayers("法定图则");
+    __g.camera.lookAt(
+      510190.2778,
+      2494828.118,
+      5500.464294,
+      -33.209282,
+      -90,
+      -90,
+      () => {
+        // this.isshowBack = false
+      }
+    );
   },
-  mounted () {
-    showtuceng(this.$treedata.xzsjdata);
-    showVectorlayers("法定图则")
-    __g.camera.lookAt(510190.2778, 2494828.118, 5500.464294, -33.209282, -90, -90, () => {
-      // this.isshowBack = false
-    })
-  },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () {
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {
     hidetuceng(this.$treedata.xzsjdata);
-    hideVectorlayers()
-    __g.polyline.clear()
+    hideVectorlayers();
+    __g.polyline.clear();
   },
-  destroyed () {
-
-
-  },
-  activated () { },
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>
