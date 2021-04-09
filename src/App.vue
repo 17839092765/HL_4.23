@@ -218,8 +218,7 @@ export default {
       });
     },
 
-
-    // 
+    //
     //根据要素id请求数据
     async requestdata (title, data) {
       let that = this;
@@ -243,16 +242,19 @@ export default {
 
       // arrdata.push(rcdata)
       // });
-      this.data_show = {
+      that.data_show = {
         title: title,
-        data: rcdata.data,
+        data: rcdata.data
       };
+      console.log(rcdata, 7788676786786);
       that.$store.commit("clickData", this.data_show);
       console.log(that.$store.state.clickData);
     },
   },
   created () {
     this.initWebSocket();
+    // window.addEventListener("load", this.onLoad, true);
+    // window.addEventListener("resize", this.onResize, true);
   },
   mounted () {
     // window.addEventListener("load", this.onLoad, true);

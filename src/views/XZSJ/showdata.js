@@ -1,4 +1,5 @@
 function showdata(newdata) {
+  console.log(newdata, 8888888)
   var title = newdata.title
   var formdata = []
   var data = newdata.data
@@ -141,29 +142,32 @@ function showdata(newdata) {
   }
   //城市更新项目的信息
   else if (title == "城市更新项目") {
-    var id = data[0].id
-    var arr = []
-    arr = [
-      {
-        name: "更新项目名称",
-        data: data[0].name,
-      },
-      {
-        name: "建设情况",
-        data: data[0].demolish,
-      },
-    ]
-    if (data.length == 1) {
-    } else {
-      data.forEach((item, index) => {
-        var obj = {
-          name: item.build,
-          data: item.data,
-        }
-        arr.push(obj)
-      })
+    if (data.length > 0) {
+      console.log(data)
+      var id = data[0].id
+      var arr = []
+      arr = [
+        {
+          name: "更新项目名称",
+          data: data[0].name,
+        },
+        {
+          name: "建设情况",
+          data: data[0].demolish,
+        },
+      ]
+      if (data.length == 1) {
+      } else {
+        data.forEach((item, index) => {
+          var obj = {
+            name: item.build,
+            data: item.data,
+          }
+          arr.push(obj)
+        })
+      }
+      formdata = [id, arr]
     }
-    formdata = [id, arr]
   }
   //楼层信息
   else if (title == "楼层信息") {

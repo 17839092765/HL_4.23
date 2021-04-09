@@ -8,6 +8,7 @@
         >产业功能布局</span
       >
     </div>
+    <LandLayout v-if="active === 1" />
     <NewCenter v-if="active === 2" />
     <!-- <LivingCommunity v-if="active === 2" /> -->
     <!-- <ServiceCenter v-if="active === 2" /> -->
@@ -19,6 +20,7 @@ import { showtuceng, hidetuceng } from "../../util/showtuceng";
 import NewCenter from "../../components/gnbjCom/NewCenter";
 import LivingCommunity from "../../components/gnbjCom/LivingCommunity";
 import ServiceCenter from "../../components/gnbjCom/ServiceCenter";
+import LandLayout from "../../components/gnbjCom/LandLayout";
 export default {
   data() {
     return {
@@ -45,6 +47,7 @@ export default {
     NewCenter,
     LivingCommunity,
     ServiceCenter,
+    LandLayout,
   },
 };
 </script>

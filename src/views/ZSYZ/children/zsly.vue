@@ -86,7 +86,7 @@ export default {
   watch: {},
   methods: {},
   created () {
-    __g.infoTree.show("BF15EEEC49051728DF0DD585E91B4C0E")
+    __g.infoTree.show("510E89A04A6F36F2AF26A5A56A36AD69")
 
   },
   mounted () {
@@ -107,7 +107,7 @@ export default {
   updated () { },
   beforeDestroy () {
     // hidetuceng([this.$treedata.zsyzdata[2]]);
-    __g.infoTree.hide("BF15EEEC49051728DF0DD585E91B4C0E")
+    __g.infoTree.hide("510E89A04A6F36F2AF26A5A56A36AD69")
 
     // BF15EEEC49051728DF0DD585E91B4C0E
     this.$store.commit("clickData", {});
