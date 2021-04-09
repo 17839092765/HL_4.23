@@ -62,12 +62,16 @@ var instance = axios.create({
   timeout: 1000 * 12,
   withCredentials: true,
   // headers: {
-  //   "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+  //   "Content-type": "application/x-www-form-urlencoded",
   //   // 'Openid':'oDS1X4wvA6JUZEFdPE5nvuGdtT1o'
-  // }
+  // },
 })
 // 设置post请求头
-// instance.defaults.headers.post['Content-Type'] = 'application/x-www-for
+instance.defaults.headers.post["Content-Type"] =
+  "application/x-www-form-urlencoded"
+// instance.defaults.headers = {
+//   "Content-type": "application/x-www-form-urlencoded",
+// }
 
 /**
  * 请求拦截器

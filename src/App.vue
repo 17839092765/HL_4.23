@@ -187,6 +187,7 @@ export default {
           if (withInterface) {
             var ace = new AirCityAPI(o.instanceId, _this.onReady, _this.log);
             ace.setEventCallback(_this.onEvent);
+
           }
         } else {
           if (withPlayer) {
@@ -211,6 +212,7 @@ export default {
             var ace = new AirCityAPI(host, _this.onReady, _this.log);
             ace.useColorLog = true;
             __g.setEventCallback(_this.onEvent);
+
           }
         }
       });
@@ -255,6 +257,10 @@ export default {
   mounted () {
     // window.addEventListener("load", this.onLoad, true);
     // window.addEventListener("resize", this.onResize, true);
+
+
+
+
     // this.api = new AirCityAPI(instanceId, function () {
     //   this.api.misc.setMainUIVisibility(true);
     // }.bind(this));

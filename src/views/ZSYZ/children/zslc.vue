@@ -78,6 +78,7 @@ export default {
     }
   },
   created () {
+
     this.jjonedata()
   },
   mounted () {

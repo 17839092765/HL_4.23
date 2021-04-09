@@ -3,8 +3,15 @@
     <div class="searchblock">
       <div class="left">
         <p>
-          <span>关键字</span><input type="text" placeholder="输入关键字" v-model="key" class="input1" name="" />
+          <span>关键字</span><input @input="fuzzy_query1" @blur="()=>searchAfterNum=[]" type="text" placeholder="输入关键字"
+            v-model="key" class="input1" name="" />
         </p>
+        <div v-if="searchAfterNum.length>0" class="inputdata">
+          <p @click="aaaaa(item.建筑名称)" v-for="item,index in searchAfterNum" :key="index">
+            {{item.建筑名称}}
+
+          </p>
+        </div>
         <p>
           <span>面积</span>
           <input type="text" v-model="area_start" name="" />
@@ -48,7 +55,7 @@
         </el-table-column>
       </el-table> -->
       <div class="searchshowtit">
-        共有<span>{{searchAfterNum}}</span> 条数据符合条件
+        共有<span>{{tableData.length}}</span> 条数据符合条件
       </div>
       <div class="table">
         <div class="title">
@@ -59,8 +66,8 @@
 
           <div class="tbody_case" v-for="item,index in tableData" :key="index">
             <div @click="tableclick(item)" class="casecum">
-              <div class="name">{{item.name}}</div>
-              <div class="adress">{{item.address}}</div>
+              <div class="name">{{item.建筑名称}}</div>
+              <div class="adress">{{item.建筑地址}}</div>
             </div>
           </div>
         </div>
@@ -84,8 +91,8 @@ export default {
       money_end: '',
       quyu: '',
       zhongbuild: '',
-      // 搜索的数据的条数
-      searchAfterNum: 0,
+      // 模糊查询数据
+      searchAfterNum: [],
       // 
       tableData: [
         //   {
@@ -132,8 +139,15 @@ export default {
       }
       // 4403030030090300003
 
-      const result = await api.layer_jj100_one("4403030030090300003")
-      console.log(result);
+      const result = await api.louyuxianzhi(request)
+      console.log(result.data.list);
+      this.tableData = result.data.list
+      // result.data.list.forEach(item => {
+      //   this.tableData.push({
+      //     name: item.建筑名称,
+      //     address: item.建筑地址
+      //   })
+      // });
     },
     reset () {
       this.key = "";
@@ -144,6 +158,28 @@ export default {
       this.quyu = ""
       this.zhongbuild = ""
     },
+    async fuzzy_query1 () {
+      if (this.key) {
+        const result = await api.fuzzy_query({ name: this.key })
+        console.log(result);
+        if (result.data[0]) {
+
+          this.searchAfterNum = result.data
+        } else {
+          this.searchAfterNum = []
+        }
+      }
+
+    },
+    async fuzzy_query () {
+      // const result = await api.fuzzy_query({ name: "" })
+      // if (result.data[0]) {
+
+      //   this.searchAfterNum = result.data
+      // } else {
+      //   this.searchAfterNum = []
+      // }
+    }
   },
   created () {
 
@@ -220,6 +256,30 @@ export default {
         width: 2px;
         height: 37px;
         background: rgb(214, 205, 205);
+      }
+      .inputdata {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        height: 50px;
+        width: 100%;
+        overflow-y: auto;
+        // height: 100px;
+        // background: #000;
+        line-height: 40px;
+        color: palegreen;
+        background: rgba(0, 0, 0, 0.472);
+        p {
+          z-index: 1000;
+          height: 35px;
+          width: 100%;
+          border-bottom: 1px solid papayawhip;
+          text-align: center;
+          &:hover {
+            background: rgba(0, 0, 0, 0.212);
+            color: papayawhip;
+          }
+        }
       }
     }
 

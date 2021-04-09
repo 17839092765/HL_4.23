@@ -133,5 +133,11 @@ const connector = {
   financialInf() {
     return axios.get(`${base}/db_jjfinanwuye/getFinanWuye`)
   },
+  // 楼宇闲置查询接口
+  louyuxianzhi(data) {
+    return axios.get(`${base}/builddata/selectFreeBuildData`, {
+      params: data,
+    })
+  },
 }
 export default connector

@@ -1,6 +1,6 @@
 <template>
   <div class="hlsj">
-    <button class="btn" @click="playCameraTour">CameraTour</button>
+    <!-- <button class="btn" @click="playCameraTour">CameraTour</button> -->
   </div>
 </template>
 
@@ -8,16 +8,16 @@
 import { showtuceng, hidetuceng } from "../../util/showtuceng";
 // import __g from "../../main"
 export default {
-  data() {
+  data () {
     return {};
   },
   computed: {},
   watch: {},
   methods: {
-    polyline_del() {
+    polyline_del () {
       __g.polyline.delete("p773");
     },
-    polyline_add() {
+    polyline_add () {
       __g.camera.lookAt(
         510264.09375,
         2493521.0,
@@ -90,7 +90,7 @@ export default {
 
       __g.polyline.add(o1);
     },
-    addCameraTour() {
+    addCameraTour () {
       console.log(111);
       let frames = [];
       frames.push(
@@ -111,29 +111,34 @@ export default {
       let o = new CameraTourData("1", "test", 20, frames);
       __g.cameraTour.add(o);
     },
-    playCameraTour() {
+    playCameraTour () {
       __g.cameraTour.play("1", () => {
         console.log(2222);
       });
     },
   },
-  created() {},
-  mounted() {
+  created () {
+    __g.infoTree.show("A3CC59C2442B8110161A4A913FCDE533")
+
+  },
+  mounted () {
     showtuceng(this.$treedata.hlsjdata);
     this.polyline_add();
-    this.addCameraTour();
+    // this.addCameraTour();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () {
+    __g.infoTree.hide("A3CC59C2442B8110161A4A913FCDE533")
+
     hidetuceng(this.$treedata.hlsjdata);
     this.polyline_del();
     __g.cameraTour.delete("1");
   },
-  destroyed() {},
-  activated() {},
+  destroyed () { },
+  activated () { },
   components: {},
 };
 </script>

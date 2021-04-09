@@ -18,7 +18,7 @@
           <div class="left">
             <div class="tit">面积(m<sup>2</sup>)</div>
             <div class="slider1">
-              <el-slider v-model="value" range @change="sliderChange" :max="10">
+              <el-slider v-model="value" range @change="sliderChange" :max="10000">
               </el-slider>
               <!-- <el-slider @change="sliderChange" v-model="value" :max="max" :step="100">
               </el-slider> -->
@@ -32,7 +32,7 @@
           <div class="center">
             <div class="tit">租金(元)</div>
             <div class="slider2">
-              <el-slider v-model="value2" range @change="sliderChange1" :max="10">
+              <el-slider v-model="value2" range @change="sliderChange1" :step="1000" :max="10000">
               </el-slider>
               <!-- <el-slider @change="sliderChange1" v-model="value2" :max="max" :step="100">
               </el-slider> -->
@@ -77,6 +77,7 @@ import SearchGaoji from "./search_gaoji"
 export default {
   data () {
     return {
+
       // 展示jjone
       showjjone: false,
       // 展示北段选中的样式
@@ -92,7 +93,41 @@ export default {
   computed: {},
   watch: {},
   methods: {
+    // sousuo
+    async request () {
+      let minArea = Number(this.value[0]),
+        maxArea = Number(this.value[1]),
+        minRent = Number(this.value2[0]),
+        maxRent = Number(this.value2[1])
 
+      const result = await connector.louyuxianzhi({
+        minArea,
+        maxArea,
+        minRent,
+        maxRent,
+        isFree: true
+      })
+      if (result.data.list) {
+        // "4403030030040400000"
+        console.log(result.data.list);
+        console.log(this.$treedata.louyucase);
+        var arr = []
+        result.data.list.map(item => {
+          this.$treedata.louyucase.map(mon => {
+            if (mon.ObjectID == item.建筑编码) {
+              let a = new TileLayerActorData(mon.Id, mon.ObjectID)
+              // __g.tileLayer.highlightActor(mon.Id, mon.ObjectID)
+              // console.log(a);
+              arr.push(a)
+            }
+
+          })
+        })
+        console.log(arr);
+
+        // highlightActors(data, fn)
+      }
+    },
     // 搜房__选择区域
     quyublock (val) {
       console.log(val);
@@ -110,16 +145,20 @@ export default {
       } else if (val === 3) {
         this.iswhownanduan = !this.iswhownanduan;
       }
+      // this.request()
     },
     // 搜房__搜索面积
-    async sliderChange (e) {
-      const result = await connector.layer_building(4403030030040400000);
-      console.log(e);
-      console.log(result);
+    sliderChange (e) {
+      this.request()
+
+
+
     },
     // 搜房__搜索租金
     sliderChange1 (e) {
       console.log(e);
+      // this.request()
+
     },
     show_search_home () {
       this.showjjone = true
@@ -294,7 +333,7 @@ export default {
         align-items: center;
         margin-left: 33px;
         color: #fff;
-        font-size: 18px;
+        font-size: 14px;
       }
       .tabdata {
         transition: all 0.5s;
