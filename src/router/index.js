@@ -23,6 +23,17 @@ const router = new VueRouter({
         {
           path: "GNBJ",
           component: () => import("../views/GNBJ/gnbj"),
+          redirect: "/Home/GNBJ/ydgn",
+          children: [
+            {
+              path: "ydgn",
+              component: () => import("../views/GNBJ/children/ydbj.vue"),
+            },
+            {
+              path: "cygn",
+              component: () => import("../views/GNBJ/children/cygn.vue"),
+            },
+          ],
         },
         {
           path: "XZSJ",

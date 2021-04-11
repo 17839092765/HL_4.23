@@ -27,7 +27,7 @@ import { showVectorlayers, hideVectorlayers } from "../../util/showtuze";
 // import __g from "../../main"
 import store from "../../store";
 export default {
-  data() {
+  data () {
     return {
       onclickdata: 0,
     };
@@ -35,10 +35,11 @@ export default {
   computed: {},
   watch: {
     $route: {
-      handler(to, from) {
+      handler (to, from) {
         // 删除点击出来的段变形
         __g.polyline.clear();
         store.commit("dataCaseisShow", false);
+        store.commit("clickData", {});
         __g.camera.lookAt(
           510190.2778,
           2494828.118,
@@ -51,20 +52,16 @@ export default {
           }
         );
         if (to && to.path === "/Home/XZSJ/fdtz") {
-          console.log(to);
 
           hideVectorlayers();
           showVectorlayers("法定图则");
         } else if (to && to.path === "/Home/XZSJ/xzqs") {
-          console.log(to);
           hideVectorlayers();
           showVectorlayers("现状权属");
         } else if (to && to.path === "/Home/XZSJ/tdly") {
-          console.log(to);
           hideVectorlayers();
           showVectorlayers("土地利用现状");
         } else if (to && to.path === "/Home/XZSJ/csgx") {
-          console.log(to);
           hideVectorlayers();
           showVectorlayers("城市更新单元");
         }
@@ -72,8 +69,8 @@ export default {
     },
   },
   methods: {},
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.$treedata && showtuceng(this.$treedata.xzsjdata);
     showVectorlayers("法定图则");
     __g.camera.lookAt(
@@ -88,17 +85,17 @@ export default {
       }
     );
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () {
     hidetuceng(this.$treedata.xzsjdata);
     hideVectorlayers();
     __g.polyline.clear();
   },
-  destroyed() {},
-  activated() {},
+  destroyed () { },
+  activated () { },
   components: {},
 };
 </script>

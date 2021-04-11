@@ -3,10 +3,7 @@
     <div ref="slider" class="slider">
       <img src="../../assets/img/5未来愿景/调节条背景.svg" alt="" />
       <div class="point" @mousedown="updateTime" ref="point">
-        <!-- <img
-          src="../../assets/img/0408红岭切图/5未来愿景/当前选中.png"
-          alt=""
-        /> -->
+
         <div>{{ currentTime }}</div>
       </div>
     </div>
@@ -94,15 +91,25 @@ export default {
   },
   created () { },
   mounted () {
-    showtuceng(this.$treedata.hlsjdata);
+    if (__g) {
+      __g.camera.lookAt(
+        509288.218750,
+        2493637.750000,
+        1239.591553,
+        -28.533407,
+        -38.835026,
+        -30.000002
+      );
+    }
+    showtuceng(this.$treedata.wlyjdata);
   },
   beforeCreate () { },
   beforeMount () { },
   beforeUpdate () { },
   updated () { },
   beforeDestroy () {
-    hidetuceng(this.$treedata.hlsjdata);
-    __g.weather.setDateTime(2021, 4, 9, 8, 0, false);
+    hidetuceng(this.$treedata.wlyjdata);
+    __g.weather.setDateTime(2021, 4, 9, 12, 0, false);
   },
   destroyed () { },
   activated () { },

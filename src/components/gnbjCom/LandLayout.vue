@@ -1,11 +1,11 @@
 <template>
   <div class="landlayout">
-    <div class="landlayout_title">
+    <!-- <div class="landlayout_title">
       <div>
         <img src="../../assets/img/2功能布局/icon_用地功能布局.svg" alt="" />
       </div>
       <div>更新单元图纸</div>
-    </div>
+    </div> -->
 
     <div ref="echart" class="echart"></div>
   </div>
@@ -14,13 +14,13 @@
 <script>
 import * as echarts from "echarts";
 export default {
-  data() {
+  data () {
     return {};
   },
   computed: {},
   watch: {},
   methods: {
-    showChart() {
+    showChart () {
       var dom = this.$refs.echart;
       var myChart = echarts.init(dom);
       var app = {};
@@ -129,7 +129,7 @@ export default {
             name: "其他用地",
             type: "bar",
             stack: "A",
-            barWidth: 100,
+            barWidth: 50,
             animationDuration: 2000,
             xAxisIndex: 0,
             yAxisIndex: 0,
@@ -145,7 +145,7 @@ export default {
             name: "绿地与广场用地",
             type: "bar",
             stack: "A",
-            barWidth: 100,
+            barWidth: 50,
             xAxisIndex: 0,
             animationDuration: 2000,
             yAxisIndex: 0,
@@ -315,17 +315,17 @@ export default {
       }
     },
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.showChart();
   },
-  beforeCreate() {},
-  beforeMount() {},
-  beforeUpdate() {},
-  updated() {},
-  beforeDestroy() {},
-  destroyed() {},
-  activated() {},
+  beforeCreate () { },
+  beforeMount () { },
+  beforeUpdate () { },
+  updated () { },
+  beforeDestroy () { },
+  destroyed () { },
+  activated () { },
   components: {},
 };
 </script>
@@ -335,10 +335,10 @@ export default {
   color: #ddd;
   position: relative;
   overflow: hidden;
-  margin-top: 10px;
+  margin-top: 350px;
   margin-left: 20px;
   z-index: 10;
-  width: 473px;
+  width: 350px;
   height: 603px;
   background: rgba(69, 77, 72, 0.4)
     linear-gradient(

@@ -1,5 +1,5 @@
-const webpack = require("webpack");
-const path = require("path");
+const webpack = require("webpack")
+const path = require("path")
 module.exports = {
   devServer: {
     // 项目运行时候的端口号
@@ -9,7 +9,7 @@ module.exports = {
         // target: 'http://192.168.31.149:8080/CIMforfinance/finance/',
         // target: 'http://47.102.133.17:8080/CIMforfinance/finance/',
         // target: "http://localhost:80/CIMforhistory/finance/",
-        target: "http://192.168.5.49:6639/CIMforhistory/finance/",
+        target: "http://58.250.250.180:9081/CIMforhistory/finance/",
         // target: 'http://192.168.31.153:8080/CIMforfinance/finance/',
         changeOrigin: true,
         pathRewrite: {
@@ -19,7 +19,7 @@ module.exports = {
       "/2api": {
         // target: 'http://192.168.31.149:8080/CIMforfinance/finance/',
         // target: 'http://47.102.133.17:8080/CIMforfinance/finance/',
-        target: "http://192.168.5.49:6639/geoserver/",
+        target: "http://58.250.250.180:9081/geoserver/",
         // target: 'http://192.168.31.153:8080/CIMforfinance/finance/',
         changeOrigin: true,
         pathRewrite: {
@@ -55,8 +55,8 @@ module.exports = {
       maxAssetSize: 30000000,
       //只给出 js 文件的性能提示
       assetFilter: function(assetFilename) {
-        return assetFilename.endsWith(".js");
+        return assetFilename.endsWith(".js")
       },
     },
   },
-};
+}

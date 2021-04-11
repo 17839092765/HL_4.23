@@ -138,6 +138,19 @@ export default {
             }
           }
         }
+      } else if (data && data.Id && data.Type == "tag") {
+        console.log("tag");
+        if (data.Id === "tagxinying") {
+          this.$store.commit("cygnblock", "tagxinying");
+
+        } else if (data.Id === "tagguoji") {
+          this.$store.commit("cygnblock", "tagguoji");
+
+        }
+        else if (data.Id === "tagxiandai") {
+          this.$store.commit("cygnblock", "tagxiandai");
+
+        }
       }
     },
     onReady () {
@@ -203,7 +216,8 @@ export default {
             );
             //AirCityPlayer对象增加方法enableAutoAdjustResolution，可以设置启用或关闭视频窗口缩放时
             //自动调整分辨率的功能。这个功能默认是启用的，如果想关闭此功能，可以在初始化的时候调用enableAutoAdjustResolution(false)
-            //acp.enableAutoAdjustResolution(false);
+            acp.enableAutoAdjustResolution(false);
+
           }
           if (withInterface) {
             let host = HostConfig.instanceId
@@ -246,15 +260,13 @@ export default {
         title: title,
         data: rcdata.data
       };
-      console.log(rcdata, 7788676786786);
       that.$store.commit("clickData", this.data_show);
-      console.log(that.$store.state.clickData);
     },
   },
   created () {
-    // this.initWebSocket();
-    window.addEventListener("load", this.onLoad, true);
-    window.addEventListener("resize", this.onResize, true);
+    this.initWebSocket();
+    // window.addEventListener("load", this.onLoad, true);
+    // window.addEventListener("resize", this.onResize, true);
   },
   mounted () {
     // window.addEventListener("load", this.onLoad, true);

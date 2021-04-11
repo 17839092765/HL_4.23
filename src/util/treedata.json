@@ -17,6 +17,16 @@
     {
       "label": "规划数据",
       "layerid": ["9CA1AB164A2434EBCE4CACBA58E68868"]
+    },
+    {
+      "label": "高亮",
+      "layerid": ["935F37B34E82DF36A7D769AB444D7E64"]
+    }
+  ],
+  "gnbjyd": [
+    {
+      "label": "用地功能布局",
+      "layerid": ["07EFC3294AC6FE975EC0BF99DE067C49"]
     }
   ],
   "xzsjdata": [
@@ -50,14 +60,30 @@
         "E2FB3ABC4EB468A920CF01B1822EA392",
         "BD0BD984453BE623FE3669B3BF27243B",
         "C81E07B0405D1FBFAB4080BE9BE98861",
-        "5ACB1BA1426582D4B195E8B1AE360E97"
+        "5ACB1BA1426582D4B195E8B1AE360E97",
+        "339EAE614F36378071FADF9D973C94BD"
       ]
     }
   ],
   "wlyjdata": [
     {
-      "label": "基础底图",
-      "layerid": ["E42D9D0C486C4AFECF799A8C8939BE53"]
+      "label": "夜景",
+      "layerid": [
+        "5094AF734B885842F9D2F1A86E52A75F",
+        "1C624D9842EE551BB8DD638AB939D8BA",
+        "E97BB67D49FCE659CB918C840BB65090",
+        "C1AFEA474A999AB56D0327A76EE3B005"
+      ]
+    },
+    {
+      "label": "max模型",
+      "layerid": [
+        "5ACB1BA1426582D4B195E8B1AE360E97",
+        "C81E07B0405D1FBFAB4080BE9BE98861",
+        "BD0BD984453BE623FE3669B3BF27243B",
+        "E2FB3ABC4EB468A920CF01B1822EA392",
+        "339EAE614F36378071FADF9D973C94BD"
+      ]
     }
   ],
   "louyucase": [

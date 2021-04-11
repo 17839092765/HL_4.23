@@ -83,7 +83,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.76);
+  background: rgba(0, 0, 0, 0.24);
 
   .Logo {
     z-index: 1000;
@@ -91,9 +91,9 @@ export default {
     width: 35%;
     height: 100%;
     // font-size: 40px;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     // font-family: YouSheBiaoTiHei;
     // color: #ffffff;
     img {

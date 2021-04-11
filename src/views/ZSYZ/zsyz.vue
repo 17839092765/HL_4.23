@@ -32,7 +32,10 @@ export default {
   watch: {},
   methods: {},
   created () {
-    __g.infoTree.show("A3CC59C2442B8110161A4A913FCDE533")
+    if (__g) {
+
+      __g.infoTree.show("A3CC59C2442B8110161A4A913FCDE533")
+    }
   },
   mounted () {
 

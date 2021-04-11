@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    cygnblock: "",
     allpolygon: [],
     clickData: {},
     dataCaseisShow: false,
@@ -14,6 +15,10 @@ export default new Vuex.Store({
     os: [],
   },
   mutations: {
+    // 产业功能标签点击
+    cygnblock(state, string) {
+      state.cygnblock = string
+    },
     //当前所有的矢量要素
     allpolygon(state, Array) {
       state.allpolygon = Array

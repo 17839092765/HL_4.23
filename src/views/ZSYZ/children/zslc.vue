@@ -3,7 +3,7 @@
     <div class="rightdatacase">
       <div class="tittop">
         <i class="icon"></i>
-        <span>{{clickData[1].data?clickData[0].data:"..."}}</span>
+        <span>{{clickData1[1]?clickData1[0].data:"..."}}</span>
       </div>
       <div class="class">
         {{"招商类型"}}
@@ -13,7 +13,7 @@
           <div class="icon"></div>
           <div class="case">
             <p>已入驻单元</p>
-            <p>{{clickData[1].data?clickData[1].data.split(',').length:"..."}}个</p>
+            <p>{{clickData1[1]?clickData1[1].data.split(',').length:"..."}}个</p>
           </div>
         </div>
         <div class="right">
@@ -26,7 +26,7 @@
       </div>
       <div class="ruzhu">
         <div class="tit">入驻企业</div>
-        <div v-for="item,index in clickData[1].data?clickData[1].data.split(','):[0]" :key="index" class="ruzhu_case">
+        <div v-for="item,index in clickData1[1]?clickData1[1].data.split(','):[0]" :key="index" class="ruzhu_case">
           <p>
             {{item}}
             <!-- <span>{{item}}</span>
@@ -56,7 +56,8 @@ export default {
   },
   computed: {
     ...mapState({
-      clickData: (state) => showdata(state.clickData) ? showdata(state.clickData) : 0,
+      clickData1: (state) => showdata(state.clickData ? state.clickData : []),
+
     }),
   },
   watch: {},

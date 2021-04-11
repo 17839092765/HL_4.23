@@ -16,8 +16,14 @@ export default {
   computed: {},
   watch: {},
   methods: {},
-  created () { },
-  mounted () { },
+  created () {
+
+  },
+  mounted () {
+    if (__g) {
+      __g.misc.setMainUIVisibility(false);
+    }
+  },
   beforeCreate () { },
   beforeMount () { },
   beforeUpdate () { },

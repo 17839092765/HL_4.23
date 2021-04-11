@@ -50,7 +50,7 @@
           <span class="info_jz">建筑信息</span>
         </div>
         <div class="cencen">
-          "超级总部基于“总部＋生态+文化”三大主题,营造世界级创新文化实验区。超级总部基于“总部+生态+文化”三大主题，营造世界级创新文化实验区
+          <!-- "超级总部基于“总部＋生态+文化”三大主题,营造世界级创新文化实验区。超级总部基于“总部+生态+文化”三大主题，营造世界级创新文化实验区 -->
         </div>
         <div class="condata">
           <div class="condata_item" v-for="(item, index) in clickData" :key="index">
@@ -86,20 +86,26 @@ export default {
   watch: {},
   methods: {},
   created () {
-    __g.infoTree.show("510E89A04A6F36F2AF26A5A56A36AD69")
+    if (__g) {
+
+      __g.infoTree.show("510E89A04A6F36F2AF26A5A56A36AD69")
+    }
 
   },
   mounted () {
     showtuceng(this.$treedata.zsyzdata);
-    __g.camera.lookAt(
-      510264.09375,
+    if (__g) {
 
-      2493521.0,
-      650.484497,
-      -26.054821,
-      -63.835243,
-      -30
-    );
+      __g.camera.lookAt(
+        510264.09375,
+
+        2493521.0,
+        650.484497,
+        -26.054821,
+        -63.835243,
+        -30
+      );
+    }
   },
   beforeCreate () { },
   beforeMount () { },

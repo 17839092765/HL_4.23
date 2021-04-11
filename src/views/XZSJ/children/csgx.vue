@@ -26,7 +26,7 @@
             {{ clickData.title ? clickData.title : "Loding..." }}
           </div>
         </div>
-        <div class="top_item2">{{clickData1[1][0].data}}</div>
+        <div class="top_item2">{{clickData1[1]?clickData1[1][0].data:"londing"}}</div>
         <!-- <div class="top_item1">
           <div class="top_item1_title" v-if="clickData1[2]">
             {{ clickData1[0].data }}
@@ -60,7 +60,7 @@
             </div>
             <div>更新单元图纸</div>
           </div>
-          <div class="drawing_img">
+          <div v-if="clickData1" class="drawing_img">
             <!-- <img v-if="clickData1[0] === 3" src="../../../assets/img/updata/3.jpg" alt="" />
             <img v-else-if="clickData1[0] === 5" src="../../../assets/img/updata/5.jpg" alt="" />
             <img v-else-if="clickData1[0] === 7" src="../../../assets/img/updata/7.jpg" alt="" />
@@ -100,7 +100,7 @@ export default {
       // 筛选过得数据
       clickData1: (state) => showdata(state.clickData),
       // 。原始数据
-      clickData: (state) => state.clickData,
+      clickData: (state) => state.clickData ? state.clickData : [],
       // 图则内容的显示隐藏
       dataCaseisShow: (state) => state.dataCaseisShow,
     }),
@@ -324,7 +324,7 @@ export default {
     padding-left: 25px;
   }
   .drawing_img {
-    margin: 0 auto;
+    margin: 20px auto;
     width: 343px;
     height: 268px;
     /* background: #000; */

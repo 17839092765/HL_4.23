@@ -4,7 +4,7 @@ import axios from "./http"
 
 // const geoserverurl = 'http://192.168.31.153:8080/geoserver/'
 // const geoserverurl = "http://localhost:80/geoserver/"
-// const geoserverurl = "http://192.168.5.49:6639/geoserver/"
+// const geoserverurl = "http://58.250.250.180:9081/geoserver/"
 const geoserverurl = "/2api"
 
 // http://localhost:80/geoserver/db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3A1111&maxFeatures=20000&outputFormat=application%2Fjson`

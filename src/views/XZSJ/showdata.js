@@ -106,7 +106,6 @@ function showdata(newdata) {
   }
   //单栋建筑的信息
   else if (title == "建筑信息") {
-    console.log(11111)
     if (newdata.data) {
       for (var index in newdata.data) {
         if (
@@ -143,7 +142,7 @@ function showdata(newdata) {
   //城市更新项目的信息
   else if (title == "城市更新项目") {
     if (data.length > 0) {
-      console.log(data)
+      console.log(data, 998)
       var id = data[0].id
       var arr = []
       arr = [
@@ -173,20 +172,23 @@ function showdata(newdata) {
   else if (title == "楼层信息") {
     var reg = new RegExp("、", "g")
     // var company = data.company.replace(/\、/g, '，')
-
-    formdata = [
-      {
-        name: "楼层",
-        data:
-          data[0].floor.slice(7) == "00"
-            ? "100" + "层"
-            : data[0].floor.slice(7) + "层",
-      },
-      {
-        name: "入驻企业",
-        data: data[0].company,
-      },
-    ]
+    console.log(data)
+    console.log(typeof data[0])
+    if (typeof data[0] == "object") {
+      formdata = [
+        {
+          name: "楼层",
+          data:
+            data[0].floor.slice(7) == "00"
+              ? "100" + "层"
+              : data[0].floor.slice(7) + "层",
+        },
+        {
+          name: "入驻企业",
+          data: data[0].company,
+        },
+      ]
+    }
   } else if (title == "单户信息") {
     if (data[0].usestatus) {
       formdata = [

@@ -73,9 +73,9 @@ export default {
   computed: {
     ...mapState({
       // 筛选过得数据
-      clickData1: (state) => showdata(state.clickData),
+      clickData1: (state) => showdata(state.clickData ? state.clickData : []),
       // 。原始数据
-      clickData: (state) => state.clickData,
+      clickData: (state) => state.clickData ? state.clickData : [],
       // 图则内容的显示隐藏
       dataCaseisShow: (state) => state.dataCaseisShow,
       os: (state) => state.os,
@@ -233,7 +233,7 @@ export default {
   },
   created () {
     this.getechartsdata();
-    clickData1 = [];
+    // clickData1 = [];
   },
   mounted () { },
   beforeCreate () { },

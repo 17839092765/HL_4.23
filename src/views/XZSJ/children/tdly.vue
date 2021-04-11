@@ -69,7 +69,7 @@ export default {
   computed: {
     ...mapState({
       // 筛选过得数据
-      clickData1: (state) => showdata(state.clickData),
+      clickData1: (state) => showdata(state.clickData ? state.clickData : []),
       // 。原始数据
       clickData: (state) => state.clickData,
       // 图则内容的显示隐藏
@@ -79,7 +79,6 @@ export default {
   watch: {},
   methods: {},
   created () {
-    clickData1 = [];
   },
   mounted () {
     var chartDom = document.getElementById("echarts13");
