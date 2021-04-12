@@ -35,7 +35,7 @@ export default {
       let url = imagePath;
 
       //图片的尺寸
-      let imageSize = [30, 30];
+      let imageSize = [40, 40];
 
       //标签显示的文字
       // let text = "aaa";
@@ -50,7 +50,7 @@ export default {
       let o = new TagData(
         id,
         coord,
-        '',
+        imagePath,
         imageSize,
         "",
         text,
@@ -58,8 +58,8 @@ export default {
         showLine
       );
       //设置文字颜色、背景颜色、
-      o.textColor = Color.White;
-      o.textBackgroundColor = Color.Blue;
+      o.textColor = [1, 1, 1, 1];
+      o.textBackgroundColor = [0, 0, 0, 0.4];
       o.textRange = textRange;
 
       //鼠标悬停时的替换图片
@@ -85,20 +85,20 @@ export default {
     this.addTag(
       "tagxinying",
       [510490.21875, 2496392, 228.9998321533203],
-      "https://z3.ax1x.com/2021/04/08/cJDAXT.png",
+      "https://z3.ax1x.com/2021/04/12/cBQ02V.png",
       "新兴赋能中心"
     );
 
     this.addTag(
       "tagguoji",
       [510506.46875, 2495097.5, 200],
-      "https://z3.ax1x.com/2021/04/08/cJDAXT.png",
+      "https://z3.ax1x.com/2021/04/12/cBQ02V.png",
       "国际都会生活社区"
     );
     this.addTag(
       "tagxiandai",
       [510554.625, 2493920.25, 200],
-      "https://z3.ax1x.com/2021/04/08/cJDAXT.png",
+      "https://z3.ax1x.com/2021/04/12/cBQ02V.png",
       "现代服务集聚中心"
     );
   },
@@ -114,6 +114,7 @@ export default {
 
     ]);
     hidetuceng(this.$treedata.gnbjdata)
+    this.$store.commit("cygnblock", "");
 
   },
   destroyed () { },

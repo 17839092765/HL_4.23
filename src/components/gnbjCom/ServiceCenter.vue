@@ -16,7 +16,7 @@ export default {
   methods: {
     addTag (id, coord, imagePath) {
       //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
-      let url = "";
+      let url = imagePath;
 
       //图片的尺寸
       let imageSize = [200, 200];

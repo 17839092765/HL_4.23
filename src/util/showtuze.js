@@ -95,7 +95,7 @@ async function showVectorlayers(data) {
       let frameThickness = 1
       let o = new PolygonData(
         id,
-        [...color1, 0.6],
+        [...color1, 0.9],
         coords,
         frameColor,
         frameThickness

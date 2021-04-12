@@ -1,7 +1,7 @@
 <template>
   <div class="zsly">
-    <div v-if="true" class="zslycase">
-      <div class="top_data">点击左边建筑物查看信息</div>
+    <div v-if="clickData[2]" class="zslycase">
+      <!-- <div class="top_data">点击左边建筑物查看信息</div> -->
       <div class="top" v-if="clickData[2]">
         <div class="top_item1">
           <div class="top_item1_btn">地标</div>

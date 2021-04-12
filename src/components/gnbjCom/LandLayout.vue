@@ -335,7 +335,7 @@ export default {
   color: #ddd;
   position: relative;
   overflow: hidden;
-  margin-top: 350px;
+  margin-top: 50px;
   margin-left: 20px;
   z-index: 10;
   width: 350px;

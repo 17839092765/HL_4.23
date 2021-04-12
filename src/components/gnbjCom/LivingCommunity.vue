@@ -16,7 +16,7 @@ export default {
   methods: {
     addTag (id, coord, imagePath) {
       //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
-      let url = "";
+      let url = imagePath;
 
       //图片的尺寸
       let imageSize = [200, 200];
@@ -88,7 +88,7 @@ export default {
         [510364.9375, 2495401.25, 65.410079956054688],
         "https://z3.ax1x.com/2021/04/08/cYFuOH.png"
       );
-    }, 40);
+    }, 100);
     setTimeout(() => {
 
       this.addTag(
@@ -96,7 +96,7 @@ export default {
         [510646.46875, 2495557.25, 92],
         "https://z3.ax1x.com/2021/04/08/cYFlTI.png"
       );
-    }, 60);
+    }, 200);
     setTimeout(() => {
 
       this.addTag(
@@ -104,7 +104,7 @@ export default {
         [510759.46875, 2495229.5, 98.000076293945313],
         "https://z3.ax1x.com/2021/04/08/cYFMmd.png"
       );
-    }, 80);
+    }, 300);
     this.addTag(
       "tag5",
       [510784.15625, 2494958.75, 226.99995422363281],

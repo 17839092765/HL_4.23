@@ -20,9 +20,7 @@ export default {
 
   },
   mounted () {
-    if (__g) {
-      __g.misc.setMainUIVisibility(false);
-    }
+
   },
   beforeCreate () { },
   beforeMount () { },

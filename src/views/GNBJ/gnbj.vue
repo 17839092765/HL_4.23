@@ -84,6 +84,21 @@ export default {
     text-align: center;
     list-style: none;
     color: #fff;
+    position: relative;
+    &.router-link-active {
+      color: #fee36d;
+    }
+    &.router-link-active::after {
+      content: "";
+      position: absolute;
+      bottom: 10%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 100%;
+      height: 2px;
+      background: #fee36d;
+    }
   }
 }
 .select {

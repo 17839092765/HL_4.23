@@ -62,7 +62,11 @@ export default {
     },
   },
   created () { },
-  mounted () { },
+  mounted () {
+    if (__g) {
+      __g.misc.setMainUIVisibility(false);
+    }
+  },
   beforeCreate () { },
   beforeMount () { },
   beforeUpdate () { },

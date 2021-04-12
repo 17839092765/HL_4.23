@@ -26,11 +26,11 @@ export default {
     showtuceng(this.$treedata.gnbjyd)
     if (__g) {
       __g.camera.lookAt(
-        510550.781250,
-        2495140.000000,
-        90.515381,
-        -43.167141,
-        -25.481180,
+        509000.781250,
+        2493820.000000,
+        2141.515381,
+        -53.167141,
+        -30.481180,
       );
     }
     // 07EFC3294AC6FE975EC0BF99DE067C49
@@ -39,7 +39,10 @@ export default {
   beforeMount () { },
   beforeUpdate () { },
   updated () { },
-  beforeDestroy () { },
+  beforeDestroy () {
+    hidetuceng(this.$treedata.gnbjyd)
+
+  },
   destroyed () { },
   activated () { },
   components: { LandLayout },

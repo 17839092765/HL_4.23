@@ -12,7 +12,7 @@
         <div id="echarts14"></div>
       </div>
     </div>
-    <div class="datacase">
+    <div v-if="clickData1.length>0" class="datacase">
       <div class="top_data" v-if="!clickData1.length">
         点击左边建筑物查看信息
       </div>

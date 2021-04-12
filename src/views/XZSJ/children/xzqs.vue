@@ -12,7 +12,7 @@
         <div id="echarts12"></div>
       </div>
     </div>
-    <div class="datacase">
+    <div v-if="clickData1.length> 0" class="datacase">
       <div class="top_data" v-if="clickData1.length === 0">
         点击左边建筑物查看信息
       </div>
@@ -32,7 +32,7 @@
             {{ clickData1[0].data }}
           </div>
         </div>
-        <div class="top_item2">招商类型: 银行金融科技子公司</div>
+        <div class="top_item2">{{clickData1[1]?clickData1[1].name+":"+clickData1[1].data:'暂无数据'}}</div>
         <div class="top_item3">
           <div class="right_item11">
             <div class="right_item1"></div>
