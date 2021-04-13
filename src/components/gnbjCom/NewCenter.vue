@@ -10,7 +10,10 @@ import Back from "./Back";
 export default {
   name: "NewCenter",
   data () {
-    return {};
+    return {
+      path: 'C:\\Users\\DoctorXiao\\Desktop\\HL\\src\\assets\\img\\2功能布局\\1\\',
+
+    };
   },
   computed: {},
   watch: {},
@@ -35,9 +38,10 @@ export default {
       let o1 = new TagData(
         "tag1",
         [510446.625, 2495761, 128],
-        "https://z3.ax1x.com/2021/04/08/cJDAXT.png",
+        this.path + "1.png",
         imageSize1,
-        "https://z3.ax1x.com/2021/04/08/cJDAXT.png",
+        this.path + "1.png",
+
         text1,
         range1,
         showLine1
@@ -55,9 +59,11 @@ export default {
       let o2 = new TagData(
         "tag2",
         [510493.875, 2495928, 89.999916076660156],
-        "https://z3.ax1x.com/2021/04/08/cJDVnU.png",
+        this.path + "2.png",
+
         imageSize1,
-        "https://z3.ax1x.com/2021/04/08/cJDVnU.png",
+        this.path + "2.png",
+
         text1,
         range1,
         showLine1
@@ -75,9 +81,11 @@ export default {
       let o3 = new TagData(
         "tag3",
         [510375.625, 2496099.5, 43.338516235351563],
-        "https://z3.ax1x.com/2021/04/08/cJDe74.png",
+        this.path + "3.png",
+
         imageSize1,
-        "https://z3.ax1x.com/2021/04/08/cJDe74.png",
+        this.path + "3.png",
+
         text1,
         range1,
         showLine1
@@ -91,9 +99,11 @@ export default {
       let o4 = new TagData(
         "tag4",
         [510420.875, 2496504.75, 138.00007629394531],
-        "https://z3.ax1x.com/2021/04/08/cJDZBF.png",
+        this.path + "4.png",
+
         imageSize1,
-        "https://z3.ax1x.com/2021/04/08/cJDZBF.png",
+        this.path + "4.png",
+
         text1,
         range1,
         showLine1
@@ -107,9 +117,11 @@ export default {
       let o5 = new TagData(
         "tag5",
         [510408.3125, 2496824, 43.89202880859375],
-        "https://z3.ax1x.com/2021/04/08/cJDkcV.png",
+        this.path + "5.png",
+
         imageSize1,
-        "https://z3.ax1x.com/2021/04/08/cJDkcV.png",
+        this.path + "5.png",
+
         text1,
         range1,
         showLine1
@@ -123,9 +135,11 @@ export default {
       let o6 = new TagData(
         "tag6",
         [510737, 2497082, 128.30000305175781],
-        "https://z3.ax1x.com/2021/04/08/cJDkcV.png",
+        this.path + "6.png",
+
         imageSize1,
-        "https://z3.ax1x.com/2021/04/08/cJDkcV.png",
+        this.path + "6.png",
+
         text1,
         range1,
         showLine1
@@ -139,9 +153,11 @@ export default {
       let o7 = new TagData(
         "tag7",
         [510885.875, 2496553, 348],
-        "https://z3.ax1x.com/2021/04/08/cJDuN9.png",
+        this.path + "7.png",
+
         imageSize1,
-        "https://z3.ax1x.com/2021/04/08/cJDuN9.png",
+        this.path + "7.png",
+
         text1,
         range1,
         showLine1
@@ -155,9 +171,11 @@ export default {
       let o8 = new TagData(
         "tag8",
         [510729.03125, 2496518.25, 167],
-        "https://z3.ax1x.com/2021/04/08/cJDKhR.png",
+        this.path + "8.png",
+
         imageSize1,
-        "https://z3.ax1x.com/2021/04/08/cJDKhR.png",
+        this.path + "8.png",
+
         text1,
         range1,
         showLine1
@@ -171,9 +189,11 @@ export default {
       let o9 = new TagData(
         "tag8",
         [510750.28125, 2496042, 211.98152160644531],
-        "https://z3.ax1x.com/2021/04/08/cJDQ91.png",
+        this.path + "9.png",
+
         imageSize1,
-        "https://z3.ax1x.com/2021/04/08/cJDQ91.png",
+        this.path + "9.png",
+
 
         text1,
         range1,
@@ -212,8 +232,10 @@ export default {
       -60.268341,
       -151.060394,
     );
+    setTimeout(() => {
 
-    this.addTag()
+      this.addTag()
+    }, 1000);
 
 
     // setTimeout(() => {

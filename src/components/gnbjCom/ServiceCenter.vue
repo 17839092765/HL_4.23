@@ -9,7 +9,10 @@ import Back from "./Back";
 export default {
   name: "LivingCommunity",
   data () {
-    return {};
+    return {
+      path: 'C:\\Users\\DoctorXiao\\Desktop\\HL\\src\\assets\\img\\2功能布局\\3\\',
+
+    };
   },
   computed: {},
   watch: {},
@@ -48,8 +51,10 @@ export default {
 
       //鼠标悬停时的替换图片
       // o.hoverImagePath = HostConfig.AbsolutePath + "/images/hilightarea.png";
+      setTimeout(() => {
 
-      __g.tag.add(o);
+        __g.tag.add(o);
+      }, 1000);
     },
   },
   created () { },
@@ -78,7 +83,7 @@ export default {
       this.addTag(
         "tag1",
         [510455.3125, 2494537.25, 259.84127807617188],
-        "https://z3.ax1x.com/2021/04/08/cYkLGV.png"
+        this.path + "1.png",
       );
     }, 20);
     setTimeout(() => {
@@ -86,7 +91,7 @@ export default {
       this.addTag(
         "tag2",
         [510525.375, 2494229.5, 446.88735961914063],
-        "https://z3.ax1x.com/2021/04/08/cYkqP0.png"
+        this.path + "2.png",
       );
     }, 40);
     setTimeout(() => {
@@ -94,7 +99,7 @@ export default {
       this.addTag(
         "tag3",
         [510705.75, 2493953, 146.02053833007813],
-        "https://z3.ax1x.com/2021/04/08/cYkH5q.png"
+        this.path + "3.png",
       );
     }, 60);
     setTimeout(() => {
@@ -102,7 +107,7 @@ export default {
       this.addTag(
         "tag4",
         [511048.65625, 2493970.75, 415.95846557617188],
-        "https://z3.ax1x.com/2021/04/08/cYk7an.png"
+        this.path + "4.png",
       );
     }, 80);
   },

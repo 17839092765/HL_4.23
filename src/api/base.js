@@ -1,7 +1,5 @@
 let url
 if (process.env.NODE_ENV === "'dev'") {
-  url = "/api"
-  console.log("devdevdevdevdevdev")
   // url = "http://192.168.5.49:6639/CIMforhistory/finance/";
   url = "http://58.250.250.180:9081/CIMforhistory/finance/"
 } else {

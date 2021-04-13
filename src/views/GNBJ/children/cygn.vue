@@ -16,6 +16,7 @@ import ServiceCenter from '../../../components/gnbjCom/ServiceCenter.vue';
 export default {
   data () {
     return {
+      path: 'C:\\Users\\DoctorXiao\\Desktop\\HL\\src\\assets\\img\\2功能布局\\tag1.png',
 
     };
   },
@@ -85,20 +86,22 @@ export default {
     this.addTag(
       "tagxinying",
       [510490.21875, 2496392, 228.9998321533203],
-      "https://z3.ax1x.com/2021/04/12/cBQ02V.png",
+      this.path,
       "新兴赋能中心"
     );
 
     this.addTag(
       "tagguoji",
       [510506.46875, 2495097.5, 200],
-      "https://z3.ax1x.com/2021/04/12/cBQ02V.png",
+      this.path,
+
       "国际都会生活社区"
     );
     this.addTag(
       "tagxiandai",
       [510554.625, 2493920.25, 200],
-      "https://z3.ax1x.com/2021/04/12/cBQ02V.png",
+      this.path,
+
       "现代服务集聚中心"
     );
   },

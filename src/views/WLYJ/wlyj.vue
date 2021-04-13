@@ -1,12 +1,12 @@
 <template>
   <div class="wlyj">
-    <div ref="slider" class="slider">
+    <!-- <div ref="slider" class="slider">
       <img src="../../assets/img/5未来愿景/调节条背景.svg" alt="" />
       <div class="point" @mousedown="updateTime" ref="point">
 
         <div>{{ currentTime }}</div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
