@@ -13,7 +13,7 @@
         <div class="top_item3">
           <div class="top_item3_left">
             <div class="left_item1">
-              <img src="../../../assets/img/mianji1.png" />
+              <img src="../../../assets/img/4招商引资/icon_面积.svg" />
             </div>
             <div class="left_item2">
               <span class="spac" v-if="clickData[2]">
@@ -25,7 +25,7 @@
           </div>
           <div class="top_item3_right">
             <div class="right_item1">
-              <img src="../../../assets/img/shangye1.png" />
+              <img src="../../../assets/img/4招商引资/icon_已招商单元.svg" />
             </div>
             <div class="right_item2">
               <span class="spac" v-if="clickData[2]">{{
@@ -49,11 +49,15 @@
 
           <span class="info_jz">建筑信息</span>
         </div>
-        <div class="cencen">
-          <!-- "超级总部基于“总部＋生态+文化”三大主题,营造世界级创新文化实验区。超级总部基于“总部+生态+文化”三大主题，营造世界级创新文化实验区 -->
-        </div>
+        <!-- <div class="cencen"> -->
+        <!-- "超级总部基于“总部＋生态+文化”三大主题,营造世界级创新文化实验区。超级总部基于“总部+生态+文化”三大主题，营造世界级创新文化实验区 -->
+        <!-- </div> -->
         <div class="condata">
-          <div class="condata_item" v-for="(item, index) in clickData" :key="index">
+          <div
+            class="condata_item"
+            v-for="(item, index) in clickData"
+            :key="index"
+          >
             <span class="span_left"> {{ item.name }}</span>
             <span class="span_cen"> |</span>
             <span class="span_right"> {{ item.data }}</span>
@@ -70,7 +74,7 @@ import { showtuceng, hidetuceng } from "../../../util/showtuceng.js";
 import { showdata } from "../../XZSJ/showdata";
 // import __g from "../../../main";
 export default {
-  data () {
+  data() {
     return {
       msg: "",
 
@@ -85,17 +89,14 @@ export default {
   },
   watch: {},
   methods: {},
-  created () {
+  created() {
     if (__g) {
-
-      __g.infoTree.show("510E89A04A6F36F2AF26A5A56A36AD69")
+      __g.infoTree.show("510E89A04A6F36F2AF26A5A56A36AD69");
     }
-
   },
-  mounted () {
+  mounted() {
     showtuceng(this.$treedata.zsyzdata);
     if (__g) {
-
       __g.camera.lookAt(
         510264.09375,
 
@@ -107,33 +108,35 @@ export default {
       );
     }
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () {
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {
     // hidetuceng([this.$treedata.zsyzdata[2]]);
-    __g.infoTree.hide("510E89A04A6F36F2AF26A5A56A36AD69")
+    __g.infoTree.hide("510E89A04A6F36F2AF26A5A56A36AD69");
 
     // BF15EEEC49051728DF0DD585E91B4C0E
     this.$store.commit("clickData", {});
     __g.tileLayer.stopHighlightActor();
   },
-  destroyed () { },
-  activated () { },
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>
 
 <style lang="scss" scoped>
 .zslycase {
-  width: 20%;
+  width: 22%;
   height: calc(100% - 80px);
   color: #fff;
   position: absolute;
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.329);
+  padding-left: 1.5%;
+  padding-right: 1.5%;
 
   // padding-left: 1%;
   // padding-right: 1%;
@@ -144,25 +147,35 @@ export default {
 }
 .span_left {
   margin-left: 5%;
-  width: 20%;
+  width: 100px;
+  display: inline-block;
+  // width: 200px;
+  height: 60px;
+  line-height: 60px;
 }
 .span_cen {
 }
 .span_right {
   margin-left: 2%;
-  word-break: break-all;
+  display: inline-block;
+  width: 200px;
+  height: 60px;
+  line-height: 25px;
 }
 .condata_item {
   font-size: 18px;
   width: 100%;
-  height: 5.5%;
+  height: 50px;
   margin-top: 1%;
+  // background: #000;
+  line-height: 50px;
 }
 .condata {
   padding-top: 4%;
   margin-top: 1%;
   width: 100%;
   height: 68%;
+  overflow-y: scroll;
   background: rgba(32, 53, 40, 0.1);
 }
 .cencen {
@@ -295,16 +308,17 @@ export default {
 .right_item1 {
   width: 52px;
   height: 52px;
-  border-radius: 52px;
+
   background: transparent;
-  border: 2px solid #ffff;
   text-align: center;
   line-height: 52px;
 }
-.left_item1 img,
+.left_item1 img {
+  width: 100%;
+}
 .right_item1 img {
-  width: 50%;
-  margin-top: 24%;
+  width: 100%;
+  margin-top: 10%;
 }
 .left_item2 {
   width: 69%;
