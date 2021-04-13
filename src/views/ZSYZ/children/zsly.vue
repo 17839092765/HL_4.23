@@ -127,15 +127,17 @@ export default {
 
 <style lang="scss" scoped>
 .zslycase {
-  width: 15%;
+  width: 20%;
   height: calc(100% - 80px);
   color: #fff;
   position: absolute;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.171);
-  padding-left: 1%;
-  padding-right: 1%;
+  background: rgba(0, 0, 0, 0.329);
+
+  // padding-left: 1%;
+  // padding-right: 1%;
+  box-sizing: border-box;
 }
 .top_data {
   margin-top: 5%;

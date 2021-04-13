@@ -7,6 +7,10 @@
         <div>{{ currentTime }}</div>
       </div>
     </div> -->
+    <div class="block">
+      <el-slider :step="2" :min="0" :max="16" @input="onchangde" show-tooltip v-model="value" vertical height="200px">
+      </el-slider>
+    </div>
   </div>
 </template>
 
@@ -16,13 +20,20 @@ import { showtuceng, hidetuceng } from "../../util/showtuceng";
 export default {
   data () {
     return {
-      value: 0,
+      value: 10,
       currentTime: "08:00",
     };
   },
   computed: {},
-  watch: {},
+  watch: {
+    value (newvalue) {
+      __g.weather.setDateTime(2021, 4, 9, newvalue, 30, 30, false);
+    }
+  },
   methods: {
+    onchangde (e) {
+      console.log(111, e);
+    },
     updateTime (e) {
       // console.log(e);
       // console.dir(this.$refs.slider);
@@ -118,25 +129,78 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.slider {
+/deep/ .block {
   position: absolute;
-  left: 47px;
-  top: 293px;
-}
-.point {
-  position: absolute;
-  width: 229px;
-  height: 213px;
-  top: 226px;
-  left: -65px;
-  cursor: pointer;
-  user-select: none;
-  background: url("../../assets/img/5未来愿景/当前选中.png");
-  > div {
-    position: absolute;
-    color: #fff;
-    top: 100px;
-    left: 135px;
+  top: 0;
+  bottom: 0;
+  left: 30px;
+  margin: auto;
+  width: 75px;
+  height: 500px;
+  background: url("../../assets/img/5未来愿景/调节条背景.svg") no-repeat
+    center/cover;
+  // background: #000 !important;
+  .is-vertical {
   }
 }
+/deep/ .el-slider {
+  width: 100%;
+  height: 100%;
+  // background: rgba(0, 0, 0, 0.096);
+}
+/deep/ .el-slider__bar {
+  width: 10px !important;
+  left: -2px !important;
+  background: rgba(0, 0, 0, 0);
+}
+/deep/ .el-slider__runway {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  margin: auto !important;
+  width: 100%;
+  height: 353px !important;
+  background: rgb(255, 255, 255);
+}
+/deep/ .el-slider__button-wrapper {
+  width: 74px;
+  height: 65px;
+  left: -35px !important;
+  margin: 0 auto !important;
+  background: rgba(0, 0, 0, 0.103);
+  border-radius: 50%;
+}
+/deep/ .el-slider__button {
+  width: 74px;
+  height: 65px;
+  border: none;
+  // background: #000;
+  z-index: 100;
+  background: url("../../assets/img/5未来愿景/当前选中.png") no-repeat
+    center/cover;
+}
+// .slider {
+//   position: absolute;
+//   left: 47px;
+//   top: 293px;
+// }
+// .point {
+//   position: absolute;
+//   width: 229px;
+//   height: 213px;
+//   top: 226px;
+//   left: -65px;
+//   cursor: pointer;
+//   user-select: none;
+//   background: url("../../assets/img/5未来愿景/当前选中.png");
+//   > div {
+//     position: absolute;
+//     color: #fff;
+//     top: 100px;
+//     left: 135px;
+//   }
+// }
 </style>

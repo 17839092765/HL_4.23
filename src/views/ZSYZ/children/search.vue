@@ -173,7 +173,7 @@ export default {
       one.style.border = "none";
       two.style.border = "none";
 
-      showtab.style.top = "calc(100% - 260px)";
+      showtab.style.top = "calc(100% - 250px)";
       tabdata.style.top = "93px";
       one.style.height = "50px";
       one.style.fontSize = "16px";
@@ -199,7 +199,7 @@ export default {
       one.style.border = "none";
       two.style.border = "none";
 
-      showtab.style.top = "calc(100% - 260px)";
+      showtab.style.top = "calc(100% - 250px)";
       tabdata1.style.top = "93px";
       one.style.height = "50px";
       one.style.fontSize = "16px";
@@ -248,7 +248,7 @@ export default {
 <style lang="scss" scoped>
 .search {
   position: absolute;
-  width: 55%;
+  width: calc(100% - 20%);
   height: 260px;
   top: calc(100% - 260px);
   /* overflow: hidden; */
@@ -260,8 +260,10 @@ export default {
     z-index: 10;
     transition: all 1s;
     position: absolute;
+    width: calc(100%);
     top: calc(100% - 150px);
-    width: 80%;
+    left: 0;
+    // width: 80%;
     height: 150px;
     /* background: rgba(70, 64, 64, 0.205); */
     .tit {
@@ -284,6 +286,8 @@ export default {
         width: 210px;
         height: 75px;
         margin-left: 50px;
+        box-sizing: border-box;
+
         background: rgba(0, 0, 0, 0.205);
         border: 1px solid rgba(0, 0, 0, 0.2);
         // filter: blur(4px);
@@ -338,11 +342,17 @@ export default {
       .tabdata {
         transition: all 0.5s;
         position: absolute;
-        width: 1500px;
+        width: 100%;
         height: 150px;
         top: 150px;
-        left: 10px;
-        background: rgba(0, 0, 0, 0.349);
+        left: 0px;
+        background-image: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.836),
+          rgba(0, 0, 0, 0.192)
+        );
+        // background: url("../../../assets/img/4招商引资/面板背景下.png")
+        //   no-repeat center/cover;
         > div {
           .tit {
             text-align: center;
@@ -444,11 +454,15 @@ export default {
       .tabdata1 {
         transition: all 0.5s;
         position: absolute;
-        width: 1500px;
+        width: 100%;
         height: 150px;
         top: 150px;
         left: 10px;
-        background: rgba(8, 8, 8, 0.363);
+        background-image: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.836),
+          rgba(0, 0, 0, 0.192)
+        );
       }
     }
   }

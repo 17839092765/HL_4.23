@@ -100,8 +100,10 @@ export default {
     align-items: center;
     // font-family: YouSheBiaoTiHei;
     // color: #ffffff;
+    background: rgba(0, 0, 0, 0.24);
+
     img {
-      width: 100%;
+      width: 90%;
       // height: 100%;
     }
   }
@@ -112,6 +114,7 @@ export default {
     justify-content: center;
     align-items: center;
     color: #ffffff;
+    background: rgba(0, 0, 0, 0.24) !important;
 
     > div {
       position: relative;
@@ -138,6 +141,7 @@ export default {
   }
   .tool {
     z-index: 1000;
+    background: rgba(0, 0, 0, 0.24);
 
     width: 30%;
     height: 100%;

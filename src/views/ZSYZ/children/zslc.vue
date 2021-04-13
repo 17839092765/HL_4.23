@@ -108,17 +108,17 @@ export default {
 
 <style lang='scss' scoped>
 .rightdatacase {
-  padding: 0 10px;
+  // padding: 0 10px;
   position: absolute;
   bottom: 0;
   right: 0;
   color: #fff;
-
+  box-sizing: border-box;
   width: 20%;
   font-weight: 600;
 
   height: calc(100% - 80px);
-  background: rgba(0, 0, 0, 0.185);
+  background: rgba(0, 0, 0, 0.329);
   .tittop {
     width: 200px;
     height: 40px;
@@ -149,11 +149,14 @@ export default {
     background: #007ad9;
     line-height: 25px;
     margin: 10px 0;
+    box-sizing: border-box;
   }
   .zsbox {
     width: 100%;
     height: 50px;
     margin: 20px 0;
+    box-sizing: border-box;
+
     > div {
       width: 40%;
       float: left;

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <div id="player"></div>
     <router-view />
   </div>
@@ -192,7 +192,6 @@ export default {
       let _this = this;
 
       this.getMatchServerConfig(HostConfig.MatchServer, function (o) {
-        console.log(o, 111111);
         if (o.result == 0) {
           if (withPlayer) {
             new AirCityPlayer(o.instanceId, "player", HostConfig.Token, true);
