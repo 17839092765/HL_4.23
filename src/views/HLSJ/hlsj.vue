@@ -11,6 +11,7 @@ import { showtuceng, hidetuceng } from "../../util/showtuceng";
 export default {
   data () {
     return {
+      path: 'C:\\Users\\DoctorXiao\\Desktop\\HL\\src\\assets\\img\\1红岭实景\\biaoji.png',
       flag: true
     };
   },
@@ -34,7 +35,7 @@ export default {
         // 标签1
         let id1 = 'SN-1';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord1 = [510418, 2494558.75, 56.89111328125];  //坐标值：标签添加的位置
-        let imagePath1 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath1 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url1 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize1 = [28, 28];           //图片的尺寸
         let text1 = '蔡屋围统筹片区';              //标签显示的文字
@@ -51,7 +52,7 @@ export default {
         // 标签2
         let id2 = 'SN-2-1';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord2 = [510303.59375, 2494559.25, 134.9962615966797];  //坐标值：标签添加的位置
-        let imagePath2 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath2 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url2 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize2 = [28, 28];           //图片的尺寸
         let text2 = '国信证券大厦';              //标签显示的文字
@@ -67,7 +68,7 @@ export default {
         // 标签3
         let id3 = 'SN-2-2';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord3 = [510322.03125, 2494524.5, 113.33856964111328];  //坐标值：标签添加的位置
-        let imagePath3 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath3 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url3 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize3 = [28, 28];           //图片的尺寸
         let text3 = '信托大厦';              //标签显示的文字
@@ -83,7 +84,7 @@ export default {
         // 标签4
         let id4 = 'SN-3-1';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord4 = [510457.875, 2494260.25, 409.4613952636719];  //坐标值：标签添加的位置
-        let imagePath4 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath4 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url4 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize4 = [28, 28];           //图片的尺寸
         let text4 = '京基100';              //标签显示的文字
@@ -99,7 +100,7 @@ export default {
         // 标签5
         let id5 = 'SN-3-2';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord5 = [510547, 2494193.75, 126.6146240234375];  //坐标值：标签添加的位置
-        let imagePath5 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath5 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url5 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize5 = [28, 28];           //图片的尺寸
         let text5 = '中国人民银行';              //标签显示的文字
@@ -116,7 +117,7 @@ export default {
         // 标签6
         let id6 = 'SN-3-3';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord6 = [510557.71875, 2494146.5, 64.09304809570312];  //坐标值：标签添加的位置
-        let imagePath6 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath6 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url6 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize6 = [28, 28];           //图片的尺寸
         let text6 = '中国人民银行大厦';              //标签显示的文字
@@ -132,7 +133,7 @@ export default {
         // 标签7
         let id7 = 'SN-3-4';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord7 = [510468.4375, 2494127.5, 123.60477447509766];  //坐标值：标签添加的位置
-        let imagePath7 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath7 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url7 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize7 = [28, 28];           //图片的尺寸
         let text7 = '农业银行';              //标签显示的文字
@@ -148,7 +149,7 @@ export default {
         // 标签8
         let id8 = 'SN-4-1';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord8 = [510822.3125, 2494169.75, 43.70339584350586];  //坐标值：标签添加的位置
-        let imagePath8 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath8 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url8 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize8 = [28, 28];           //图片的尺寸
         let text8 = '地王大厦';              //标签显示的文字
@@ -165,7 +166,7 @@ export default {
         // 标签9
         let id9 = 'SN-4-2';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord9 = [510586.3125, 2493952.5, 163.28671264648438];  //坐标值：标签添加的位置
-        let imagePath9 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath9 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url9 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize9 = [28, 28];           //图片的尺寸
         let text9 = '平安银行大厦';              //标签显示的文字
@@ -181,7 +182,7 @@ export default {
         // 标签10
         let id10 = 'SN-4-3';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord10 = [510667.9375, 2493962, 164.11358642578125];  //坐标值：标签添加的位置
-        let imagePath10 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath10 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url10 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize10 = [28, 28];           //图片的尺寸
         let text10 = '深业中心大厦';              //标签显示的文字
@@ -198,7 +199,7 @@ export default {
         // 标签11
         let id11 = 'SN-4-4';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord11 = [510739.90625, 2493979.25, 128.20452880859375];  //坐标值：标签添加的位置
-        let imagePath11 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath11 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url11 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize11 = [28, 28];           //图片的尺寸
         let text11 = '金山大厦';              //标签显示的文字
@@ -215,7 +216,7 @@ export default {
         // 标签12
         let id12 = 'SN-4-5';     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord12 = [510801.90625, 2493992, 120.59784698486328];  //坐标值：标签添加的位置
-        let imagePath12 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath12 = this.path; //图片路径，可以是本地路径，也支持网络路径
         let url12 = '';   //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize12 = [28, 28];           //图片的尺寸
         let text12 = '金丰城大厦';              //标签显示的文字
@@ -236,7 +237,7 @@ export default {
         let text13 = '华润大厦';              //标签显示的文字
         let range13 = [1, 8000.0];            //标签的可见范围
         let showLine13 = false;                //标签下方是否显示垂直牵引线
-        let imagePath13 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath13 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o13 = new TagData(id13, coord13, imagePath13, imageSize13, url13, text13, range13, showLine13,);
         o13.textColor = Color.Black;         //设置文字颜色
@@ -252,7 +253,7 @@ export default {
         let text14 = '万象城';              //标签显示的文字
         let range14 = [1, 8000.0];            //标签的可见范围
         let showLine14 = false;                //标签下方是否显示垂直牵引线
-        let imagePath14 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath14 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o14 = new TagData(id14, coord14, imagePath14, imageSize14, url14, text14, range14, showLine14,);
         o14.textColor = Color.Black;         //设置文字颜色
@@ -268,7 +269,7 @@ export default {
         let text15 = '都心水镜';              //标签显示的文字
         let range15 = [1, 8000.0];            //标签的可见范围
         let showLine15 = false;                //标签下方是否显示垂直牵引线
-        let imagePath15 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath15 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o15 = new TagData(id15, coord15, imagePath15, imageSize15, url15, text15, range15, showLine15,);
         o15.textColor = Color.Black;         //设置文字颜色
@@ -285,7 +286,7 @@ export default {
         let text16 = '建设集团大院';              //标签显示的文字
         let range16 = [1, 8000.0];            //标签的可见范围
         let showLine16 = false;                //标签下方是否显示垂直牵引线
-        let imagePath16 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath16 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o16 = new TagData(id16, coord16, imagePath16, imageSize16, url16, text16, range16, showLine16,);
         o16.textColor = Color.Black;         //设置文字颜色
@@ -302,7 +303,7 @@ export default {
         let text17 = '建设集团办公楼';              //标签显示的文字
         let range17 = [1, 8000.0];            //标签的可见范围
         let showLine17 = false;                //标签下方是否显示垂直牵引线
-        let imagePath17 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath17 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o17 = new TagData(id17, coord17, imagePath17, imageSize17, url17, text17, range17, showLine17,);
         o17.textColor = Color.Black;         //设置文字颜色
@@ -319,7 +320,7 @@ export default {
         let text18 = '中深国际大厦';              //标签显示的文字
         let range18 = [1, 8000.0];            //标签的可见范围
         let showLine18 = false;                //标签下方是否显示垂直牵引线
-        let imagePath18 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath18 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o18 = new TagData(id18, coord18, imagePath18, imageSize18, url18, text18, range18, showLine18,);
         o18.textColor = Color.Black;         //设置文字颜色
@@ -335,7 +336,7 @@ export default {
         let text19 = '百汇大厦';              //标签显示的文字
         let range19 = [1, 8000.0];            //标签的可见范围
         let showLine19 = false;                //标签下方是否显示垂直牵引线
-        let imagePath19 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath19 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o19 = new TagData(id19, coord19, imagePath19, imageSize19, url19, text19, range19, showLine19,);
         o19.textColor = Color.Black;         //设置文字颜色
@@ -352,7 +353,7 @@ export default {
         let text20 = '长虹大厦';              //标签显示的文字
         let range20 = [1, 8000.0];            //标签的可见范围
         let showLine20 = false;                //标签下方是否显示垂直牵引线
-        let imagePath20 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath20 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o20 = new TagData(id20, coord20, imagePath20, imageSize20, url20, text20, range20, showLine20,);
         o20.textColor = Color.Black;         //设置文字颜色
@@ -368,7 +369,7 @@ export default {
         let text21 = '洪涛大厦';              //标签显示的文字
         let range21 = [1, 8000.0];            //标签的可见范围
         let showLine21 = false;                //标签下方是否显示垂直牵引线
-        let imagePath21 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath21 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o21 = new TagData(id21, coord21, imagePath21, imageSize21, url21, text21, range21, showLine21,);
         o21.textColor = Color.Black;         //设置文字颜色
@@ -384,7 +385,7 @@ export default {
         let text22 = '蔡屋围发展大厦';              //标签显示的文字
         let range22 = [1, 8000.0];            //标签的可见范围
         let showLine22 = false;                //标签下方是否显示垂直牵引线
-        let imagePath22 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath22 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o22 = new TagData(id22, coord22, imagePath22, imageSize22, url22, text22, range22, showLine22,);
         o22.textColor = Color.Black;         //设置文字颜色
@@ -400,7 +401,7 @@ export default {
         let text23 = '北京大厦';              //标签显示的文字
         let range23 = [1, 8000.0];            //标签的可见范围
         let showLine23 = false;                //标签下方是否显示垂直牵引线
-        let imagePath23 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath23 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o23 = new TagData(id23, coord23, imagePath23, imageSize23, url23, text23, range23, showLine23,);
         o23.textColor = Color.Black;         //设置文字颜色
@@ -416,7 +417,7 @@ export default {
         let text24 = '茂源大厦';              //标签显示的文字
         let range24 = [1, 8000.0];            //标签的可见范围
         let showLine24 = false;                //标签下方是否显示垂直牵引线
-        let imagePath24 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath24 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o24 = new TagData(id24, coord24, imagePath24, imageSize24, url24, text24, range24, showLine24,);
         o24.textColor = Color.Black;         //设置文字颜色
@@ -432,7 +433,7 @@ export default {
         let text25 = '国速大厦';              //标签显示的文字
         let range25 = [1, 8000.0];            //标签的可见范围
         let showLine25 = false;                //标签下方是否显示垂直牵引线
-        let imagePath25 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath25 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o25 = new TagData(id25, coord25, imagePath25, imageSize25, url25, text25, range25, showLine25,);
         o25.textColor = Color.Black;         //设置文字颜色
@@ -448,7 +449,7 @@ export default {
         let text26 = '七支队办公楼';              //标签显示的文字
         let range26 = [1, 8000.0];            //标签的可见范围
         let showLine26 = false;                //标签下方是否显示垂直牵引线
-        let imagePath26 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath26 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o26 = new TagData(id26, coord26, imagePath26, imageSize26, url26, text26, range26, showLine26,);
         o26.textColor = Color.Black;         //设置文字颜色
@@ -464,7 +465,7 @@ export default {
         let text27 = '华润中心';              //标签显示的文字
         let range27 = [1, 8000.0];            //标签的可见范围
         let showLine27 = false;                //标签下方是否显示垂直牵引线
-        let imagePath27 = 'D:/soso/project/hzm_hongling/20201012_CGSY_FREEDO_SZ_HONGLIN/src/assets/img/biaoji.png'; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath27 = this.path; //图片路径，可以是本地路径，也支持网络路径
 
         let o27 = new TagData(id27, coord27, imagePath27, imageSize27, url27, text27, range27, showLine27,);
         o27.textColor = Color.Black;         //设置文字颜色
