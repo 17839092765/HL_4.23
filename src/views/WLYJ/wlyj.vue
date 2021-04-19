@@ -8,7 +8,16 @@
       </div>
     </div> -->
     <div class="block">
-      <el-slider :step="2" :min="0" :max="16" @input="onchangde" show-tooltip v-model="value" vertical height="200px">
+      <el-slider
+        :step="2"
+        :min="0"
+        :max="16"
+        @input="onchangde"
+        show-tooltip
+        v-model="value"
+        vertical
+        height="200px"
+      >
       </el-slider>
     </div>
   </div>
@@ -18,7 +27,7 @@
 import { showtuceng, hidetuceng } from "../../util/showtuceng";
 
 export default {
-  data () {
+  data() {
     return {
       value: 10,
       currentTime: "08:00",
@@ -26,15 +35,15 @@ export default {
   },
   computed: {},
   watch: {
-    value (newvalue) {
+    value(newvalue) {
       __g.weather.setDateTime(2021, 4, 9, newvalue, 30, 30, false);
-    }
+    },
   },
   methods: {
-    onchangde (e) {
+    onchangde(e) {
       console.log(111, e);
     },
-    updateTime (e) {
+    updateTime(e) {
       // console.log(e);
       // console.dir(this.$refs.slider);
       document.documentElement.onmousemove = (mousEvent) => {
@@ -100,12 +109,12 @@ export default {
       };
     },
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     if (__g) {
       __g.camera.lookAt(
-        509288.218750,
-        2493637.750000,
+        509288.21875,
+        2493637.75,
         1239.591553,
         -28.533407,
         -38.835026,
@@ -114,16 +123,16 @@ export default {
     }
     showtuceng(this.$treedata.wlyjdata);
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () {
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {
     hidetuceng(this.$treedata.wlyjdata);
-    __g.weather.setDateTime(2021, 4, 9, 12, 0, false);
+    __g.weather.setDateTime(2021, 4, 9, 10, 0, false);
   },
-  destroyed () { },
-  activated () { },
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>

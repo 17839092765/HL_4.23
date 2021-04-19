@@ -1,34 +1,49 @@
 <template>
-  <div class='zslc'>
-    <div class="rightdatacase">
+  <div class="zslc">
+    <div v-if="clickData1[1]" class="rightdatacase">
       <div class="tittop">
         <i class="icon"></i>
-        <span>{{clickData1[1]?clickData1[0].data:"..."}}</span>
+        <span>{{ clickData1[1] ? clickData1[0].data : "..." }}</span>
       </div>
-      <div class="class">
-        {{"招商类型"}}
-      </div>
+      <!-- <div class="zhaoshangclass">
+        {{ "招商类型" }}
+      </div> -->
       <div class="zsbox">
         <div class="left">
           <div class="icon"></div>
           <div class="case">
             <p>已入驻单元</p>
-            <p>{{clickData1[1]?clickData1[1].data.split(',').length:"..."}}个</p>
+            <p>
+              {{
+                clickData1[1] ? clickData1[1].data.split(",").length : "..."
+              }}个
+            </p>
           </div>
         </div>
         <div class="right">
           <div class="icon"></div>
           <div class="case">
             <p>剩余单元</p>
-            <p>{{}}个</p>
+            <p>{{ "暂无数据" }}</p>
           </div>
         </div>
       </div>
-      <div class="ruzhu">
+      <div v-if="clickData1[1]" class="ruzhu">
         <div class="tit">入驻企业</div>
-        <div v-for="item,index in clickData1[1]?clickData1[1].data.split(','):[0]" :key="index" class="ruzhu_case">
+        <div
+          v-for="(item, index) in clickData1[1]
+            ? clickData1[1].data.split(',')
+            : [0]"
+          :key="index"
+          class="ruzhu_case"
+        >
           <p>
-            {{item}}
+            <span>
+              {{ item.split("|")[0] }}
+            </span>
+            <span>
+              {{ item.split("|")[1] }}
+            </span>
             <!-- <span>{{item}}</span>
             <span>{{item}}</span> -->
           </p>
@@ -39,74 +54,70 @@
 </template>
 
 <script>
-import layers_jjone from "../../../assets/js/jjone.js"
-import { showtuceng, hidetuceng } from "../../../util/showtuceng"
-import { clear_jj100 } from "../../../util/clickEvt"
+import layers_jjone from "../../../assets/js/jjone.js";
+import { showtuceng, hidetuceng } from "../../../util/showtuceng";
+import { clear_jj100 } from "../../../util/clickEvt";
 import { mapState } from "vuex";
 import { showdata } from "../../XZSJ/showdata";
-
+import store from "../../../store";
 
 // import __g from "../../../main"
 export default {
-  data () {
+  data() {
     return {
-      jjoneidarr: []
-
+      jjoneidarr: [],
+      layerdata: [],
     };
   },
   computed: {
     ...mapState({
       clickData1: (state) => showdata(state.clickData ? state.clickData : []),
-
     }),
   },
   watch: {},
   methods: {
-    jjonedata () {
-      layers_jjone.forEach(item => {
-        this.jjoneidarr.push(item.id)
-      })
+    jjonedata() {
+      layers_jjone.forEach((item) => {
+        this.jjoneidarr.push(item.id);
+      });
     },
-    showjjone (flag) {
-
+    showjjone(flag) {
       if (flag) {
-
         __g.infoTree.show(this.jjoneidarr);
       } else {
-
         __g.infoTree.hide(this.jjoneidarr);
       }
-    }
+    },
   },
-  created () {
-
-    this.jjonedata()
+  created() {
+    this.jjonedata();
+    store.commit("clickData", {});
   },
-  mounted () {
+  mounted() {
     // console.log(layers_jjone);
     // showtuceng(layers_jjone)
-    this.showjjone(true)
-    clear_jj100()
+    this.showjjone(true);
+    clear_jj100();
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () {
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {
     //[{ "name": "楼层", "data": "63层" }, { "name": "入驻企业", "data": "深圳前海瑞鑫网际网路金融有限公司（63楼部分）、关东地生态农业（深圳）有限公司（6301室）、兴业证券（6307室）" }]
   },
-  updated () { },
-  beforeDestroy () {
+  updated() {},
+  beforeDestroy() {
     // clear_jj100()
-    this.showjjone(false)
-    this.$store.commit("clickData", {})
+    this.showjjone(false);
+    this.$store.commit("clickData", {});
     __g.tileLayer.stopHighlightActor();
   },
-  destroyed () { },
-  activated () { },
+  destroyed() {},
+  activated() {},
   components: {},
-}
+};
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .rightdatacase {
   // padding: 0 10px;
   position: absolute;
@@ -122,6 +133,7 @@ export default {
   .tittop {
     width: 200px;
     height: 40px;
+    margin-left: 10px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -132,23 +144,25 @@ export default {
       background: url("../../../assets/img/4招商引资/icon_招商楼层.svg")
         no-repeat center;
       margin-top: 10px;
+      vertical-align: bottom;
     }
     > span {
       font-size: 20px;
       color: #fff;
       display: inline-block;
       width: 100px;
-      height: 40px;
-      line-height: 40px;
+      height: 30px;
+      line-height: 30px;
     }
   }
-  .class {
+  .zhaoshangclass {
     width: 149px;
-    padding: 10px;
-    height: 25px;
+    /* padding: 10px; */
+    height: 55px;
     background: #007ad9;
-    line-height: 25px;
-    margin: 10px 0;
+    line-height: 55px;
+    margin: 20px 0;
+    text-indent: 20px;
     box-sizing: border-box;
   }
   .zsbox {
@@ -193,7 +207,7 @@ export default {
       margin: 20px 0;
     }
     .ruzhu_case {
-      width: 80%;
+      width: 100%;
       height: 50px;
       background: rgba(69, 77, 72, 0.4);
       border-radius: 2px;
@@ -205,14 +219,22 @@ export default {
         font-size: 20px;
         line-height: 50px;
         span:nth-of-type(1) {
-          display: inline-block;
-          width: 40%;
+          /* display: inline-block; */
+          width: 30%;
           color: #00f5f7;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          float: left;
         }
         span:nth-of-type(2) {
-          width: 60%;
-
+          /* display: inline-block; */
+          float: left;
+          width: 70%;
+          font-size: 14px;
           color: #fff;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       }
     }

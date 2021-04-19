@@ -72,6 +72,7 @@
 import { mapState } from "vuex";
 import { showtuceng, hidetuceng } from "../../../util/showtuceng.js";
 import { showdata } from "../../XZSJ/showdata";
+import store from "../../../store";
 // import __g from "../../../main";
 export default {
   data() {
@@ -93,6 +94,8 @@ export default {
     if (__g) {
       __g.infoTree.show("510E89A04A6F36F2AF26A5A56A36AD69");
     }
+    console.log(store);
+    store.commit("clickData", {});
   },
   mounted() {
     showtuceng(this.$treedata.zsyzdata);
