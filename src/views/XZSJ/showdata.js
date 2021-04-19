@@ -1,17 +1,17 @@
 function showdata(newdata) {
-  console.log(newdata, 8888888)
-  var title = newdata.title
-  var formdata = []
-  var data = newdata.data
+  console.log(newdata, 8888888);
+  var title = newdata.title;
+  var formdata = [];
+  var data = newdata.data;
   var nonedata = [
     {
       name: "暂无数据",
       data: "暂无数据",
     },
-  ]
+  ];
   for (var item in data) {
     if (data[item] == "" || !data[item]) {
-      data[item] = "--"
+      data[item] = "--";
     }
   }
   //用地现状、法定图则信息的展示
@@ -50,7 +50,7 @@ function showdata(newdata) {
         name: "备注信息",
         data: data.note,
       },
-    ]
+    ];
   } else if (title == "用地现状信息") {
     formdata = [
       {
@@ -74,7 +74,7 @@ function showdata(newdata) {
         data:
           data[0]["sum(ratio)"] == null ? "暂无数据" : data[0]["sum(ratio)"],
       },
-    ]
+    ];
   }
   //用地权属信息的展示
   else if (title == "用地权属信息") {
@@ -90,18 +90,18 @@ function showdata(newdata) {
         ) {
           // console.log(index, typeof index, newdata.data[index], "index")
           if (newdata.data[index] == "") {
-            newdata.data[index] = "--"
+            newdata.data[index] = "--";
           }
           var data_ = {
             name: index,
             data: newdata.data[index],
-          }
-          formdata.push(data_)
+          };
+          formdata.push(data_);
         }
       }
       // console.log(formdata, "form")
     } else {
-      formdata = nonedata
+      formdata = nonedata;
     }
   }
   //单栋建筑的信息
@@ -118,7 +118,7 @@ function showdata(newdata) {
           index != "delFlag"
         ) {
           if (newdata.data[index] == "") {
-            newdata.data[index] = "--"
+            newdata.data[index] = "--";
           }
           // if (index == '建筑面积') {
           //   index = '建筑面积（㎡）'
@@ -131,20 +131,20 @@ function showdata(newdata) {
           var data_ = {
             name: index,
             data: newdata.data[index],
-          }
-          formdata.push(data_)
+          };
+          formdata.push(data_);
         }
       }
     } else {
-      formdata = nonedata
+      formdata = nonedata;
     }
   }
   //城市更新项目的信息
   else if (title == "城市更新项目") {
     if (data.length > 0) {
-      console.log(data, 998)
-      var id = data[0].id
-      var arr = []
+      console.log(data, 998);
+      var id = data[0].id;
+      var arr = [];
       arr = [
         {
           name: "更新项目名称",
@@ -154,26 +154,26 @@ function showdata(newdata) {
           name: "建设情况",
           data: data[0].demolish,
         },
-      ]
+      ];
       if (data.length == 1) {
       } else {
         data.forEach((item, index) => {
           var obj = {
             name: item.build,
             data: item.data,
-          }
-          arr.push(obj)
-        })
+          };
+          arr.push(obj);
+        });
       }
-      formdata = [id, arr]
+      formdata = [id, arr];
     }
   }
   //楼层信息
   else if (title == "楼层信息") {
-    var reg = new RegExp("、", "g")
+    var reg = new RegExp("、", "g");
     // var company = data.company.replace(/\、/g, '，')
-    console.log(data)
-    console.log(typeof data[0])
+    console.log(data);
+    console.log(typeof data[0]);
     if (typeof data[0] == "object") {
       formdata = [
         {
@@ -187,7 +187,10 @@ function showdata(newdata) {
           name: "入驻企业",
           data: data[0].company,
         },
-      ]
+        {
+          area: data[0].area,
+        },
+      ];
     }
   } else if (title == "单户信息") {
     if (data[0].usestatus) {
@@ -208,7 +211,7 @@ function showdata(newdata) {
           name: "招商租金",
           data: data[0].rent,
         },
-      ]
+      ];
     } else {
       formdata = [
         {
@@ -231,10 +234,10 @@ function showdata(newdata) {
           name: "公司概要",
           data: data[0].note,
         },
-      ]
+      ];
     }
   }
-  console.log(formdata, 888)
-  return formdata
+  console.log(formdata, 888);
+  return formdata;
 }
-export { showdata }
+export { showdata };

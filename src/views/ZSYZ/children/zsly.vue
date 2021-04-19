@@ -102,13 +102,31 @@ export default {
     if (__g) {
       __g.camera.lookAt(
         510264.09375,
-
         2493521.0,
         650.484497,
         -26.054821,
         -63.835243,
         -30
       );
+      // let options = {
+      //   showOutline: true,
+      //   outlineThickness: 3.0,
+      //   outlineColor: Color.Red,
+      //   useSceneColor: false,
+      //   sceneColor: Color.Black,
+      //   showSkyline: true,
+      //   windowSize: [400, 200],
+      //   skylineColor: Color.Green,
+      //   backgroundColor: [1, 1, 1, 0.7],
+      //   height: 50.0,
+      //   tileLayers: [
+      //     {
+      //       color: Color.Blue,
+      //       ids: ["510E89A04A6F36F2AF26A5A56A36AD69"],
+      //     },
+      //   ],
+      // };
+      // __g.tools.startSkylineAnalysis(options);
     }
   },
   beforeCreate() {},

@@ -104,21 +104,7 @@ export default {
       // 模糊查询数据
       searchAfterNum: [],
       //
-      tableData: [
-        //   {
-        //   name: 'aaa',
-        //   address: '上海市普陀区金沙江路 1518 弄'
-        // }, {
-        //   name: 'ccc',
-        //   address: '上海市普陀区金沙江路 1517 弄'
-        // }, {
-        //   name: 'vvv',
-        //   address: '上海市普陀区金沙江路 1519 弄'
-        // }, {
-        //   name: 'bbb',
-        //   address: '上海市普陀区金沙江路 1516 弄'
-        // }
-      ],
+      tableData: [],
     };
   },
   computed: {},
@@ -134,7 +120,6 @@ export default {
           this.hightbuliding = mon;
         }
       });
-      // console.log(hightbuliding);
       __g.tileLayer.highlightActor(
         this.hightbuliding.Id,
         this.hightbuliding.ObjectID

@@ -35,7 +35,9 @@
             ? clickData1[1].data.split(',')
             : [0]"
           :key="index"
-          class="ruzhu_case"
+          :class="
+            item.indexOf('虚位以待') !== -1 ? 'ruzhu_case xuwei' : 'ruzhu_case'
+          "
         >
           <p>
             <span>
@@ -44,8 +46,12 @@
             <span>
               {{ item.split("|")[1] }}
             </span>
-            <!-- <span>{{item}}</span>
-            <span>{{item}}</span> -->
+            <!-- <span>{{item}}</span> -->
+            <span>{{
+              item.indexOf("虚位以待") !== -1
+                ? clickData1[2].area.split(",")[index] + "㎡"
+                : ""
+            }}</span>
           </p>
         </div>
       </div>
@@ -207,7 +213,9 @@ export default {
       margin: 20px 0;
     }
     .ruzhu_case {
-      width: 100%;
+      margin: 3px auto;
+
+      width: 90%;
       height: 50px;
       background: rgba(69, 77, 72, 0.4);
       border-radius: 2px;
@@ -237,6 +245,41 @@ export default {
           white-space: nowrap;
         }
       }
+    }
+  }
+  .xuwei {
+    background: linear-gradient(180deg, #f6faff 0%, #c4c8ce 100%);
+    border-radius: 4px;
+    opacity: 0.89;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    /* filter: blur(15px); */
+    span:nth-of-type(1) {
+      /* display: inline-block; */
+      width: 30% !important;
+      color: #00ffa6 !important;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      float: left;
+    }
+    span:nth-of-type(2) {
+      /* display: inline-block; */
+      float: left;
+      width: 40% !important;
+      font-size: 14px;
+      color: #00ffa6 !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    span:nth-of-type(3) {
+      /* display: inline-block; */
+      float: left;
+      width: 30% !important;
+      font-size: 14px;
+      color: #00ffa6 !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }

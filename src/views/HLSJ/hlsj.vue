@@ -60,6 +60,7 @@ export default {
               -30
             );
             this.CameraLookstyle = 1;
+
             break;
           case 2:
             this.CameraLookstyle = 2;
