@@ -15,7 +15,9 @@
             <p>已入驻单元</p>
             <p>
               {{
-                clickData1[1] ? clickData1[1].data.split(",").length : "..."
+                clickData1[3]
+                  ? clickData1[3].usestatus.split(",")[0]
+                  : "无数据"
               }}个
             </p>
           </div>
@@ -24,7 +26,11 @@
           <div class="icon"></div>
           <div class="case">
             <p>剩余单元</p>
-            <p>{{ "暂无数据" }}</p>
+            <p>
+              {{
+                clickData1[3] ? clickData1[3].usestatus.split(",")[0] : "无数据"
+              }}
+            </p>
           </div>
         </div>
       </div>

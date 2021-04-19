@@ -190,6 +190,9 @@ function showdata(newdata) {
         {
           area: data[0].area,
         },
+        {
+          usestatus: data[0].usestatus,
+        },
       ];
     }
   } else if (title == "单户信息") {
