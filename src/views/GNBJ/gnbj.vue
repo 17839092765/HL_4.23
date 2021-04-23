@@ -12,10 +12,12 @@
     <NewCenter v-if="active === 2" /> -->
     <!-- <LivingCommunity v-if="active === 2" /> -->
     <!-- <ServiceCenter v-if="active === 2" /> -->
-    <div class="twolink">
+    <div class="twolink1">
       <router-link to="/Home/GNBJ/ydgn" tag="li">
         <span>用地功能布局</span>
       </router-link>
+    </div>
+    <div class="twolink2">
       <router-link to="/Home/GNBJ/cygn" tag="li">
         <span>产业功能布局</span>
       </router-link>
@@ -63,23 +65,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.twolink {
+.twolink1 {
   position: absolute;
-  top: 80px;
+  top: 90px;
   left: 49%;
-  width: 300px;
-  height: 50px;
+  width: 160px;
+  height: 40px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background: rgba(0, 0, 0, 0.24);
-  border-radius: 0 0 10px 10px;
+  border-radius: 5px;
+  font-size: 18px;
 
   // z-index: 300;
   > li {
-    width: 40%;
+    width: 90%;
     height: 100%;
-    line-height: 50px;
+    line-height: 40px;
     text-align: center;
     list-style: none;
     color: #fff;
@@ -87,19 +90,58 @@ export default {
     &.router-link-active {
       color: #fee36d;
     }
-    &.router-link-active::after {
-      content: "";
-      position: absolute;
-      bottom: 10%;
-      left: 0;
-      right: 0;
-      margin: auto;
-      width: 100%;
-      height: 2px;
-      background: #fee36d;
-    }
+    // &.router-link-active::after {
+    //   content: "";
+    //   position: absolute;
+    //   bottom: 10%;
+    //   left: 0;
+    //   right: 0;
+    //   margin: auto;
+    //   width: 100%;
+    //   height: 2px;
+    //   background: #fee36d;
+    // }
   }
 }
+.twolink2 {
+  position: absolute;
+  top: 90px;
+  left: 58%;
+  width: 160px;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  font-size: 18px;
+
+  // z-index: 300;
+  > li {
+    width: 90%;
+    height: 100%;
+    line-height: 40px;
+    text-align: center;
+    list-style: none;
+    color: #fff;
+    position: relative;
+    &.router-link-active {
+      color: #fee36d;
+    }
+    // &.router-link-active::after {
+    //   content: "";
+    //   position: absolute;
+    //   bottom: 10%;
+    //   left: 0;
+    //   right: 0;
+    //   margin: auto;
+    //   width: 100%;
+    //   height: 2px;
+    //   background: #fee36d;
+    // }
+  }
+}
+
 .select {
   display: flex;
   justify-content: space-between;

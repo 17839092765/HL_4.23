@@ -135,17 +135,17 @@ export default {
       color: #fee36d;
        font-weight: 700;
     }
-    &.router-link-active::after {
-      content: "";
-      position: absolute;
-      bottom: 5px;
-      left: 0;
-      right: 0;
-      margin: auto;
-      width: 100%;
-      height: 2px;
-      background: #fee36d;
-    }
+    // &.router-link-active::after {
+    //   content: "";
+    //   position: absolute;
+    //   bottom: 5px;
+    //   left: 0;
+    //   right: 0;
+    //   margin: auto;
+    //   width: 100%;
+    //   height: 2px;
+    //   background: #fee36d;
+    // }
   }
 }
 .threelink2 {
@@ -153,7 +153,7 @@ export default {
   width: 120px;
   height: 40px;
   top: 90px;
-  left: 120px;
+  left: 80px;
   right: 0;
   margin: auto;
   background: rgba(0, 0, 0, 0.3);
@@ -175,17 +175,17 @@ export default {
       color: #fee36d;
        font-weight: 700;
     }
-    &.router-link-active::after {
-      content: "";
-      position: absolute;
-      bottom: 0px;
-      left: 0;
-      right: 0;
-      margin: auto;
-      width: 100%;
-      height: 2px;
-      background: #fee36d;
-    }
+    // &.router-link-active::after {
+    //   content: "";
+    //   position: absolute;
+    //   bottom: 0px;
+    //   left: 0;
+    //   right: 0;
+    //   margin: auto;
+    //   width: 100%;
+    //   height: 2px;
+    //   background: #fee36d;
+    // }
   }
 }
 .threelink3 {
@@ -193,7 +193,7 @@ export default {
   width: 120px;
   height: 40px;
   top: 90px;
-  left: 420px;
+  left: 340px;
   right: 0;
   margin: auto;
   background: rgba(0, 0, 0, 0.3);
@@ -215,17 +215,17 @@ export default {
       color: #fee36d;
        font-weight: 700;
     }
-    &.router-link-active::after {
-      content: "";
-      position: absolute;
-      bottom: 0px;
-      left: 0;
-      right: 0;
-      margin: auto;
-      width: 100%;
-      height: 2px;
-      background: #fee36d;
-    }
+    // &.router-link-active::after {
+    //   content: "";
+    //   position: absolute;
+    //   bottom: 0px;
+    //   left: 0;
+    //   right: 0;
+    //   margin: auto;
+    //   width: 100%;
+    //   height: 2px;
+    //   background: #fee36d;
+    // }
   }
 }
 .threelink4 {
@@ -233,7 +233,7 @@ export default {
   width: 120px;
   height: 40px;
   top: 90px;
-  left: 720px;
+  left: 600px;
   right: 0;
   margin: auto;
   background: rgba(0, 0, 0, 0.3);
@@ -255,17 +255,17 @@ export default {
       color: #fee36d;
        font-weight: 700;
     }
-    &.router-link-active::after {
-      content: "";
-      position: absolute;
-      bottom: 0px;
-      left: 0;
-      right: 0;
-      margin: auto;
-      width: 100%;
-      height: 2px;
-      background: #fee36d;
-    }
+    // &.router-link-active::after {
+    //   content: "";
+    //   position: absolute;
+    //   bottom: 0px;
+    //   left: 0;
+    //   right: 0;
+    //   margin: auto;
+    //   width: 100%;
+    //   height: 2px;
+    //   background: #fee36d;
+    // }
   }
 }
 </style>
