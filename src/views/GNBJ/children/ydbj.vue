@@ -4,7 +4,7 @@
     <div class="tuli">
       <div class="tulicase">
         <div class="tittop">
-          图例
+          
         </div>
         <div class="box" v-for="(item, index) in tulidata" :key="index">
           <div class="title">
@@ -145,12 +145,12 @@ export default {
 
 <style lang="scss" scoped>
 .tuli {
-  width: 700px;
+  width: 680px;
   height: 300px;
   /* background: #000; */
   position: absolute;
   right: 10px;
-  top: 100px;
+  top: 150px;
   .tulicase {
     .tittop {
       float: left;
@@ -159,7 +159,7 @@ export default {
     }
     .box {
       width: 160px;
-      margin-left: 10px;
+      margin-left: 5px;
       text-align: left;
       height: 100%;
       float: left;

@@ -20,6 +20,32 @@
       >
       </el-slider>
     </div>
+    <!-- <div class="pictoLook">
+      <div
+        :class="
+          CameraLookstyle === 1 ? 'isactive CameraLookstyle' : 'CameraLookstyle'
+        "
+        @click="CameraLook(1)"
+      ></div>
+      <div
+        :class="
+          CameraLookstyle === 2 ? 'isactive CameraLookstyle' : 'CameraLookstyle'
+        "
+        @click="CameraLook(2)"
+      ></div>
+      <div
+        :class="
+          CameraLookstyle === 3 ? 'isactive CameraLookstyle' : 'CameraLookstyle'
+        "
+        @click="CameraLook(3)"
+      ></div>
+      <div
+        :class="
+          CameraLookstyle === 4 ? 'isactive CameraLookstyle' : 'CameraLookstyle'
+        "
+        @click="CameraLook(4)"
+      ></div>
+    </div> -->
   </div>
 </template>
 
@@ -29,6 +55,7 @@ import { showtuceng, hidetuceng } from "../../util/showtuceng";
 export default {
   data() {
     return {
+      CameraLookstyle: 0,
       value: 10,
       currentTime: "08:00",
     };
@@ -40,6 +67,67 @@ export default {
     },
   },
   methods: {
+    CameraLook(val) {
+      if (__g) {
+        switch (val) {
+          case 1:
+            __g.camera.lookAt(
+              510264.09375,
+
+              2493521.0,
+              650.484497,
+              -26.054821,
+              -63.835243,
+              -30
+            );
+            this.CameraLookstyle = 1;
+
+            break;
+          case 2:
+            this.CameraLookstyle = 2;
+
+            __g.camera.lookAt(
+              510264.09375,
+
+              2493521.0,
+              650.484497,
+              -26.054821,
+              -63.835243,
+              -30
+            );
+            break;
+          case 3:
+            this.CameraLookstyle = 3;
+
+            __g.camera.lookAt(
+              510264.09375,
+
+              2493521.0,
+              650.484497,
+              -26.054821,
+              -63.835243,
+              -30
+            );
+            break;
+          case 4:
+            this.CameraLookstyle = 4;
+
+            __g.camera.lookAt(
+                510389.843750,
+                2494008.750000,
+                61.139725,
+                -1.240516,
+                -6.405172,
+                4
+                
+            );
+            break;
+
+          default:
+            break;
+        }
+      }
+    },
     onchangde(e) {
       console.log(111, e);
     },
@@ -138,6 +226,49 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.pictoLook {
+  width: 200px;
+  height: 70%;
+  /* background: #000; */
+  position: absolute;
+  top: 150px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  > div {
+    width: 90%;
+    height: 19%;
+    border: 3px solid rgb(69, 255, 178);
+    box-sizing: border-box;
+  }
+  .isactive {
+    border: 5px solid rgb(255, 255, 255) !important;
+    transform: scale(1.2);
+  }
+  > div:hover {
+    transform: scale(1.2);
+    transition: all 0.2s;
+  }
+
+//   > div:nth-of-type(1) {
+//     background: url("../../assets/img/1红岭实景/06168135-f86a-4cca-a981-99da8a29e695.jpg")
+//       no-repeat center/cover;
+//   }
+//   > div:nth-of-type(2) {
+//     background: url("../../assets/img/1红岭实景/3b55c90a-b719-4b3b-a537-3881513aecfd.jpg")
+//       no-repeat center/cover;
+//   }
+//   > div:nth-of-type(3) {
+//     background: url("../../assets/img/1红岭实景/76262c68-19fd-4821-a1cd-6f983fcf94ae.png")
+//       no-repeat center/cover;
+//   }
+//   > div:nth-of-type(4) {
+//     background: url("../../assets/img/1红岭实景/b8bbfda5-bde2-42c9-8c87-a61fa1bbabf2.jpg")
+//       no-repeat center/cover;
+//   }
+}
 /deep/ .block {
   position: absolute;
   top: 0;

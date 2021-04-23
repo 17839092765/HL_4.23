@@ -11,7 +11,7 @@ export default {
   name: "LivingCommunity",
   data () {
     return {
-      path: 'C:\\Users\\DoctorXiao\\Desktop\\HL\\src\\assets\\img\\2功能布局\\2\\',
+      path: 'E:\\06 code\\hongling\\HL\\src\\assets\\img\\2功能布局\\2\\',
       arr: []
     };
   },

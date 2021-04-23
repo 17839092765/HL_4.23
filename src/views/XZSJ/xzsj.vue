@@ -2,16 +2,22 @@
   <div class="xzsj">
     <!-- <FDTZ />
     <XZQS /> -->
-    <div class="threelink">
+    <div class="threelink1">
       <router-link to="/Home/XZSJ/fdtz" tag="li">
         <span>法定图则</span>
       </router-link>
+      </div>
+      <div class="threelink2">
       <router-link to="/Home/XZSJ/xzqs" tag="li">
         <span>现状权属</span>
       </router-link>
+      </div>
+      <div class="threelink3">
       <router-link to="/Home/XZSJ/tdly" tag="li">
         <span>土地利用</span>
       </router-link>
+      </div>
+      <div class="threelink4">
       <router-link to="/Home/XZSJ/csgx" tag="li">
         <span>城市更新单元</span>
       </router-link>
@@ -101,17 +107,58 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.threelink {
+.threelink1 {
   position: absolute;
-  width: 500px;
-  height: 50px;
-  top: 80px;
-  left: 0;
+  width: 120px;
+  height: 40px;
+  top: 90px;
+  left: -180px;
   right: 0;
   margin: auto;
-  background: rgba(0, 0, 0, 0.356);
-  border-radius: 20px;
-  font-size: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px 5px 5px 5px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  > li {
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    color: #ffffff;
+    list-style: none;
+    cursor: pointer;
+    
+
+    &.router-link-active {
+      color: #fee36d;
+       font-weight: 700;
+    }
+    &.router-link-active::after {
+      content: "";
+      position: absolute;
+      bottom: 5px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 100%;
+      height: 2px;
+      background: #fee36d;
+    }
+  }
+}
+.threelink2 {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  top: 90px;
+  left: 120px;
+  right: 0;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px 5px 5px 5px;
+  font-size: 18px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -126,6 +173,87 @@ export default {
 
     &.router-link-active {
       color: #fee36d;
+       font-weight: 700;
+    }
+    &.router-link-active::after {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 100%;
+      height: 2px;
+      background: #fee36d;
+    }
+  }
+}
+.threelink3 {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  top: 90px;
+  left: 420px;
+  right: 0;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px 5px 5px 5px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  > li {
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    color: #ffffff;
+    list-style: none;
+    cursor: pointer;
+
+    &.router-link-active {
+      color: #fee36d;
+       font-weight: 700;
+    }
+    &.router-link-active::after {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 100%;
+      height: 2px;
+      background: #fee36d;
+    }
+  }
+}
+.threelink4 {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  top: 90px;
+  left: 720px;
+  right: 0;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px 5px 5px 5px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  > li {
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    color: #ffffff;
+    list-style: none;
+    cursor: pointer;
+
+    &.router-link-active {
+      color: #fee36d;
+       font-weight: 700;
     }
     &.router-link-active::after {
       content: "";

@@ -2,7 +2,7 @@
   <div class="hlsj">
     <!-- <button class="btn" @click="playCameraTour">CameraTour</button> -->
     <div @click="tagshow" class="tagflag">开启关闭标签</div>
-    <div class="pictoLook">
+    <!-- <div class="pictoLook">
       <div
         :class="
           CameraLookstyle === 1 ? 'isactive CameraLookstyle' : 'CameraLookstyle'
@@ -17,7 +17,8 @@
       ></div>
       <div
         :class="
-          CameraLookstyle === 3 ? 'isactive CameraLookstyle' : 'CameraLookstyle'
+          CameraLookstyle === 3 ? 'isactive CameraLyy
+          ookstyle' : 'CameraLookstyle'
         "
         @click="CameraLook(3)"
       ></div>
@@ -27,7 +28,7 @@
         "
         @click="CameraLook(4)"
       ></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -39,7 +40,7 @@ export default {
     return {
       CameraLookstyle: 0,
       path:
-        "C:\\Users\\DoctorXiao\\Desktop\\HL\\src\\assets\\img\\1红岭实景\\biaoji.png",
+        "E:\\06 code\\hongling\\HL\\src\\assets\\img\\1红岭实景\\biaoji.png",
       flag: true,
     };
   },
@@ -984,7 +985,7 @@ export default {
   width: 130px;
   height: 40px;
   cursor: pointer;
-  background: rgba(67, 150, 115, 0.616);
+  background: rgba(18,150,219, 0.8);
   position: absolute;
   text-align: center;
   line-height: 40px;

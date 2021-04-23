@@ -205,7 +205,7 @@ export default {
         formatter: "{a} <br/>{b} : {c}个",
       },
       legend: {
-        backgroundColor: "#00032C",
+        //backgroundColor: "#00032C",
         orient: "horizontal",
         left: "center",
         bottom: "5%",
@@ -561,9 +561,9 @@ export default {
   box-sizing: border-box;
   color: white;
   height: calc(100% - 80px);
-  background: rgba(0, 0, 0, 0.171);
+  background: rgba(0, 0, 0, 0.24);
   position: absolute;
-  border-radius: 20px 20px 0 0;
+  border-radius: 0 0 0 0;
   // top: 0;
   right: 0;
 }
@@ -673,7 +673,7 @@ export default {
 .echwarp {
   width: 350px;
   height: 450px;
-  /* background: #0000004d; */
+  background: #5c5c5c4d; 
   position: absolute;
   top: 100px;
   left: 20px;
@@ -696,7 +696,7 @@ export default {
     position: absolute;
     top: 1.5%;
     left: 0;
-    /* background: rgba(40, 68, 67, 0.3); */
+    //background: rgba(40, 68, 67, 0.3); 
     /* filter: blur(0.5px); */
   }
   .echbox1 {

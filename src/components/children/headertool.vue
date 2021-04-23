@@ -45,7 +45,7 @@ import dayjs from "dayjs";
 export default {
   data() {
     return {
-      isShowUI: true,
+      isShowUI: false,
       time: "00:00",
     };
   },
@@ -60,6 +60,7 @@ export default {
     resetCamera() {},
     setUp() {},
     showUI() {
+     // visible:false,
       __g.misc.setMainUIVisibility(this.isShowUI);
     },
   },

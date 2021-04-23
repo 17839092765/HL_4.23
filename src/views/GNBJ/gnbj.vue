@@ -19,7 +19,6 @@
       <router-link to="/Home/GNBJ/cygn" tag="li">
         <span>产业功能布局</span>
       </router-link>
-
     </div>
 
     <router-view />
@@ -66,15 +65,15 @@ export default {
 <style lang="scss" scoped>
 .twolink {
   position: absolute;
-  top: 100px;
-  left: 40%;
+  top: 80px;
+  left: 49%;
   width: 300px;
   height: 50px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: rgba(0, 0, 0, 0.363);
-  border-radius: 50px;
+  background: rgba(0, 0, 0, 0.24);
+  border-radius: 0 0 10px 10px;
 
   // z-index: 300;
   > li {

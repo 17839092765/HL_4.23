@@ -43,7 +43,7 @@ export default {
           bottom: "6%",
           containLabel: true,
         },
-        backgroundColor: "#848380",
+        //backgroundColor: "#848380",
         color: [
           "#608545",
           "#40FF01",
@@ -340,12 +340,12 @@ export default {
   z-index: 10;
   width: 350px;
   height: 603px;
-  background: rgba(69, 77, 72, 0.4)
-    linear-gradient(
-      227deg,
-      rgba(16, 25, 36, 0.4) 0%,
-      rgba(35, 47, 48, 0.7) 100%
-    );
+  background: rgba(69, 77, 72, 0.5);
+    // linear-gradient(
+    //   227deg,
+    //   rgba(16, 25, 36, 0.4) 0%,
+    //   rgba(35, 47, 48, 0.7) 100%
+    // );
   flex-direction: column;
   display: flex;
   > .landlayout_title {

@@ -192,8 +192,8 @@ export default {
   line-height: 50px;
 }
 .condata {
-  padding-top: 4%;
-  margin-top: 1%;
+  padding-top: 0%;
+  margin-top: 0%;
   width: 100%;
   height: 68%;
   overflow-y: scroll;
@@ -240,8 +240,9 @@ export default {
   height: 30%;
 }
 .cen {
+  top:5%;
   width: 100%;
-  height: 55%;
+  height: 90%;
 }
 .jdt {
   width: 100%;

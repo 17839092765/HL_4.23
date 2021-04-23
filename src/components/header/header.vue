@@ -11,15 +11,14 @@
           <span>红岭实景</span>
         </router-link>
       </div>
-      <div @click="showmenus(2)">
-        <router-link to="/Home/GNBJ" tag="div">
-          <span>功能布局</span>
-        </router-link>
-      </div>
       <div @click="showmenus(3)">
         <router-link to="/Home/XZSJ" tag="div">
           <span>现状数据</span>
-
+        </router-link>
+      </div>
+      <div @click="showmenus(2)">
+        <router-link to="/Home/GNBJ" tag="div">
+          <span>功能布局</span>
         </router-link>
       </div>
       <div @click="showmenus(4)">
@@ -81,13 +80,13 @@ export default {
 <style lang="scss" scoped>
 .header {
   // position: relative;
-  font-weight: 600;
+  font-weight: 400;
   width: 100%;
   height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(0, 0, 0, 0.24);
+  //background: rgba(0, 0, 0, 0.24);
 
   .Logo {
     z-index: 1000;
@@ -111,10 +110,12 @@ export default {
     width: 35%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     color: #ffffff;
-    background: rgba(0, 0, 0, 0.24) !important;
+    font-size: 22px;
+    background: rgba(0, 0, 0, 0.24) ;
+    z-index: 1000;
 
     > div {
       position: relative;
@@ -126,15 +127,17 @@ export default {
     }
     .router-link-active {
       color: #fee36d;
+      font-weight: 700;
+    //   font-size: 22px;
     }
     .router-link-active::after {
       content: "";
       position: absolute;
-      bottom: 10px;
+      bottom: 0px;
       left: 0;
       right: 0;
       margin: auto;
-      width: 60%;
+      width: 90%;
       height: 2px;
       background: #fee36d;
     }

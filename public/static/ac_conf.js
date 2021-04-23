@@ -6,9 +6,9 @@
 //   Path: "C:\\Users\\DoctorXiao\\AppData\\Roaming\\AirCityCloud\\SDK",
 // }
 var HostConfig = {
-  MatchServer: "192.168.5.98:83",
-  AirCityPlayer: "192.168.5.98:8081",
-  AirCityAPI: "192.168.5.98:4323",
+  MatchServer: "192.168.5.100:88",
+  AirCityPlayer: "192.168.5.100:8082",
+  AirCityAPI: "192.168.5.100:4324",
   Token: "",
-  Path: "C:\\Users\\张祥\\AppData\\Roaming\\AirCityCloud\\SDK",
+  Path: "D:\\AirCityCloud\\SDK",
 };

@@ -16,8 +16,7 @@ import ServiceCenter from '../../../components/gnbjCom/ServiceCenter.vue';
 export default {
   data () {
     return {
-      path: 'C:\\Users\\DoctorXiao\\Desktop\\HL\\src\\assets\\img\\2功能布局\\tag1.png',
-
+      path: 'E:\\06 code\\hongling\\HL\\src\\assets\\img\\2功能布局\\tag1.png',
     };
   },
   computed: {
