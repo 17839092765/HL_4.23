@@ -101,12 +101,12 @@ export default {
     showtuceng(this.$treedata.zsyzdata);
     if (__g) {
       __g.camera.lookAt(
-        510264.09375,
-        2493521.0,
-        650.484497,
-        -26.054821,
-        -63.835243,
-        -30
+        508820.343750,
+        2494021.000000,
+        808.976990,
+        -16.688160,
+        -22.833220,
+        -10
       );
       // let options = {
       //   showOutline: true,

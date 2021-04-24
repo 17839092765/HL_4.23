@@ -40,7 +40,7 @@ export default {
     return {
       CameraLookstyle: 0,
       path:
-        "E:\\06 code\\hongling\\HL\\src\\assets\\img\\1红岭实景\\biaoji.png",
+        "http://192.168.5.49:9080/img/biaoji.png",
       flag: true,
     };
   },
@@ -803,11 +803,11 @@ export default {
     polyline_add() {
       if (__g) {
         __g.camera.lookAt(
-          510264.09375,
-          2493521.0,
-          650.484497,
-          -26.054821,
-          -63.835243,
+        508666.062500,
+        2494739.250000,
+        1101.650635,
+        -20.728325,
+        -4.184755,
           -30
         );
       }
@@ -985,13 +985,24 @@ export default {
   width: 130px;
   height: 40px;
   cursor: pointer;
-  background: rgba(18,150,219, 0.8);
+  background: rgba(18,150,219, 0.6);
   position: absolute;
   text-align: center;
   line-height: 40px;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.6);
   top: 100px;
   left: 20px;
   font-weight: 600;
+
+  > li {
+    color: rgba(255, 255, 255, 1);
+    background: rgba(18,150,219, 1);
+    
+    &.router-link-active {
+      color: #fee36d;
+      font-weight: 700;
+    }
+  }
+
 }
 </style>

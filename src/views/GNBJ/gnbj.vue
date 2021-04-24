@@ -87,8 +87,10 @@ export default {
     list-style: none;
     color: #fff;
     position: relative;
+    
     &.router-link-active {
       color: #fee36d;
+      font-weight: 700;
     }
     // &.router-link-active::after {
     //   content: "";
@@ -125,8 +127,10 @@ export default {
     list-style: none;
     color: #fff;
     position: relative;
+
     &.router-link-active {
       color: #fee36d;
+      font-weight: 700;
     }
     // &.router-link-active::after {
     //   content: "";
