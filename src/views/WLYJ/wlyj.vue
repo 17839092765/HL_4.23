@@ -86,7 +86,8 @@ export default {
             break;
           case 2:
             this.CameraLookstyle = 2;
-            __g.misc.playAnimation(5);
+            __g.misc.playAnimation(2);
+
             // __g.camera.lookAt(
             //   510264.09375,
 
@@ -113,15 +114,16 @@ export default {
             break;
           case 4:
             this.CameraLookstyle = 4;
+            __g.misc.playAnimation(5);
 
-            __g.camera.lookAt(
-              510389.84375,
-              2494008.75,
-              61.139725,
-              -1.240516,
-              -6.405172,
-              4
-            );
+            // __g.camera.lookAt(
+            //   510389.84375,
+            //   2494008.75,
+            //   61.139725,
+            //   -1.240516,
+            //   -6.405172,
+            //   4
+            // );
             break;
 
           default:
