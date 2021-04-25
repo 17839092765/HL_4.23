@@ -13,13 +13,11 @@
 //   Path: "D:\\AirCityCloud\\SDK",
 // };
 
-
 //49服务器的服务
 var HostConfig = {
-    MatchServer: "192.168.5.49:81",
-    AirCityPlayer: "192.168.5.49:8083",
-    AirCityAPI: "192.168.5.49:4325",
-    Token: "",
-    Path: "D:\\AirCityCloud\\SDK",
-  };
-  
+  MatchServer: "192.168.5.49:81",
+  AirCityPlayer: "192.168.5.49:8083",
+  AirCityAPI: "192.168.5.49:4325",
+  Token: "",
+  Path: "C:\\Users\\jm\\AppData\\Roaming\\AirCityCloud\\SDK",
+};

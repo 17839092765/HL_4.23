@@ -6,18 +6,18 @@
       <router-link to="/Home/XZSJ/fdtz" tag="li">
         <span>法定图则</span>
       </router-link>
-      </div>
-      <div class="threelink2">
+    </div>
+    <div class="threelink2">
       <router-link to="/Home/XZSJ/xzqs" tag="li">
         <span>现状权属</span>
       </router-link>
-      </div>
-      <div class="threelink3">
+    </div>
+    <div class="threelink3">
       <router-link to="/Home/XZSJ/tdly" tag="li">
         <span>土地利用</span>
       </router-link>
-      </div>
-      <div class="threelink4">
+    </div>
+    <div class="threelink4">
       <router-link to="/Home/XZSJ/csgx" tag="li">
         <span>城市更新单元</span>
       </router-link>
@@ -33,7 +33,7 @@ import { showVectorlayers, hideVectorlayers } from "../../util/showtuze";
 // import __g from "../../main"
 import store from "../../store";
 export default {
-  data () {
+  data() {
     return {
       onclickdata: 0,
     };
@@ -41,7 +41,7 @@ export default {
   computed: {},
   watch: {
     $route: {
-      handler (to, from) {
+      handler(to, from) {
         // 删除点击出来的段变形
         __g.polyline.clear();
         store.commit("dataCaseisShow", false);
@@ -58,7 +58,6 @@ export default {
           }
         );
         if (to && to.path === "/Home/XZSJ/fdtz") {
-
           hideVectorlayers();
           showVectorlayers("法定图则");
         } else if (to && to.path === "/Home/XZSJ/xzqs") {
@@ -75,8 +74,8 @@ export default {
     },
   },
   methods: {},
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.$treedata && showtuceng(this.$treedata.xzsjdata);
     showVectorlayers("法定图则");
     __g.camera.lookAt(
@@ -91,22 +90,44 @@ export default {
       }
     );
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () {
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {
     hidetuceng(this.$treedata.xzsjdata);
     hideVectorlayers();
     __g.polyline.clear();
   },
-  destroyed () { },
-  activated () { },
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>
 
 <style lang="scss" scoped>
+.xzsj {
+  > div {
+    background: rgba(0, 0, 0, 0.192) !important;
+    > li {
+      width: 100%;
+      height: 100% !important;
+      border-radius: 5px;
+      line-height: 40px !important;
+      text-align: center;
+      width: 100% !important;
+      height: 50px;
+      line-height: 50px;
+      &.router-link-active {
+        height: 50px;
+        line-height: 50px;
+        color: #fee36d;
+        font-weight: 700;
+        background: rgba(0, 0, 0, 0.411);
+      }
+    }
+  }
+}
 .threelink1 {
   position: absolute;
   width: 120px;
@@ -129,11 +150,10 @@ export default {
     color: #ffffff;
     list-style: none;
     cursor: pointer;
-    
 
     &.router-link-active {
       color: #fee36d;
-       font-weight: 700;
+      font-weight: 700;
     }
     // &.router-link-active::after {
     //   content: "";
@@ -173,7 +193,7 @@ export default {
 
     &.router-link-active {
       color: #fee36d;
-       font-weight: 700;
+      font-weight: 700;
     }
     // &.router-link-active::after {
     //   content: "";
@@ -213,7 +233,7 @@ export default {
 
     &.router-link-active {
       color: #fee36d;
-       font-weight: 700;
+      font-weight: 700;
     }
     // &.router-link-active::after {
     //   content: "";
@@ -253,7 +273,7 @@ export default {
 
     &.router-link-active {
       color: #fee36d;
-       font-weight: 700;
+      font-weight: 700;
     }
     // &.router-link-active::after {
     //   content: "";

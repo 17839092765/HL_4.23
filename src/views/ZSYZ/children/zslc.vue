@@ -94,6 +94,10 @@ export default {
       });
     },
     showjjone(flag) {
+      //      layers_jjone.forEach((item, index) => {
+      //   let lastid_ = item.id;
+      //   __g.tileLayer.setTranslation(lastid_, [510447.46875, 2494084.25, 20]);
+      // });
       if (flag) {
         __g.infoTree.show(this.jjoneidarr);
       } else {
