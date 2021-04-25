@@ -34,7 +34,7 @@ import LivingCommunity from "../../components/gnbjCom/LivingCommunity";
 import ServiceCenter from "../../components/gnbjCom/ServiceCenter";
 import LandLayout from "../../components/gnbjCom/LandLayout";
 export default {
-  data () {
+  data() {
     return {
       active: 1,
     };
@@ -42,19 +42,19 @@ export default {
   computed: {},
   watch: {},
   methods: {},
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     // showtuceng(this.$treedata.gnbjdata);
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () {
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {
     hidetuceng(this.$treedata.gnbjdata);
   },
-  destroyed () { },
-  activated () { },
+  destroyed() {},
+  activated() {},
   components: {
     NewCenter,
     LivingCommunity,
@@ -74,23 +74,26 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: rgba(0, 0, 0, 0.24);
+  background: rgba(0, 0, 0, 0.205);
   border-radius: 5px;
   font-size: 18px;
 
   // z-index: 300;
   > li {
-    width: 90%;
+    width: 100%;
     height: 100%;
+    border-radius: 5px;
+
     line-height: 40px;
     text-align: center;
     list-style: none;
     color: #fff;
     position: relative;
-    
+
     &.router-link-active {
       color: #fee36d;
       font-weight: 700;
+      background: rgba(0, 0, 0, 0.404);
     }
     // &.router-link-active::after {
     //   content: "";
@@ -120,8 +123,9 @@ export default {
 
   // z-index: 300;
   > li {
-    width: 90%;
+    width: 100%;
     height: 100%;
+    border-radius: 5px;
     line-height: 40px;
     text-align: center;
     list-style: none;
@@ -131,6 +135,7 @@ export default {
     &.router-link-active {
       color: #fee36d;
       font-weight: 700;
+      background: rgba(0, 0, 0, 0.404);
     }
     // &.router-link-active::after {
     //   content: "";

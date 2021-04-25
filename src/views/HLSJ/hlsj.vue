@@ -1,7 +1,9 @@
 <template>
   <div class="hlsj">
     <!-- <button class="btn" @click="playCameraTour">CameraTour</button> -->
-    <div @click="tagshow" class="tagflag">开启关闭标签</div>
+    <div @click="tagshow" class="tagflag">
+      {{ flag ? "隐藏标签" : "显示标签" }}
+    </div>
     <!-- <div class="pictoLook">
       <div
         :class="
@@ -39,9 +41,9 @@ export default {
   data() {
     return {
       CameraLookstyle: 0,
-      path:
-        "http://192.168.5.49:9080/img/biaoji.png",
-      flag: true,
+      path: "http://192.168.5.49:9080/img/biaoji.png",
+      flag: false,
+      tagIds: [],
     };
   },
   computed: {},
@@ -109,12 +111,21 @@ export default {
       }
     },
     tagshow() {
+      this.flag = !this.flag;
+
       if (this.flag) {
-        __g.tag.clear();
-        this.flag = !this.flag;
+        if (this.tagIds.length == 0) {
+          console.log("addtag");
+          this.addtag();
+        } else {
+          __g.tag.show(this.tagIds);
+        }
+        // this.flag = !this.flag;
       } else {
-        this.addtag();
-        this.flag = !this.flag;
+        // __g.tag.clear();
+        __g.tag.hide(this.tagIds);
+
+        // this.addtag();
       }
     },
     addtag() {
@@ -128,7 +139,7 @@ export default {
         let text1 = "蔡屋围统筹片区"; //标签显示的文字
         let range1 = [1, 8000.0]; //标签的可见范围
         let showLine1 = false; //标签下方是否显示垂直牵引线
-
+        this.tagIds.push(id1);
         let o1 = new TagData(
           id1,
           coord1,
@@ -153,6 +164,7 @@ export default {
         let text2 = "国信证券大厦"; //标签显示的文字
         let range2 = [1, 8000.0]; //标签的可见范围
         let showLine2 = false; //标签下方是否显示垂直牵引线
+        this.tagIds.push(id2);
 
         let o2 = new TagData(
           id2,
@@ -178,6 +190,7 @@ export default {
         let text3 = "信托大厦"; //标签显示的文字
         let range3 = [1, 8000.0]; //标签的可见范围
         let showLine3 = false; //标签下方是否显示垂直牵引线
+        this.tagIds.push(id3);
 
         let o3 = new TagData(
           id3,
@@ -203,6 +216,7 @@ export default {
         let text4 = "京基100"; //标签显示的文字
         let range4 = [1, 8000.0]; //标签的可见范围
         let showLine4 = false; //标签下方是否显示垂直牵引线
+        this.tagIds.push(id4);
 
         let o4 = new TagData(
           id4,
@@ -228,6 +242,7 @@ export default {
         let text5 = "中国人民银行"; //标签显示的文字
         let range5 = [1, 8000.0]; //标签的可见范围
         let showLine5 = false; //标签下方是否显示垂直牵引线
+        this.tagIds.push(id5);
 
         let o5 = new TagData(
           id5,
@@ -253,6 +268,7 @@ export default {
         let text6 = "中国人民银行大厦"; //标签显示的文字
         let range6 = [1, 8000.0]; //标签的可见范围
         let showLine6 = false; //标签下方是否显示垂直牵引线
+        this.tagIds.push(id6);
 
         let o6 = new TagData(
           id6,
@@ -278,6 +294,7 @@ export default {
         let text7 = "农业银行"; //标签显示的文字
         let range7 = [1, 8000.0]; //标签的可见范围
         let showLine7 = false; //标签下方是否显示垂直牵引线
+        this.tagIds.push(id7);
 
         let o7 = new TagData(
           id7,
@@ -303,6 +320,7 @@ export default {
         let text8 = "地王大厦"; //标签显示的文字
         let range8 = [1, 8000.0]; //标签的可见范围
         let showLine8 = false; //标签下方是否显示垂直牵引线
+        this.tagIds.push(id8);
 
         let o8 = new TagData(
           id8,
@@ -328,6 +346,7 @@ export default {
         let text9 = "平安银行大厦"; //标签显示的文字
         let range9 = [1, 8000.0]; //标签的可见范围
         let showLine9 = false; //标签下方是否显示垂直牵引线
+        this.tagIds.push(id9);
 
         let o9 = new TagData(
           id9,
@@ -353,6 +372,7 @@ export default {
         let text10 = "深业中心大厦"; //标签显示的文字
         let range10 = [1, 8000.0]; //标签的可见范围
         let showLine10 = false; //标签下方是否显示垂直牵引线
+        this.tagIds.push(id10);
 
         let o10 = new TagData(
           id10,
@@ -378,6 +398,7 @@ export default {
         let text11 = "金山大厦"; //标签显示的文字
         let range11 = [1, 8000.0]; //标签的可见范围
         let showLine11 = false; //标签下方是否显示垂直牵引线
+        this.tagIds.push(id11);
 
         let o11 = new TagData(
           id11,
@@ -403,6 +424,7 @@ export default {
         let text12 = "金丰城大厦"; //标签显示的文字
         let range12 = [1, 8000.0]; //标签的可见范围
         let showLine12 = false; //标签下方是否显示垂直牵引线
+        this.tagIds.push(id12);
 
         let o12 = new TagData(
           id12,
@@ -428,6 +450,7 @@ export default {
         let range13 = [1, 8000.0]; //标签的可见范围
         let showLine13 = false; //标签下方是否显示垂直牵引线
         let imagePath13 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id13);
 
         let o13 = new TagData(
           id13,
@@ -453,6 +476,7 @@ export default {
         let range14 = [1, 8000.0]; //标签的可见范围
         let showLine14 = false; //标签下方是否显示垂直牵引线
         let imagePath14 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id14);
 
         let o14 = new TagData(
           id14,
@@ -478,6 +502,7 @@ export default {
         let range15 = [1, 8000.0]; //标签的可见范围
         let showLine15 = false; //标签下方是否显示垂直牵引线
         let imagePath15 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id15);
 
         let o15 = new TagData(
           id15,
@@ -503,6 +528,7 @@ export default {
         let range16 = [1, 8000.0]; //标签的可见范围
         let showLine16 = false; //标签下方是否显示垂直牵引线
         let imagePath16 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id16);
 
         let o16 = new TagData(
           id16,
@@ -529,6 +555,7 @@ export default {
         let range17 = [1, 8000.0]; //标签的可见范围
         let showLine17 = false; //标签下方是否显示垂直牵引线
         let imagePath17 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id17);
 
         let o17 = new TagData(
           id17,
@@ -554,6 +581,7 @@ export default {
         let range18 = [1, 8000.0]; //标签的可见范围
         let showLine18 = false; //标签下方是否显示垂直牵引线
         let imagePath18 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id18);
 
         let o18 = new TagData(
           id18,
@@ -579,6 +607,7 @@ export default {
         let range19 = [1, 8000.0]; //标签的可见范围
         let showLine19 = false; //标签下方是否显示垂直牵引线
         let imagePath19 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id19);
 
         let o19 = new TagData(
           id19,
@@ -605,6 +634,7 @@ export default {
         let range20 = [1, 8000.0]; //标签的可见范围
         let showLine20 = false; //标签下方是否显示垂直牵引线
         let imagePath20 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id20);
 
         let o20 = new TagData(
           id20,
@@ -630,6 +660,7 @@ export default {
         let range21 = [1, 8000.0]; //标签的可见范围
         let showLine21 = false; //标签下方是否显示垂直牵引线
         let imagePath21 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id21);
 
         let o21 = new TagData(
           id21,
@@ -655,6 +686,7 @@ export default {
         let range22 = [1, 8000.0]; //标签的可见范围
         let showLine22 = false; //标签下方是否显示垂直牵引线
         let imagePath22 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id22);
 
         let o22 = new TagData(
           id22,
@@ -680,6 +712,7 @@ export default {
         let range23 = [1, 8000.0]; //标签的可见范围
         let showLine23 = false; //标签下方是否显示垂直牵引线
         let imagePath23 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id23);
 
         let o23 = new TagData(
           id23,
@@ -705,6 +738,7 @@ export default {
         let range24 = [1, 8000.0]; //标签的可见范围
         let showLine24 = false; //标签下方是否显示垂直牵引线
         let imagePath24 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id24);
 
         let o24 = new TagData(
           id24,
@@ -730,6 +764,7 @@ export default {
         let range25 = [1, 8000.0]; //标签的可见范围
         let showLine25 = false; //标签下方是否显示垂直牵引线
         let imagePath25 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id25);
 
         let o25 = new TagData(
           id25,
@@ -755,6 +790,7 @@ export default {
         let range26 = [1, 8000.0]; //标签的可见范围
         let showLine26 = false; //标签下方是否显示垂直牵引线
         let imagePath26 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id26);
 
         let o26 = new TagData(
           id26,
@@ -780,6 +816,7 @@ export default {
         let range27 = [1, 8000.0]; //标签的可见范围
         let showLine27 = false; //标签下方是否显示垂直牵引线
         let imagePath27 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id27);
 
         let o27 = new TagData(
           id27,
@@ -803,11 +840,11 @@ export default {
     polyline_add() {
       if (__g) {
         __g.camera.lookAt(
-        508666.062500,
-        2494739.250000,
-        1101.650635,
-        -20.728325,
-        -4.184755,
+          508666.0625,
+          2494739.25,
+          1101.650635,
+          -20.728325,
+          -4.184755,
           -30
         );
       }
@@ -911,7 +948,7 @@ export default {
   mounted() {
     showtuceng(this.$treedata.hlsjdata);
     this.polyline_add();
-    this.addtag();
+    // this.addtag();
     // this.addCameraTour();
   },
   beforeCreate() {},
@@ -982,10 +1019,11 @@ export default {
   cursor: pointer;
 }
 .tagflag {
+  z-index: 100;
   width: 130px;
   height: 40px;
   cursor: pointer;
-  background: rgba(18,150,219, 0.6);
+  background: rgba(18, 150, 219, 0.6);
   position: absolute;
   text-align: center;
   line-height: 40px;
@@ -996,13 +1034,12 @@ export default {
 
   > li {
     color: rgba(255, 255, 255, 1);
-    background: rgba(18,150,219, 1);
-    
+    background: rgba(18, 150, 219, 1);
+
     &.router-link-active {
       color: #fee36d;
       font-weight: 700;
     }
   }
-
 }
 </style>

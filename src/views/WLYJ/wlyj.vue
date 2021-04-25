@@ -20,7 +20,7 @@
       >
       </el-slider>
     </div>
-    <!-- <div class="pictoLook">
+    <div class="pictoLook">
       <div
         :class="
           CameraLookstyle === 1 ? 'isactive CameraLookstyle' : 'CameraLookstyle'
@@ -45,7 +45,7 @@
         "
         @click="CameraLook(4)"
       ></div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -71,55 +71,56 @@ export default {
       if (__g) {
         switch (val) {
           case 1:
-            __g.camera.lookAt(
-              510264.09375,
+            __g.misc.playAnimation(4);
+            // __g.camera.lookAt(
+            //   510264.09375,
 
-              2493521.0,
-              650.484497,
-              -26.054821,
-              -63.835243,
-              -30
-            );
+            //   2493521.0,
+            //   650.484497,
+            //   -26.054821,
+            //   -63.835243,
+            //   -30
+            // );
             this.CameraLookstyle = 1;
 
             break;
           case 2:
             this.CameraLookstyle = 2;
+            __g.misc.playAnimation(5);
+            // __g.camera.lookAt(
+            //   510264.09375,
 
-            __g.camera.lookAt(
-              510264.09375,
-
-              2493521.0,
-              650.484497,
-              -26.054821,
-              -63.835243,
-              -30
-            );
+            //   2493521.0,
+            //   650.484497,
+            //   -26.054821,
+            //   -63.835243,
+            //   -30
+            // );
             break;
           case 3:
             this.CameraLookstyle = 3;
+            __g.misc.playAnimation(6);
 
-            __g.camera.lookAt(
-              510264.09375,
+            // __g.camera.lookAt(
+            //   510264.09375,
 
-              2493521.0,
-              650.484497,
-              -26.054821,
-              -63.835243,
-              -30
-            );
+            //   2493521.0,
+            //   650.484497,
+            //   -26.054821,
+            //   -63.835243,
+            //   -30
+            // );
             break;
           case 4:
             this.CameraLookstyle = 4;
 
             __g.camera.lookAt(
-                510389.843750,
-                2494008.750000,
-                61.139725,
-                -1.240516,
-                -6.405172,
-                4
-                
+              510389.84375,
+              2494008.75,
+              61.139725,
+              -1.240516,
+              -6.405172,
+              4
             );
             break;
 
@@ -201,8 +202,8 @@ export default {
   mounted() {
     if (__g) {
       __g.camera.lookAt(
-        508913.312500,
-        2493698.500000,
+        508913.3125,
+        2493698.5,
         892.929504,
         -18.531157,
         -29.102474,
@@ -252,22 +253,22 @@ export default {
     transition: all 0.2s;
   }
 
-//   > div:nth-of-type(1) {
-//     background: url("../../assets/img/1红岭实景/06168135-f86a-4cca-a981-99da8a29e695.jpg")
-//       no-repeat center/cover;
-//   }
-//   > div:nth-of-type(2) {
-//     background: url("../../assets/img/1红岭实景/3b55c90a-b719-4b3b-a537-3881513aecfd.jpg")
-//       no-repeat center/cover;
-//   }
-//   > div:nth-of-type(3) {
-//     background: url("../../assets/img/1红岭实景/76262c68-19fd-4821-a1cd-6f983fcf94ae.png")
-//       no-repeat center/cover;
-//   }
-//   > div:nth-of-type(4) {
-//     background: url("../../assets/img/1红岭实景/b8bbfda5-bde2-42c9-8c87-a61fa1bbabf2.jpg")
-//       no-repeat center/cover;
-//   }
+  > div:nth-of-type(1) {
+    background: url("../../assets/img/1红岭实景/06168135-f86a-4cca-a981-99da8a29e695.jpg")
+      no-repeat center/cover;
+  }
+  > div:nth-of-type(2) {
+    background: url("../../assets/img/1红岭实景/3b55c90a-b719-4b3b-a537-3881513aecfd.jpg")
+      no-repeat center/cover;
+  }
+  > div:nth-of-type(3) {
+    background: url("../../assets/img/1红岭实景/76262c68-19fd-4821-a1cd-6f983fcf94ae.png")
+      no-repeat center/cover;
+  }
+  > div:nth-of-type(4) {
+    background: url("../../assets/img/1红岭实景/b8bbfda5-bde2-42c9-8c87-a61fa1bbabf2.jpg")
+      no-repeat center/cover;
+  }
 }
 /deep/ .block {
   position: absolute;

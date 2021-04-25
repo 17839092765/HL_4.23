@@ -257,7 +257,7 @@ export default {
     },
   },
   created() {
-    //  this.initWebSocket();
+    // this.initWebSocket();
     window.addEventListener("load", this.onLoad, true);
     window.addEventListener("resize", this.onResize, true);
   },
