@@ -20,6 +20,7 @@ var HostConfig = {
     AirCityPlayer: "192.168.5.49:8083",
     AirCityAPI: "192.168.5.49:4325",
     Token: "",
-    Path: "D:\\AirCityCloud\\SDK",
+    // Path: "D:\\AirCityCloud\\SDK",
+    Path: "C:\\Users\\jm\\AppData\\Roaming\\AirCityCloud\\SDK",
   };
   
