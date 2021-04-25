@@ -16,7 +16,7 @@ import ServiceCenter from '../../../components/gnbjCom/ServiceCenter.vue';
 export default {
   data () {
     return {
-      path: 'E:\\06 code\\hongling\\HL\\src\\assets\\img\\2功能布局\\tag1.png',
+      path: 'E:\\yqd\\code\\HL_4.23\\src\\assets\\img\\2功能布局\\tag1.png',
     };
   },
   computed: {
@@ -74,11 +74,12 @@ export default {
   mounted () {
     if (__g) {
       __g.camera.lookAt(
-        509355.781250,
-        2493820.000000,
-        2141.515381,
-        -43.167141,
-        -25.481180,
+      508928.312500,
+      2494123.750000,
+      1412.436523,
+      -35.296734,
+      -21.038792,
+        -35.481180,
       );
     }
     showtuceng(this.$treedata.gnbjdata)
