@@ -98,6 +98,7 @@ export default {
     hidetuceng(this.$treedata.xzsjdata);
     hideVectorlayers();
     __g.polyline.clear();
+    this.$store.commit("clickData", {})
   },
   destroyed() {},
   activated() {},
@@ -108,7 +109,7 @@ export default {
 <style lang="scss" scoped>
 .xzsj {
   > div {
-    background: rgba(0, 0, 0, 0.192) !important;
+    background: rgba(0, 0, 0, 0.274) !important;
     > li {
       width: 100%;
       height: 100% !important;

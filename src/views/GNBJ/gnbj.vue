@@ -74,7 +74,8 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: rgba(0, 0, 0, 0.205);
+     background: rgba(0, 0, 0, 0.274) !important;
+
   border-radius: 5px;
   font-size: 18px;
 

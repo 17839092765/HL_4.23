@@ -80,9 +80,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="nonedata">
-      暂无数据
-    </div>
+    <div v-else class="nonedata">暂无数据</div>
   </div>
 </template>
 
@@ -115,15 +113,15 @@ export default {
       console.log(item);
       console.log(this.$treedata.louyucase);
 
-      this.$treedata.louyucase.map((mon) => {
+      this.$treedata.louyucase.forEach((mon) => {
         if (mon.ObjectID === item.建筑编码) {
           this.hightbuliding = mon;
+          __g.tileLayer.highlightActor(
+            mon.ObjectID,
+            mon.Id,
+             );
         }
       });
-      __g.tileLayer.highlightActor(
-        this.hightbuliding.Id,
-        this.hightbuliding.ObjectID
-      );
     },
     // 高级搜索提交确定
     async sumit() {

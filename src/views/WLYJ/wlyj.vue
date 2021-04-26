@@ -1,13 +1,13 @@
 <template>
   <div class="wlyj">
-    <!-- <div ref="slider" class="slider">
+    <div ref="slider" class="slider">
       <img src="../../assets/img/5未来愿景/调节条背景.svg" alt="" />
       <div class="point" @mousedown="updateTime" ref="point">
 
         <div>{{ currentTime }}</div>
       </div>
-    </div> -->
-    <div class="block">
+    </div>
+    <!-- <div class="block">
       <el-slider
         :step="2"
         :min="0"
@@ -19,7 +19,7 @@
         height="200px"
       >
       </el-slider>
-    </div>
+    </div> -->
     <div class="pictoLook">
       <div
         :class="
@@ -211,8 +211,10 @@ export default {
         -29.102474,
         -30.000002
       );
+      __g.infoTree.show("CA5B86EA479EC48F0701CAB66C35E54E")
     }
     showtuceng(this.$treedata.wlyjdata);
+    // showtuceng(this.$treedata.Car);
   },
   beforeCreate() {},
   beforeMount() {},
@@ -220,6 +222,9 @@ export default {
   updated() {},
   beforeDestroy() {
     hidetuceng(this.$treedata.wlyjdata);
+    // hidetuceng(this.$treedata.Car);
+      __g.infoTree.hide("CA5B86EA479EC48F0701CAB66C35E54E")
+
     __g.weather.setDateTime(2021, 4, 9, 10, 0, false);
   },
   destroyed() {},
@@ -325,25 +330,25 @@ export default {
   background: url("../../assets/img/5未来愿景/当前选中.png") no-repeat
     center/cover;
 }
-// .slider {
-//   position: absolute;
-//   left: 47px;
-//   top: 293px;
-// }
-// .point {
-//   position: absolute;
-//   width: 229px;
-//   height: 213px;
-//   top: 226px;
-//   left: -65px;
-//   cursor: pointer;
-//   user-select: none;
-//   background: url("../../assets/img/5未来愿景/当前选中.png");
-//   > div {
-//     position: absolute;
-//     color: #fff;
-//     top: 100px;
-//     left: 135px;
-//   }
-// }
+.slider {
+  position: absolute;
+  left: 47px;
+  top: 293px;
+}
+.point {
+  position: absolute;
+  width: 229px;
+  height: 213px;
+  top: 226px;
+  left: -65px;
+  cursor: pointer;
+  user-select: none;
+  background: url("../../assets/img/5未来愿景/当前选中.png");
+  > div {
+    position: absolute;
+    color: #fff;
+    top: 100px;
+    left: 135px;
+  }
+}
 </style>

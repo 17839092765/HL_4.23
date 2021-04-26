@@ -41,7 +41,8 @@ export default {
   data() {
     return {
       CameraLookstyle: 0,
-      path: "http://192.168.5.49:9080/img/biaoji.png",
+      // path: "http://192.168.5.49:9080/img/biaoji.png",
+      path: "D:\\HongLing\\HL_4.23\\src\\assets\\img\\1红岭实景\\biaoji.png",
       flag: false,
       tagIds: [],
     };

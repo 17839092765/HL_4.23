@@ -2,6 +2,7 @@ const webpack = require("webpack")
 const path = require("path")
 module.exports = {
   devServer: {
+    open:true,
     // 项目运行时候的端口号
     port: 8080,
     proxy: {

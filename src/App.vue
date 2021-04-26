@@ -256,10 +256,11 @@ export default {
       that.$store.commit("clickData", this.data_show);
     },
   },
+  
   created() {
-    // this.initWebSocket();
-    window.addEventListener("load", this.onLoad, true);
-    window.addEventListener("resize", this.onResize, true);
+    this.initWebSocket();
+    // window.addEventListener("load", this.onLoad, true);
+    // window.addEventListener("resize", this.onResize, true);
   },
   mounted() {
     // window.addEventListener("load", this.onLoad, true);

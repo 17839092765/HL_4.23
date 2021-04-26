@@ -10,7 +10,8 @@ export default {
   name: "LivingCommunity",
   data () {
     return {
-      path: 'E:\\yqd\\code\\HL_4.23\\src\\assets\\img\\2功能布局\\3\\',
+      // path: 'E:\\yqd\\code\\HL_4.23\\src\\assets\\img\\2功能布局\\3\\',
+      path: 'D:\\HongLing\\HL_4.23\\src\\assets\\img\\2功能布局\\3\\',
 
     };
   },

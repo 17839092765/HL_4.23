@@ -136,7 +136,8 @@ import SearchGaoji from "./search_gaoji";
 export default {
   data() {
     return {
-      // 展示jjone
+ hightbuliding: {},
+// 展示jjone
       showjjone: false,
       // 展示北段选中的样式
       iswhowbeiduan: false,
@@ -152,6 +153,21 @@ export default {
   computed: {},
   watch: {},
   methods: {
+      // 表格的点击
+    tableclick(item) {
+      console.log(item);
+      console.log(this.$treedata.louyucase);
+
+      this.$treedata.louyucase.map((mon) => {
+        if (mon.ObjectID === item.建筑编码) {
+          this.hightbuliding = mon;
+        }
+      });
+      __g.tileLayer.highlightActor(
+        this.hightbuliding.Id,
+        this.hightbuliding.ObjectID
+      );
+    },
     // sousuo
     async request() {
       let minArea = Number(this.value[0]),
