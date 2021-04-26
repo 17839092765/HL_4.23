@@ -1,36 +1,36 @@
 <template>
-  <div class='cygn'>
-    <NewCenter v-if="cygnblock==='tagxinying'" />
-    <LivingCommunity v-if="cygnblock==='tagguoji'" />
-    <ServiceCenter v-if="cygnblock==='tagxiandai'" />
-    {{cygnblock}}
+  <div class="cygn">
+    <NewCenter v-if="cygnblock === 'tagxinying'" />
+    <LivingCommunity v-if="cygnblock === 'tagguoji'" />
+    <ServiceCenter v-if="cygnblock === 'tagxiandai'" />
+    {{ cygnblock }}
   </div>
 </template>
 
 <script>
-import NewCenter from '../../../components/gnbjCom/NewCenter.vue';
-import { showtuceng, hidetuceng } from "../../../util/showtuceng"
-import { mapState } from "vuex"
-import LivingCommunity from '../../../components/gnbjCom/LivingCommunity.vue';
-import ServiceCenter from '../../../components/gnbjCom/ServiceCenter.vue';
+import NewCenter from "../../../components/gnbjCom/NewCenter.vue";
+import { showtuceng, hidetuceng } from "../../../util/showtuceng";
+import { mapState } from "vuex";
+import LivingCommunity from "../../../components/gnbjCom/LivingCommunity.vue";
+import ServiceCenter from "../../../components/gnbjCom/ServiceCenter.vue";
 export default {
-  data () {
+  data() {
     return {
-      path: 'E:\\yqd\\code\\HL_4.23\\src\\assets\\img\\2功能布局\\tag1.png',
+      path: "E:\\Freedo\\红岭\\HL_4.23\\src\\assets\\img\\2功能布局\\tag1.png",
     };
   },
   computed: {
     ...mapState({
-      cygnblock: (state) => state.cygnblock
-    })
+      cygnblock: (state) => state.cygnblock,
+    }),
   },
   watch: {
-    cygnblock (newcygnblock) {
+    cygnblock(newcygnblock) {
       console.log(newcygnblock);
-    }
+    },
   },
   methods: {
-    addTag (id, coord, imagePath, text) {
+    addTag(id, coord, imagePath, text) {
       //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
       let url = imagePath;
 
@@ -68,21 +68,19 @@ export default {
       __g.tag.add(o);
     },
   },
-  created () {
-
-  },
-  mounted () {
+  created() {},
+  mounted() {
     if (__g) {
       __g.camera.lookAt(
-      508928.312500,
-      2494123.750000,
-      1412.436523,
-      -35.296734,
-      -21.038792,
-        -35.481180,
+        508928.3125,
+        2494123.75,
+        1412.436523,
+        -35.296734,
+        -21.038792,
+        -35.48118
       );
     }
-    showtuceng(this.$treedata.gnbjdata)
+    showtuceng(this.$treedata.gnbjdata);
     this.addTag(
       "tagxinying",
       [510490.21875, 2496392, 228.9998321533203],
@@ -105,26 +103,19 @@ export default {
       "现代服务集聚中心"
     );
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () {
-    __g.tag.delete([
-      "tagxinying",
-      "tagguoji",
-      "tagxiandai",
-
-    ]);
-    hidetuceng(this.$treedata.gnbjdata)
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {
+    __g.tag.delete(["tagxinying", "tagguoji", "tagxiandai"]);
+    hidetuceng(this.$treedata.gnbjdata);
     this.$store.commit("cygnblock", "");
-
   },
-  destroyed () { },
-  activated () { },
+  destroyed() {},
+  activated() {},
   components: { NewCenter, LivingCommunity, ServiceCenter },
-}
+};
 </script>
 
-<style lang='scss' scoped>
-</style>
+<style lang="scss" scoped></style>

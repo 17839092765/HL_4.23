@@ -8,16 +8,15 @@
 import Back from "./Back";
 export default {
   name: "LivingCommunity",
-  data () {
+  data() {
     return {
-      path: 'E:\\yqd\\code\\HL_4.23\\src\\assets\\img\\2功能布局\\3\\',
-
+      path: "E:\\Freedo\\红岭\\HL_4.23\\src\\assets\\img\\2功能布局\\3\\",
     };
   },
   computed: {},
   watch: {},
   methods: {
-    addTag (id, coord, imagePath) {
+    addTag(id, coord, imagePath) {
       //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
       let url = imagePath;
 
@@ -52,25 +51,24 @@ export default {
       //鼠标悬停时的替换图片
       // o.hoverImagePath = HostConfig.AbsolutePath + "/images/hilightarea.png";
       setTimeout(() => {
-
         __g.tag.add(o);
       }, 1000);
     },
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     if (__g) {
-      __g.infoTree.hide("935F37B34E82DF36A7D769AB444D7E64")
-      __g.tag.delete(["tagxinying", "tagguoji", "tagxiandai"])
+      __g.infoTree.hide("935F37B34E82DF36A7D769AB444D7E64");
+      __g.tag.delete(["tagxinying", "tagguoji", "tagxiandai"]);
     }
     __g.camera.lookAt(
-      511072.187500,
-      2494568.500000,
+      511072.1875,
+      2494568.5,
       1142.122437,
       0.000001,
       144.363281,
 
-      -49.130196,
+      -49.130196
     );
     /**
      * <a href="https://imgtu.com/i/cYkLGV"><img src="https://z3.ax1x.com/2021/04/08/cYkLGV.png" alt="cYkLGV.png" border="0"></a>
@@ -79,47 +77,43 @@ export default {
 <a href="https://imgtu.com/i/cYk7an"><img src="https://z3.ax1x.com/2021/04/08/cYk7an.png" alt="cYk7an.png" border="0"></a>
      */
     setTimeout(() => {
-
       this.addTag(
         "tag1",
         [510455.3125, 2494537.25, 259.84127807617188],
-        this.path + "1.png",
+        this.path + "1.png"
       );
     }, 20);
     setTimeout(() => {
-
       this.addTag(
         "tag2",
         [510525.375, 2494229.5, 446.88735961914063],
-        this.path + "2.png",
+        this.path + "2.png"
       );
     }, 40);
     setTimeout(() => {
-
       this.addTag(
         "tag3",
         [510705.75, 2493953, 146.02053833007813],
-        this.path + "3.png",
+        this.path + "3.png"
       );
     }, 60);
     setTimeout(() => {
-
       this.addTag(
         "tag4",
         [511048.65625, 2493970.75, 415.95846557617188],
-        this.path + "4.png",
+        this.path + "4.png"
       );
     }, 80);
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () {
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {
     __g.tag.delete(["tag1", "tag2", "tag3", "tag4"]);
   },
-  destroyed () { },
-  activated () { },
+  destroyed() {},
+  activated() {},
   components: {
     Back,
   },

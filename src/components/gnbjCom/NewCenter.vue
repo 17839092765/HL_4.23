@@ -9,16 +9,15 @@ import Back from "./Back";
 
 export default {
   name: "NewCenter",
-  data () {
+  data() {
     return {
-      path: 'E:\\yqd\\code\\HL_4.23\\src\\assets\\img\\2功能布局\\1\\',
-
+      path: "E:\\Freedo\\红岭\\HL_4.23\\src\\assets\\img\\2功能布局\\1\\",
     };
   },
   computed: {},
   watch: {},
   methods: {
-    addTag (id, coord, imagePath) {
+    addTag(id, coord, imagePath) {
       //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
       let url1 = imagePath;
 
@@ -194,7 +193,6 @@ export default {
         imageSize1,
         this.path + "9.png",
 
-
         text1,
         range1,
         showLine1
@@ -204,15 +202,13 @@ export default {
       o9.textBackgroundColor = Color.White;
       o9.textRange = textRange;
       __g.tag.add(o9);
-
     },
-
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     if (__g) {
-      __g.infoTree.hide("935F37B34E82DF36A7D769AB444D7E64")
-      __g.tag.delete(["tagxinying", "tagguoji", "tagxiandai"])
+      __g.infoTree.hide("935F37B34E82DF36A7D769AB444D7E64");
+      __g.tag.delete(["tagxinying", "tagguoji", "tagxiandai"]);
       __g.tag.delete([
         "tag1",
         "tag2",
@@ -226,17 +222,15 @@ export default {
       ]);
     }
     __g.camera.lookAt(
-      511211.468750,
-      2496189.750000,
+      511211.46875,
+      2496189.75,
       1059.392334,
       -60.268341,
-      -151.060394,
+      -151.060394
     );
     setTimeout(() => {
-
-      this.addTag()
+      this.addTag();
     }, 1000);
-
 
     // setTimeout(() => {
 
@@ -301,11 +295,11 @@ export default {
     //   "https://z3.ax1x.com/2021/04/08/cJDQ91.png"
     // );
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () {
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {
     __g.tag.delete([
       "tag1",
       "tag2",
@@ -318,8 +312,8 @@ export default {
       "tag9",
     ]);
   },
-  destroyed () { },
-  activated () { },
+  destroyed() {},
+  activated() {},
   components: {
     Back,
   },
