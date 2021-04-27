@@ -40,7 +40,7 @@ const geoserverruest = {
   //现状权属
   xzqsquery() {
     return axios.get(
-      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs&maxFeatures=20000&outputFormat=application%2Fjson`
+      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs0407&maxFeatures=20000&outputFormat=application%2Fjson`
     )
   },
   // 城市更新项目
@@ -58,11 +58,19 @@ const geoserverruest = {
   },
   // 3.31api
   // 现状权属
+  // shownewxzqsdata() {
+  //   return axios.get(
+  //     `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs0403&maxFeatures=20000&outputFormat=application%2Fjson`
+  //   )
+  //   // db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs0401&maxFeatures=2000&outputFormat=application%2Fjson
+  //   // db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs0407&maxFeatures=20000&outputFormat=application%2Fjson
+  // },
   shownewxzqsdata() {
     return axios.get(
-      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs0403&maxFeatures=20000&outputFormat=application%2Fjson`
+      `${geoserverurl}db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs0407&maxFeatures=20000&outputFormat=application%2Fjson`
     )
     // db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs0401&maxFeatures=2000&outputFormat=application%2Fjson
+    // db_hongling/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=db_hongling%3Axzqs0407&maxFeatures=20000&outputFormat=application%2Fjson
   },
   // 法定图则
   shownewfdtzdata_left() {

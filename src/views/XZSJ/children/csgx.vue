@@ -673,7 +673,7 @@ export default {
 .echwarp {
   width: 350px;
   height: 450px;
-  background: #5c5c5c4d; 
+  // background: #5c5c5c4d; 
   position: absolute;
   top: 100px;
   left: 20px;
@@ -706,7 +706,7 @@ export default {
     height: calc(100% - 20px);
     background: red;
     background: rgba(41, 62, 65, 0.65);
-    filter: blur(8px);
+    // filter: blur(8px);
   }
 }
 .top_data {
