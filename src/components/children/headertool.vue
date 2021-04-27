@@ -57,7 +57,19 @@ export default {
         this.time = dayjs().format("YYYY/MM/DD HH:mm:ss");
       }, 1000);
     },
-    resetCamera() {},
+    resetCamera() {
+      __g.camera.lookAt(
+          510190.2778,
+          2494828.118,
+          5500.464294,
+          -33.209282,
+          -90,
+          -90,
+          () => {
+            // this.isshowBack = false
+          }
+        );
+    },
     setUp() {},
     showUI() {
      // visible:false,
