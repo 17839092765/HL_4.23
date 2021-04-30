@@ -256,6 +256,7 @@ export default {
       that.$store.commit("clickData", this.data_show);
     },
   },
+
   created() {
     // this.initWebSocket();
     window.addEventListener("load", this.onLoad, true);
@@ -290,6 +291,9 @@ export default {
   height: 100%;
   position: absolute;
   z-index: 0;
-  // background: rgba(0, 0, 0, 0.226);
+}
+.aaa {
+  background: rgb(255, 149, 0);
+  background: rgb(126, 48, 48);
 }
 </style>

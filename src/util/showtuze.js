@@ -293,18 +293,19 @@ async function showVectorlayers(data) {
         }
       } else if (idd == "xzqsxx") {
         color1 = ele.properties.rgb.split(",")
-
         for (let c = 0; c < color1.length; c++) {
-          color1[c] = Number((color1[c] / 255).toFixed(5))
+          color1[c] = Number((color1[c]/255 ))
+
         }
       }
 
       color = color1
+      console.log(color);
       let frameColor = color
-      let frameThickness = 1
+      let frameThickness =1
       let o = new PolygonData(
         id,
-        [...color, 0.8],
+        [...color, 1],
         coords,
         frameColor,
         frameThickness

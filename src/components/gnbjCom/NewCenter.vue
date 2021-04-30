@@ -11,7 +11,8 @@ export default {
   name: "NewCenter",
   data() {
     return {
-      path: "E:\\Freedo\\红岭\\HL_4.23\\src\\assets\\img\\2功能布局\\1\\",
+      // path: 'E:\\yqd\\code\\HL_4.23\\src\\assets\\img\\2功能布局\\1\\',
+      path: "D:\\HongLing\\HL_4.23\\src\\assets\\img\\2功能布局\\1\\",
     };
   },
   computed: {},

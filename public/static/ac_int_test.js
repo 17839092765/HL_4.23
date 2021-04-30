@@ -2,19 +2,23 @@
 function onReady() {
     //此时可以调用接口了
     __g.camera.get((r) => {
-        var str = `OnReady Get Camera: ${r.x}, ${r.y}, ${r.z}, ${r.pitch}, ${r.yaw}, ${r.roll}`;
+        var str = `Camera: ${r.x}, ${r.y}, ${r.z}, ${r.pitch}, ${r.yaw}`;
+        //或者这样调用
+        //var str = `Camera: ${r.camera.join(',')}`;
         log(str);
     })
 
     __g.misc.setApiVersionReceived(function () {
         var spanVer = document.getElementById('spanVer');
-        spanVer.innerText = ` S${this.apiVersion}C${this.sdkVersion}`;
-        if (this.apiVersion != this.sdkVersion) {
-            spanVer.innerHTML = ` S${this.apiVersion}<font color=red><b>C${this.sdkVersion}</b></font>`;
-            logWithColor('red', '<b>JS SDK版本和云渲染服务器版本不一致，可能造成接口调用错误，请确认!</b>\n');
-        }
-        else {
-            spanVer.innerHTML = ` S${this.apiVersion}C${this.sdkVersion}`;
+        if (spanVer) {
+            spanVer.innerText = ` S${this.apiVersion}C${this.sdkVersion}`;
+            if (this.apiVersion != this.sdkVersion) {
+                spanVer.innerHTML = ` S${this.apiVersion}<font color=red><b>C${this.sdkVersion}</b></font>`;
+                logWithColor('red', '<b>JS SDK版本和云渲染服务器版本不一致，可能造成接口调用错误，请确认!</b>\n');
+            }
+            else {
+                spanVer.innerHTML = ` S${this.apiVersion}C${this.sdkVersion}`;
+            }
         }
     })
 }
@@ -89,7 +93,6 @@ function increaseHeight(val, cat) {
 }
 
 
-
 //检查用户是否需要用户登录
 function checkLogin() {
     if (__timeLimitOnly) {
@@ -132,7 +135,6 @@ function checkLogin() {
             location.href = "login.html";
     }
 }
-
 
 
 function init(withPlayer, withInterface) {
@@ -198,18 +200,22 @@ function init(withPlayer, withInterface) {
         __editor.setValue(str);
     }
 
+    //2021.04.16 解析参数
+    let bitrate = getQueryVariable('bitrate');
+
     if (location.search.indexOf('ms') != -1) { //页面地址加参数： http://192.168.1.222/int.html?ms
         getMatchServerConfig(HostConfig.MatchServer, function (o) {
             if (o.result == 0) {
                 if (withPlayer) {
-                    new AirCityPlayer(o.instanceId, 'player', HostConfig.Token, true);
+                    let acp = new AirCityPlayer(o.instanceId, 'player', HostConfig.Token, true);
+                    bitrate && acp.setBitrate(bitrate);  //2021.04.16 Add 设置码率
                 }
                 if (withInterface) {
-                    var ace = new AirCityCloud(o.instanceId, onReady, log);
+                    var ace = new AirCityAPI(o.instanceId, onReady, log);
                     ace.setEventCallback(onEvent);
 
                     //更新页面显示
-                    let host = AirCityCloud.getHostFromInstanceId(o.instanceId);
+                    let host = AirCityAPI.getHostFromInstanceId(o.instanceId);
                     if (host) {
                         document.getElementById('txtIP').value = host[0];
                         document.getElementById('txtPort').value = host[1];
@@ -228,14 +234,24 @@ function init(withPlayer, withInterface) {
             //AirCityPlayer对象增加方法enableAutoAdjustResolution，可以设置启用或关闭视频窗口缩放时
             //自动调整分辨率的功能。这个功能默认是启用的，如果想关闭此功能，可以在初始化的时候调用enableAutoAdjustResolution(false)
             //acp.enableAutoAdjustResolution(false);
+            bitrate && acp.setBitrate(bitrate);  //2021.04.16 Add 设置码率
         }
         if (withInterface) {
             let host = HostConfig.instanceId ? HostConfig.instanceId : HostConfig.AirCityAPI;
-            var ace = new AirCityCloud(host, onReady, log);
+            var ace = new AirCityAPI(host, onReady, log);
             ace.useColorLog = true;
             ace.setEventCallback(onEvent);
         }
     }
+
+    //2021.03.18 恢复滚动条的位置
+    let scrollY = localStorage.getItem('scrollY');
+    if (document.getElementById('leftPanel'))
+        document.getElementById('leftPanel').scrollTop = scrollY || 0;
+}
+
+function toTop() {
+    document.getElementById('leftPanel').scrollTop = 0;
 }
 
 var iReconnect = 0;
@@ -308,18 +324,32 @@ function onEvent(data) {
     if (data.eventtype == 'LeftMouseButtonClick') {
         if (data.Type == 'TileLayer') {
             __currentTileLayerActor = {
-                'id': data.Id,
+                'id': data.ID,
                 'objectId': data.ObjectID
             };
+
+            //2021.03.23 经纬度转换
+            __g.coord.pcs2gcs(data.MouseClickPoint, function (res) {
+                if (res.coordinates.length > 0) {
+                    let posGeo = res.coordinates[0];
+                    log(`鼠标点击位置：[${data.MouseClickPoint[0]}, ${data.MouseClickPoint[1]}, ${data.MouseClickPoint[2]}]`)
+                    log(`转经纬度坐标：[${posGeo[0]}, ${posGeo[1]}]`);
+                }
+            });
         }
     }
 
     //for test
-    let str = 'OnEvent: ' + data.eventtype + ', ' + data.Type + ', ' + data.Id;
+    let str = 'OnEvent: ' + data.eventtype;
     log(str);
+
 }
 
 function call(fn) {
+
+    //2021.03.18 记录滚动条的位置
+    let scrollY = document.getElementById('leftPanel').scrollTop;
+    localStorage.setItem('scrollY', scrollY)
 
     var notExec = document.getElementById('cbNotExecute').checked;
     if (!notExec) {
@@ -342,7 +372,7 @@ function call(fn) {
 function execCode() {
     var text = __editor.getValue();
     try {
-        eval(text);
+        eval('(async ()=>{' + text + '})()');
     } catch (e) {
         logWithColor('red', e.message);
         logWithColor('red', e.stack);
@@ -410,8 +440,68 @@ function onConnect() {
 
 
 /*-------------------------------------------------
+  异步接口调用方式测试
+--------------------------------------------------*/
+function test_calling_with_callback() {
+    __g.tag.delete('tag1', function () {
+        __g.camera.get(function (cam) {
+            let o = new TagData('tag1');
+            o.coordinate = [cam.x, cam.y, 25.4];
+            o.imagePath = HostConfig.Path + '/images/tag.png';
+            o.imageSize = [28, 28];
+            o.text = '北京银行';
+            o.showLine = true;
+            __g.tag.add(o, function () {
+                __g.tag.focus(o.id, 500, 0.2, function () {
+                    log("Test Finished.");
+                }); //focus
+            }); //add
+        }) //delete
+    }); //get
+}
+
+function test_calling_with_then() {
+    __g.tag.delete('tag1').then(() => __g.camera.get())
+        .then((cam) => {
+            let o = new TagData('tag1');
+            o.coordinate = [cam.x, cam.y, 25.4];
+            o.imagePath = HostConfig.Path + '/images/tag.png';
+            o.imageSize = [28, 28];
+            o.text = '北京银行';
+            o.showLine = true;
+            __g.tag.add(o);
+        })
+        .then(() => __g.tag.focus('tag1', 500, 0.2))
+        .then(() => {
+            log("Test Finished.");
+        })
+}
+
+async function test_calling_with_await() {
+
+    await __g.tag.delete('tag1')
+    let cam = await __g.camera.get();
+
+    let o = new TagData('tag1');
+    o.coordinate = [cam.x, cam.y, 25.4];
+    o.imagePath = HostConfig.Path + '/images/tag.png';
+    o.imageSize = [28, 28];
+    o.text = '北京银行';
+    o.showLine = true;
+    await __g.tag.add(o);
+    await __g.tag.focus(o.id, 500, 0.2);
+    log("Test Finished.");
+}
+
+
+
+/*-------------------------------------------------
   ac
 --------------------------------------------------*/
+function test_ac_reset() {
+    __g.reset();
+}
+
 function destroyPlayer() {
     if (__p)
         __p.destroy();
@@ -428,42 +518,108 @@ function test_ac_quit() {
 
 
 
-
 /*-------------------------------------------------
   camera
 --------------------------------------------------*/
 function test_camera_get() {
-    __g.camera.get(function (response) {
-        log('this is get camera callback function!');
+    __g.camera.get(function (res) {
+        log('这是camera.get的回调函数的输出信息，可以通过下面的代码重新设置到当前的位置：\n');
+        let str = `__g.camera.set(${res.x}, ${res.y}, ${res.z}, ${res.pitch}, ${res.yaw}, 0);\n`;
+        log(str);
     })
 }
 
 function test_camera_set() {
-    //参数：x, y, z, heading, tilt
-    __g.camera.set(-178.14, -8038.16, 250.47, 90.0, -50.0);
+
+    //参数：x, y, z, pitch, yaw, flyTime
+    __g.camera.set(492035.37, 2488806.75, 402.62, -15.0, -173.0, 0.2);
+}
+
+function test_camera_set_byArray() {
+
+    //最后一个元素无用，会忽略
+    let cam = [488586.843750, 2486889.750000, 713.141602, -36.353725, -124.556442, -0.000004];
+    __g.camera.set(cam, 0.2);
+}
+
+function test_camera_set_byObject() {
+
+    let cam = {
+        "x": 490088.281250,
+        "y": 2485978.750000,
+        "z": 1031.461914,
+        "pitch": -39.462357,
+        "yaw": -152.668823,
+        "roll": 0.0     //该参数无用，会自动忽略
+    }
+    __g.camera.set(cam, 0.2);
 }
 
 function test_camera_lookAt() {
     __distance += 200.0;
-    //lookAt参数：x, y, z, distance, heading, tilt
-    __g.camera.lookAt(-913.18, -10852.01, 82.49, __distance, 90.0, -50.0);
+    //lookAt参数：x, y, z, distance,  pitch, yaw, flyTime
+    __g.camera.lookAt(492035.37, 2488806.75, 402.62, __distance, -15.0, -173.0, 0.2);
 }
 
 function test_camera_lookAtBBox() {
     //[minx,miny,minz,maxx,maxy,maxz]
-    let bbox = [1083.27, -12907.29, 81.79, 1308.18, -12759.77, 201.51];
-    let heading = 90.0;
-    let tilt = -50.0;
-    __g.camera.lookAtBBox(bbox, heading, tilt);
+    let bbox = [495119.875, 2491031.25, 0.2, 495386.625, 2491245.5, 0.4];
+
+    //lookAtBBox参数：bbox,  pitch, yaw, flyTime
+    __g.camera.lookAtBBox(bbox, -15.0, -173.0, 0.5);
 }
 
 function test_camera_playAnimation() {
     //参数：导览序号
-    __g.misc.playAnimation(0);
+    __g.camera.playAnimation(0);
 }
 
 function test_camera_stopAnimation() {
-    __g.misc.stopAnimation();
+    __g.camera.stopAnimation();
+}
+
+function test_camera_moveForward() {
+    __g.camera.moveForward();
+}
+
+function test_camera_moveBackward() {
+    __g.camera.moveBackward();
+}
+
+function test_camera_moveLeft() {
+    __g.camera.moveLeft();
+}
+
+function test_camera_moveRight() {
+    __g.camera.moveRight();
+}
+
+function test_camera_moveUp() {
+    __g.camera.moveUp();
+}
+
+function test_camera_moveDown() {
+    __g.camera.moveDown();
+}
+
+function test_camera_turnLeft() {
+    __g.camera.turnLeft();
+}
+
+function test_camera_turnRight() {
+    __g.camera.turnRight();
+}
+
+function test_camera_turnUp() {
+    __g.camera.turnUp();
+}
+
+function test_camera_turnDown() {
+    __g.camera.turnDown();
+}
+
+function test_camera_stop() {
+    __g.camera.stop();
 }
 
 
@@ -473,36 +629,34 @@ function test_camera_stopAnimation() {
 --------------------------------------------------*/
 let __distance = 100.0;
 
-function test_coord_screen2World() {
-    __g.coord.screen2World(643.466, 392.872, (res) => {
-        log('Screen2World Result: ' + res.worldLocation);
-    });
+async function test_coord_screen2World() {
+    let res = await __g.coord.screen2World(600, 400);
+    log('Screen2World Result: ' + res.worldLocation);
 }
 
-function test_coord_world2Screen() {
-    __g.coord.world2Screen(-27.39, -9020.16, 82.69, (res) => {
-        log('World2Screen Result: ' + res.screenPosition);
-    });
+async function test_coord_world2Screen() {
+    let res = await __g.coord.world2Screen(489843.28, 2488373.5, 170);
+    log('World2Screen Result: ' + res.screenPosition);
 }
 
+function test_coord_pcs2gcs() {
+    __g.coord.pcs2gcs([498326, 3353092]);
+}
+
+function test_coord_gcs2pcs() {
+    __g.coord.gcs2pcs([30.297492106590411, 113.98259824550810]);
+}
 
 
 /*-------------------------------------------------
   infoTree
 --------------------------------------------------*/
-function test_layers_setVisibility() {
-    //参数：LayerID是对象在图层树上的序号，从0开始
-    let o1 = new LayerVisibleData(1, true);
-    let o2 = new LayerVisibleData(2, false);
-    __g.infoTree.setVisibility([o1, o2]);
-}
-
 function test_layers_show() {
-    __g.infoTree.show(['6C0888EC46B4C3D68635BF9E98628819', 'B0D8D4AF42F9EFB9BA4B258F3A9BC410']);
+    __g.infoTree.show('A659DF0E404D806CB3511C9DAC22D160');
 }
 
 function test_layers_hide() {
-    __g.infoTree.hide(['6C0888EC46B4C3D68635BF9E98628819', 'B0D8D4AF42F9EFB9BA4B258F3A9BC410']);
+    __g.infoTree.hide(['A659DF0E404D806CB3511C9DAC22D160']);
 }
 
 function test_layers_enableXRay() {
@@ -516,14 +670,34 @@ function test_layers_disableXRay() {
     __g.infoTree.disableXRay(ids);
 }
 
-function test_layers_addSomeTags() {
+
+//生成随机坐标值或者坐标值数组
+function getRandCoord() {
+    let baseX = 487430.87;
+    let baseY = 2489692.75;
+    return [baseX + Math.random() * 250, baseY + Math.random() * 250, 8];
+}
+
+function getRandCoords(n) {
+
+    var coords = [];
+    for (let i = 0; i < n; i++) {
+        coords.push(getRandCoord());
+    }
+
+    return coords;
+}
+
+async function test_layers_addSomeTags() {
+
+    __g.camera.set(487759.78125, 2489952.5, 264.63446, -43.952045, 159.880676, 0);
 
     let oaTags = new Array();
 
     for (let i = 0; i < 10; i++) {
         let o = new TagData(i);
-        o.coordinate = [-100 + Math.random() * 250, -4300 + Math.random() * 250, 5.47];
-        o.imagePath = HostConfig.AbsolutePath + '/images/tag.png';;
+        o.coordinate = getRandCoord();
+        o.imagePath = HostConfig.Path + '/images/tag.png';;
         o.imageSize = [28, 28];
         o.text = 'T' + i.toString();
         oaTags.push(o);
@@ -533,7 +707,7 @@ function test_layers_addSomeTags() {
     let oaRadiation = new Array();
     for (let i = 0; i < 4; i++) {
         let o = new RadiationPointData(i);
-        o.coordinate = [-100 + Math.random() * 250, -4300 + Math.random() * 250, 5.47];
+        o.coordinate = getRandCoord();
         o.radius = 50;
         o.rippleNumber = 2;
         o.color = [1, 0, 1, 1];
@@ -546,7 +720,7 @@ function test_layers_addSomeTags() {
     for (let i = 0; i < 4; i++) {
         let o = new ODLineData(i);
         o.color = [0, 0, 1, 1];
-        o.coordinates = [[-100 + Math.random() * 250, -4300 + Math.random() * 250, 5.7], [-100 + Math.random() * 250, -4300 + Math.random() * 250, 5.7]];
+        o.coordinates = getRandCoords(2);
         o.flowRate = 1;
         o.brightness = 0.8;
         o.bendDegree = 0.5;
@@ -572,12 +746,12 @@ function test_layers_addSomeTags() {
     let oaBeams = new Array();
     for (let i = 0; i < 2; i++) {
         let o = new BeamData(i);
-        o.coordinates = [[-100 + Math.random() * 250, -4300 + Math.random() * 250, 8], [-100 + Math.random() * 250, -4300 + Math.random() * 250, 8], [-100 + Math.random() * 250, -4300 + Math.random() * 250, 8]];//光流的polyline的坐标数组
-        o.duration = 3;       //光流粒子的生命周期
-        o.thickness = 0.1;    //光流线的宽度
-        o.interval = 0.2;       //光流粒子发射间隔
-        o.velocity = 0.1;       //光流粒子的速度
-        o.color = [1, 0, 0, 1];  //光流的颜色
+        o.coordinates = getRandCoords(2);//光流的polyline的坐标数组
+        o.duration = 3;                  //光流粒子的生命周期
+        o.thickness = 0.1;               //光流线的宽度
+        o.interval = 0.2;                //光流粒子发射间隔
+        o.velocity = 0.1;                //光流粒子的速度
+        o.color = [1, 0, 0, 1];          //光流的颜色
         o.groupId = 'group0';
         oaBeams.push(o);
     }
@@ -585,7 +759,7 @@ function test_layers_addSomeTags() {
     let oaPolylines = new Array();
     for (let i = 0; i < 2; i++) {
         let o = new PolylineData(i);
-        o.coordinates = [[-100 + Math.random() * 250, -4300 + Math.random() * 250, 8], [-100 + Math.random() * 250, -4300 + Math.random() * 250, 8], [-100 + Math.random() * 250, -4300 + Math.random() * 250, 8]];//光流的polyline的坐标数组
+        o.coordinates = getRandCoords(3);   //光流的polyline的坐标数组
         o.color = [0, 0, 1, 1];
         o.style = 1;
         o.thickness = 15;
@@ -598,20 +772,20 @@ function test_layers_addSomeTags() {
     let oaPolygons = new Array();
     for (let i = 0; i < 4; i++) {
         let o = new PolygonData(i);
-        o.coordinates = [[-100 + Math.random() * 100, -4300 + Math.random() * 100, 8], [-100 + Math.random() * 100, -4300 + Math.random() * 100, 8], [-100 + Math.random() * 100, -4300 + Math.random() * 100, 8]];//光流的polyline的坐标数组
-        o.color = Color.Green;//多边形的填充颜色
+        o.coordinates = getRandCoords(3);   //光流的polyline的坐标数组
+        o.color = Color.Green;              //多边形的填充颜色
         o.frameThickness = 1;
         o.groupId = 'group0';
         oaPolygons.push(o);
     }
 
 
-    __g.tag.clear();
-    __g.polyline.clear();
-    __g.odline.clear();
-    __g.beam.clear();
-    __g.radiationPoint.clear();
-    __g.polygon.clear();
+    await __g.tag.clear();
+    await __g.polyline.clear();
+    await __g.odline.clear();
+    await __g.beam.clear();
+    await __g.radiationPoint.clear();
+    await __g.polygon.clear();
 
     __g.tag.add(oaTags);
     __g.polyline.add(oaPolylines);
@@ -620,8 +794,6 @@ function test_layers_addSomeTags() {
     __g.radiationPoint.add(oaRadiation);
     __g.polygon.add(oaPolygons);
 
-
-    __g.camera.set(-13.01, -4138.65, 304.78, -78, -83, 0);
 }
 
 function test_layers_showByGroupId() {
@@ -640,12 +812,9 @@ function test_layers_deleteByGroupId() {
     __g.infoTree.deleteByGroupId('group0');
 }
 
-function test_layers_get() {
-    __g.infoTree.get((response) => {
-        let str = response.infotree;
-        let o = JSON.parse(str);
-        log(JSON.stringify(o));
-    });
+async function test_layers_get() {
+    let res = await __g.infoTree.get();
+    console.log(JSON.stringify(res.infotree));
 }
 
 
@@ -655,17 +824,17 @@ function test_layers_get() {
 --------------------------------------------------*/
 function test_cameraTour_add() {
     let frames = [];
-    frames.push(new CameraTourKeyFrame(0, 1.0, [-1232.84, 443.71, 2667.01], [-27.69, -65.72, 0]));
-    frames.push(new CameraTourKeyFrame(1, 4.0, [3730.99, -2971.31, 1653.13], [-28.95, -112.0, 0]));
-    frames.push(new CameraTourKeyFrame(2, 8.0, [1633.73, -8339.78, 921.05], [-28.9, -112.01, 0]));
-    frames.push(new CameraTourKeyFrame(3, 12.0, [3175.11, -8883.62, 1080.79], [-33.78, -112, 0]));
+    frames.push(new CameraTourKeyFrame(0, 1.0, [492501.90625, 2483838.75, 5898.237305], [-55.95829, -89.993935, 0]));
+    frames.push(new CameraTourKeyFrame(1, 2.0, [493538.75, 2487061.5, 1166.874878], [-36.769756, -91.261223, 0]));
+    frames.push(new CameraTourKeyFrame(2, 3.0, [493364.78125, 2487789.25, 504.430054], [-23.049517, -91.261223, 0]));
+    frames.push(new CameraTourKeyFrame(3, 4.0, [495635.78125, 2491133.75, 183.135956], [-24.96583, -172.325165, 0]));
+    frames.push(new CameraTourKeyFrame(4, 5.0, [495270, 2491256.75, 67.038582], [-25.314354, 108.269859, 0]));
 
-    let o = new CameraTourData('1', 'test', 20, frames);
+    let o = new CameraTourData('1', 'test', frames);
     __g.cameraTour.add(o);
 }
 
 function test_cameraTour_update() {
-
 }
 
 function test_cameraTour_play() {
@@ -690,7 +859,7 @@ function test_tileLayer_add() {
     let location = [0, 0, 0];
     let rotation = [0, 0, 0];
     let scale = [1, 1, 1];
-    let fileName = HostConfig.AbsolutePath + "\\media\\SDKDemo.3dt";
+    let fileName = HostConfig.Path + "\\media\\project\\demo_files\\SDKDemo.3dt";
     let o = new TileLayerData('1', fileName, location, rotation, scale);
     __g.tileLayer.add(o);
 }
@@ -707,133 +876,131 @@ function test_tileLayer_focus() {
     __g.tileLayer.focus('1');
 }
 
+function checkTileLayerId() {
+    if (!__currentTileLayerActor || !__currentTileLayerActor.id) {
+        logWithColor('red', '请在场景中先点击一个TileLayer图层，再调用此方法')
+        return false;
+    }
+    return true;
+}
+
 function test_tileLayer_show() {
-    __g.tileLayer.show(__currentTileLayerActor.id);
+    checkTileLayerId() &&
+        __g.tileLayer.show(__currentTileLayerActor.id);
 }
 
 function test_tileLayer_hide() {
-    __g.tileLayer.hide(__currentTileLayerActor.id);
+    checkTileLayerId() &&
+        __g.tileLayer.hide(__currentTileLayerActor.id);
 }
 
 function test_tileLayer_enableXRay() {
-    __g.tileLayer.enableXRay(__currentTileLayerActor.id, [1, 0, 1, 0.0381]);
+    checkTileLayerId() &&
+        __g.tileLayer.enableXRay(__currentTileLayerActor.id, [1, 0, 1, 0.0381]);
 }
 
 function test_tileLayer_disableXRay() {
-    __g.tileLayer.disableXRay(__currentTileLayerActor.id);
+    checkTileLayerId() &&
+        __g.tileLayer.disableXRay(__currentTileLayerActor.id);
 }
 
 function test_tileLayer_get() {
     __g.tileLayer.get('1');
 }
 
-function test_tileLayer_actor_check() {
-    if (!__currentTileLayerActor) {
-        logWithColor('red', "请先点选一个TileLayer Actor，再执行此操作");
-        return false;
-    }
-    return true;
-}
 
 function test_tileLayer_actor_show() {
-    if (test_tileLayer_actor_check())
+    checkTileLayerId() &&
         __g.tileLayer.showActor(__currentTileLayerActor.id, __currentTileLayerActor.objectId);
 }
 
 function test_tileLayer_actor_hide() {
-    if (test_tileLayer_actor_check())
+    checkTileLayerId() &&
         __g.tileLayer.hideActor(__currentTileLayerActor.id, __currentTileLayerActor.objectId);
 }
 
 function test_tileLayer_actor_focus() {
-    if (test_tileLayer_actor_check())
+    checkTileLayerId() &&
         __g.tileLayer.focusActor(__currentTileLayerActor.id, __currentTileLayerActor.objectId);
 }
 
 function test_tileLayer_actor_highlight() {
-    if (test_tileLayer_actor_check())
+    checkTileLayerId() &&
         __g.tileLayer.highlightActor(__currentTileLayerActor.id, __currentTileLayerActor.objectId);
 }
 
 function test_tileLayer_actor_stopHighlight() {
+    checkTileLayerId() &&
+        __g.tileLayer.stopHighlightActor(__currentTileLayerActor.id, __currentTileLayerActor.objectId);
+}
+
+function test_tileLayer_actor_stopHighlight_all() {
     __g.tileLayer.stopHighlightActor();
 }
 
 function test_tileLayer_actor_showAllActors() {
-    __g.tileLayer.showAllActors(__currentTileLayerActor.id);
+    checkTileLayerId() &&
+        __g.tileLayer.showAllActors(__currentTileLayerActor.id);
 }
 
 function test_tileLayer_actor_hideAllActors() {
-    __g.tileLayer.hideAllActors(__currentTileLayerActor.id);
+    checkTileLayerId() &&
+        __g.tileLayer.hideAllActors(__currentTileLayerActor.id);
 }
 
 function test_tileLayer_actor_enableClip() {
-    __g.tileLayer.enableClip(__currentTileLayerActor.id);
+    checkTileLayerId() &&
+        __g.tileLayer.enableClip(__currentTileLayerActor.id);
 }
 
 function test_tileLayer_actor_disableClip() {
-    __g.tileLayer.disableClip(__currentTileLayerActor.id);
+    checkTileLayerId() &&
+        __g.tileLayer.disableClip(__currentTileLayerActor.id);
 }
 
 function test_tileLayer_actor_setStyle() {
     let style = 3; //样式， 0：默认；1：X光；2：纯色；3：水晶体
-    __g.tileLayer.setStyle(__currentTileLayerActor.id, style, Color.Red);
+    checkTileLayerId() &&
+        __g.tileLayer.setStyle(__currentTileLayerActor.id, style, Color.Red);
 }
+
+function test_tileLayer_actor_setCollision() {
+    checkTileLayerId() &&
+        __g.tileLayer.setCollision(__currentTileLayerActor.id, true);
+}
+
 
 
 /*-------------------------------------------------
   tag
 --------------------------------------------------*/
-function test_tag_add() {
-    //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
-    let id = 'p1';
-
-    //坐标值：标签添加的位置
-    let coord = [-178.14, -8038.16, 5.47];
-
-    //图片路径，有3种格式：1）本地路径，2）网络路径，3）BASE64
-    let imagePath = HostConfig.AbsolutePath + '/images/tag.png';
-    //let imagePath = 'data:image/png;base64,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';
-
-    //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
-    let url = HostConfig.AbsolutePath + '/int_popup.html';
-
-    //图片的尺寸
-    let imageSize = [28, 28];
-
-    //标签显示的文字
-    let text = '北京银行';
-
-    //标签和文字的可见范围
-    let range = [1, 8000.0];
-    let textRange = 200;
-
-    //标签下方是否显示垂直牵引线
-    let showLine = true;
-
-    let o = new TagData(id, coord, imagePath, imageSize, url, text, range, showLine);
-    //设置文字颜色、背景颜色、
+async function test_tag_add() {
+    let o = new TagData('p1');
+    o.coordinate = [495269.37, 2491073.25, 25.4];
+    o.imagePath = HostConfig.Path + '/images/tag.png';
+    o.url = HostConfig.Path + '/int_popup.html';
+    o.imageSize = [28, 28];
+    o.text = '北京银行';
+    o.range = [1, 8000.0];
+    o.textRange = 3000;
+    o.showLine = true;
     o.textColor = Color.Black;
     o.textBackgroundColor = Color.White;
-    o.textRange = textRange;
+    o.hoverImagePath = HostConfig.Path + '/images/hilightarea.png';
+    await __g.tag.add(o);
+    __g.tag.focus(o.id, 200, 0);
 
-    //鼠标悬停时的替换图片
-    o.hoverImagePath = HostConfig.AbsolutePath + '/images/hilightarea.png';
-
+    o.id = 'p2';
+    o.text = "招商银行";
+    o.coordinate = [495231.93, 2490962.25, 10.0];
     __g.tag.add(o);
-
-    let o2 = o;
-    o2.id = 'p2';
-    o2.text = "招商银行";
-    o2.coordinate[0] = -200;
-    __g.tag.add(o2);
 }
 
 function test_tag_update() {
-    let id = 'p1'; //标签的ID，必须是之前已经创建过的标签才能Update，如果当前没有就忽略
-    let coord = [-178.14, -8038.16, 5.47];
+    let id = 'p1';
+    let coord = [495304.09375, 2491078.25, 29.39];
     let imagePath = 'data:image/png;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4QC+RXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUAAAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAAAEgAAAABAAeQAAAHAAAABDAyMjGRAQAHAAAABAECAwCgAAAHAAAABDAxMDCgAQADAAAAAQABAACgAgAEAAAAAQAAAoqgAwAEAAAAAQAAAmWkBgADAAAAAQAAAAAAAAAAAAD/7QAsUGhvdG9zaG9wIDMuMAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/9sAQwACAQECAQECAgICAgICAgMFAwMDAwMGBAQDBQcGBwcHBgcHCAkLCQgICggHBwoNCgoLDAwMDAcJDg8NDA4LDAwM/9sAQwECAgIDAwMGAwMGDAgHCAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwM/8AAEQgAQABAAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A/fyqer61Bots0kzqqqM81LqN8mnWjyyHaqivkD9ob41+KvjZ8W7T4X/Dc2reJNSja4u7+6VpLHw/ZKQsl7chWVnALBI4FZXnkYIGjjE08LSuTKVjtfj9+3/4Z+ElzbWLXjXGqalMbawsLWN7i81GbBPk28EYaWeUgEiONWY44Brgrf41ftAfEfbdaD8HfFlvptwN9vd6ve2GleYP9q3muBdx/SSBD7V7r+zT+xx4P/Zis5rnS4bjWvFepR+XqvijVik+r6mMg+W0oVRFAGG5beFUhRizKgZmZvwa/wCDrH/gtZ4q8Y/HXWv2Y/htrl5ofgvwrGtr41urKby5PEV7LGGeyLod32WFHCPH8u+Uyq6lY0JfMugcvc+zfiz/AMHAvhP9lzxO2l+NPE3hG6uraUxXaeG/E+n6/wDY2VirrIttMzqysCCgQuMfdr6n/Y0/4K9fDH9r3Q1vPCPizSdchUL5qwTYmtt33RLC4EkRODgSKpNfxm10nwv+K/iT4I+OLHxL4R1vUfD+vabIJLe8spjHInqpxwynoyMCrDIIIJFF11Dl7H94vh/xRa+JbNZbeRWDDIwetaI+Q1+Kn/BA7/gul/w1vp3/AAhfjSS30/4gaLErzpGdsGrQAhftMK/wsCQJI+gLBl+Vtqfs74e1qPXtMjnjYMGAOc9aTVgjLozzj9q34mx/Dj4b315JMluscLMzu21VAGSSfQdc1xX/AATX+EMnhH4Bw+ONYgZfGHxY8vxLqck0e24tLWRN1hYHPzILe2dQ8YJQXMt3IuPNOfP/APgrmjeIPgdqnh9mKxeJFXRXIONou3FtnPt5ufwr7KC4XHbpgU+gR3uOr+JP/gsD4W1Twd/wVZ/aPs9WtZ7W8k+JGvXqrMm1nhuNQmngkA/uyQyRuv8AsuK/tsr8bf8Ag5N/4N5tc/b21+P45fBG1s7j4pWtrHZeI/Dsjx23/CV28ShIbmGZiFF5EgWMrKwWWFIwrI0KpNJR+VP/AAblf8FA/gH/AME9P2n/ABZ4g+O3hhr+HWtEFnoevppg1NtAlDM0yeRgsBcIQnmoCy7AuNkjsPkX9uv4s+B/jt+2L8SvGPw18Lf8IT4D8R6/dX+h6L5aRfYbZ3JUeXGTHDu5fyoyUj37FJVQa4f4ofCrxP8ABPxvf+F/GXh3XPCfiTSmVL3StYsZbG9tCyhlEkUqq65VlYZHIII4Nc7QB2f7P/xt1z9m740eG/HXhyYwax4ZvkvIPmIWYDh4nxzskQsjDursK/sz/wCCbX7SNh+0b+z/AOGfEmmzNLYa9ptvqFsX4fy5Y1kXcOzAMAR2IIr+Js9Gr+oL/g1W8eXXiP8A4J9+C7e4kkkbT3vrPcx6ql7PsH0CFVH+7VdCZbpn19/wVg8Haprv7PniCbRbc3OsWtlLc6fHnG+5jUyQjPb94qcmvqHwF430v4oeBdF8S6HdJfaL4isINT0+5T7txbzRrJG49mRlP41ifHDwLH448G3Vuy7i0ZHSvnv/AIJ4/FhvhRrmofAbxJJ9lvNCafUPBcsp+XUdJZy72anOBJZO5RYwFAtGtdu8xzlDoC0Z9cUUV+SXjH9iv9vS9/4OD9P+Jel+OtWj/Zzj1W3uHb/hJ0XRY9HFsqz6a2keduad8Ook8gr5zpPvVlyslH0P/wAF2/8AgkV4Z/4Kkfsi64ttpNtF8XPCOnzX3g3WI4F+1STRq0n9nSPkFre4OUwxxG7rIASpVv46a/vu8Qa7Z+FdDvtU1K6hsdP02B7q6uZ3CRW8SKWd2Y8BVUEknoBX8FfxA1638U+O9a1Szt/sdnqV/PdQQYA8iN5GZU444BA49KAMWv6sP+DZX4IXnwt/4J9/DuO9h8ufULF9Wbjqt3PJcx59/KljH4V/Or/wTO/YV1n9vv8Aal0TwnaWt0fDtpNHeeIr2MFVtbMNygbtJLjy0AycsWwVRiP7Hf2UfhLb/Cr4c2FjBbxW0cEKokUaBUjUDAVQOAAOAOwquhMtXY9XliWWNlbkN6184/td/shQfFqxh1CxmvNJ1zSbhb/TNTsJPJvNOuUzsnhkwdrjJHIKsrMjqyOyt9IU2WJZk2soZT2NSEo3PkX4Yf8ABQvVvhCY/Dvx10e8sLi1/dReM9H0+S40vUBnCtd28QeWxlxku4V7XCFzLDvECeiah/wU/wD2atM0WTULj9oT4IpYxkhpv+E50woSOwIm5b2HOa9G8bfBXRvGsLLdWsUmfVa+e/i7/wAEi/hX8Zb83PiDwT4T1+boH1PSre7YD0zIjVWga9T8n/8Ag4N/4OcPCXx1+CuvfAr9nPULzVtM8URNp/irxoYZbSCeyYYlsbJHCyOJcmOWZ1VDHvVBIJfMT8zv2HP+CNPxp/bb8RWLWfh2+8JeFpmUy67rFq8KNGcc28J2yXBIJwVxHkYMi1/UH8Lf+CN/wk+EuqR3mg+A/Beh3MZysunaNa2si/Ro41NfQ/gX9n/Q/BMS/Z7SFWXuF5o0DXofJn/BKr/gkz4O/YP+Fdno+g6eVkYie9vbjD3Woz4wZZWwMnsFACqOABzn7qtLRbO3WNOFUYp1vbJaoFjUKvtUlS9QjGx//9k=';
-    let url = HostConfig.AbsolutePath + '/int_popup.html';
+    let url = HostConfig.Path + '/int_popup.html';
     let imageSize = [28, 28];
     let text = '北京银行';
     let range = [1, 8000.0];
@@ -847,11 +1014,11 @@ function test_tag_update() {
 }
 
 function test_tag_focus() {
-    __g.tag.focus('p1');
+    __g.tag.focus('p1', 200, 0.2);
 }
 
 function test_tag_focusAll() {
-    __g.tag.focusAll();
+    __g.tag.focusAll(200, 0.2);
 }
 
 function test_tag_show() {
@@ -894,14 +1061,13 @@ function test_tag_hideAllPopupWindow() {
     __g.tag.hideAllPopupWindow();
 }
 
-function test_tag_setCoordinate() {
-    __g.tag.setCoordinate('p1', [-500.14, -8038.16, 5.47], () => {
-        __g.tag.focus('p1');
-    })
+async function test_tag_setCoordinate() {
+    await __g.tag.setCoordinate('p1', [495254.1875, 2491154.25, 0.400]);
+    __g.tag.focus('p1', 200, 0.2);
 }
 
 function test_tag_setImagePath() {
-    let path = HostConfig.AbsolutePath + '/images/ctag.png';
+    let path = HostConfig.Path + '/images/ctag.png';
     __g.tag.setImagePath('p1', path);
 }
 
@@ -918,7 +1084,7 @@ function test_tag_setText() {
 }
 
 function test_tag_setRange() {
-    __g.tag.setRange('p1', [1, 300]);
+    __g.tag.setRange('p1', [1, 800]);
 }
 
 function test_tag_setTextColor() {
@@ -937,26 +1103,15 @@ function test_tag_setShowLine() {
     __g.tag.setShowLine('p1', false);
 }
 
-function test_tag_get() {
-    __g.tag.get('p1', (data) => {
-        let str = `Get tag data result: \n id: ${data.id} \n text: ${data.text}`;
-        log(str);
-    });
-
-    __g.tag.get(['p1', 'p2'], (dataArr) => {
-        let o1 = dataArr['p1'];
-        let o2 = dataArr['p2'];
-        let str = `Get tag data result: \n id: ${o1.id} \n text: ${o1.text}`;
-        str += `\n id: ${o2.id} \n text: ${o2.text}`;
-        log(str);
-    });
+async function test_tag_get() {
+    let res = await __g.tag.get('p1');
+    let o = res.data[0];
+    log(`获取标签：\n id: ${o.id} \n text: ${o.text}`);
 }
 
 var __canvas;
 
 function test_tag_add_canvas() {
-
-    __g.tag.delete('canvas_tag1');
 
     // 生成图片
     if (!__canvas)
@@ -978,15 +1133,16 @@ function test_tag_add_canvas() {
 
 
         let o = new TagData('canvas_tag1');
-        o.coordinate = [5036.56, -4504.51, 370.19];
+        o.coordinate = [495150.21875, 2490873.75, 0.40];
         o.imagePath = __canvas.toDataURL("image/jpg");
         o.imageSize = [165, 63];
         o.text = '';
-        o.url = HostConfig.AbsolutePath + '/int_popup.html';
+        o.url = HostConfig.Path + '/int_popup.html';
         o.range = [1, 8000.0];
-        __g.tag.add(o, () => {
-            __g.tag.focus('canvas_tag1');
-        });
+
+        __g.tag.delete('canvas_tag1')
+            .then(() => __g.tag.add(o))
+            .then(() => __g.tag.focus('canvas_tag1', 200, 0.2));
     }
 }
 
@@ -995,24 +1151,27 @@ function test_tag_add_canvas() {
 /*-------------------------------------------------
   customTag
 --------------------------------------------------*/
-function test_ctag_add() {
+async function test_ctag_add() {
     let id = 'ct1';
-    let coord = [-178.14, -8038.16, 5.47];
-    let page = HostConfig.AbsolutePath + '/int_custom_tag.html?icon=images/ctag1.png&title=北医三院&address=海淀区花园北路';
+    let coord = [495113.71875, 2491218, 0.4];
+    let page = HostConfig.Path + '/int_custom_tag.html?icon=images/ctag1.png&title=北医三院&address=海淀区花园北路';
     let contentWeb = new WebUIData(page, 220, 52);
-    let popupWeb = new WebUIData(HostConfig.AbsolutePath + '/int_popup.html', 600, 480);
+    let popupWeb = new WebUIData(HostConfig.Path + '/int_popup.html', 600, 480);
     let pivot = [0.5, 0.5];
     let range = [1, 5000];
     let o = new CustomTagData(id, coord, contentWeb, popupWeb, pivot, range);
-    __g.ctag.add(o/*, __g.camera.lookAt(-178.14, -8038.16, 5.47, 1200, 90.0, -50.0)*/);
+
+    await __g.ctag.clear();
+    await __g.ctag.add(o);
+    __g.ctag.focus(o.id, 50, 0.2);
 }
 
 function test_ctag_update() {
     let id = 'ct1';
-    let coord = [-178.14, -8038.16, 5.47];
-    let page = HostConfig.AbsolutePath + '/int_custom_tag.html?icon=images/ctag2.png&title=北京银行&address=朝阳区外馆斜街';
+    let coord = [495113.71875, 2491218, 0.4];
+    let page = HostConfig.Path + '/int_custom_tag.html?icon=images/ctag2.png&title=北京银行&address=朝阳区外馆斜街';
     let contentWeb = new WebUIData(page, 220, 52);
-    let popupWeb = new WebUIData(HostConfig.AbsolutePath + '/int_popup.html', 600, 480);
+    let popupWeb = new WebUIData(HostConfig.Path + '/int_popup.html', 600, 480);
     let pivot = [0.5, 0.5];
     let range = [1, 5000];
     let o = new CustomTagData(id, coord, contentWeb, popupWeb, pivot, range);
@@ -1028,7 +1187,7 @@ function test_ctag_clear() {
 }
 
 function test_ctag_focus() {
-    __g.ctag.focus('ct1');
+    __g.ctag.focus('ct1', 50, 0.1);
 }
 
 function test_ctag_focusAll() {
@@ -1060,15 +1219,17 @@ function test_ctag_get() {
 /*-------------------------------------------------
   polyline
 --------------------------------------------------*/
-function test_polyline_add() {
-    let coords = [[872.16, -9485.86, 5.8], [864.77, -9196.58, 5.7], [624.34, -9209.29, 6.05], [482.58, -9373.57, 7.38]];
-    let color = Color.Red;
-    let style = 1;
-    let thickness = 150;
-    let brightness = 0.8;
-    let flowRate = 0.5;
-    let o = new PolylineData('p1', color, coords, style, thickness, brightness, flowRate);
+async function test_polyline_add() {
+    let o = new PolylineData('p1');
+    o.coordinates = [[493711.15625, 2488656.25, 7.0], [493698.09375, 2490060.25, 8.4], [494434.78125, 2490056, 5.4], [494663.90625, 2491221, 3.8]];
+    o.color = Color.Red;
+    o.style = 1;
+    o.thickness = 150;
+    o.brightness = 0.8;
+    o.flowRate = 0.5;
     o.depthTest = false;
+    __g.camera.set(495161.78125, 2489277, 1362.090454, -48.678974, -152.06279, 0);
+    await __g.polyline.delete(o.id);
     __g.polyline.add(o);
 }
 
@@ -1128,7 +1289,7 @@ function test_polyline_get() {
 function test_odline_add() {
     let o = new ODLineData('od1');
     o.color = Color.Green;
-    o.coordinates = [[-133.82, -8531.6, 5.7], [2102.68, -8574.97, 5.7]];
+    o.coordinates = [[492303.65625, 2487534.5, 4.195], [491391.5625, 2487777.5, 4.2]];
     o.flowRate = 1;
     o.brightness = 10;
     o.bendDegree = 0.5;
@@ -1147,13 +1308,15 @@ function test_odline_add() {
     o.startLabelShape = 1;
     o.endLabelShape = 1;
 
-    __g.odline.add(o);
+    __g.camera.set(491433.65625, 2486907.5, 685.200928, -39.472763, -64.888329, 0);
+    __g.odline.delete('od1')
+        .then(() => __g.odline.add(o));
 }
 
 function test_odline_update() {
     let o = new ODLineData('od1');
     o.color = [1, 0, 1, 1];
-    o.coordinates = [[-133.82, -8531.6, 5.7], [2102.68, -8574.97, 5.7]];
+    o.coordinates = [[492303.65625, 2487534.5, 4.195], [491391.5625, 2487777.5, 4.2]];
     o.flowRate = 1;
     o.brightness = 0.8;
     o.bendDegree = 0.5;
@@ -1214,32 +1377,11 @@ function test_odline_get() {
   polygon
 --------------------------------------------------*/
 function test_polygon_add() {
-    let coords1 = [[2084.75, -8474.21, 5.7], [2133.45, -8556.37, 5.7], [2278.18, -8436.39, 5.7], [2152.5, -8361.8, 5.7]];
-
-    let coords2 = [
-        [[9665.22, -11366.88, 5.7], [9765.4, -4511.22, 5.7], [4155.2, -4036.94, 5.7], [3098, -11010.32, 5.7], [6445.79, -12717.28, 6.78]],
-        [[8706.9, -9457.89, 5.7], [8824.84, -8055.4, 6.64], [7619.37, -8859.47, 6.72]],
-        [[5744.8, -7795.59, 5.7], [6205.21, -5724.74, 5.7], [4460.01, -5839.38, 6.05], [3966.28, -7712.46, 7.17]]
-    ];
-
-    let coords3 = [
-        //part1
-        [
-            [[9665.22, -11366.88, 5.7], [9765.4, -4511.22, 5.7], [4155.2, -4036.94, 5.7], [3098, -11010.32, 5.7], [6445.79, -12717.28, 6.78]],
-            [[8706.9, -9457.89, 5.7], [8824.84, -8055.4, 6.64], [7619.37, -8859.47, 6.72]],
-            [[5744.8, -7795.59, 5.7], [6205.21, -5724.74, 5.7], [4460.01, -5839.38, 6.05], [3966.28, -7712.46, 7.17]]
-        ],
-
-        //part2
-        [
-            [[-4477.25, -4353.11, 5.7], [-1803.2, -6744.65, 5.7], [-562.18, -4590.14, 5.7], [-2271.85, -2595.33, 5.7]],
-            [[-2867.3, -4342.53, 5.7], [-2381.34, -5043.33, 5.7], [-1723.21, -4566.1, 6.25], [-1938.83, -3757.59, 5.7]]
-        ]
-    ];
+    let coords1 = [[488545.9375, 2491134.5, 1.0], [488235.9375, 2490811.5, 1.0], [487774.5625, 2491299.25, 1.0], [488081.59375, 2491625.5, 1.0]];
 
     let color = [0, 0, 1, 1];//多边形的填充颜色
     let frameColor = Color.Red;
-    let frameThickness = 10;
+    let frameThickness = 5;
     let o = new PolygonData('1', color, coords1, frameColor, frameThickness);
     o.depthTest = false;
     __g.polygon.add(o);
@@ -1247,10 +1389,10 @@ function test_polygon_add() {
 
 function test_polygon_update() {
     let coords = [
-        [[2084.75, -8474.21, 5.7], [2133.45, -8556.37, 5.7], [2270.38, -8499.91, 5.7], [2278.18, -8436.39, 5.7], [2152.5, -8361.8, 5.7]],
-        [[2188.48, -8418.16, 7.42], [2168.73, -8461.96, 6.75], [2199.68, -8475.66, 8.66], [2215.46, -8446.06, 8.47]]
+        [[488545.9375, 2491134.5, 1.0], [488235.9375, 2490811.5, 1.0], [487774.5625, 2491299.25, 1.0], [488081.59375, 2491625.5, 1.0]],
+        [[488248.65625, 2491142.25, 1], [488215.46875, 2491330.25, 1], [488057.71875, 2491184.25, 1]]
     ];
-    let color = Color.Yellow;
+    let color = Color.Green;
     let o = new PolygonData('1', color, coords);
     o.depthTest = false;
     __g.polygon.update(o);
@@ -1299,7 +1441,7 @@ function test_polygon_get() {
   polygon3d
 --------------------------------------------------*/
 function test_polygon3d_add(fn) {
-    let coords = [[9665.22, -11366.88, 5.7], [9765.4, -4511.22, 5.7], [4155.2, -4036.94, 5.7], [3098, -11010.32, 5.7], [6445.79, -12717.28, 6.78]];
+    let coords = [[489877.9375, 2493053.5, 6.6659374237060547], [489850.5, 2492181.75, 5.6631250381469727], [488457.03125, 2493013.5, 0]];
     let color = [1, 0, 1, 1];   //颜色值
     let height = 500;           //3D多边形的高度
     let intensity = 4.0;        //亮度
@@ -1310,18 +1452,8 @@ function test_polygon3d_add(fn) {
 
 function test_polygon3d_update() {
     let coords = [
-        //part1
-        [
-            [[9665.22, -11366.88, 5.7], [9765.4, -4511.22, 5.7], [4155.2, -4036.94, 5.7], [3098, -11010.32, 5.7], [6445.79, -12717.28, 6.78]],
-            [[8706.9, -9457.89, 5.7], [8824.84, -8055.4, 6.64], [7619.37, -8859.47, 6.72]],
-            [[5744.8, -7795.59, 5.7], [6205.21, -5724.74, 5.7], [4460.01, -5839.38, 6.05], [3966.28, -7712.46, 7.17]]
-        ],
-
-        //part2
-        [
-            [[-4477.25, -4353.11, 5.7], [-1803.2, -6744.65, 5.7], [-562.18, -4590.14, 5.7], [-2271.85, -2595.33, 5.7]],
-            [[-2867.3, -4342.53, 5.7], [-2381.34, -5043.33, 5.7], [-1723.21, -4566.1, 6.25], [-1938.83, -3757.59, 5.7]]
-        ]
+        [[489877.9375, 2493053.5, 6.6659374237060547], [489850.5, 2492181.75, 5.6631250381469727], [488977.84375, 2492411.75, 0], [488457.03125, 2493013.5, 0]],
+        [[489536.5625, 2492735.5, 12.10546875], [489228.4375, 2492998.5, 7.3343749046325684], [489008.78125, 2492620.5, 2.504218578338623]]
     ];
     let color = [1, 1, 0, 1];//颜色值
     let height = 300;//3D多边形的高度
@@ -1377,53 +1509,28 @@ function getRandNumBetween(min, max) {
 
 var __tidUpdateHeatMap = undefined;
 
-function test_heatmap_add() {
+async function test_heatmap_add() {
     clearInterval(__tidUpdateHeatMap);
-    __g.tag.clear(__g.heatmap.clear(() => {
-        {
-            let bbox = [1083.27, -12907.29, -10, 1308.18, -12759.77, 201.51];
-            let range = [0, 100];
-            let data = [];
-            let tagData = [];
-            for (let i = 0; i < 100; i++) {
-                let x = getRandNumBetween(bbox[0], bbox[3]);    //minX ~ maxX
-                let y = getRandNumBetween(bbox[1], bbox[4]);    //minY ~ maxY
-                let z = 0;
-                let coord = [x, y, z];                 //热力点的坐标
-                let radius = Math.random() * 40;           //热力点影像半径范围
-                let heatValue = Math.random() * 100;        //热力值
-                let o = new HeatMapPointData(`${i}`, coord, radius, heatValue);
-                data.push(o);
-            }
-            __g.tag.add(tagData);
-            __g.heatmap.add('heatmap1', bbox, range, data);
-        }
+    await __g.tag.clear();
+    await __g.heatmap.clear();
+    await __g.camera.set(492231.9375, 2489968, 2180.598145, -54.192036, -175.195358, 0);
 
-        {
-            let bbox = [1383.27, -12607.29, -700, 1608.18, -12459.77, 501.51];
-            let range = [0, 100];
-            let data = [];
-            let tagData = [];
-            for (let i = 0; i < 100; i++) {
-                let x = getRandNumBetween(bbox[0], bbox[3]);    //minX ~ maxX
-                let y = getRandNumBetween(bbox[1], bbox[4]);    //minY ~ maxY
-                let z = 0;
-                let coord = [x, y, z];                 //热力点的坐标
-                {
-                    //添加热力点定位标签
-                    let imagePath = 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1816424559,1043488893&fm=26&gp=0.jpg';
-                    tagData.push(new TagData(`${i}`, coord, imagePath, [28, 28], '', '', [1, 8000.0], false));
-                }
-                let radius = Math.random() * 40;           //热力点影像半径范围
-                let heatValue = Math.random() * 100;        //热力值
-                let o = new HeatMapPointData(`${i}`, coord, radius, heatValue);
-                data.push(o);
-            }
-            __g.tag.add(tagData);
-            __g.heatmap.add('heatmap2', bbox, range, data);
-        }
-    }));
-
+    let bbox = [488670.75, 2488165, 5.7, 491659.59375, 2490987.5, 344.58];
+    let range = [0, 100];
+    let data = [];
+    let tagData = [];
+    for (let i = 0; i < 100; i++) {
+        let x = getRandNumBetween(bbox[0], bbox[3]);    //minX ~ maxX
+        let y = getRandNumBetween(bbox[1], bbox[4]);    //minY ~ maxY
+        let z = 0;
+        let coord = [x, y, z];                 //热力点的坐标
+        let radius = Math.random() * 400;           //热力点影像半径范围
+        let heatValue = Math.random() * 100;        //热力值
+        let o = new HeatMapPointData(i, coord, radius, heatValue);
+        data.push(o);
+    }
+    __g.tag.add(tagData);
+    __g.heatmap.add('heatmap1', bbox, range, data);
 }
 
 function test_heatmap_update() {
@@ -1471,49 +1578,25 @@ function test_heatmap_get() {
   beam
 --------------------------------------------------*/
 function test_beam_add() {
-    let o1, o2;
-    {
-        let coords = [[-178, -8040, 8], [958, -7980, 8], [-198, -7340, 8]];//光流的polyline的坐标数组
-        let duration = 3;       //光流粒子的生命周期
-        let thickness = 0.8;    //光流线的宽度
-        let interval = 0.5;       //光流粒子发射间隔
-        let velocity = 5;       //光流粒子的速度
-        let color = [1, 0, 0, 1];  //光流的颜色
-        o1 = new BeamData('1', duration, thickness, interval, velocity, color, coords);
-    }
-    {
-        let coords = [[207300, -330000, 140000], [587600, -330000, 140000], [597600, -524400, 140000]];
-        let duration = 4;
-        let thickness = 0.5;
-        let interval = 2;
-        let velocity = 4;
-        let color = [0, 0, 1];
-        o2 = new BeamData('2', duration, thickness, interval, velocity, color, coords);
-    }
-    __g.beam.add([o1, o2]);
+    let coords = [[491599.5, 2490045, 11.3046875], [492483.5, 2490050.5, 8.1779689788818359], [492621.1875, 2489262.5, 11.311718940734863]];
+    let duration = 3;       //光流粒子的生命周期
+    let thickness = 0.8;    //光流线的宽度
+    let interval = 0.5;       //光流粒子发射间隔
+    let velocity = 5;       //光流粒子的速度
+    let color = [1, 0, 0, 1];  //光流的颜色
+    let o = new BeamData('1', duration, thickness, interval, velocity, color, coords);
+    __g.beam.add(o);
 }
 
 function test_beam_update() {
-    let o1, o2;
-    {
-        let coords = [[-178, -8040, 8], [958, -7980, 8], [-198, -7340, 8]];
-        let duration = 5;
-        let thickness = 3;
-        let interval = 0.2;
-        let velocity = 5;
-        let color = Color.Blue;
-        o1 = new BeamData('1', duration, thickness, interval, velocity, color, coords);
-    }
-    {
-        let coords = [[207300, -330000, 140000], [587600, -330000, 140000], [597600, -524400, 140000]];
-        let duration = 5;
-        let thickness = 1;
-        let interval = 2;
-        let velocity = 4;
-        let color = [0, 0, 1];
-        o2 = new BeamData('2', duration, thickness, interval, velocity, color, coords);
-    }
-    __g.beam.update([o1, o2]);
+    let coords = [[491599.5, 2490045, 11.3046875], [492483.5, 2490050.5, 8.1779689788818359], [492520.28125, 2490873.25, 9.8798437118530273]];
+    let duration = 5;
+    let thickness = 3;
+    let interval = 0.2;
+    let velocity = 5;
+    let color = Color.Blue;
+    let o = new BeamData('1', duration, thickness, interval, velocity, color, coords);
+    __g.beam.update(o);
 }
 
 function test_beam_delete() {
@@ -1543,25 +1626,11 @@ function test_beam_setThickness() {
   highlightArea
 --------------------------------------------------*/
 function test_highlightArea_add() {
-    let coords3 = [
-        //part1
-        [
-            [[9665.22, -11366.88, 5.7], [9765.4, -4511.22, 5.7], [4155.2, -4036.94, 5.7], [3098, -11010.32, 5.7], [6445.79, -12717.28, 6.78]],
-            [[8706.9, -9457.89, 5.7], [8824.84, -8055.4, 6.64], [7619.37, -8859.47, 6.72]],
-            [[5744.8, -7795.59, 5.7], [6205.21, -5724.74, 5.7], [4460.01, -5839.38, 6.05], [3966.28, -7712.46, 7.17]]
-        ],
-
-        //part2
-        [
-            [[-4477.25, -4353.11, 5.7], [-1803.2, -6744.65, 5.7], [-562.18, -4590.14, 5.7], [-2271.85, -2595.33, 5.7]],
-            [[-2867.3, -4342.53, 5.7], [-2381.34, -5043.33, 5.7], [-1723.21, -4566.1, 6.25], [-1938.83, -3757.59, 5.7]]
-        ]
-    ];
-
+    let coords = [[488509.90625, 2487479.5, 59], [487133.5, 2486976, 17], [486509.21875, 2488715.25, 5], [488062.3125, 2489276, 8]];
     let color = [1, 0, 0, 0.8];//多边形高亮颜色
     let heightRange = [0.0, 100.0];//高亮染色区域可以限定一个高度范围，也就是Z坐标的区间，只有Z值这这个区间的模型才会被染色
     let intensity = 5.0;//高亮颜色的强度
-    let o = new HighlightAreaData('1', coords3, color, heightRange, intensity);
+    let o = new HighlightAreaData('1', coords, color, heightRange, intensity);
     __g.highlightArea.add(o);
 }
 
@@ -1571,8 +1640,8 @@ function test_highlightArea_delete() {
 
 function test_highlightArea_update() {
     let coords = [
-        [[9665.22, -11366.88, 5.7], [9765.4, -4511.22, 5.7], [4155.2, -4036.94, 5.7], [3098, -11010.32, 5.7], [6445.79, -12717.28, 6.78]],
-        [[8706.9, -9457.89, 5.7], [8824.84, -8055.4, 6.64], [7619.37, -8859.47, 6.72]]
+        [[488509.90625, 2487479.5, 59], [487133.5, 2486976, 17], [486509.21875, 2488715.25, 5], [488062.3125, 2489276, 8]],
+        [[487930.0625, 2488807.5, 4.0], [487628.3125, 2488703.25, 9.0], [487524.5625, 2488938.25, 8.0], [487846, 2489052.5, 6.0]]
     ];
     let color = [1, 0, 1, 0.5];
     let heightRange = [0.0, 200.0];
@@ -1607,7 +1676,7 @@ function test_highlightArea_get() {
   radiationPoint
 --------------------------------------------------*/
 function test_radiationPoint_add() {
-    let coordinate = [-178.14, -8038.16, 5.47];
+    let coordinate = [495113.71875, 2491218, 0.4];
     let radius = 300;
     let rippleNumber = 2;
     let color = [1, 0, 1, 1];
@@ -1617,7 +1686,7 @@ function test_radiationPoint_add() {
 }
 
 function test_radiationPoint_update() {
-    let coordinate = [-178.14, -8038.16, 5.47];
+    let coordinate = [495113.71875, 2491218, 0.4];
     let radius = 300;
     let rippleNumber = 2;
     let color = [1, 0, 0, 1];
@@ -1662,26 +1731,30 @@ function test_radiationPoint_get() {
 --------------------------------------------------*/
 let __co_location;
 function test_customObject_add() {
-    let pakFilePath = HostConfig.AbsolutePath + '/media/test.pak';
+    let pakFilePath = HostConfig.Path + '/media/custom.pak';
     let assetPath = '/Game/Common/Asset_Bank/Mesh/Car/BP_Car_JiuHuChe';
-    __co_location = [-148.14, -7370.16, 9.47];
+    __co_location = [495490.90625, 2490908, 0.25009766221046448];
     let rotation = [0, 0, 0];
     let scale = [1, 1, 1];
-    let smoothMotion = 0;   //1: 平滑插值，0: 跳跃
+    let smoothMotion = 1;   //1: 平滑插值，0: 跳跃
     let o = new CustomObjectData('o1', pakFilePath, assetPath, __co_location, rotation, scale, smoothMotion);
     __g.customObject.add(o);
 }
 
 function test_customObject_update() {
-    test_customObject_setPos();
+    __g.customObject.setRotation('o1', [])
 }
 
 function test_customObject_delete() {
     __g.customObject.delete('o1');
 }
 
+function test_customObject_clear() {
+    __g.customObject.clear();
+}
+
 function test_customObject_focus() {
-    __g.customObject.focus('o1', 30);
+    __g.customObject.focus('o1', -1);  //-1:自动跟随
 }
 
 function test_customObject_show() {
@@ -1692,13 +1765,37 @@ function test_customObject_hide() {
     __g.customObject.hide('o1');
 }
 
+function test_customObject_highlight() {
+    __g.customObject.highlight('o1', Color.Red);
+}
+
+function test_customObject_unhighlight() {
+    __g.customObject.unhighlight();
+}
+
 function test_customObject_get() {
     __g.customObject.get('o1');
 }
 
+
+function test_customObject_addByTileLayer() {
+    let o = new CustomObjectData2('o1', __currentTileLayerActor.id, __currentTileLayerActor.objectId,
+        [-148.14, -7370.16, 9.47], [0, 0, 0], [1, 1, 1], 0);
+    __g.customObject.addByTileLayer(o);
+}
+
+function test_customObject_callFunction() {
+    __g.customObject.callFunction('o1', 'funName', BPFuncParamType.Int32, 10002, () => {
+
+    });
+}
+
 function test_customObject_setPos() {
     __co_location[0] += 5.0;
-    __g.customObject.setLocation('o1', __co_location, test_customObject_focus);
+    __g.customObject.updateBegin();
+    __g.customObject.setSmoothMotion('o1', 1);
+    __g.customObject.setLocation('o1', __co_location);
+    __g.customObject.updateEnd();
 }
 
 var __co_scale = [1, 1, 1];
@@ -1717,8 +1814,8 @@ function test_customObject_setScale() {
 function test_vp_add() {
     let o = new VideoProjectionData();
     o.id = "vp1";
-    o.videoURL = HostConfig.AbsolutePath + "/media/traffic.mov";
-    o.location = [66.14, -7288.16, 9.47];
+    o.videoURL = HostConfig.Path + "/media/video2.mov";
+    o.location = [495333.59375, 2490901, 20.0];
     o.rotation = [-50, 0, 0];
     o.fov = 90;
     o.aspectRatio = 1.77;
@@ -1729,8 +1826,8 @@ function test_vp_add() {
 function test_vp_update() {
     let o = new VideoProjectionData();
     o.id = "vp1";
-    o.videoURL = HostConfig.AbsolutePath + "/media/traffic.mov";
-    o.location = [66.14, -7288.16, 9.47];
+    o.videoURL = HostConfig.Path + "/media/video2.mov";
+    o.location = [495333.59375, 2490901, 20.0];
     o.rotation = [-50, 0, 0];
     o.fov = 90;
     o.aspectRatio = 2;
@@ -1765,12 +1862,12 @@ function test_vp_delete() {
   panorama
 --------------------------------------------------*/
 function test_panorama_add() {
-    let o = new PanoramaData('p1', HostConfig.AbsolutePath + '/media/panorama.jpg', [4440.45, 3741.73, 100], 75);
+    let o = new PanoramaData('p1', HostConfig.Path + '/media/panorama1.jpg', [495302.625, 2491061.5, 30.15234375], 75);
     __g.panorama.add(o);
 }
 
 function test_panorama_update() {
-    let o = new PanoramaData('p1', HostConfig.AbsolutePath + '/media/panorama-1.jpg', [4440.45, 3741.73, 100], 75);
+    let o = new PanoramaData('p1', HostConfig.Path + '/media/panorama2.jpg', [495302.625, 2491061.5, 30.15234375], 75);
     __g.panorama.update(o);
 }
 
@@ -1800,8 +1897,8 @@ function test_panorama_get() {
 function test_decal_add() {
     let o = new DecalData('d1');
     o.order = 1;
-    o.texturePath = HostConfig.AbsolutePath + '/media/decal.jpg';
-    o.location = [66.14, -7288.16, 9.47];
+    o.texturePath = HostConfig.Path + '/media/decal1.png';
+    o.location = [494219.3125, 2490657, -0.001054687425494194];
     o.rotation = [-90, 180, 0];
     o.scale = [1, 1, 1];
     __g.decal.add(o);
@@ -1810,8 +1907,8 @@ function test_decal_add() {
 function test_decal_update() {
     let o = new DecalData('d1');
     o.order = 1;
-    o.texturePath = HostConfig.AbsolutePath + '/media/decal.jpg';
-    o.location = [66.14, -7288.16, 9.47];
+    o.texturePath = HostConfig.Path + '/media/decal2.png';
+    o.location = [494219.3125, 2490657, -0.001054687425494194];
     o.rotation = [-90, 180, 0];
     o.scale = [0.5, 0.5, 0.5];
     __g.decal.update(o);
@@ -1844,19 +1941,19 @@ function test_decal_get() {
 --------------------------------------------------*/
 function test_viewshed_add() {
     let o = new ViewshedData('v1');
-    o.coordinate = [5235.26, 4256.03, -20.47];
+    o.coordinate = [495189.71875, 2490901.75, 10];
     o.fov = 70;
-    o.radius = 1000;
-    o.direction = 120;
+    o.radius = 400;
+    o.direction = -50;
     __g.viewshed.add(o);
 }
 
 function test_viewshed_update() {
     let o = new ViewshedData('v1');
-    o.coordinate = [5235.26, 4256.03, -20.47];
-    o.fov = 55;
-    o.radius = 2000;
-    o.direction = 135;
+    o.coordinate = [495189.71875, 2490901.75, 10];
+    o.fov = 70;
+    o.radius = 500;
+    o.direction = -60;
     __g.viewshed.update(o);
 }
 
@@ -1879,6 +1976,46 @@ function test_viewshed_focusAll() {
 function test_viewshed_get() {
     __g.viewshed.get('v1');
 }
+
+
+
+
+/*-------------------------------------------------
+  dynamicWater
+--------------------------------------------------*/
+function test_dynamicWater_add() {
+    let coords = [[493878.9375, 2490438.25, 0], [494153.09375, 2490915, 0], [494413.875, 2490763.25, 0], [494286.21875, 2490366.25, 0]];
+    let o = new DynamicWaterData('dy1', coords, 0);
+    __g.dynamicWater.add(o);
+}
+
+function test_dynamicWater_update() {
+    let o = new DynamicWaterData('dy1');
+    o.style = 1;
+    __g.dynamicWater.update(o);
+}
+
+function test_dynamicWater_delete() {
+    __g.dynamicWater.delete('dy1');
+}
+
+function test_dynamicWater_clear() {
+    __g.dynamicWater.clear();
+}
+
+function test_dynamicWater_focus() {
+    __g.dynamicWater.focus('dy1');
+}
+
+function test_dynamicWater_focusAll() {
+    __g.dynamicWater.focusAll();
+}
+
+function test_dynamicWater_get() {
+    __g.dynamicWater.get('dy1');
+}
+
+
 
 
 
@@ -1926,14 +2063,17 @@ function test_misc_setMainUIVisibility() {
     __g.misc.setMainUIVisibility(__uiVisible);
 }
 
-let __queryEnabled = false;
-function test_misc_setQueryToolState() {
-    __queryEnabled = !__queryEnabled;
-    __g.misc.setQueryToolState(__queryEnabled);
+
+function test_misc_setMousePickMask() {
+    //此处可以用枚举，也可以直接设置数字，数字含义如下：
+    //7: click, move, hover: 全开 
+    //0: click, move, hover: 全关 
+    let mask = MousePickMask.MouseClick | MousePickMask.MouseMove | MousePickMask.MouseHover;
+    __g.misc.setMousePickMask(mask);
 }
 
 function test_misc_playVideo() {
-    __g.misc.playVideo(1, 20, 20, 400, 300, HostConfig.AbsolutePath + '/media/traffic.mov');
+    __g.misc.playVideo(1, 20, 20, 400, 300, HostConfig.Path + '/media/video2.mov');
 }
 
 function test_misc_stopPlayVideo() {
@@ -1941,7 +2081,7 @@ function test_misc_stopPlayVideo() {
 }
 
 function test_misc_playMovie() {
-    __g.misc.playMovie(HostConfig.AbsolutePath + '/media/traffic.mov');
+    __g.misc.playMovie(HostConfig.Path + '/media/video1.mp4', true);
 }
 
 function test_misc_stopMovie() {
@@ -1984,36 +2124,41 @@ function test_misc_hideAllFoliages() {
 /*-------------------------------------------------
   tools
 --------------------------------------------------*/
-function test_tools_startPolygonClip() {
-    let coords1 = [[14568.25, -15901.38, 0], [14366.85, -15872.15, 0], [14428.1, -16030.33, 0]];
+async function test_tools_startPolygonClip() {
 
-    let coords2 = [
-        [[9665.22, -11366.88, 5.7], [9765.4, -4511.22, 5.7], [4155.2, -4036.94, 5.7], [3098, -11010.32, 5.7], [6445.79, -12717.28, 6.78]],
-        [[8706.9, -9457.89, 5.7], [8824.84, -8055.4, 6.64], [7619.37, -8859.47, 6.72]],
-        [[5744.8, -7795.59, 5.7], [6205.21, -5724.74, 5.7], [4460.01, -5839.38, 6.05], [3966.28, -7712.46, 7.17]]
-    ];
+    await __g.camera.set(489438.625, 2486334.75, 636.202454, -67.643913, -154.078171, 0);
+    await __g.tileLayer.enableClip('A659DF0E404D806CB3511C9DAC22D160');
 
-    let coords3 = [
-        //part1
-        [
-            [[9665.22, -11366.88, 5.7], [9765.4, -4511.22, 5.7], [4155.2, -4036.94, 5.7], [3098, -11010.32, 5.7], [6445.79, -12717.28, 6.78]],
-            [[8706.9, -9457.89, 5.7], [8824.84, -8055.4, 6.64], [7619.37, -8859.47, 6.72]],
-            [[5744.8, -7795.59, 5.7], [6205.21, -5724.74, 5.7], [4460.01, -5839.38, 6.05], [3966.28, -7712.46, 7.17]]
-        ],
-
-        //part2
-        [
-            [[-4477.25, -4353.11, 5.7], [-1803.2, -6744.65, 5.7], [-562.18, -4590.14, 5.7], [-2271.85, -2595.33, 5.7]],
-            [[-2867.3, -4342.53, 5.7], [-2381.34, -5043.33, 5.7], [-1723.21, -4566.1, 6.25], [-1938.83, -3757.59, 5.7]]
-        ]
-    ];
-
-    __g.misc.startPolygonClip(coords1);
+    let coords = [
+        [488912.3125, 2486257.75, 16.357500076293945],
+        [489164.1875, 2486585, 186.87702941894531],
+        [489389.28125, 2486518.75, 44.41058349609375],
+        [489260.15625, 2486184.5, 6.065742015838623]
+    ]
+    __g.tools.startPolygonClip(coords);
 }
 
-function test_tools_stopClip() {
-    __g.misc.stopClip();
+function test_tools_stopPolygonClip() {
+    __g.tools.stopPolygonClip();
 }
+
+async function test_tools_startPlaneClip() {
+    __g.tools.startPlaneClip([489399.15625, 2487092.5, 19.214374542236328], [0, 0, 0]);
+}
+
+function test_tools_stopPlaneClip() {
+    __g.tools.stopPlaneClip();
+}
+
+async function test_tools_startVolumeClip() {
+    __g.tools.startVolumeClip([489787.90625, 2488905.5, 289.4771728515625], 0);
+}
+
+function test_tools_stopVolumeClip() {
+    __g.tools.stopVolumeClip();
+}
+
+
 
 function test_misc_setMeasurement() {
     //options的每个属性都是可选的
@@ -2029,12 +2174,64 @@ function test_misc_setMeasurement() {
     __g.tools.setMeasurement(MeasurementMode.Coordinate, options);
 }
 
-function test_misc_enterMeasurement() {
-    __g.tools.enterMeasurement();
+function test_misc_startMeasurement() {
+    __g.tools.startMeasurement();
 }
 
-function test_misc_exitMeasurement() {
-    __g.tools.exitMeasurement();
+function test_misc_stopMeasurement() {
+    __g.tools.stopMeasurement();
+}
+
+function test_misc_lineIntersect() {
+    __g.tools.lineIntersect([1068.1212158203125, 4493.12060546875, 188.63694763183594], [1379.934326171875, 5068.63818359375, 6.7398433685302734]);
+}
+
+
+function test_misc_startSkylineAnalysis() {
+    let options = {
+        showOutline: true,
+        outlineThickness: 3.0,
+        outlineColor: Color.Red,
+        useSceneColor: false,
+        sceneColor: Color.Black,
+        showSkyline: true,
+        windowSize: [400, 200],
+        skylineColor: Color.Green,
+        backgroundColor: Color.Gray,
+        height: 50.0,
+        tileLayers: [
+            {
+                color: Color.Blue,
+                ids: ['B1C4E5BD4888DA841D690AA396B061C3', 'A659DF0E404D806CB3511C9DAC22D160']
+            }
+        ]
+    }
+    __g.tools.startSkylineAnalysis(options);
+}
+
+
+function test_misc_stopSkylineAnalysis() {
+    __g.tools.stopSkylineAnalysis();
+}
+
+
+function test_misc_exportSkyline() {
+    __g.tools.exportSkyline('d:/skyline.png', [400, 200], Color.Green, Color.Gray);
+}
+
+function test_misc_startViewshedAnalysis() {
+    let options = {
+        fov_h: 150,
+        fov_v: 45,
+        height: 10.0,
+        visibleColor: Color.Green,
+        invisibleColor: Color.Red
+    }
+    __g.tools.startViewshedAnalysis(options);
+}
+
+function test_misc_stopViewshedAnalysis() {
+    __g.tools.stopViewshedAnalysis();
 }
 
 
@@ -2141,30 +2338,30 @@ function test_editHelper_cancel() {
     __g.editHelper.cancel();
 }
 
-function test_editHelper_finish() {
-    __g.editHelper.finish(true, (response) => {
-        buildType = response.buildType;
-        switch (buildType) {
-            case 0: {
-                let o = new PolylineData(Math.random());
-                o.coordinates = response.coordinates;
-                o.color = Color.Red
-                o.style = 2;
-                o.thickness = 10;
-                o.brightness = 1;
-                o.flowRate = 0.5;
-                __g.polyline.add(o);
-            } break;
+async function test_editHelper_finish() {
+    let res = await __g.editHelper.finish(true);
+    buildType = res.buildType;
 
-            case 1: {
-                let color = Color.Blue;       //多边形的填充颜色
-                let frameColor = Color.Red;
-                let frameThickness = 1;
-                let o = new PolygonData(Math.random(), color, response.coordinates, frameColor, frameThickness);
-                __g.polygon.add(o);
-            } break;
-        }
-    });
+    switch (buildType) {
+        case 0: {
+            let o = new PolylineData(Math.random());
+            o.coordinates = res.coordinates;
+            o.color = Color.Red
+            o.style = 2;
+            o.thickness = 10;
+            o.brightness = 1;
+            o.flowRate = 0.5;
+            __g.polyline.add(o);
+        } break;
+
+        case 1: {
+            let color = Color.Blue;       //多边形的填充颜色
+            let frameColor = Color.Red;
+            let frameThickness = 1;
+            let o = new PolygonData(Math.random(), color, res.coordinates, frameColor, frameThickness);
+            __g.polygon.add(o);
+        } break;
+    }
 }
 
 
@@ -2173,192 +2370,11 @@ function test_editHelper_finish() {
 /*-------------------------------------------------
   测试用例
 --------------------------------------------------*/
-var __roads = undefined;
-var __lands = undefined;
-let __shpCenter = [662219.645, 3262845.555, 0.0];
-
-function showRoad(show) {
-    var ids = [];
-    for (var a in __roads) {
-        ids.push(__roads[a].id);
-    }
-
-    if (show) {
-        __g.polyline.show(ids);
-    }
-    else {
-        __g.polyline.hide(ids);
-    }
-}
-
-function addRoad() {
-    __g.polyline.clear();
-
-    var roadCount = dataLuZhongXingXian.features.length;
-    var oa = [];
-    for (var i = 0; i < roadCount; i++) {
-        var featrue = dataLuZhongXingXian.features[i];
-        var geometry = featrue.geometry;
-        var coordinates = geometry.coordinates;
-        let coords = coordinates[0]; //多边形的坐标数组
-        for (var j = 0; j < coords.length; j++) {
-            coords[j][0] -= __shpCenter[0];
-            coords[j][1] -= __shpCenter[1];
-            coords[j][1] = -coords[j][1];
-
-            coords[j][0] += 250;
-            coords[j][1] -= 2550;
-
-            coords[j].push(251);
-        }
-
-        var properties = featrue.properties;
-
-        var exponent = properties['拥堵指数'];
-        let color = [0, 1, 0, 1];
-        if (exponent !== null) {
-            switch (exponent) {
-                case 0:
-                    {
-                        color = [0, 1, 0, 1];
-                        break;
-                    }
-                case 1:
-                    {
-                        color = [1, 1, 0, 1];
-                        break;
-                    }
-                case 2:
-                    {
-                        color = [1, 1, 0, 1];
-                        break;
-                    }
-                case 3:
-                    {
-                        color = [0, 1, 0, 1];
-                        break;
-                    }
-                default:
-                    {
-                        color = [0.5, 0.0, 0.5, 1];
-                        break;
-                    }
-            }
-        }
-
-        let style = 4;
-        let thickness = 2;
-        let brightness = 0.0;
-        let flowRate = 0.0;
-        var roadId = 'road' + i;
-        let o = new PolylineData(roadId, color, coords, style, thickness, brightness, flowRate);
-        oa.push(o);
-    }
-
-    __roads = oa;
-    __g.polyline.add(oa, () => {
-        __g.polyline.focus('road0', 1000);
-    });
-}
-
-function showLandPolygons(show) {
-    var ids = [];
-    for (var a in __lands) {
-        ids.push(__lands[a].id);
-    }
-
-    if (show) {
-        __g.polygon3d.show(ids);
-    }
-    else {
-        __g.polygon3d.hide(ids);
-    }
-}
-
-function getRandom(start, end, fixed = 0) {
-    let differ = end - start
-    let random = Math.random()
-    return (start + differ * random).toFixed(fixed)
-}
-
-function addLandPolygons() {
-    __g.polygon3d.clear();
-
-    var landCount = dikuai.features.length;
-    var oa = [];
-    var typeColors = {};
-
-    for (var i = 0; i < landCount; i++) {
-        var featrue = dikuai.features[i];
-        var geometry = featrue.geometry;
-        var coordinates = geometry.coordinates;
-        let coords = coordinates[0][0];//多边形的坐标数组
-
-        for (var j = 0; j < coords.length; j++) {
-            coords[j][0] -= __shpCenter[0];
-            coords[j][1] -= __shpCenter[1];
-            coords[j][1] = -coords[j][1];
-
-            coords[j][0] += 250;
-            coords[j][1] -= 2550;
-
-            coords[j].push(235);
-        }
-
-        var properties = featrue.properties;
-        var landType = properties['用地类'];
-
-        let color = [];//颜色值
-        if (typeColors[landType] === undefined) {
-            var r = getRandom(10, 255) / 255;
-            var g = getRandom(50, 255) / 255;
-            var b = getRandom(60, 255) / 255;
-            color = [r, g, b, 0.5];
-            typeColors[landType] = color;
-        }
-        else {
-            color = typeColors[landType];
-        }
-
-        let height = 100;       //3D多边形的高度
-        let intensity = 4.0;    //亮度
-        let type = 1;           //3DPolygon的样式
-        let o = new Polygon3DData('dikuai' + i, type, coords, color, height, intensity);
-        oa.push(o);
-
-    }
-    __lands = oa;
-    __g.polygon3d.add(oa, () => {
-        __g.polygon3d.focus('dikuai0', 1000);
-    });
-}
-
-function testcase_highlightArea_crash() {
-    __g.highlightArea.clear();
-
-    let coords = [
-        [-2785.06, -13556.48, 5.7],
-        [8156.87, -14242.93, 5.7],
-        [8881.75, -7989.53, 5.82],
-        [4221, -5911.65, 5.7],
-        [-3369.15, -5128.73, 5.7]
-    ];
-    let color = [1, 0, 0, 0.8];//多边形高亮颜色
-    let heightRange = [0.0, 100.0];//高亮染色区域可以限定一个高度范围，也就是Z坐标的区间，只有Z值这这个区间的模型才会被染色
-    let intensity = 5.0;//高亮颜色的强度
-    let o = new HighlightAreaData('1', coords, color, heightRange, intensity);
-    __g.highlightArea.add(o, function () { __g.highlightArea.focus('1'); });
-
-    setInterval(function () {
-        __g.camera.get(function (response) {
-            log('this is get camera callback function!');
-        })
-    }, 1000);
-}
-
-
 function testcase_simulate_building_process() {
-    let tileLayerId = '619B2DB74CB1A81EFD9AAF9F98CFE5AD';
+
+    __g.camera.set(495271.03125, 2491192, 71.168579, -37.002457, 91.473381, 0);
+
+    let tileLayerId = 'B1C4E5BD4888DA841D690AA396B061C3';
     __g.tileLayer.hideAllActors(tileLayerId);
 
     let index = 0;
@@ -2373,187 +2389,177 @@ function testcase_simulate_building_process() {
 
 
 
+async function testcase_simulate_gps_location() {
+    await __g.customObject.delete('co1');
+    let o = new CustomObjectData('co1');
+    o.pakFilePath = HostConfig.Path + '/media/custom.pak';
+    o.assetPath = '/Game/Common/Asset_Bank/Mesh/Car/BP_Car_JiuHuChe';
+    o.location = __gps_pos[0];
+    o.rotation = [0, 0, 0];
+    o.scale = [1, 1, 1];
+    o.smoothMotion = 1;   //1: 平滑插值，0: 跳跃
+    o.coordinateType = 1;   //设置坐标系：0(Projection), 1(WGS84)
+    await __g.customObject.add(o);
+    await __g.customObject.focus(o.id, -1);
+
+    let index = 0;
+    setInterval(async () => {
+        if (++index > __gps_pos.length)
+            index = 0;
+        let pos = __gps_pos[index];
+        __g.customObject.setLocation(o.id, pos)
+    }, 1200);
+}
+
+
+
 /*-------------------------------------------------
   压力测试
 --------------------------------------------------*/
-function test_stress_add_1000_tags() {
+async function test_stress_add_1000_tags() {
     clearScreen();
+    await __g.tag.clear();
+    await __g.camera.set(491757.5625, 2490132.25, 126.055817, -82.87175, 178.001175, 0);
 
+    let baseX = 491615.03;
+    let baseY = 2490023.75;
     let oa = new Array();
 
     for (let i = 0; i < 1000; i++) {
 
-        let x = Math.ceil(Math.random() * 200) //1-200的随机数
-        let y = Math.ceil(Math.random() * 200) //1-200的随机数
+        let x = Math.ceil(baseX + Math.random() * 200)
+        let y = Math.ceil(baseY + Math.random() * 200)
 
-        //设置参数
-        let id = i;                      //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
-        let coord = [x, y, 5.47];        //坐标值：标签添加的位置
-        let imagePath = 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1816424559,1043488893&fm=26&gp=0.jpg'; //图片路径，可以是本地路径，也支持网络路径
-        let url = HostConfig.AbsolutePath + '/int_popup.html';;//鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
-        let imageSize = [28, 28];        //图片的尺寸
-        let text = `T${i}`;              //标签显示的文字
-        let range = [1, 8000.0];         //标签的可见范围
-        let showLine = true;             //标签下方是否显示垂直牵引线
-
-        let o = new TagData(id, coord, imagePath, imageSize, url, text, range, showLine);
-        o.textColor = [0, 0, 0, 1];       //设置文字颜色
-
+        let o = new TagData(i);
+        o.coordinate = [x, y, 15.0];
+        o.imagePath = HostConfig.Path + '/images/tag.png';
+        o.url = HostConfig.Path + '/int_popup.html';
+        o.imageSize = [28, 28];
+        o.text = i.toString();
         oa.push(o);
     }
-
-    __g.tag.add(oa, function () {
-        __g.tag.focusAll();
-    });
-
+    await __g.tag.add(oa);
 }
 
-function test_stress_update_1000_tags() {
+async function test_stress_update_1000_tags() {
 
-    clearScreen();
+    __g.tag.updateBegin();  //updateBegin不是异步调用，不需要await
 
-    __g.tag.updateBegin();
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 1000; i++)
         __g.tag.setTextBackgroundColor(i, Color.Yellow);
-    }
-    __g.tag.updateEnd(function () {
-        log('update finished!');
-    });
+
+    await __g.tag.updateEnd();
+    log('update finished!');
 }
 
-function test_stress_update_tagpos_500() {
+async function test_stress_update_tagpos_200() {
 
-    clearScreen();
+    let o = new TagData('t1');
+    o.coordinate = [491274.65625, 2489124, 21.0]
+    o.imagePath = HostConfig.Path + '/images/tag.png';
+    o.text = '北京银行';
+    o.range = [1, 10000];
 
-    __g.tag.clear(() => {
+    await __g.tag.clear();
+    await __g.camera.set(492472.750000, 2487660.750000, 1637.308838, -49.619568, -93.635345, 0);
+    await __g.tag.add(o);
 
-        let o = new TagData('t1', [-178.14, -8038.16, 5.47], null, null, null, '迪蒙大厦', [1, 8000], true);
-        __g.tag.add(o, () => {
+    let i = 0;
+    let tid = setInterval(() => {
+        if (i++ > 200)
+            clearInterval(tid);
+        log(`${i} times`);
 
-            __g.tag.focus('t1', 500, setTimeout(() => {
+        o.coordinate[0] += 10;
 
-                let i = 0;
-                let tid = setInterval(() => {
-                    if (i++ > 500)
-                        clearInterval(tid);
-                    log(`${i} times`);
-                    __g.tag.setCoordinate('t1', [-178.14 + i * 5, -8038.16, 5.47]);
-                }, 50);
-
-            }, 1000)); //focus
-
-        }); //add
-
-    }); //clear
+        __g.tag.setCoordinate('t1', o.coordinate);
+    }, 50);
 }
 
-function test_stress_add_heatmap_3000() {
+async function test_stress_add_heatmap_3000() {
     clearInterval(__tidUpdateHeatMap);
-    __g.tag.clear(__g.heatmap.clear(() => {
-        let bbox = [1083.27, -12907.29, -1000, 1308.18, -12759.77, 201.51];
-        let range = [0, 100];
+    await __g.tag.clear();
+    await __g.heatmap.clear();
+    await __g.camera.set(490577.4375, 2489508.75, 2100.174561, -76.326889, -160.474792, 0);
+
+    let bbox = [488670.75, 2488165, 5.7, 491659.59375, 2490987.5, 344.58];
+    let range = [0, 100];
+    let data = [];
+    let pointCount = 2000;  //热力点数量
+    for (let i = 0; i < pointCount; i++) {
+        let x = getRandNumBetween(bbox[0], bbox[3]);    //minX ~ maxX
+        let y = getRandNumBetween(bbox[1], bbox[4]);    //minY ~ maxY
+        let z = 0;
+        let coord = [x, y, z];                 //热力点的坐标
+        let radius = Math.random() * 100;           //热力点影像半径范围
+        let heatValue = Math.random() * 100;        //热力值
+        let o = new HeatMapPointData(`${i}`, coord, radius, heatValue);
+        data.push(o);
+    }
+
+    await __g.heatmap.add('heatmap1', bbox, range, data);
+    __tidUpdateHeatMap = setInterval(() => {
         let data = [];
-        let pointCount = 2000;  //热力点数量
         for (let i = 0; i < pointCount; i++) {
-            let x = getRandNumBetween(bbox[0], bbox[3]);    //minX ~ maxX
-            let y = getRandNumBetween(bbox[1], bbox[4]);    //minY ~ maxY
-            let z = 0;
-            let coord = [x, y, z];                 //热力点的坐标
-            let radius = Math.random() * 8;           //热力点影像半径范围
-            let heatValue = Math.random() * 100;        //热力值
-            let o = new HeatMapPointData(`${i}`, coord, radius, heatValue);
+            let o = {};
+            o.id = `${i}`;
+            o.heatValue = Math.random() * 100;
             data.push(o);
         }
-        __g.heatmap.add('heatmap1', bbox, range, data, () => {
-            __tidUpdateHeatMap = setInterval(() => {
-                let data = [];
-                for (let i = 0; i < pointCount; i++) {
-                    let o = {};
-                    o.id = `${i}`;
-                    o.heatValue = Math.random() * 100;
-                    data.push(o);
-                }
-                __g.heatmap.update('heatmap1', null, null, data);
-            }, 1000);
-        });
-    }));
+
+        //此处的update没有后续依赖所以不需要await
+        __g.heatmap.update('heatmap1', null, null, data);
+    }, 1000);
 }
 
-var dataId = [];
 
-function test_stress_add_delete_focus() {
-    __g.tag.delete(dataId, function () {
-        dataId = []
-        //设置参数
-        let data = []
-        for (let i = 1; i < 800; i++) {
-            dataId.push(i)
-            let id = i;     //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
-            let coord = [1800 + i * 100, -3500 + i * 100, 100];  //坐标值：标签添加的位置
-            let imagePath = HostConfig.AbsolutePath + '/images/tag.png'; //图片路径，可以是本地路径，也支持网络路径
-            let url = HostConfig.AbsolutePath + '/int_popup.html';
-            let imageSize = [28, 28];           //图片的尺寸
-            let text = '西丽街道已上报事件：131123' + i;              //标签显示的文字
-            let range = [1, 80000.0];            //标签的可见范围
-            let showLine = false;                //标签下方是否显示垂直牵引线
-            var o = new TagData(id, coord, imagePath, imageSize, null, text, range, showLine);
-            o.textColor = Color.Black;         //设置文字颜色
-            o.textBackgroundColor = Color.White;
-            data.push(o)
-        }
-
-        __g.tag.add(data, __g.tag.focus(dataId));
-    });
-}
-
-function test_stress_add_800_polygon() {
-    __g.polygon.clear();
+async function test_stress_add_800_polygon() {
     let color = Color.Yellow;       //多边形的填充颜色
-    let frameColor = Color.Blue;
     let frameThickness = 500;
     let o = new PolygonData('p800', color, __coords800, Color.Blue, frameThickness);
-    __g.polygon.add(o, function () {
-        __g.polygon.focus('p800')
-    });
+
+    await __g.polygon.clear();
+    await __g.polygon.add(o);
+    __g.polygon.focus('p800')
 }
 
-function test_stress_add_800_3dpolygon() {
-    __g.polygon3d.clear();
+async function test_stress_add_800_3dpolygon() {
     let color = [1, 0, 1, 1];   //颜色值
     let height = 5000;           //3D多边形的高度
     let intensity = 4.0;        //亮度
     let type = 1;               //3DPolygon的样式
     let o = new Polygon3DData('p800', type, __coords800, color, height, intensity);
-    __g.polygon3d.add(o, function () {
-        __g.polygon3d.focus('p800');
-    });
+
+    await __g.polygon3d.clear();
+    await __g.polygon3d.add(o);
+    __g.polygon3d.focus('p800');
 }
 
-function test_stress_add_10000_polygon() {
-    __g.polygon.clear();
+async function test_stress_add_10000_polygon() {
     let color = Color.Blue;       //多边形的填充颜色
     let frameColor = Color.Red;
     let frameThickness = 500;
     let o = new PolygonData('p1w', color, __coords1w, frameColor, frameThickness);
-    __g.polygon.add(o, function () {
-        __g.polygon.focus('p1w')
-    });
+
+    await __g.polygon.clear();
+    await __g.polygon.add(o);
+    __g.polygon.focus('p1w');
 }
 
-function test_stress_add_10000_3dpolygon() {
-    __g.polygon3d.clear();
+async function test_stress_add_10000_3dpolygon() {
     let color = Color.Blue;     //颜色值
     let height = 5000;          //3D多边形的高度
     let intensity = 4.0;        //亮度
     let type = 1;               //3DPolygon的样式
     let o = new Polygon3DData('p1w', type, __coords1w, color, height, intensity);
-    __g.polygon3d.add(o, function () {
-        __g.polygon3d.focus('p1w');
-    });
+
+    await __g.polygon3d.clear();
+    await __g.polygon3d.add(o);
+    __g.polygon3d.focus('p1w');
 }
 
-function test_stress_polygon_from_geojson() {
-    __g.polygon.clear();
+async function test_stress_polygon_from_geojson() {
+    await __g.polygon.clear();
 
     let count = zoneBoundary.geometries.length;
     for (let i = 0; i < count; i++) {
@@ -2569,8 +2575,8 @@ function test_stress_polygon_from_geojson() {
     }
 }
 
-function test_stress_3dpolygon_from_geojson(fn) {
-    __g.polygon3d.clear();
+async function test_stress_3dpolygon_from_geojson(fn) {
+    await __g.polygon3d.clear();
 
     let count = zoneBoundary.geometries.length;
     let oa = [];
@@ -2583,9 +2589,10 @@ function test_stress_3dpolygon_from_geojson(fn) {
         let o = new Polygon3DData(i, type, coords, color, height, intensity);
         oa.push(o);
     }
-    __g.polygon3d.add(oa, function () {
-        __g.polygon3d.focus(0, 0, () => { if (fn) fn(oa); });
-    });
+    await __g.polygon3d.add(oa);
+    await __g.polygon3d.focus(0, 0);
+    if (fn)
+        fn(oa);
 }
 
 function test_stress_polyline_show_hide_frequently() {
@@ -2674,20 +2681,18 @@ function test_stress_3dpolygon_show_hide_frequently2() {
 }
 
 
-function test_stress_callback_frequently() {
+async function test_stress_callback_frequently() {
 
     for (let i = 0; i < 10; i++) {
-        __g.camera.get((r) => {
-            let str = `get camera callback, callbackIndex: ${r.callbackIndex}`;
-            log(str);
-        })
+        let res = await __g.camera.get();
+        let str = `get camera callback, callbackIndex: ${res.callbackIndex}`;
+        log(str);
     }
 }
 
 
 function test_stress_playVideo_frequently() {
     let isfirst = true;
-    let index = 0;
 
     setInterval(function () {
 
@@ -2702,8 +2707,9 @@ function test_stress_playVideo_frequently() {
 }
 
 
+//频繁添加修改删除3DPolygon
 function test_stress_add_update_delete_3dpolygon() {
-    __g.camera.set(9665.22, -11366.88, 1800, 0, 0, 0);
+    __g.camera.set(488673.28125, 2494341.75, 1381.636353, -36.11198, 78.878166, 0);
     setInterval(function () {
         __g.polygon3d.clear(() => {
             test_polygon3d_add(test_polygon3d_update)

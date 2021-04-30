@@ -3,7 +3,7 @@ import qs from "qs"
 import base from "./base"
 // import { data } from "jquery";
 
-// const geoserverurl = 'http://192.168.31.153:8080/geoserver/'
+// const geoserverurl = 'http://58.250.250.180:9081/geoserver/'
 // const geoserverurl = "http://192.168.5.54:80/geoserver/"
 const geoserverurl = "/2api"
 
