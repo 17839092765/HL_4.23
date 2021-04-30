@@ -3,7 +3,6 @@
     <div ref="slider" class="slider">
       <img src="../../assets/img/5未来愿景/调节条背景.svg" alt="" />
       <div class="point" @mousedown="updateTime" ref="point">
-
         <div>{{ currentTime }}</div>
       </div>
     </div>
@@ -211,7 +210,7 @@ export default {
         -29.102474,
         -30.000002
       );
-      __g.infoTree.show("CA5B86EA479EC48F0701CAB66C35E54E")
+      __g.infoTree.show("CA5B86EA479EC48F0701CAB66C35E54E");
     }
     showtuceng(this.$treedata.wlyjdata);
     // showtuceng(this.$treedata.Car);
@@ -223,8 +222,8 @@ export default {
   beforeDestroy() {
     hidetuceng(this.$treedata.wlyjdata);
     // hidetuceng(this.$treedata.Car);
-      __g.infoTree.hide("CA5B86EA479EC48F0701CAB66C35E54E")
-
+    __g.infoTree.hide("CA5B86EA479EC48F0701CAB66C35E54E");
+    __g.misc.stopAnimation();
     __g.weather.setDateTime(2021, 4, 9, 10, 0, false);
   },
   destroyed() {},
