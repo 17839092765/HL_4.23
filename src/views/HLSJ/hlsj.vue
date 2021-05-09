@@ -42,7 +42,9 @@ export default {
     return {
       CameraLookstyle: 0,
       // path: "http://192.168.5.49:9080/img/biaoji.png",
-      path: "D:\\HongLing\\HL_4.23\\src\\assets\\img\\1红岭实景\\biaoji.png",
+      path:
+        "E:\\Freedo\\红岭\\HL_4.23\\src\\assets\\img\\1红岭实景\\biaoji.png",
+      path1: "E:\\Freedo\\红岭\\HL_4.23\\src\\assets\\img\\1红岭实景\\",
       flag: false,
       tagIds: [],
     };

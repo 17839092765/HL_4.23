@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       // path: 'E:\\yqd\\code\\HL_4.23\\src\\assets\\img\\2功能布局\\2\\',
-      path: "D:\\HongLing\\HL_4.23\\src\\assets\\img\\2功能布局\\2\\",
+      path: "127.0.0.1:8080/img/2功能布局/2/",
       arr: [],
     };
   },

@@ -2,27 +2,28 @@
   <div class="xzsj">
     <!-- <FDTZ />
     <XZQS /> -->
-    <div class="threelink1">
-      <router-link to="/Home/XZSJ/fdtz" tag="li">
-        <span>法定图则</span>
-      </router-link>
+    <div class="link">
+      <div class="threelink1">
+        <router-link to="/Home/XZSJ/fdtz" tag="li">
+          <span>法定图则</span>
+        </router-link>
+      </div>
+      <div class="threelink2">
+        <router-link to="/Home/XZSJ/xzqs" tag="li">
+          <span>现状权属</span>
+        </router-link>
+      </div>
+      <div class="threelink3">
+        <router-link to="/Home/XZSJ/tdly" tag="li">
+          <span>土地利用</span>
+        </router-link>
+      </div>
+      <div class="threelink4">
+        <router-link to="/Home/XZSJ/csgx" tag="li">
+          <span>城市更新单元</span>
+        </router-link>
+      </div>
     </div>
-    <div class="threelink2">
-      <router-link to="/Home/XZSJ/xzqs" tag="li">
-        <span>现状权属</span>
-      </router-link>
-    </div>
-    <div class="threelink3">
-      <router-link to="/Home/XZSJ/tdly" tag="li">
-        <span>土地利用</span>
-      </router-link>
-    </div>
-    <div class="threelink4">
-      <router-link to="/Home/XZSJ/csgx" tag="li">
-        <span>城市更新单元</span>
-      </router-link>
-    </div>
-
     <router-view />
   </div>
 </template>
@@ -76,6 +77,9 @@ export default {
   methods: {},
   created() {},
   mounted() {
+    let link = document.getElementsByClassName("link")[0];
+    console.log(link);
+    link.style.width = "600px";
     this.$treedata && showtuceng(this.$treedata.xzsjdata);
     showVectorlayers("法定图则");
     __g.camera.lookAt(
@@ -98,7 +102,7 @@ export default {
     hidetuceng(this.$treedata.xzsjdata);
     hideVectorlayers();
     __g.polyline.clear();
-    this.$store.commit("clickData", {})
+    this.$store.commit("clickData", {});
   },
   destroyed() {},
   activated() {},
@@ -108,28 +112,51 @@ export default {
 
 <style lang="scss" scoped>
 .xzsj {
-  > div {
-    background: rgba(0, 0, 0, 0.274) !important;
-    > li {
-      width: 100%;
-      height: 100% !important;
-      border-radius: 5px;
-      line-height: 40px !important;
-      text-align: center;
-      width: 100% !important;
-      height: 50px;
-      line-height: 50px;
-      &.router-link-active {
+  .link {
+    position: absolute;
+    overflow: hidden;
+    width: 0px;
+    height: 40px;
+    transition: all 1s;
+    top: 80px;
+    left: 0px;
+    right: 0;
+    /* bottom: 0; */
+    margin: auto;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px 5px 5px 5px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    > div {
+      width: 160px;
+      overflow: hidden;
+      /* background: rgba(0, 0, 0, 0.274) !important; */
+      > li {
+        width: 100%;
+        height: 100% !important;
+        border-radius: 5px;
+        line-height: 40px !important;
+        text-align: center;
+        width: 100% !important;
         height: 50px;
         line-height: 50px;
-        color: #fee36d;
-        font-weight: 700;
-        background: rgba(0, 0, 0, 0.411);
+        list-style: none;
+        color: #fff;
+        cursor: pointer;
+        &.router-link-active {
+          height: 50px;
+          line-height: 50px;
+          color: #fee36d;
+          font-weight: 700;
+          background: rgba(0, 0, 0, 0.411);
+        }
       }
     }
   }
 }
-.threelink1 {
+/* .threelink1 {
   position: absolute;
   width: 120px;
   height: 40px;
@@ -287,6 +314,6 @@ export default {
     //   height: 2px;
     //   background: #fee36d;
     // }
-  }
-}
+  } */
+/* } */
 </style>

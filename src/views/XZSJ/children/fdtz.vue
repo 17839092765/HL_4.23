@@ -1,23 +1,21 @@
 <template>
   <div class="fdtz">
-    <div class="echwarp">
-      <div class="echbox1"></div>
-      <div class="echbox">
-        <div class="top">
-          <div class="top2" style="display: flex;margin-left: 20px;">
-            <div class="igm_top">
-              <img src="../../../assets/img/3现状数据/icon_法定图则.svg" />
+    <div class="datacase">
+      <div class="clickdata">
+        <div class="echwarp">
+          <div class="echbox1"></div>
+          <div class="echbox">
+            <div class="top">
+              <div class="top2" style="display: flex;margin-left: 20px;">
+                <div class="igm_top">
+                  <img src="../../../assets/img/3现状数据/icon_法定图则.svg" />
+                </div>
+                <span class="fading">法定图则</span>
+              </div>
             </div>
-            <span class="fading">法定图则</span>
+            <div ref="ech1111" id="echarts11"></div>
           </div>
         </div>
-        <div id="echarts11"></div>
-      </div>
-    </div>
-    <div v-if="clickData1[2]" class="datacase">
-      <div class="top_data" v-if="!clickData1[2]">点击左边建筑物查看信息</div>
-      <div v-show="dataCaseisShow" class="clickdata">
-        <div class="title1"></div>
         <div class="title">
           <div class="title_img">
             <img src="../../../assets/img/3现状数据/icon_地块信息.svg" />
@@ -26,31 +24,44 @@
             {{ clickData.title ? clickData.title : "Loding..." }}
           </div>
         </div>
-        <div class="top_item1">
+        <div v-if="clickData1[2]" class="top_item1">
           <div class="top_item1_btn">地块编号</div>
           <div class="top_item1_title" v-if="clickData1[2]">
             {{ clickData1[0].data }}
           </div>
         </div>
-        <div class="top_item2">{{clickData1[2]?clickData1[2].name+":"+clickData1[2].data:"暂无数据"}}</div>
-        <div class="top_item3">
+        <div v-if="clickData1[2]" class="top_item2">
+          {{
+            clickData1[2]
+              ? clickData1[2].name + ":" + clickData1[2].data
+              : "暂无数据"
+          }}
+        </div>
+        <div v-if="clickData1[2]" class="top_item3">
           <div class="right_item11">
             <div class="right_item1"></div>
           </div>
 
           <div class="right_item2">
             <span class="spac" v-if="clickData1[2]">
-              {{ clickData1[3].data }}</span>
+              {{ clickData1[3].data }}</span
+            >
             <span class="wan">m<sup>2</sup></span>
             <div>用地面积</div>
           </div>
         </div>
-        <div class="condata1"></div>
-        <div class="condata">
-          <div class="condata_item" v-for="(item, index) in clickData1" :key="index">
-            <div class="span_left">{{ item.name }}</div>
-            <span class="span_cen"> |</span>
-            <span class="span_right"> {{ item.data }}</span>
+        <div v-if="clickData1[2]" class="box">
+          <div class="condata1"></div>
+          <div class="condata">
+            <div
+              class="condata_item"
+              v-for="(item, index) in clickData1"
+              :key="index"
+            >
+              <div class="span_left">{{ item.name }}</div>
+              <span class="span_cen"> |</span>
+              <span class="span_right"> {{ item.data }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -64,7 +75,7 @@ import { mapState } from "vuex";
 import { showdata } from "../showdata";
 // import __g from "../../../main";
 export default {
-  data () {
+  data() {
     return {};
   },
   computed: {
@@ -78,9 +89,124 @@ export default {
       os: (state) => state.os,
     }),
   },
-  watch: {},
+  watch: {
+    // "$store.state.clickData": function() {
+    //   if (this.clickData1) {
+    //     console.log(11111111111111111);
+    //     this.addecharts();
+    //   }
+    //   //你需要执行的代码
+    // },
+  },
   methods: {
-    ChuLiOs (data) {
+    addecharts() {
+      setTimeout(() => {
+        this.$nextTick(() => {
+          // var chartDom = this.$refs.ech1111;
+          var chartDom = document.getElementById("echarts11");
+          console.log(chartDom);
+          var myChart = echarts.init(chartDom);
+
+          var option;
+          myChart.on("click", (params) => {
+            console.log(params);
+            if (params.name == "商业服务业用地") {
+              this.Glow(this.ChuLiOs([0.99608, 0, 0, 1]));
+            } else if (params.name == "居住用地") {
+              this.Glow(this.ChuLiOs([1, 1, 0, 1]));
+            } else if (params.name == "公共管理与服务设施用地") {
+              this.Glow(this.ChuLiOs([1, 0, 1, 1]));
+            } else if (params.name == "物流仓储用地") {
+              this.Glow(this.ChuLiOs([0.4549, 0.43137, 0.86667, 1]));
+            } else if (params.name == "公用设施用地") {
+              this.Glow(this.ChuLiOs([0, 0.72157, 0.72157, 1]));
+            } else if (params.name == "交通设施用地") {
+              this.Glow(this.ChuLiOs([0, 0.43137, 0.86667, 1]));
+            } else if (params.name == "绿地与广场用地") {
+              this.Glow(this.ChuLiOs([0.25098, 1, 0.00392, 1]));
+            } else if (params.name == "工业用地") {
+              this.Glow(this.ChuLiOs([0.72157, 0.36078, 0.36471, 1]));
+            } else if (params.name == "其他用地") {
+              this.Glow(this.ChuLiOs([0.29412, 0.58431, 0, 1]));
+            }
+          });
+          option = {
+            color: [
+              "#FA013B",
+              "#ED28EE",
+              "#7D684B",
+              "#FFFF00",
+              "#A66EDD",
+              "#2D86E0",
+              "#00B8B8",
+              "#40FF01",
+              "#608545",
+            ],
+            // backgroundColor: "#00032C",
+            tooltip: {
+              trigger: "item",
+              formatter: "{a} <br/>{b} : {d}%",
+            },
+            legend: {
+              // backgroundColor: "#0000004d",
+              //backgroundColor: "#00032C",
+              orient: "horizontal",
+              bottom: "5%",
+              show: true,
+              data: [
+                "商业服务业用地",
+                "公共管理与服务设施用地",
+                "工业用地",
+                "居住用地",
+                "物流仓储用地",
+                "公用设施用地",
+                "交通设施用地",
+                "绿地与广场用地",
+                "其他用地",
+              ],
+              textStyle: {
+                color: "#fff",
+                fontSize: "12",
+              },
+            },
+            series: [
+              {
+                name: "法定图则",
+                type: "pie",
+                radius: ["35%", "55%"],
+                center: ["50%", "35%"],
+                avoidLabelOverlap: true, //开启后饼图上的文字不会重叠，并且鼠标移入后文字不会消失
+                selectedMode: "single",
+                animationDuration: 2000,
+                label: {
+                  show: true,
+                  position: "inside",
+                  color: "#fff",
+                  fontSize: "10",
+                  formatter: "{d}%",
+                },
+                labelLine: {
+                  show: false,
+                },
+                data: [
+                  { value: 27.09, name: "商业服务业用地" },
+                  { value: 11.76, name: "公共管理与服务设施用地" },
+                  { value: 0.45, name: "工业用地" },
+                  { value: 15.62, name: "居住用地" },
+                  { value: 4.57, name: "物流仓储用地" },
+                  { value: 2.31, name: "公用设施用地" },
+                  { value: 32.61, name: "交通设施用地" },
+                  { value: 4.62, name: "绿地与广场用地" },
+                  { value: 0.97, name: "其他用地" },
+                ],
+              },
+            ],
+          };
+          option && myChart.setOption(option);
+        });
+      }, 1000);
+    },
+    ChuLiOs(data) {
       // let echartsColorClass = []
       // console.log(this.os);
       // this.os.map(item => {
@@ -112,7 +238,7 @@ export default {
       console.log(newos);
       return newos;
     },
-    Glow (newos) {
+    Glow(newos) {
       console.log(newos);
 
       __g.polygon.glow(
@@ -120,7 +246,7 @@ export default {
           return item[0];
         }),
         5,
-        (res) => { }
+        (res) => {}
       );
 
       __g.polyline.clear(() => {
@@ -156,115 +282,24 @@ export default {
         });
       });
     },
+    adddddd() {
+      this.$nextTick(() => {
+        console.log(this.$refs.ech1);
+        !this.$refs.ech1 && this.addecharts();
+      });
+    },
   },
-  created () { },
-  mounted () {
-    var chartDom = document.getElementById("echarts11");
-    var myChart = echarts.init(chartDom);
-    var option;
-    myChart.on("click", (params) => {
-      console.log(params);
-      if (params.name == "商业服务业用地") {
-        this.Glow(this.ChuLiOs([0.99608, 0, 0, 1]));
-      } else if (params.name == "居住用地") {
-        this.Glow(this.ChuLiOs([1, 1, 0, 1]));
-      } else if (params.name == "公共管理与服务设施用地") {
-        this.Glow(this.ChuLiOs([1, 0, 1, 1]));
-      } else if (params.name == "物流仓储用地") {
-        this.Glow(this.ChuLiOs([0.4549, 0.43137, 0.86667, 1]));
-      } else if (params.name == "公用设施用地") {
-        this.Glow(this.ChuLiOs([0, 0.72157, 0.72157, 1]));
-      } else if (params.name == "交通设施用地") {
-        this.Glow(this.ChuLiOs([0, 0.43137, 0.86667, 1]));
-      } else if (params.name == "绿地与广场用地") {
-        this.Glow(this.ChuLiOs([0.25098, 1, 0.00392, 1]));
-      } else if (params.name == "工业用地") {
-        this.Glow(this.ChuLiOs([0.72157, 0.36078, 0.36471, 1]));
-      } else if (params.name == "其他用地") {
-        this.Glow(this.ChuLiOs([0.29412, 0.58431, 0, 1]));
-      }
-    });
-    option = {
-      color: [
-        "#FA013B",
-        "#ED28EE",
-        "#7D684B",
-        "#FFFF00",
-        "#A66EDD",
-        "#2D86E0",
-        "#00B8B8",
-        "#40FF01",
-        "#608545",
-      ],
-      // backgroundColor: "#00032C",
-      tooltip: {
-        trigger: "item",
-        formatter: "{a} <br/>{b} : {d}%",
-      },
-      legend: {
-        // backgroundColor: "#0000004d",
-       //backgroundColor: "#00032C",
-        orient: "horizontal",
-        bottom: "5%",
-        show: true,
-        data: [
-          "商业服务业用地",
-          "公共管理与服务设施用地",
-          "工业用地",
-          "居住用地",
-          "物流仓储用地",
-          "公用设施用地",
-          "交通设施用地",
-          "绿地与广场用地",
-          "其他用地",
-        ],
-        textStyle: {
-          color: "#fff",
-          fontSize: "12",
-        },
-      },
-      series: [
-        {
-          name: "法定图则",
-          type: "pie",
-          radius: ["35%", "55%"],
-          center: ["50%", "35%"],
-          avoidLabelOverlap: true, //开启后饼图上的文字不会重叠，并且鼠标移入后文字不会消失
-          selectedMode: "single",
-          animationDuration: 2000,
-          label: {
-            show: true,
-            position: "inside",
-            color: "#fff",
-            fontSize: "10",
-            formatter: "{d}%",
-          },
-          labelLine: {
-            show: false,
-          },
-          data: [
-            { value: 27.09, name: "商业服务业用地" },
-            { value: 11.76, name: "公共管理与服务设施用地" },
-            { value: 0.45, name: "工业用地" },
-            { value: 15.62, name: "居住用地" },
-            { value: 4.57, name: "物流仓储用地" },
-            { value: 2.31, name: "公用设施用地" },
-            { value: 32.61, name: "交通设施用地" },
-            { value: 4.62, name: "绿地与广场用地" },
-            { value: 0.97, name: "其他用地" },
-          ],
-        },
-      ],
-    };
-    option && myChart.setOption(option);
+  created() {},
+  mounted() {
+    this.addecharts();
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () { },
-  destroyed () { },
-  activated () { },
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {},
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>
@@ -364,19 +399,25 @@ export default {
 .condata_item {
   font-size: 16px;
   width: 100%;
-  height: 10%;
+  height: 30px;
   min-height: 9.5%;
 
   display: flex;
   align-items: center;
 }
+.box {
+  position: relative;
+  font-size: 16px;
+  width: 100%;
+  height: 150px;
+}
 .condata {
   font-size: 16px;
   width: 100%;
-  height: 38%;
+  height: 100%;
   position: absolute;
   right: -4%;
-  top: 40%;
+  top: 0%;
   overflow: scroll;
 }
 /* 滚动条宽度 */
@@ -405,7 +446,7 @@ export default {
   padding-top: 4%;
   margin-top: 1%;
   width: 100%;
-  height: 38%;
+  height: 100%;
   background: rgba(53, 46, 44, 0.45);
   filter: blur(2px);
 }
@@ -413,13 +454,13 @@ export default {
 .right_item11 {
   width: 20%;
   height: 100%;
-  margin-left: 5%;
-  padding-top: 20%;
+  /* padding-top: 20%; */
 }
 .right_item2 {
   width: 60%;
   height: 100%;
-  padding-top: 20%;
+  /* padding-top: 20%; */
+  font-size: 14px;
 }
 .right_item1 img {
   width: 50%;
@@ -443,14 +484,14 @@ export default {
 }
 .right_item1 {
   width: 100%;
-  height: 70px;
-  background-image: url("../../../assets/img/3现状数据/icon_面积.svg");
-  background-size: 80%;
-  background-repeat: no-repeat;
+  height: 60px;
+  background: url("../../../assets/img/3现状数据/icon_面积.svg") no-repeat
+    center/cover;
+  background-size: 60%;
 }
 .top_item3 {
   width: 100%;
-  height: 15%;
+  height: 60px;
   background: transparent;
   display: flex;
   align-items: center;
@@ -475,7 +516,7 @@ export default {
 .datacase {
   width: 20%;
   height: 100%;
-  padding: 20px 10px;
+  padding: 10px 10px;
   box-sizing: border-box;
   color: white;
   height: calc(100% - 80px);
@@ -491,7 +532,7 @@ export default {
 }
 .top_item1 {
   width: 100%;
-  height: 10%;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -538,7 +579,7 @@ export default {
   display: flex;
 
   width: 100%;
-  height: 6%;
+  height: 50px;
   background-image: url("../../../assets/img/3现状数据/titbg_text6.svg");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -590,10 +631,11 @@ export default {
 .echwarp {
   width: 350px;
   height: 450px;
-  // background: #0000004d; 
-  position: absolute;
+  position: relative;
+  // background: #0000004d;
+  /* position: absolute;
   top: 100px;
-  left: 20px;
+  left: 20px; */
   z-index: 100;
   color: white;
 
@@ -610,18 +652,18 @@ export default {
   .echbox {
     width: 100%;
     height: calc(100% - 140px);
-    position: absolute;
+    /* position: absolute;
     top: 1.5%;
-    left: 0;
+    left: 0; */
     /* background: rgba(40, 68, 67, 0.3); */
     /* filter: blur(0.5px); */
   }
   .echbox1 {
-    margin-top: 1.5%;
-
+    /* margin-top: 1.5%; */
+    position: absolute;
     width: 100%;
-    height: calc(100% - 20px);
-    background: red;
+    top: 10%;
+    height: calc(100% - 15%);
     background: rgba(41, 62, 65, 0.65);
     // filter: blur(8px);
   }

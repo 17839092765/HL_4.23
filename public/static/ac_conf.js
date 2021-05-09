@@ -5,7 +5,7 @@ const CASEIP = "127.0.0.1";
 //49服务器的服务
 var HostConfig = {
   MatchServer: CASEIP + ":81",
-  AirCityPlayer: CASEIP + ":8081",
+  AirCityPlayer: CASEIP + ":8082",
   AirCityAPI: CASEIP + ":4322",
   Token: "",
   Path: "C:\\Users\\张祥\\AppData\\Roaming\\AirCityCloud\\SDK",

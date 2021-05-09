@@ -12,15 +12,17 @@
     <NewCenter v-if="active === 2" /> -->
     <!-- <LivingCommunity v-if="active === 2" /> -->
     <!-- <ServiceCenter v-if="active === 2" /> -->
-    <div class="twolink1">
-      <router-link to="/Home/GNBJ/ydgn" tag="li">
-        <span>用地功能布局</span>
-      </router-link>
-    </div>
-    <div class="twolink2">
-      <router-link to="/Home/GNBJ/cygn" tag="li">
-        <span>产业功能布局</span>
-      </router-link>
+    <div class="link">
+      <div class="twolink1">
+        <router-link to="/Home/GNBJ/ydgn" tag="li">
+          <span>用地功能布局</span>
+        </router-link>
+      </div>
+      <div class="twolink2">
+        <router-link to="/Home/GNBJ/cygn" tag="li">
+          <span>产业功能布局</span>
+        </router-link>
+      </div>
     </div>
 
     <router-view />
@@ -65,7 +67,65 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.twolink1 {
+.link {
+  position: absolute;
+  width: 320px;
+  height: 40px;
+  top: 80px;
+  left: 0px;
+  right: 0;
+  /* bottom: 0; */
+  margin: auto;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px 5px 5px 5px;
+  font-size: 18px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  > div {
+    cursor: pointer;
+    width: 160px;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    border-radius: 5px;
+    font-size: 18px;
+
+    // z-index: 300;
+    > li {
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+
+      line-height: 40px;
+      text-align: center;
+      list-style: none;
+      color: #fff;
+      position: relative;
+
+      &.router-link-active {
+        color: #fee36d;
+        font-weight: 700;
+        background: rgba(0, 0, 0, 0.404);
+      }
+      // &.router-link-active::after {
+      //   content: "";
+      //   position: absolute;
+      //   bottom: 10%;
+      //   left: 0;
+      //   right: 0;
+      //   margin: auto;
+      //   width: 100%;
+      //   height: 2px;
+      //   background: #fee36d;
+      // }
+    }
+  }
+}
+/* .twolink1 {
   position: absolute;
   top: 90px;
   left: 49%;
@@ -74,7 +134,7 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-     background: rgba(0, 0, 0, 0.274) !important;
+  background: rgba(0, 0, 0, 0.274) !important;
 
   border-radius: 5px;
   font-size: 18px;
@@ -150,7 +210,7 @@ export default {
     //   background: #fee36d;
     // }
   }
-}
+} */
 
 .select {
   display: flex;

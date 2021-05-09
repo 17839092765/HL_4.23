@@ -1,23 +1,20 @@
 <template>
   <div class="fdtz">
-    <div class="echwarp">
-      <div class="echbox1"></div>
-      <div class="echbox">
-        <div class="top">
-          <div class="igm_top">
-            <img src="../../../assets/img/3现状数据/icon_法定图则.svg" />
-            <span class="fading">现状权属</span>
+    <div class="datacase">
+      <div class="clickdata">
+        <div class="echwarp">
+          <div class="echbox1"></div>
+          <div class="echbox">
+            <div class="top">
+              <div class="igm_top">
+                <img src="../../../assets/img/3现状数据/icon_法定图则.svg" />
+                <span class="fading">现状权属</span>
+              </div>
+            </div>
+            <div id="echarts12"></div>
           </div>
         </div>
-        <div id="echarts12"></div>
-      </div>
-    </div>
-    <div v-if="clickData1.length> 0" class="datacase">
-      <div class="top_data" v-if="clickData1.length === 0">
-        点击左边建筑物查看信息
-      </div>
-      <div v-show="dataCaseisShow" class="clickdata">
-        <div class="title1"></div>
+        <div v-if="clickData1.length > 0" class="title1"></div>
         <div class="title">
           <div class="title_img">
             <img src="../../../assets/img/3现状数据/icon_地块信息.svg" />
@@ -26,31 +23,44 @@
             {{ clickData.title ? clickData.title : "Loding..." }}
           </div>
         </div>
-        <div class="top_item1">
+        <div v-if="clickData1.length > 0" class="top_item1">
           <div class="top_item1_btn">地块编号</div>
           <div class="top_item1_title" v-if="clickData1[2]">
             {{ clickData1[0].data }}
           </div>
         </div>
-        <div class="top_item2">{{clickData1[1]?clickData1[1].name+":"+clickData1[1].data:'暂无数据'}}</div>
-        <div class="top_item3">
+        <div v-if="clickData1.length > 0" class="top_item2">
+          {{
+            clickData1[1]
+              ? clickData1[1].name + ":" + clickData1[1].data
+              : "暂无数据"
+          }}
+        </div>
+        <div v-if="clickData1.length > 0" class="top_item3">
           <div class="right_item11">
             <div class="right_item1"></div>
           </div>
 
           <div class="right_item2">
             <span class="spac" v-if="clickData1[2]">
-              {{ clickData1[3].data }}</span>
+              {{ clickData1[3].data }}</span
+            >
             <span class="wan">m<sup>2</sup></span>
             <div>用地面积</div>
           </div>
         </div>
-        <div class="condata1"></div>
-        <div class="condata">
-          <div class="condata_item" v-for="(item, index) in clickData1" :key="index">
-            <div class="span_left">{{ item.name }}</div>
-            <span class="span_cen"> |</span>
-            <span class="span_right"> {{ item.data }}</span>
+        <div v-if="clickData1.length > 0" class="box">
+          <div class="condata1"></div>
+          <div class="condata">
+            <div
+              class="condata_item"
+              v-for="(item, index) in clickData1"
+              :key="index"
+            >
+              <div class="span_left">{{ item.name }}</div>
+              <span class="span_cen"> |</span>
+              <span class="span_right"> {{ item.data }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -65,7 +75,7 @@ import { showdata } from "../showdata";
 import connector from "../../../api/common";
 // import __g from "../../../main";
 export default {
-  data () {
+  data() {
     return {
       option: [],
     };
@@ -75,7 +85,7 @@ export default {
       // 筛选过得数据
       clickData1: (state) => showdata(state.clickData ? state.clickData : []),
       // 。原始数据
-      clickData: (state) => state.clickData ? state.clickData : [],
+      clickData: (state) => (state.clickData ? state.clickData : []),
       // 图则内容的显示隐藏
       dataCaseisShow: (state) => state.dataCaseisShow,
       os: (state) => state.os,
@@ -83,7 +93,7 @@ export default {
   },
   watch: {},
   methods: {
-    ChuLiOs (data) {
+    ChuLiOs(data) {
       // let echartsColorClass = []
       // console.log(this.os);
       // this.os.map(item => {
@@ -115,7 +125,7 @@ export default {
       console.log(newos);
       return newos;
     },
-    Glow (newos) {
+    Glow(newos) {
       console.log(newos);
 
       __g.polygon.glow(
@@ -123,7 +133,7 @@ export default {
           return item[0];
         }),
         5,
-        (res) => { }
+        (res) => {}
       );
 
       __g.polyline.clear(() => {
@@ -159,7 +169,7 @@ export default {
         });
       });
     },
-    async getechartsdata () {
+    async getechartsdata() {
       const result = await connector.xzqs_echart();
       if (result.status === 200) {
         console.log(result.data);
@@ -168,7 +178,7 @@ export default {
         this.showEcharts();
       }
     },
-    showEcharts () {
+    showEcharts() {
       var chartDom = document.getElementById("echarts12");
       var myChart = echarts.init(chartDom);
       var option;
@@ -193,7 +203,7 @@ export default {
           trigger: "item",
         },
         legend: {
-         // backgroundColor: "#00032C",
+          // backgroundColor: "#00032C",
           bottom: "5%",
           left: "center",
           textStyle: {
@@ -211,7 +221,7 @@ export default {
               show: true,
               position: "inside",
               formatter: "{d}%",
-              color: '#fff'
+              color: "#fff",
             },
             emphasis: {
               label: {
@@ -233,23 +243,29 @@ export default {
       option && myChart.setOption(option);
     },
   },
-  created () {
+  created() {
     this.getechartsdata();
     // clickData1 = [];
   },
-  mounted () { },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () { },
-  destroyed () { },
-  activated () { },
+  mounted() {},
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {},
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>
 
 <style lang="scss" scoped>
+.fdtz {
+  /* position: relative; */
+  width: 100%;
+  height: 100%;
+  /* background: #000; */
+}
 .title_img {
   width: 20%;
   height: 100%;
@@ -344,7 +360,7 @@ export default {
 .condata_item {
   font-size: 16px;
   width: 100%;
-  height: 10%;
+  height: 30px;
   min-height: 9.5%;
 
   display: flex;
@@ -356,7 +372,7 @@ export default {
   height: 38%;
   position: absolute;
   right: -4%;
-  top: 40%;
+  top: 1%;
   overflow: scroll;
 }
 /* 滚动条宽度 */
@@ -379,8 +395,13 @@ export default {
 ::-webkit-scrollbar-thumb:active {
   background-color: transparent;
 }
-
+.box {
+  width: 100%;
+  height: 38%;
+  position: relative;
+}
 .condata1 {
+  position: absolute;
   font-size: 16px;
   padding-top: 4%;
   margin-top: 1%;
@@ -455,7 +476,8 @@ export default {
 .datacase {
   width: 20%;
   height: 100%;
-  padding: 20px 10px;
+
+  padding: 10px 10px;
   box-sizing: border-box;
   color: white;
   height: calc(100% - 80px);
@@ -464,6 +486,7 @@ export default {
   border-radius: 0 0 0 0;
   // top: 0;
   right: 0;
+  overflow-y: scroll;
 }
 .clickdata {
   width: 100%;
@@ -551,6 +574,7 @@ export default {
   height: 100%;
   border-bottom: 1px solid white;
 }
+
 #echarts12 {
   width: 100%;
   height: 370px;
@@ -570,10 +594,11 @@ export default {
 .echwarp {
   width: 350px;
   height: 450px;
-  // background: #0000004d; 
-  position: absolute;
+  position: relative;
+  // background: #0000004d;
+  /* position: absolute;
   top: 100px;
-  left: 20px;
+  left: 20px; */
   z-index: 100;
   color: white;
 
@@ -590,18 +615,18 @@ export default {
   .echbox {
     width: 100%;
     height: calc(100% - 140px);
-    position: absolute;
+    /* position: absolute;
     top: 1.5%;
-    left: 0;
+    left: 0; */
     /* background: rgba(40, 68, 67, 0.3); */
     /* filter: blur(0.5px); */
   }
   .echbox1 {
-    margin-top: 1.5%;
-
+    /* margin-top: 1.5%; */
+    position: absolute;
     width: 100%;
-    height: calc(100% - 20px);
-    background: red;
+    top: 10%;
+    height: calc(100% - 15%);
     background: rgba(41, 62, 65, 0.65);
     // filter: blur(8px);
   }
