@@ -1,6 +1,6 @@
 <template>
   <div class="zslc">
-    <div v-if="clickData1[1]" class="rightdatacase">
+    <div class="rightdatacase">
       <div class="tittop">
         <i class="icon"></i>
         <span>{{ clickData1[1] ? clickData1[0].data : "..." }}</span>
@@ -107,9 +107,12 @@ export default {
   },
   created() {
     this.jjonedata();
-    store.commit("clickData", {});
+
+    // store.commit("clickData", {});
   },
   mounted() {
+    __g.infoTree.hide("510E89A04A6F36F2AF26A5A56A36AD69");
+
     // console.log(layers_jjone);
     // showtuceng(layers_jjone)
     this.showjjone(true);
@@ -122,7 +125,9 @@ export default {
   },
   updated() {},
   beforeDestroy() {
-    // clear_jj100()
+    __g.infoTree.show("510E89A04A6F36F2AF26A5A56A36AD69");
+
+    clear_jj100();
     this.showjjone(false);
     this.$store.commit("clickData", {});
     __g.tileLayer.stopHighlightActor();
@@ -141,11 +146,11 @@ export default {
   right: 0;
   color: #fff;
   box-sizing: border-box;
-  width: 20%;
+  width: 100%;
   font-weight: 600;
 
-  height: calc(100% - 80px);
-  background: rgba(0, 0, 0, 0.329);
+  height: calc(100%);
+  /* background: rgba(0, 0, 0, 0.329); */
   .tittop {
     width: 200px;
     height: 40px;

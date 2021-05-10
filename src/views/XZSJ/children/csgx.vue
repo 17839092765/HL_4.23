@@ -1,24 +1,23 @@
 <template>
   <div class="fdtz">
-    <div class="echwarp">
-      <div class="echbox1"></div>
-      <div class="echbox">
-        <div class="top">
-          <div class="igm_top">
-            <img src="../../../assets/img/3现状数据/icon_城市更新单元.svg" />
-            <span class="fading">城市更新单元</span>
+    <div class="datacase">
+      <div class="clickdata">
+        <div class="echwarp">
+          <div class="echbox1"></div>
+          <div class="echbox">
+            <div class="top">
+              <div class="igm_top">
+                <img
+                  src="../../../assets/img/3现状数据/icon_城市更新单元.svg"
+                />
+                <span class="fading">城市更新单元</span>
+              </div>
+            </div>
+            <div id="echarts14"></div>
           </div>
         </div>
-        <div id="echarts14"></div>
-      </div>
-    </div>
-    <div v-if="clickData1.length>0" class="datacase">
-      <div class="top_data" v-if="!clickData1.length">
-        点击左边建筑物查看信息
-      </div>
-      <div v-show="dataCaseisShow" class="clickdata">
-        <div class="title1"></div>
-        <div class="title">
+        <div v-if="clickData1.length > 0" class="title1"></div>
+        <div v-if="clickData1.length > 0" class="title">
           <div class="title_img">
             <img src="../../../assets/img/3现状数据/icon_地块信息.svg" />
           </div>
@@ -26,7 +25,9 @@
             {{ clickData.title ? clickData.title : "Loding..." }}
           </div>
         </div>
-        <div class="top_item2">{{clickData1[1]?clickData1[1][0].data:"londing"}}</div>
+        <div v-if="clickData1.length > 0" class="top_item2">
+          {{ clickData1[1] ? clickData1[1][0].data : "londing" }}
+        </div>
         <!-- <div class="top_item1">
           <div class="top_item1_title" v-if="clickData1[2]">
             {{ clickData1[0].data }}
@@ -45,18 +46,25 @@
           </div>
         </div> -->
         <!-- <div class="condata1"></div> -->
-        <div class="condata111">
-          <div class="condata_item1" v-for="(item, index) in clickData1[1]" :key="index">
-            <div class="span_left1">{{ item.name+":" }}</div>
+        <div v-if="clickData1.length > 0" class="condata111">
+          <div
+            class="condata_item1"
+            v-for="(item, index) in clickData1[1]"
+            :key="index"
+          >
+            <div class="span_left1">{{ item.name + ":" }}</div>
             <!-- <span class="span_cen"> </span> -->
-            <div class="span_right1"> {{ item.data }}</div>
+            <div class="span_right1">{{ item.data }}</div>
           </div>
         </div>
         <!-- 更新单元图纸 -->
-        <div class="drawing">
+        <div v-if="clickData1.length > 0" class="drawing">
           <div class="drawing_title">
             <div>
-              <img src="../../../assets/img/3现状数据/icon_建筑信息.png" alt="" />
+              <img
+                src="../../../assets/img/3现状数据/icon_建筑信息.png"
+                alt=""
+              />
             </div>
             <div>更新单元图纸</div>
           </div>
@@ -67,16 +75,56 @@
             <img v-else-if="clickData1[0] === 9" src="../../../assets/img/updata/9.jpg" alt="" />
             <img v-else-if="clickData1[0] === 11" src="../../../assets/img/updata/11.jpg" alt="" />
             <img v-else src="../../../assets/img/updata/1.png" alt="" /> -->
-            <img v-if="clickData1[0]==13" src="../../../assets/img/updata/1.png" alt="" />
-            <img v-else-if="clickData1[0]==6" src="../../../assets/img/updata/3.jpg" alt="" />
-            <img v-else-if="clickData1[0]==8" src="../../../assets/img/updata/5.jpg" alt="" />
-            <img v-else-if="clickData1[0]==9" src="../../../assets/img/updata/6.jpg" alt="" />
-            <img v-else-if="clickData1[0]==10" src="../../../assets/img/updata/6.jpg" alt="" />
-            <img v-else-if="clickData1[0]==11" src="../../../assets/img/updata/7.jpg" alt="" />
-            <img v-else-if="clickData1[0]==13" src="../../../assets/img/updata/9.jpg" alt="" />
-            <img v-else-if="clickData1[0]==22" src="../../../assets/img/updata/9.jpg" alt="" />
-            <img v-else-if="clickData1[0]==21" src="../../../assets/img/updata/9.jpg" alt="" />
-            <img v-else-if="clickData1[0]==12" src="../../../assets/img/updata/11.jpg" alt="" />
+            <img
+              v-if="clickData1[0] == 13"
+              src="../../../assets/img/updata/1.png"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] == 6"
+              src="../../../assets/img/updata/3.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] == 8"
+              src="../../../assets/img/updata/5.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] == 9"
+              src="../../../assets/img/updata/6.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] == 10"
+              src="../../../assets/img/updata/6.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] == 11"
+              src="../../../assets/img/updata/7.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] == 13"
+              src="../../../assets/img/updata/9.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] == 22"
+              src="../../../assets/img/updata/9.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] == 21"
+              src="../../../assets/img/updata/9.jpg"
+              alt=""
+            />
+            <img
+              v-else-if="clickData1[0] == 12"
+              src="../../../assets/img/updata/11.jpg"
+              alt=""
+            />
             <!-- <img v-else src="../../../assets/img/updata/1.png" alt="" /> -->
           </div>
         </div>
@@ -90,7 +138,7 @@ import * as echarts from "echarts";
 import { mapState } from "vuex";
 import { showdata } from "../showdata";
 export default {
-  data () {
+  data() {
     return {
       img: "",
     };
@@ -100,7 +148,7 @@ export default {
       // 筛选过得数据
       clickData1: (state) => showdata(state.clickData),
       // 。原始数据
-      clickData: (state) => state.clickData ? state.clickData : [],
+      clickData: (state) => (state.clickData ? state.clickData : []),
       // 图则内容的显示隐藏
       dataCaseisShow: (state) => state.dataCaseisShow,
     }),
@@ -116,10 +164,10 @@ export default {
     // },
   },
   methods: {},
-  created () {
+  created() {
     // clickData1 = [this.clickData1];
   },
-  mounted () {
+  mounted() {
     var chartDom = document.getElementById("echarts14");
     var myChart = echarts.init(chartDom);
     var option;
@@ -262,13 +310,13 @@ export default {
 
     // console.log(this.clickData1);
   },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () { },
-  destroyed () { },
-  activated () { },
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {},
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>
@@ -557,7 +605,7 @@ export default {
 .datacase {
   width: 20%;
   height: 100%;
-  padding: 20px 10px;
+  padding: 10px 10px;
   box-sizing: border-box;
   color: white;
   height: calc(100% - 80px);
@@ -570,6 +618,7 @@ export default {
 .clickdata {
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
 }
 .top_item1 {
   width: 100%;
@@ -656,7 +705,7 @@ export default {
 }
 #echarts14 {
   width: 100%;
-  height: 370px;
+  height: 300px;
   margin: 0 auto;
   // padding: 10px;
 }
@@ -672,11 +721,12 @@ export default {
 }
 .echwarp {
   width: 350px;
-  height: 450px;
-  // background: #5c5c5c4d; 
-  position: absolute;
+  height: 350px;
+  position: relative;
+  // background: #0000004d;
+  /* position: absolute;
   top: 100px;
-  left: 20px;
+  left: 20px; */
   z-index: 100;
   color: white;
 
@@ -684,7 +734,7 @@ export default {
     display: flex;
     align-items: center;
     width: 100%;
-    height: 15%;
+    height: 20%;
     margin-top: 3%;
     background-image: url("../../../assets/img/3现状数据/titbg_text4.svg");
     background-size: 100%;
@@ -693,18 +743,18 @@ export default {
   .echbox {
     width: 100%;
     height: calc(100% - 140px);
-    position: absolute;
+    /* position: absolute;
     top: 1.5%;
-    left: 0;
-    //background: rgba(40, 68, 67, 0.3); 
+    left: 0; */
+    /* background: rgba(40, 68, 67, 0.3); */
     /* filter: blur(0.5px); */
   }
   .echbox1 {
-    margin-top: 1.5%;
-
+    /* margin-top: 1.5%; */
+    position: absolute;
     width: 100%;
-    height: calc(100% - 20px);
-    background: red;
+    top: 10%;
+    height: calc(100% - 15%);
     background: rgba(41, 62, 65, 0.65);
     // filter: blur(8px);
   }

@@ -2,6 +2,7 @@
 function showtuceng(data) {
   if (__g) {
     data.map((item) => {
+      console.log(item);
       __g.infoTree.show(item.layerid);
     });
   }
@@ -9,6 +10,7 @@ function showtuceng(data) {
 function hidetuceng(data) {
   if (__g) {
     data.map((item) => {
+      console.log(item, "隐藏图层");
       __g.infoTree.hide(item.layerid);
     });
   }

@@ -1,8 +1,8 @@
-import Vue from "vue"
-import VueRouter from "vue-router"
-import Home from "../views/Home.vue"
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: "hash",
@@ -62,18 +62,18 @@ const router = new VueRouter({
         {
           path: "ZSYZ",
           component: () => import("../views/ZSYZ/zsyz"),
-          redirect: "/Home/ZSYZ/zsly",
-          name: "zsyz",
-          children: [
-            {
-              path: "zsly",
-              component: () => import("../views/ZSYZ/children/zsly"),
-            },
-            {
-              path: "zslc",
-              component: () => import("../views/ZSYZ/children/zslc.vue"),
-            },
-          ],
+          // redirect: "/Home/ZSYZ/zsly",
+          // name: "",
+          // children: [
+          //   {
+          //     path: "zsly",
+          //     component: () => import("../views/ZSYZ/zsly"),
+          //   },
+          //   {
+          //     path: "zslc",
+          //     component: () => import("../views/ZSYZ/children/zslc.vue"),
+          //   },
+          // ],
         },
         {
           path: "WLYJ",
@@ -82,6 +82,6 @@ const router = new VueRouter({
       ],
     },
   ],
-})
+});
 
-export default router
+export default router;
