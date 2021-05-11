@@ -125,7 +125,7 @@ export default {
   },
   updated() {},
   beforeDestroy() {
-    __g.infoTree.show("510E89A04A6F36F2AF26A5A56A36AD69");
+    // __g.infoTree.show("510E89A04A6F36F2AF26A5A56A36AD69");
 
     clear_jj100();
     this.showjjone(false);

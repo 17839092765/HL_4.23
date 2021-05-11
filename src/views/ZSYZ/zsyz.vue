@@ -288,7 +288,9 @@ export default {
       }
     },
   },
-  created() {},
+  created() {
+    this.$store.commit("clickData", {});
+  },
   mounted() {
     if (__g) {
       __g.camera.lookAt(
@@ -309,8 +311,9 @@ export default {
   updated() {},
   beforeDestroy() {
     __g.infoTree.hide("A3CC59C2442B8110161A4A913FCDE533");
-
+    this.$store.commit("clickData", {});
     hidetuceng(this.$treedata.zsyzdata);
+    // __g.infoTree.hide("510E89A04A6F36F2AF26A5A56A36AD69");
   },
   destroyed() {},
   activated() {},

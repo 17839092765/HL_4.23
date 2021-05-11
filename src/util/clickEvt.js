@@ -23,7 +23,7 @@ function click_EVT_jj100(data) {
 //楼层偏移事件
 function movelayer(arr) {
   arr.forEach((item) => {
-    var translate = [510459.46875, 2494140.25, 20];
+    var translate = [510459.46875, 2494128.5, 20];
     __g.tileLayer.setTranslation(item, translate, function(evt) {});
   });
 }
@@ -31,7 +31,9 @@ function movelayer(arr) {
 function clear_jj100() {
   layers_jjone.forEach((item, index) => {
     let lastid_ = item.id;
-    __g.tileLayer.setTranslation(lastid_, [510399.46875, 2494140.25, 20]);
+    // __g.tileLayer.setTranslation(lastid_, [510399.46875, 2494140.25, 20]);
+    __g.tileLayer.setTranslation(lastid_, [510393.65625, 2494128.5, 20]);
+
     // __g.tileLayer.setTranslation(lastid_, [510447.46875, 2494084.25, 20]);
   });
 }

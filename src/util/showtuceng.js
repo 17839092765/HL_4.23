@@ -2,7 +2,8 @@
 function showtuceng(data) {
   if (__g) {
     data.map((item) => {
-      console.log(item);
+      console.log(item, "显示图层");
+
       __g.infoTree.show(item.layerid);
     });
   }

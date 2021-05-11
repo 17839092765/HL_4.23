@@ -135,6 +135,11 @@ export default {
     }),
   },
   watch: {
+    btnJRY(newval, oldval) {
+      if (newval !== 2) {
+        __g.infoTree.show("510E89A04A6F36F2AF26A5A56A36AD69");
+      }
+    },
     "$store.state.clickData": function(a, b) {
       console.log(a, b);
       if (a) {
