@@ -1,6 +1,6 @@
 <template>
   <div class="zslc">
-    <div v-if="clickData1[0].name == '楼层'" class="rightdatacase">
+    <div v-if="clickData1[0].name == '楼层' && black" class="rightdatacase">
       <p></p>
       <div class="tittop">
         <i class="icon"></i>
@@ -62,6 +62,12 @@
           </p>
         </div>
       </div>
+      <div @click="blackjj100case" class="black">
+        <div class="icon"></div>
+        <div class="tit">
+          返回楼栋
+        </div>
+      </div>
     </div>
     <div v-else-if="isjj100" class="jj100data">
       <JJ100CASE />
@@ -82,6 +88,7 @@ import JJ100CASE from "./jj100Case";
 export default {
   data() {
     return {
+      black: true,
       isjj100: false,
       jjoneidarr: [],
       layerdata: [],
@@ -98,9 +105,15 @@ export default {
     clickData1(a, b) {
       console.log(a, 12313123213213);
       console.log(b, 22222222222222);
+      this.black = true;
     },
   },
   methods: {
+    blackjj100case() {
+      this.isjj100 = true;
+      this.black = false;
+      clear_jj100();
+    },
     jjonedata() {
       layers_jjone.forEach((item) => {
         this.jjoneidarr.push(item.id);
@@ -153,9 +166,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.zslc{
+.zslc {
   width: 100%;
-   height: 100%;
+  height: 100%;
 }
 .rightdatacase {
   // padding: 0 10px;
@@ -169,6 +182,29 @@ export default {
 
   height: calc(100%);
   /* background: rgba(0, 0, 0, 0.329); */
+  .black {
+    width: 150px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.411);
+    display: flex;
+    position: absolute;
+    left: 20%;
+    bottom: 10%;
+    justify-content: space-around;
+    align-items: center;
+    .icon {
+      width: 30%;
+      height: 100%;
+      background: url("../../../assets/img/4招商引资/icon_返回.svg") no-repeat
+        center/cover;
+    }
+    .tit {
+      width: 70%;
+      height: 100%;
+      line-height: 50px;
+      text-align: center;
+    }
+  }
   .tittop {
     width: 200px;
     height: 40px;

@@ -32,15 +32,17 @@
             <div class="right">企业名称</div>
           </div>
           <div
-            v-for="(item, index) in jj100data[newvalue - 1]"
+            v-for="(item, index) in jj100arr[newvalue - 1]"
             :key="index"
             class="rightcase"
+            @click="goJJ100case(newvalue - 1)"
           >
             <div class="left">
               <p>{{ item[0] }}</p>
             </div>
-            <div class="right"></div>
-            <p>{{ item[1] }}</p>
+            <div class="right">
+              <p>{{ item[1] }}</p>
+            </div>
           </div>
         </div>
         <!-- <div v-for="(item, index) in jj100data" :key="index" class="case">
@@ -63,6 +65,8 @@
 
 <script>
 import connector from "../../../api/common";
+import { mapState } from "vuex";
+import { click_EVT_jj100 } from "../../../util/clickEvt";
 export default {
   data() {
     return {
@@ -71,27 +75,151 @@ export default {
       marks: {
         1: {
           style: {
-            color: "#1989FA",
-            fontSize: "18px",
+            color: "#fff",
+            fontSize: "16px",
           },
           label: this.$createElement("strong", "1F"),
         },
 
         100: {
           style: {
-            color: "#1989FA",
-            fontSize: "18px",
+            color: "#fff",
+            fontSize: "16px",
           },
           label: this.$createElement("strong", "100F"),
         },
       },
       loading: true,
       jj100data: [],
+      jj100ids: [],
+      i: 0,
+      objId: [
+        " JJ100_001",
+        "JJ100_002",
+        "JJ100_003",
+        "JJ100_004",
+        "JJ100_005",
+        "JJ100_006",
+        "JJ100_007",
+        "JJ100_008",
+        "JJ100_009",
+        "JJ100_010",
+        "JJ100_011",
+        "JJ100_012",
+        "JJ100_013",
+        "JJ100_014",
+        "JJ100_015",
+        "JJ100_016",
+        "JJ100_017",
+        "JJ100_018",
+        "JJ100_019",
+        "JJ100_020",
+        "JJ100_021",
+        "JJ100_022",
+        "JJ100_023",
+        "JJ100_024",
+        "JJ100_025",
+        "JJ100_026",
+        "JJ100_027",
+        "JJ100_028",
+        "JJ100_029",
+        "JJ100_030",
+        "JJ100_031",
+        "JJ100_032",
+        "JJ100_033",
+        "JJ100_034",
+        "JJ100_035",
+        "JJ100_036",
+        "JJ100_037",
+        "JJ100_038",
+        "JJ100_039",
+        "JJ100_040",
+        "JJ100_041",
+        "JJ100_042",
+        "JJ100_043",
+        "JJ100_044",
+        "JJ100_045",
+        "JJ100_046",
+        "JJ100_047",
+        "JJ100_048",
+        "JJ100_049",
+        "JJ100_050",
+        "JJ100_051",
+        "JJ100_052",
+        "JJ100_053",
+        "JJ100_054",
+        "JJ100_055",
+        "JJ100_056",
+        "JJ100_057",
+        "JJ100_058",
+        "JJ100_059",
+        "JJ100_060",
+        "JJ100_061",
+        "JJ100_062",
+        "JJ100_063",
+        "JJ100_064",
+        "JJ100_065",
+        "JJ100_066",
+        "JJ100_067",
+        "JJ100_068",
+        "JJ100_069",
+        "JJ100_070",
+        "JJ100_071",
+        "JJ100_072",
+        "JJ100_073",
+        "JJ100_074",
+        "JJ100_075",
+        "JJ100_076",
+        "JJ100_077",
+        "JJ100_078",
+        "JJ100_079",
+        "JJ100_080",
+        "JJ100_081",
+        "JJ100_082",
+        "JJ100_083",
+        "JJ100_084",
+        "JJ100_085",
+        "JJ100_086",
+        "JJ100_087",
+        "JJ100_088",
+        "JJ100_089",
+        "JJ100_090",
+        "JJ100_091",
+        "JJ100_092",
+        "JJ100_093",
+        "JJ100_094",
+        "JJ100_095",
+        "JJ100_096",
+        "JJ100_097",
+        "JJ100_098",
+        "JJ100_099",
+        "JJ100_100",
+      ],
     };
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      jj100arr: (state) => state.jj100Arr,
+      jj100ArrIds: (state) => state.jj100ArrIds,
+    }),
+  },
   watch: {},
   methods: {
+    async goJJ100case(index) {
+      const { data: result } = await connector.layer_jj100_one(
+        this.jj100ArrIds[index]
+      );
+      let data_show = {
+        title: "楼层信息",
+        data: result,
+      };
+      this.$store.commit("clickData", data_show);
+
+      click_EVT_jj100({
+        Id: this.jj100ArrIds[index],
+        ObjectID: this.objId[index],
+      });
+    },
     onChange(e) {
       console.log(e);
       this.newvalue = e;
@@ -200,28 +328,66 @@ export default {
         "1B718B3844C70710AB4DD1B8EC3A59A1",
         "E002EA7C462CB11E2F141694D5EF3FDE",
       ];
-      ids.forEach(async (item, index) => {
-        const { data: result } = await connector.layer_jj100_one(item);
-        if (typeof result[0] == "object") {
-          let a = [];
-          console.log(result[0].company.split(","));
-          result[0].company.split(",").forEach((mon) => {
-            console.log(mon.split("|"));
-            a.push(mon.split("|"));
-          });
-          this.jj100data.push(a);
-        } else {
-          this.jj100data.push([["暂无数据"]]);
-        }
-        if (index === ids.length - 1) {
-          this.loading = false;
-          console.log(this.jj100data);
-        }
-      });
+
+      const { data: result } = await connector.layer_jj100_one(ids[this.i]);
+
+      if (typeof result[0] == "object") {
+        let a = [];
+        console.log(result[0].company.split(","));
+        console.log(result);
+        result[0].company.split(",").forEach((mon) => {
+          console.log(mon.split("|"));
+          a.push(mon.split("|"));
+        });
+        this.jj100data.push(a);
+        this.jj100ids.push(result[1]);
+      } else {
+        this.jj100data.push([["暂无数据"]]);
+        this.jj100ids.push(result[0]);
+      }
+      // if (index === ids.length - 1) {
+      //   this.loading = false;
+      //   console.log(this.jj100data);
+      // }
+      this.i++;
+      if (this.i < ids.length && this.i == this.jj100data.length) {
+        this.getJJ100Case();
+      }
+      if (this.i === ids.length) {
+        this.loading = false;
+        this.$store.commit("jj100Arr", this.jj100data);
+        this.$store.commit("jj100ArrIds", this.jj100ids);
+        console.log(this.jj100data);
+      }
+
+      // ids.forEach(async (item, index) => {
+      //   const { data: result } = await connector.layer_jj100_one(item);
+      //   if (typeof result[0] == "object") {
+      //     let a = [];
+      //     console.log(result[0].company.split(","));
+      //     result[0].company.split(",").forEach((mon) => {
+      //       console.log(mon.split("|"));
+      //       a.push(mon.split("|"));
+      //     });
+      //     this.jj100data.push(a);
+      //   } else {
+      //     this.jj100data.push([["暂无数据"]]);
+      //   }
+      //   if (index === ids.length - 1) {
+      //     this.$store.commit("jj100Arr", this.jj100data);
+      //     this.loading = false;
+      //     console.log(this.jj100data);
+      //     console.log(this.jj100Arr);
+      //   }
+      // });
     },
   },
   created() {
-    this.getJJ100Case();
+    if (this.jj100arr.length < 1) {
+      this.getJJ100Case();
+    } else {
+      this.loading = false;
+    }
   },
   mounted() {},
   beforeCreate() {},
@@ -286,20 +452,38 @@ export default {
             float: left;
           }
         }
+
         .rightcase {
           width: 100%;
           height: 50px;
-          background: rgb(66, 152, 155);
+          background: rgba(0, 0, 0, 0.432);
           line-height: 50px;
           font-size: 14px;
-
+          cursor: pointer;
+          &:nth-child(even) {
+            background: #00000000;
+          }
+          &:hover {
+            color: #ead268;
+          }
           .left {
             width: 25%;
             float: left;
+            text-align: left;
+            text-indent: 10px;
           }
           .right {
             width: 75%;
             float: left;
+            p {
+              text-align: left;
+
+              text-indent: 10px;
+              width: 90%;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
           }
         }
       }
@@ -307,4 +491,21 @@ export default {
   }
 }
 /*  */
+/*  */
+/deep/.el-slider__button {
+  width: 12px;
+  height: 28px;
+  background: rgb(0, 0, 0);
+  box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  opacity: 0.85;
+  border: 2px solid;
+  filter: blur(2px);
+}
+/deep/.el-slider__bar {
+  background: #0e1e26;
+}
+/deep/ .el-slider__stop {
+  background: #0e1e26;
+}
 </style>

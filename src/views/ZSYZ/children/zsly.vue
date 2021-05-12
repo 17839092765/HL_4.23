@@ -354,14 +354,15 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
+  font-size: 14px;
 }
 
 .top_data {
   margin-top: 5%;
 }
 .span_left {
-  margin-left: 5%;
-  width: 100px;
+  /* margin-left: 5%; */
+  width: 28%;
   display: inline-block;
   // width: 200px;
   height: 60px;
@@ -372,12 +373,12 @@ export default {
 .span_right {
   margin-left: 2%;
   display: inline-block;
-  width: 200px;
+  width: 65%;
   height: 60px;
   line-height: 25px;
 }
 .condata_item {
-  font-size: 18px;
+  font-size: 16px;
   width: 100%;
   height: 50px;
   margin-top: 1%;
@@ -390,7 +391,7 @@ export default {
   width: 100%;
   height: 68%;
   overflow-y: scroll;
-  background: rgba(32, 53, 40, 0.1);
+  /* background: rgba(32, 53, 40, 0.1); */
 }
 .cencen {
   width: 100%;
@@ -482,7 +483,7 @@ export default {
   padding-left: 4%;
   width: 80%;
   height: 20%;
-  font-size: 22px;
+  font-size: 16px;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #ffffff;
