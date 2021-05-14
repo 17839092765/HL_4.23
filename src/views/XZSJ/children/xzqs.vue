@@ -15,7 +15,7 @@
           </div>
         </div>
         <div v-if="clickData1.length > 0" class="title1"></div>
-        <div class="title">
+        <div v-if="clickData1[2]" class="title">
           <div class="title_img">
             <img src="../../../assets/img/3现状数据/icon_地块信息.svg" />
           </div>
