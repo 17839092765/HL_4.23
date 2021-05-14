@@ -77,6 +77,8 @@ export default {
   methods: {},
   created() {},
   mounted() {
+    this.$store.commit("clickData", {});
+
     let link = document.getElementsByClassName("link")[0];
     console.log(link);
     link.style.width = "600px";

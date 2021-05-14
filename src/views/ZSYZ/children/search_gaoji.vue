@@ -110,16 +110,16 @@ export default {
   methods: {
     // 表格的点击
     tableclick(item) {
-      console.log(item);
+      console.log(item.建筑编码);
       console.log(this.$treedata.louyucase);
 
       this.$treedata.louyucase.forEach((mon) => {
         if (mon.ObjectID === item.建筑编码) {
+          console.log(123);
           this.hightbuliding = mon;
-          __g.tileLayer.highlightActor(
-            mon.ObjectID,
-            mon.Id,
-             );
+          __g.tileLayer.highlightActor(mon.Id, mon.ObjectID, (res) => {
+            console.log(res);
+          });
         }
       });
     },

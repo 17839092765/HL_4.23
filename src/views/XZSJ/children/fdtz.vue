@@ -447,7 +447,7 @@ export default {
   margin-top: 1%;
   width: 100%;
   height: 100%;
-  background: rgba(53, 46, 44, 0.45);
+  /* background: rgba(53, 46, 44, 0.45); */
   filter: blur(2px);
 }
 
@@ -664,7 +664,7 @@ export default {
     width: 100%;
     top: 10%;
     height: calc(100% - 15%);
-    background: rgba(41, 62, 65, 0.65);
+    /* background: rgba(41, 62, 65, 0.65); */
     // filter: blur(8px);
   }
 }

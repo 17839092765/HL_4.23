@@ -17,12 +17,30 @@
               class="demo-ruleForm"
             >
               <el-form-item label="楼宇名称" prop="buildName">
-                <el-input
-                  type="text"
-                  v-model="ruleForm.buildName"
-                  autocomplete="off"
-                ></el-input>
+                <el-col :span="20">
+                  <el-input
+                    placeholder="请输入楼宇名称"
+                    @input="fuzzy_query1"
+                    type="text"
+                    v-model="ruleForm.buildName"
+                    autocomplete="off"
+                  ></el-input>
+                </el-col>
               </el-form-item>
+              <div
+                v-if="ruleForm.buildName && searchAfterNum.length"
+                class="buildBox"
+              >
+                <div
+                  v-for="(item, index) in searchAfterNum"
+                  :key="index"
+                  class="case"
+                >
+                  <p>
+                    {{ item.建筑名称 }}
+                  </p>
+                </div>
+              </div>
               <el-divider></el-divider>
               <el-form-item :required="true" label="面积" prop="mianji">
                 <el-col :span="10">
@@ -112,6 +130,7 @@
                     class="case"
                     v-for="(item, index) in tableData"
                     :key="index"
+                    @click="buildCase(item)"
                   >
                     <div class="left">
                       <p>{{ item.建筑名称 }}</p>
@@ -212,6 +231,7 @@ export default {
       }, 500);
     };
     return {
+      searchAfterNum: [],
       tableData: [],
       noClick: true,
       ruleForm: {
@@ -222,7 +242,7 @@ export default {
         },
         zujin: {
           min: 0,
-          max: 2000,
+          max: 20000,
         },
       },
       rules: {
@@ -236,6 +256,62 @@ export default {
   computed: {},
   watch: {},
   methods: {
+    // 关键字搜索
+    async fuzzy_query1() {
+      if (this.ruleForm.buildName) {
+        const result = await connector.fuzzy_query({
+          name: this.ruleForm.buildName,
+        });
+        console.log(result);
+        if (result.data[0]) {
+          this.searchAfterNum = result.data;
+        } else {
+          this.searchAfterNum = [];
+        }
+      } else {
+        this.searchAfterNum = [];
+      }
+    },
+    // 点击表格时的三维模型高亮
+    buildCase(item) {
+      console.log(item.建筑编码);
+      console.log(this.$treedata.louyucase);
+      let objId = "";
+      if (item.建筑编码 == "4403030030090300003") {
+        objId = "4403030030090300003_2";
+      } else if (item.建筑编码 == "4403030030040600002") {
+        objId = "4403030030040600002_24";
+      }
+      // =
+      //   item.建筑编码 == "4403030030090300003"
+      //     ? "4403030030090300003_2"
+      //     : item.建筑编码;
+      let aaa = false;
+      this.$treedata.louyucase.forEach((mon) => {
+        if (mon.ObjectID === objId) {
+          aaa = true;
+          console.log("dui");
+
+          // this.hightbuliding = mon;
+          __g.tileLayer.highlightActor(mon.Id, objId, (res) => {
+            console.log(res);
+            if (res) {
+              console.log(111);
+              this.$message({
+                message: "已高亮显示,查看详细信息请点击",
+                type: "success",
+              });
+            }
+          });
+        }
+      });
+      if (!aaa) {
+        this.$message({
+          message: "暂无数据",
+          type: "info",
+        });
+      }
+    },
     async request() {
       const { min: minArea, max: maxArea } = this.ruleForm.mianji;
       const { min: minRent, max: maxRent } = this.ruleForm.zujin;
@@ -268,11 +344,11 @@ export default {
         buildName: "",
         mianji: {
           min: 0,
-          max: 2000,
+          max: 20000,
         },
         zujin: {
           min: 0,
-          max: 2000,
+          max: 20000,
         },
       };
       this.tableData = [];
@@ -328,6 +404,28 @@ export default {
   position: absolute;
   left: -20%;
   transition: all 0.5s;
+  /* 根据楼宇名称的模糊搜索 */
+  .buildBox {
+    width: 100%;
+    min-height: 50px;
+    max-height: 150px;
+    border-left: 1px solid #eee;
+    overflow-y: scroll;
+    margin-bottom: 30px;
+    .case {
+      width: 80%;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      margin: 5px auto;
+      cursor: pointer;
+      border-bottom: 1px solid #cecece;
+      &:hover {
+        color: #fee36d;
+        border-bottom: 1px solid #fee36d;
+      }
+    }
+  }
   .data {
     width: 100%;
     height: 100%;
@@ -524,6 +622,6 @@ export default {
   box-sizing: border-box;
 }
 /deep/.el-divider--horizontal {
-  margin: 0;
+  margin: 5px 0;
 }
 </style>

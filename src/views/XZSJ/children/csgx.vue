@@ -329,7 +329,7 @@ export default {
   > div {
     width: 100%;
     height: 60px;
-    background: rgba(0, 0, 0, 0.356);
+    /* background: rgba(0, 0, 0, 0.356); */
     margin: 3px 0;
     display: flex;
     align-items: center;
@@ -755,7 +755,7 @@ export default {
     width: 100%;
     top: 10%;
     height: calc(100% - 15%);
-    background: rgba(41, 62, 65, 0.65);
+    /* background: rgba(41, 62, 65, 0.65); */
     // filter: blur(8px);
   }
 }
