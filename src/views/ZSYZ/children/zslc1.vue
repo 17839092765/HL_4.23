@@ -192,6 +192,7 @@ export default {
     bottom: 10%;
     justify-content: space-around;
     align-items: center;
+    cursor: pointer;
     .icon {
       width: 30%;
       height: 100%;
@@ -199,7 +200,7 @@ export default {
         center/cover;
     }
     .tit {
-      width: 70%;
+      width: 50%;
       height: 100%;
       line-height: 50px;
       text-align: center;

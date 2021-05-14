@@ -2,9 +2,9 @@
   <div class="jj100case">
     <div
       v-loading="loading"
-      element-loading-text="拼命加载中"
+      :element-loading-text="'加载中- ' + (jj100ids.length + 1) + '/' + '100'"
       element-loading-spinner="el-icon-loading"
-      element-loading-background="rgba(0, 0, 0, 0.2)"
+      element-loading-background="rgba(0, 0, 0, 0.1)"
       v-if="loading"
       class="loading111"
     ></div>
@@ -412,6 +412,7 @@ export default {
     width: 100%;
     height: 100%;
     position: absolute;
+    font-size: 18px !important;
   }
   .jj100data {
     width: 100%;
@@ -507,5 +508,8 @@ export default {
 }
 /deep/ .el-slider__stop {
   background: #0e1e26;
+}
+/deep/ .el-loading-text {
+  font-size: 20px !important;
 }
 </style>
