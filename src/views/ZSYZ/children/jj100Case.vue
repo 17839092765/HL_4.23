@@ -2,7 +2,7 @@
   <div class="jj100case">
     <div
       v-loading="loading"
-      :element-loading-text="'加载中- ' + (jj100ids.length + 1) + '/' + '100'"
+      :element-loading-text="'加载中- ' + (jj100ids.length + 1) + '/' + '1'"
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.1)"
       v-if="loading"
@@ -214,6 +214,12 @@ export default {
         data: result,
       };
       this.$store.commit("clickData", data_show);
+      console.log(this.jj100ArrIds[index], this.objId[index]);
+      __g.tileLayer.focus(
+        this.jj100ArrIds[index],
+        this.objId[index],
+        (res) => {}
+      );
 
       click_EVT_jj100({
         Id: this.jj100ArrIds[index],
@@ -329,36 +335,45 @@ export default {
         "E002EA7C462CB11E2F141694D5EF3FDE",
       ];
 
-      const { data: result } = await connector.layer_jj100_one(ids[this.i]);
-
-      if (typeof result[0] == "object") {
-        let a = [];
-        console.log(result[0].company.split(","));
+      const { data: resultarr } = await connector.layer_jj100_one();
+      const arr = resultarr.reverse();
+      console.log(resultarr);
+      console.log(arr);
+      arr.forEach((result, index) => {
+        console.log(result.floor.split("_")[1]);
         console.log(result);
-        result[0].company.split(",").forEach((mon) => {
-          console.log(mon.split("|"));
-          a.push(mon.split("|"));
-        });
-        this.jj100data.push(a);
-        this.jj100ids.push(result[1]);
-      } else {
-        this.jj100data.push([["暂无数据"]]);
-        this.jj100ids.push(result[0]);
-      }
-      // if (index === ids.length - 1) {
-      //   this.loading = false;
-      //   console.log(this.jj100data);
-      // }
-      this.i++;
-      if (this.i < ids.length && this.i == this.jj100data.length) {
-        this.getJJ100Case();
-      }
-      if (this.i === ids.length) {
+        if (result.floor.area !== null) {
+          let a = [];
+          console.log(result.company.split(","));
+          console.log(result);
+          result.company.split(",").forEach((mon) => {
+            console.log(mon.split("|"));
+            a.push(mon.split("|"));
+          });
+          this.jj100data.push(a);
+          this.jj100ids.push(result.fid);
+        } else {
+          this.jj100data.push([["暂无数据"]]);
+          this.jj100ids.push(result.fid);
+        }
+
+        // if (index === ids.length - 1) {
+        //   this.loading = false;
+        //   console.log(this.jj100data);
+        // }
+        // this.i++;
+        // if (this.i < ids.length && this.i == this.jj100data.length) {
+        //   this.getJJ100Case();
+        // }
+        // if (this.i === ids.length) {
+
         this.loading = false;
         this.$store.commit("jj100Arr", this.jj100data);
         this.$store.commit("jj100ArrIds", this.jj100ids);
         console.log(this.jj100data);
-      }
+
+        // }
+      });
 
       // ids.forEach(async (item, index) => {
       //   const { data: result } = await connector.layer_jj100_one(item);

@@ -7,15 +7,15 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {};
   },
   computed: {},
   watch: {},
   methods: {
-    back () {
+    back() {
       if (__g) {
-        __g.infoTree.show("935F37B34E82DF36A7D769AB444D7E64")
+        __g.infoTree.show("935F37B34E82DF36A7D769AB444D7E64");
         this.addTag(
           "tagxinying",
           [510490.21875, 2496392, 228.9998321533203],
@@ -35,17 +35,16 @@ export default {
           "现代服务集聚中心"
         );
         __g.camera.lookAt(
-          509355.781250,
-          2493820.000000,
+          509355.78125,
+          2493820.0,
           2141.515381,
           -43.167141,
-          -25.481180,
+          -25.48118
         );
       }
       this.$store.commit("cygnblock", "");
-
     },
-    addTag (id, coord, imagePath, text) {
+    addTag(id, coord, imagePath, text) {
       //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
       let url = imagePath;
 
@@ -84,15 +83,15 @@ export default {
       __g.tag.add(o);
     },
   },
-  created () { },
-  mounted () { },
-  beforeCreate () { },
-  beforeMount () { },
-  beforeUpdate () { },
-  updated () { },
-  beforeDestroy () { },
-  destroyed () { },
-  activated () { },
+  created() {},
+  mounted() {},
+  beforeCreate() {},
+  beforeMount() {},
+  beforeUpdate() {},
+  updated() {},
+  beforeDestroy() {},
+  destroyed() {},
+  activated() {},
   components: {},
 };
 </script>

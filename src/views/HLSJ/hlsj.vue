@@ -835,6 +835,231 @@ export default {
         o27.textBackgroundColor = Color.White;
 
         __g.tag.add(o27);
+        // 标签28
+        let id28 = "GY-1-13"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
+        let coord28 = [510313.34375, 2495769.5, 162.67398071289062]; //坐标值：标签添加的位置
+        let url28 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
+        let imageSize28 = [28, 28]; //图片的尺寸
+        let text28 = "中民时代广场"; //标签显示的文字
+        let range28 = [1, 8000.0]; //标签的可见范围
+        let showLine28 = false; //标签下方是否显示垂直牵引线
+        let imagePath28 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id28);
+
+        let o28 = new TagData(
+          id28,
+          coord28,
+          imagePath28,
+          imageSize28,
+          url28,
+          text28,
+          range28,
+          showLine28
+        );
+        o28.textColor = Color.Black; //设置文字颜色
+        o28.textBackgroundColor = Color.White;
+
+        __g.tag.add(o28);
+        // 标签29
+        let id29 = "GY-1-14"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
+        let coord29 = [510562.15625, 2495755.75, 112.8927001953125]; //坐标值：标签添加的位置
+        let url29 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
+        let imageSize29 = [28, 28]; //图片的尺寸
+        let text29 = "万通大厦"; //标签显示的文字
+        let range29 = [1, 8000.0]; //标签的可见范围
+        let showLine29 = false; //标签下方是否显示垂直牵引线
+        let imagePath29 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id29);
+
+        let o29 = new TagData(
+          id29,
+          coord29,
+          imagePath29,
+          imageSize29,
+          url29,
+          text29,
+          range29,
+          showLine29
+        );
+        o29.textColor = Color.Black; //设置文字颜色
+        o29.textBackgroundColor = Color.White;
+
+        __g.tag.add(o29);
+        // 标签30
+        let id30 = "GY-1-15"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
+        let coord30 = [510669.0625, 2495756.5, 241.17686462402344]; //坐标值：标签添加的位置
+        let url30 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
+        let imageSize30 = [28, 28]; //图片的尺寸
+        let text30 = "帝豪金融大厦"; //标签显示的文字
+        let range30 = [1, 8000.0]; //标签的可见范围
+        let showLine30 = false; //标签下方是否显示垂直牵引线
+        let imagePath30 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id30);
+
+        let o30 = new TagData(
+          id30,
+          coord30,
+          imagePath30,
+          imageSize30,
+          url30,
+          text30,
+          range30,
+          showLine30
+        );
+        o30.textColor = Color.Black; //设置文字颜色
+        o30.textBackgroundColor = Color.White;
+
+        __g.tag.add(o30);
+        // 标签31
+        let id31 = "GY-1-16"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
+        let coord31 = [510904.28125, 2495766.25, 110.61300659179688]; //坐标值：标签添加的位置
+        let url31 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
+        let imageSize31 = [28, 28]; //图片的尺寸
+        let text31 = "嘉宝田花园"; //标签显示的文字
+        let range31 = [1, 8000.0]; //标签的可见范围
+        let showLine31 = false; //标签下方是否显示垂直牵引线
+        let imagePath31 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id31);
+
+        let o31 = new TagData(
+          id31,
+          coord31,
+          imagePath31,
+          imageSize31,
+          url31,
+          text31,
+          range31,
+          showLine31
+        );
+        o31.textColor = Color.Black; //设置文字颜色
+        o31.textBackgroundColor = Color.White;
+
+        __g.tag.add(o31);
+        // 标签32
+        let id32 = "GY-1-17"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
+        let coord32 = [510445.90625, 2496250.5, 56.04585647583008]; //坐标值：标签添加的位置
+        let url32 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
+        let imageSize32 = [28, 28]; //图片的尺寸
+        let text32 = "艺茂中心"; //标签显示的文字
+        let range32 = [1, 8000.0]; //标签的可见范围
+        let showLine32 = false; //标签下方是否显示垂直牵引线
+        let imagePath32 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id32);
+
+        let o32 = new TagData(
+          id32,
+          coord32,
+          imagePath32,
+          imageSize32,
+          url32,
+          text32,
+          range32,
+          showLine32
+        );
+        o32.textColor = Color.Black; //设置文字颜色
+        o32.textBackgroundColor = Color.White;
+
+        __g.tag.add(o32);
+        // 标签33
+        let id33 = "GY-1-18"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
+        let coord33 = [510783.09375, 2496340.25, 111.85453033447266]; //坐标值：标签添加的位置
+        let url33 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
+        let imageSize33 = [28, 28]; //图片的尺寸
+        let text33 = "深业物流大厦"; //标签显示的文字
+        let range33 = [1, 8000.0]; //标签的可见范围
+        let showLine33 = false; //标签下方是否显示垂直牵引线
+        let imagePath33 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id33);
+
+        let o33 = new TagData(
+          id33,
+          coord33,
+          imagePath33,
+          imageSize33,
+          url33,
+          text33,
+          range33,
+          showLine33
+        );
+        o33.textColor = Color.Black; //设置文字颜色
+        o33.textBackgroundColor = Color.White;
+
+        __g.tag.add(o33);
+        // 标签34
+        let id34 = "GY-1-19"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
+        let coord34 = [510799.90625, 2496552, 347.0163879394531]; //坐标值：标签添加的位置
+        let url34 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
+        let imageSize34 = [28, 28]; //图片的尺寸
+        let text34 = "宝能第一空间"; //标签显示的文字
+        let range34 = [1, 8000.0]; //标签的可见范围
+        let showLine34 = false; //标签下方是否显示垂直牵引线
+        let imagePath34 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id34);
+
+        let o34 = new TagData(
+          id34,
+          coord34,
+          imagePath34,
+          imageSize34,
+          url34,
+          text34,
+          range34,
+          showLine34
+        );
+        o34.textColor = Color.Black; //设置文字颜色
+        o34.textBackgroundColor = Color.White;
+
+        __g.tag.add(o34);
+        // 标签35
+        let id35 = "GY-1-20"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
+        let coord35 = [510379.4375, 2493830.75, 121.43464660644531]; //坐标值：标签添加的位置
+        let url35 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
+        let imageSize35 = [28, 28]; //图片的尺寸
+        let text35 = "金融中心大厦"; //标签显示的文字
+        let range35 = [1, 8000.0]; //标签的可见范围
+        let showLine35 = false; //标签下方是否显示垂直牵引线
+        let imagePath35 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id35);
+
+        let o35 = new TagData(
+          id35,
+          coord35,
+          imagePath35,
+          imageSize35,
+          url35,
+          text35,
+          range35,
+          showLine35
+        );
+        o35.textColor = Color.Black; //设置文字颜色
+        o35.textBackgroundColor = Color.White;
+
+        __g.tag.add(o35);
+        // 标签36
+        let id36 = "GY-1-21"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
+        let coord36 = [510908.03125, 2493577.25, 204.24159240722656]; //坐标值：标签添加的位置
+        let url36 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
+        let imageSize36 = [28, 28]; //图片的尺寸
+        let text36 = "深圳君悦酒店"; //标签显示的文字
+        let range36 = [1, 8000.0]; //标签的可见范围
+        let showLine36 = false; //标签下方是否显示垂直牵引线
+        let imagePath36 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id36);
+
+        let o36 = new TagData(
+          id36,
+          coord36,
+          imagePath36,
+          imageSize36,
+          url36,
+          text36,
+          range36,
+          showLine36
+        );
+        o36.textColor = Color.Black; //设置文字颜色
+        o36.textBackgroundColor = Color.White;
+
+        __g.tag.add(o36);
       }
     },
     polyline_del() {
