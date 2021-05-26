@@ -15,7 +15,7 @@
     <div class="link">
       <div class="twolink1">
         <router-link to="/Home/GNBJ/ydgn" tag="li">
-          <span>用地功能布局</span>
+          <span>建筑功能布局</span>
         </router-link>
       </div>
       <div class="twolink2">

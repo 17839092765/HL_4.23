@@ -324,11 +324,11 @@ export default {
 <style lang="scss" scoped>
 .condata111 {
   width: 100%;
-  height: 300px;
+  height: 250px;
   overflow-y: scroll;
   > div {
     width: 100%;
-    height: 60px;
+    height: 40px;
     /* background: rgba(0, 0, 0, 0.356); */
     margin: 3px 0;
     display: flex;

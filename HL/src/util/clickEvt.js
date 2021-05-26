@@ -8,6 +8,7 @@ function click_EVT_building(data, datatype) {
   var actorName = data.ObjectID;
   // requestdata("楼层信息", data.Id)
   __g.tileLayer.highlightActor(tileLayerId, actorName);
+  __g.tileLayer.focusActor(tileLayerId, actorName);
 }
 
 function click_EVT_jj100(data) {
@@ -15,7 +16,6 @@ function click_EVT_jj100(data) {
   // name -> ObjectID
   var actorName = data.ObjectID;
   clear_jj100();
-  console.log(tileLayerId, "sadsadasdsad");
   movelayer([tileLayerId]);
   __g.tileLayer.highlightActor(tileLayerId, actorName);
 }

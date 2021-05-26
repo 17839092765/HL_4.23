@@ -3,9 +3,7 @@
     <LandLayout />
     <div class="tuli">
       <div class="tulicase">
-        <div class="tittop">
-          
-        </div>
+        <div class="tittop"></div>
         <div class="box" v-for="(item, index) in tulidata" :key="index">
           <div class="title">
             {{ item.title }}
@@ -121,11 +119,11 @@ export default {
     showtuceng(this.$treedata.gnbjyd);
     if (__g) {
       __g.camera.lookAt(
-      512437.656250,
-      2494145.750000,
-      1536.795898,
-      -31.845427,
-      -151.657822,
+        512437.65625,
+        2494145.75,
+        1536.795898,
+        -31.845427,
+        -151.657822,
         -30.48118
       );
     }

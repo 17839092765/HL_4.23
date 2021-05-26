@@ -42,8 +42,7 @@ export default {
     return {
       CameraLookstyle: 0,
       // path: "http://192.168.5.49:9080/img/biaoji.png",
-      path:
-        "E:\\Freedo\\红岭\\HL_4.23\\src\\assets\\img\\1红岭实景\\biaoji.png",
+      path: "127.0.0.1:8080/img/1红岭实景/",
       path1: "E:\\Freedo\\红岭\\HL_4.23\\src\\assets\\img\\1红岭实景\\",
       flag: false,
       tagIds: [],
@@ -136,7 +135,7 @@ export default {
         // 标签1
         let id1 = "SN-1"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord1 = [510418, 2494558.75, 56.89111328125]; //坐标值：标签添加的位置
-        let imagePath1 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath1 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         let url1 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize1 = [28, 28]; //图片的尺寸
         let text1 = "蔡屋围统筹片区"; //标签显示的文字
@@ -161,7 +160,7 @@ export default {
         // 标签2
         let id2 = "SN-2-1"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord2 = [510303.59375, 2494559.25, 134.9962615966797]; //坐标值：标签添加的位置
-        let imagePath2 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath2 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         let url2 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize2 = [28, 28]; //图片的尺寸
         let text2 = "国信证券大厦"; //标签显示的文字
@@ -187,7 +186,7 @@ export default {
         // 标签3
         let id3 = "SN-2-2"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord3 = [510322.03125, 2494524.5, 113.33856964111328]; //坐标值：标签添加的位置
-        let imagePath3 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath3 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         let url3 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize3 = [28, 28]; //图片的尺寸
         let text3 = "信托大厦"; //标签显示的文字
@@ -213,7 +212,7 @@ export default {
         // 标签4
         let id4 = "SN-3-1"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord4 = [510457.875, 2494260.25, 409.4613952636719]; //坐标值：标签添加的位置
-        let imagePath4 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath4 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         let url4 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize4 = [28, 28]; //图片的尺寸
         let text4 = "京基100"; //标签显示的文字
@@ -239,7 +238,7 @@ export default {
         // 标签5
         let id5 = "SN-3-2"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord5 = [510547, 2494193.75, 126.6146240234375]; //坐标值：标签添加的位置
-        let imagePath5 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath5 = this.path + "银行.png"; //图片路径，可以是本地路径，也支持网络路径
         let url5 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize5 = [28, 28]; //图片的尺寸
         let text5 = "中国人民银行"; //标签显示的文字
@@ -265,7 +264,7 @@ export default {
         // 标签6
         let id6 = "SN-3-3"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord6 = [510557.71875, 2494146.5, 64.09304809570312]; //坐标值：标签添加的位置
-        let imagePath6 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath6 = this.path + "银行.png"; //图片路径，可以是本地路径，也支持网络路径
         let url6 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize6 = [28, 28]; //图片的尺寸
         let text6 = "中国人民银行大厦"; //标签显示的文字
@@ -291,7 +290,7 @@ export default {
         // 标签7
         let id7 = "SN-3-4"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord7 = [510468.4375, 2494127.5, 123.60477447509766]; //坐标值：标签添加的位置
-        let imagePath7 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath7 = this.path + "银行.png"; //图片路径，可以是本地路径，也支持网络路径
         let url7 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize7 = [28, 28]; //图片的尺寸
         let text7 = "农业银行"; //标签显示的文字
@@ -317,7 +316,7 @@ export default {
         // 标签8
         let id8 = "SN-4-1"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord8 = [510822.3125, 2494169.75, 43.70339584350586]; //坐标值：标签添加的位置
-        let imagePath8 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath8 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         let url8 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize8 = [28, 28]; //图片的尺寸
         let text8 = "地王大厦"; //标签显示的文字
@@ -343,7 +342,7 @@ export default {
         // 标签9
         let id9 = "SN-4-2"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord9 = [510586.3125, 2493952.5, 163.28671264648438]; //坐标值：标签添加的位置
-        let imagePath9 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath9 = this.path + "银行.png"; //图片路径，可以是本地路径，也支持网络路径
         let url9 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize9 = [28, 28]; //图片的尺寸
         let text9 = "平安银行大厦"; //标签显示的文字
@@ -369,7 +368,7 @@ export default {
         // 标签10
         let id10 = "SN-4-3"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord10 = [510667.9375, 2493962, 164.11358642578125]; //坐标值：标签添加的位置
-        let imagePath10 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath10 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         let url10 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize10 = [28, 28]; //图片的尺寸
         let text10 = "深业中心大厦"; //标签显示的文字
@@ -395,7 +394,7 @@ export default {
         // 标签11
         let id11 = "SN-4-4"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord11 = [510739.90625, 2493979.25, 128.20452880859375]; //坐标值：标签添加的位置
-        let imagePath11 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath11 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         let url11 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize11 = [28, 28]; //图片的尺寸
         let text11 = "金山大厦"; //标签显示的文字
@@ -421,7 +420,7 @@ export default {
         // 标签12
         let id12 = "SN-4-5"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
         let coord12 = [510801.90625, 2493992, 120.59784698486328]; //坐标值：标签添加的位置
-        let imagePath12 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath12 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         let url12 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize12 = [28, 28]; //图片的尺寸
         let text12 = "金丰城大厦"; //标签显示的文字
@@ -452,7 +451,7 @@ export default {
         let text13 = "华润大厦"; //标签显示的文字
         let range13 = [1, 8000.0]; //标签的可见范围
         let showLine13 = false; //标签下方是否显示垂直牵引线
-        let imagePath13 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath13 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id13);
 
         let o13 = new TagData(
@@ -478,7 +477,7 @@ export default {
         let text14 = "万象城"; //标签显示的文字
         let range14 = [1, 8000.0]; //标签的可见范围
         let showLine14 = false; //标签下方是否显示垂直牵引线
-        let imagePath14 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath14 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id14);
 
         let o14 = new TagData(
@@ -501,10 +500,10 @@ export default {
         let coord15 = [511084.71875, 2493927.5, 103.15538787841797]; //坐标值：标签添加的位置
         let url15 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize15 = [28, 28]; //图片的尺寸
-        let text15 = "都心水镜"; //标签显示的文字
+        let text15 = "嘉宾花园"; //标签显示的文字
         let range15 = [1, 8000.0]; //标签的可见范围
         let showLine15 = false; //标签下方是否显示垂直牵引线
-        let imagePath15 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath15 = this.path + "小区.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id15);
 
         let o15 = new TagData(
@@ -530,7 +529,7 @@ export default {
         let text16 = "建设集团大院"; //标签显示的文字
         let range16 = [1, 8000.0]; //标签的可见范围
         let showLine16 = false; //标签下方是否显示垂直牵引线
-        let imagePath16 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath16 = this.path + "81-办公楼.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id16);
 
         let o16 = new TagData(
@@ -557,7 +556,7 @@ export default {
         let text17 = "建设集团办公楼"; //标签显示的文字
         let range17 = [1, 8000.0]; //标签的可见范围
         let showLine17 = false; //标签下方是否显示垂直牵引线
-        let imagePath17 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath17 = this.path + "81-办公楼.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id17);
 
         let o17 = new TagData(
@@ -583,7 +582,7 @@ export default {
         let text18 = "中深国际大厦"; //标签显示的文字
         let range18 = [1, 8000.0]; //标签的可见范围
         let showLine18 = false; //标签下方是否显示垂直牵引线
-        let imagePath18 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath18 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id18);
 
         let o18 = new TagData(
@@ -609,7 +608,7 @@ export default {
         let text19 = "百汇大厦"; //标签显示的文字
         let range19 = [1, 8000.0]; //标签的可见范围
         let showLine19 = false; //标签下方是否显示垂直牵引线
-        let imagePath19 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath19 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id19);
 
         let o19 = new TagData(
@@ -636,7 +635,7 @@ export default {
         let text20 = "长虹大厦"; //标签显示的文字
         let range20 = [1, 8000.0]; //标签的可见范围
         let showLine20 = false; //标签下方是否显示垂直牵引线
-        let imagePath20 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath20 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id20);
 
         let o20 = new TagData(
@@ -662,7 +661,7 @@ export default {
         let text21 = "洪涛大厦"; //标签显示的文字
         let range21 = [1, 8000.0]; //标签的可见范围
         let showLine21 = false; //标签下方是否显示垂直牵引线
-        let imagePath21 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath21 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id21);
 
         let o21 = new TagData(
@@ -688,7 +687,7 @@ export default {
         let text22 = "蔡屋围发展大厦"; //标签显示的文字
         let range22 = [1, 8000.0]; //标签的可见范围
         let showLine22 = false; //标签下方是否显示垂直牵引线
-        let imagePath22 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath22 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id22);
 
         let o22 = new TagData(
@@ -714,7 +713,7 @@ export default {
         let text23 = "北京大厦"; //标签显示的文字
         let range23 = [1, 8000.0]; //标签的可见范围
         let showLine23 = false; //标签下方是否显示垂直牵引线
-        let imagePath23 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath23 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id23);
 
         let o23 = new TagData(
@@ -740,7 +739,7 @@ export default {
         let text24 = "茂源大厦"; //标签显示的文字
         let range24 = [1, 8000.0]; //标签的可见范围
         let showLine24 = false; //标签下方是否显示垂直牵引线
-        let imagePath24 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath24 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id24);
 
         let o24 = new TagData(
@@ -766,7 +765,7 @@ export default {
         let text25 = "国速大厦"; //标签显示的文字
         let range25 = [1, 8000.0]; //标签的可见范围
         let showLine25 = false; //标签下方是否显示垂直牵引线
-        let imagePath25 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath25 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id25);
 
         let o25 = new TagData(
@@ -792,7 +791,7 @@ export default {
         let text26 = "七支队办公楼"; //标签显示的文字
         let range26 = [1, 8000.0]; //标签的可见范围
         let showLine26 = false; //标签下方是否显示垂直牵引线
-        let imagePath26 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath26 = this.path + "81-办公楼.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id26);
 
         let o26 = new TagData(
@@ -815,10 +814,10 @@ export default {
         let coord27 = [510732.375, 2494954.25, 282.0292053222656]; //坐标值：标签添加的位置
         let url27 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
         let imageSize27 = [28, 28]; //图片的尺寸
-        let text27 = "华润中心"; //标签显示的文字
+        let text27 = "华讯中心"; //标签显示的文字
         let range27 = [1, 8000.0]; //标签的可见范围
         let showLine27 = false; //标签下方是否显示垂直牵引线
-        let imagePath27 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath27 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id27);
 
         let o27 = new TagData(
@@ -843,7 +842,7 @@ export default {
         let text28 = "中民时代广场"; //标签显示的文字
         let range28 = [1, 8000.0]; //标签的可见范围
         let showLine28 = false; //标签下方是否显示垂直牵引线
-        let imagePath28 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath28 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id28);
 
         let o28 = new TagData(
@@ -868,7 +867,7 @@ export default {
         let text29 = "万通大厦"; //标签显示的文字
         let range29 = [1, 8000.0]; //标签的可见范围
         let showLine29 = false; //标签下方是否显示垂直牵引线
-        let imagePath29 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath29 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id29);
 
         let o29 = new TagData(
@@ -893,7 +892,7 @@ export default {
         let text30 = "帝豪金融大厦"; //标签显示的文字
         let range30 = [1, 8000.0]; //标签的可见范围
         let showLine30 = false; //标签下方是否显示垂直牵引线
-        let imagePath30 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath30 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id30);
 
         let o30 = new TagData(
@@ -918,7 +917,7 @@ export default {
         let text31 = "嘉宝田花园"; //标签显示的文字
         let range31 = [1, 8000.0]; //标签的可见范围
         let showLine31 = false; //标签下方是否显示垂直牵引线
-        let imagePath31 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath31 = this.path + "小区.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id31);
 
         let o31 = new TagData(
@@ -943,7 +942,7 @@ export default {
         let text32 = "艺茂中心"; //标签显示的文字
         let range32 = [1, 8000.0]; //标签的可见范围
         let showLine32 = false; //标签下方是否显示垂直牵引线
-        let imagePath32 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath32 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id32);
 
         let o32 = new TagData(
@@ -968,7 +967,7 @@ export default {
         let text33 = "深业物流大厦"; //标签显示的文字
         let range33 = [1, 8000.0]; //标签的可见范围
         let showLine33 = false; //标签下方是否显示垂直牵引线
-        let imagePath33 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath33 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id33);
 
         let o33 = new TagData(
@@ -993,7 +992,7 @@ export default {
         let text34 = "宝能第一空间"; //标签显示的文字
         let range34 = [1, 8000.0]; //标签的可见范围
         let showLine34 = false; //标签下方是否显示垂直牵引线
-        let imagePath34 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath34 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id34);
 
         let o34 = new TagData(
@@ -1018,7 +1017,7 @@ export default {
         let text35 = "金融中心大厦"; //标签显示的文字
         let range35 = [1, 8000.0]; //标签的可见范围
         let showLine35 = false; //标签下方是否显示垂直牵引线
-        let imagePath35 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath35 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id35);
 
         let o35 = new TagData(
@@ -1043,7 +1042,7 @@ export default {
         let text36 = "深圳君悦酒店"; //标签显示的文字
         let range36 = [1, 8000.0]; //标签的可见范围
         let showLine36 = false; //标签下方是否显示垂直牵引线
-        let imagePath36 = this.path; //图片路径，可以是本地路径，也支持网络路径
+        let imagePath36 = this.path + "酒店.png"; //图片路径，可以是本地路径，也支持网络路径
         this.tagIds.push(id36);
 
         let o36 = new TagData(
@@ -1060,6 +1059,56 @@ export default {
         o36.textBackgroundColor = Color.White;
 
         __g.tag.add(o36);
+        // 标签37
+        let id37 = "GY-1-22"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
+        let coord37 = [510530.0625, 2493822.75, 132.2466583251953]; //坐标值：标签添加的位置
+        let url37 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
+        let imageSize37 = [28, 28]; //图片的尺寸
+        let text37 = "蔡屋围丽晶大厦"; //标签显示的文字
+        let range37 = [1, 8000.0]; //标签的可见范围
+        let showLine37 = false; //标签下方是否显示垂直牵引线
+        let imagePath37 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id37);
+
+        let o37 = new TagData(
+          id37,
+          coord37,
+          imagePath37,
+          imageSize37,
+          url37,
+          text37,
+          range37,
+          showLine37
+        );
+        o37.textColor = Color.Black; //设置文字颜色
+        o37.textBackgroundColor = Color.White;
+
+        __g.tag.add(o37);
+        // 标签38
+        let id38 = "GY-1-23"; //标签的ID，字符串值，也可以用数字（内部会自动转成字符串）
+        let coord38 = [511010.84375, 2494045.75, 85.46062469482422]; //坐标值：标签添加的位置
+        let url38 = ""; //鼠标点击标签后弹出的网页的URL，也可以是本地视频文件，鼠标点击标签后会弹出视频播放窗口
+        let imageSize38 = [28, 28]; //图片的尺寸
+        let text38 = "湖北宝丰大厦"; //标签显示的文字
+        let range38 = [1, 8000.0]; //标签的可见范围
+        let showLine38 = false; //标签下方是否显示垂直牵引线
+        let imagePath38 = this.path + "建筑.png"; //图片路径，可以是本地路径，也支持网络路径
+        this.tagIds.push(id38);
+
+        let o38 = new TagData(
+          id38,
+          coord38,
+          imagePath38,
+          imageSize38,
+          url38,
+          text38,
+          range38,
+          showLine38
+        );
+        o38.textColor = Color.Black; //设置文字颜色
+        o38.textBackgroundColor = Color.White;
+
+        __g.tag.add(o38);
       }
     },
     polyline_del() {

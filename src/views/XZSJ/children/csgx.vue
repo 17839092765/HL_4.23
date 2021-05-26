@@ -46,7 +46,61 @@
           </div>
         </div> -->
         <!-- <div class="condata1"></div> -->
-        <div v-if="clickData1.length > 0" class="condata111">
+        <div v-if="clickData1[0] == 7" class="condata111">
+          <div class="condata_item1">
+            <div class="span_left1">主导功能:</div>
+            <div class="span_right1">重点发展互联网和文化创意中心</div>
+          </div>
+          <div class="condata_item1">
+            <div class="span_left1">功能布局:</div>
+            <div class="span_right1">西部商务商业中心</div>
+          </div>
+          <div class="condata_item1">
+            <div class="span_left1">建设规模总量:</div>
+            <div class="span_right1">5.9ha</div>
+          </div>
+          <div class="condata_item1">
+            <div class="span_left1">规划建筑量:</div>
+            <div class="span_right1">39.67万㎡</div>
+          </div>
+          <div class="condata_item1">
+            <div class="span_left1">开发建设用地面积:</div>
+            <div class="span_right1">46699.6㎡</div>
+          </div>
+          <div class="condata_item1">
+            <div class="span_left1">容积率:</div>
+            <div class="span_right1">8.2</div>
+          </div>
+          <div class="condata_item1">
+            <div class="span_left1">计容积率总建筑面积:</div>
+            <div class="span_right1">381730㎡</div>
+          </div>
+          <div class="condata_item1">
+            <div class="span_left1">规划建筑量:</div>
+            <div class="span_right1">39.67万㎡</div>
+          </div>
+          <div class="condata_item1 condata_item22">
+            <div class="span_left1">-商业和办公:</div>
+            <div class="span_right1">261900</div>
+          </div>
+          <div class="condata_item1 condata_item22">
+            <div class="span_left1">-公共配套设施:</div>
+            <div class="span_right1">7630</div>
+          </div>
+          <div class="condata_item1 condata_item22">
+            <div class="span_left1">-住宅:</div>
+            <div class="span_right1">0</div>
+          </div>
+          <div class="condata_item1 condata_item22">
+            <div class="span_left1">-商务公寓:</div>
+            <div class="span_right1">112200</div>
+          </div>
+          <div class="condata_item1">
+            <div class="span_left1">地下商业建筑面积:</div>
+            <div class="span_right1">0㎡</div>
+          </div>
+        </div>
+        <div v-else-if="clickData1.length > 0" class="condata111">
           <div
             class="condata_item1"
             v-for="(item, index) in clickData1[1]"
@@ -68,63 +122,78 @@
             </div>
             <div>更新单元图纸</div>
           </div>
-          <div v-if="clickData1" class="drawing_img">
+          <div v-if="clickData1" @click="shuaxin" class="drawing_img">
             <!-- <img v-if="clickData1[0] === 3" src="../../../assets/img/updata/3.jpg" alt="" />
             <img v-else-if="clickData1[0] === 5" src="../../../assets/img/updata/5.jpg" alt="" />
             <img v-else-if="clickData1[0] === 7" src="../../../assets/img/updata/7.jpg" alt="" />
             <img v-else-if="clickData1[0] === 9" src="../../../assets/img/updata/9.jpg" alt="" />
             <img v-else-if="clickData1[0] === 11" src="../../../assets/img/updata/11.jpg" alt="" />
             <img v-else src="../../../assets/img/updata/1.png" alt="" /> -->
+
             <img
+              Preview="1"
               v-if="clickData1[0] == 13"
               src="../../../assets/img/updata/1.png"
               alt=""
             />
             <img
+              Preview="1"
               v-else-if="clickData1[0] == 6"
               src="../../../assets/img/updata/3.jpg"
               alt=""
             />
             <img
+              Preview="1"
               v-else-if="clickData1[0] == 8"
               src="../../../assets/img/updata/5.jpg"
               alt=""
             />
             <img
+              Preview="1"
               v-else-if="clickData1[0] == 9"
               src="../../../assets/img/updata/6.jpg"
               alt=""
             />
             <img
+              Preview="1"
               v-else-if="clickData1[0] == 10"
               src="../../../assets/img/updata/6.jpg"
               alt=""
             />
             <img
+              Preview="1"
               v-else-if="clickData1[0] == 11"
               src="../../../assets/img/updata/7.jpg"
               alt=""
             />
-            <img
+            <!-- <img
               v-else-if="clickData1[0] == 13"
               src="../../../assets/img/updata/9.jpg"
               alt=""
-            />
+            /> -->
             <img
+              Preview="1"
               v-else-if="clickData1[0] == 22"
               src="../../../assets/img/updata/9.jpg"
               alt=""
             />
             <img
+              Preview="1"
               v-else-if="clickData1[0] == 21"
               src="../../../assets/img/updata/9.jpg"
               alt=""
             />
             <img
+              Preview="1"
               v-else-if="clickData1[0] == 12"
               src="../../../assets/img/updata/11.jpg"
               alt=""
             />
+            <div v-if="clickData1[0] == 7" class="img">
+              <img Preview="1" src="../../../assets/img/updata/12.png" alt="" />
+              <img Preview="2" src="../../../assets/img/updata/13.png" alt="" />
+            </div>
+
             <!-- <img v-else src="../../../assets/img/updata/1.png" alt="" /> -->
           </div>
         </div>
@@ -154,16 +223,15 @@ export default {
     }),
   },
   watch: {
-    // "this.clickData1": {
-    //   handler() {
-    //     if (clickData1[0]) {
-    //       img = require(`../../../assets/img/updata/${clickData1[0]}`);
-    //     }
-    //   },
-    //   immediate: true,
-    // },
+    clickData1() {
+      this.$previewRefresh();
+    },
   },
-  methods: {},
+  methods: {
+    shuaxin() {
+      this.$previewRefresh();
+    },
+  },
   created() {
     // clickData1 = [this.clickData1];
   },
@@ -307,6 +375,7 @@ export default {
       ],
     };
     option && myChart.setOption(option);
+    this.$previewRefresh();
 
     // console.log(this.clickData1);
   },
@@ -324,11 +393,11 @@ export default {
 <style lang="scss" scoped>
 .condata111 {
   width: 100%;
-  height: 300px;
+  height: 250px;
   overflow-y: scroll;
   > div {
     width: 100%;
-    height: 60px;
+    height: 40px;
     /* background: rgba(0, 0, 0, 0.356); */
     margin: 3px 0;
     display: flex;
@@ -340,7 +409,7 @@ export default {
     }
     > div:nth-of-type(1) {
       display: flex;
-      line-height: 60px;
+      line-height: 40px;
       justify-content: flex-start;
       white-space: nowrap;
       // width: 60%;
@@ -357,6 +426,11 @@ export default {
       // text-align: right;
       font-size: 14px;
     }
+  }
+  .condata_item22 {
+    /* background: #000 !important; */
+    padding-left: 20px;
+    box-sizing: border-box;
   }
 }
 .drawing {
@@ -376,9 +450,10 @@ export default {
     width: 343px;
     height: 268px;
     /* background: #000; */
-    > img {
+    img {
+      margin-bottom: 10px;
       width: 100%;
-      height: 100%;
+      /* height: 100%; */
     }
   }
 }
